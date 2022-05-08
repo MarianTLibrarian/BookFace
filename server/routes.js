@@ -19,11 +19,13 @@ router.put('/books/rating', controller.books.rateBook);
 // --- Book Clubs API endpoints ---
 // ---                          ---
 router.get('/bookclubs', controller.bookclubs.allClubs);
-router.get('/mybookclubs', controller.bookclubs.myClubs);
+router.get('/myBookclubs', controller.bookclubs.myClubs);
 
 router.post('/bookclub/create', controller.bookclubs.createClub);
 router.post('/bookclubs/messages', controller.bookclubs.postMessage);
 
 router.put('/bookclubs/join', controller.bookclubs.joinClub);
+
+router.delete('/bookclubs/delete', controller.bookclubs.deleteClub); 
 
 module.exports = router;
