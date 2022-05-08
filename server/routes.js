@@ -5,16 +5,15 @@ const router = require('express').Router();
 // --- Books API endpoints ---
 // ---                     ---
 router.get('/search', controller.books.searchBooks);
-router.get('/books', controller.books.personalBooks); // FIXME: conflict with react-router endpoint
+router.get('/books', controller.books.personalBooks);
 router.get('/popularBooks', controller.books.popularBooks);
 
-router.post('/books', controller.books.addBook); // FIXME: conflict with react-router endpoint
+router.post('/books', controller.books.addBook);
 
-// FIXME: These need unique endpoints
-router.put('/books', controller.books.updateStatus);
-router.put('/books', controller.books.addToBookshelf);
-router.put('/books', controller.books.reviewBook);
-router.put('/books', controller.books.rateBook);
+router.put('/books/status', controller.books.updateStatus);
+router.put('/books/bookshelf', controller.books.addToBookshelf);
+router.put('/books/review', controller.books.reviewBook);
+router.put('/books/rating', controller.books.rateBook);
 
 // ---                          ---
 // --- Book Clubs API endpoints ---
@@ -22,9 +21,9 @@ router.put('/books', controller.books.rateBook);
 router.get('/bookclubs', controller.bookclubs.allClubs);
 router.get('/mybookclubs', controller.bookclubs.myClubs);
 
-router.post('/bookclub', controller.bookclubs.createClub);
-router.post('/FIXME', controller.bookclubs.postMessage); // FIXME: API endpoint not yet defined
+router.post('/bookclub/create', controller.bookclubs.createClub);
+router.post('/bookclubs/messages', controller.bookclubs.postMessage);
 
-router.put('/FIXME', controller.bookclubs.joinClub); // FIXME: API endpoint not yet defined
+router.put('/bookclubs/join', controller.bookclubs.joinClub);
 
 module.exports = router;
