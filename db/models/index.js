@@ -1,1 +1,2 @@
-// TODO: export models from here
+module.exports.books = require('./books');
+module.exports.bookclubs = require('./bookclubs');

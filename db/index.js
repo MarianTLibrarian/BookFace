@@ -1,1 +1,1 @@
-// TODO: export database connection from here
+module.exports = {/* Firebase here */}
