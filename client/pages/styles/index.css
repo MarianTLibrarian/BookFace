@@ -30,6 +30,9 @@ h1 {
   padding-bottom: 10px;
 }
 
+:root {
+  --beige: #ddc9b4;
+}
 
 
 /***********************     Nav     ***********************/
@@ -120,6 +123,7 @@ h1 {
   width: 100%;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .main-content h1 {
@@ -144,9 +148,20 @@ button {
   border: 2px solid white;
   transition: 0.5s;
 }
+.green-btn button {
+  background:#67b27c;
+  border:none;
+  border-radius:5px;
+  font-weight: bold;
+  box-shadow: 3px 3px 5px #9e9795;
+}
 
 button:hover {
   background: #B9946A;
+}
+
+.green-btn {
+  padding-top:40px;
 }
 
 .description {
@@ -162,4 +177,12 @@ button:hover {
   width: 900px;
   line-height: 26px;
   font-weight: bold;
+}
+
+.page-content{
+ display: flex;
+ width:1200px;
+ padding:100px 0;
+ margin:auto;
+ flex-direction: column;
 }
