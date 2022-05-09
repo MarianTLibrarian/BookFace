@@ -22,7 +22,6 @@ function NotFound() {
 export default function App() {
   return (
     <div>
-
       <Router>
         <NavBar />
         <Routes>
@@ -31,7 +30,7 @@ export default function App() {
           <Route path="/bookdetail" element={<BookDetail />} />
           <Route path="/bookclubs" element={<BookClubs />} />
           <Route path="/bookclubdetail" element={<BookClubDetail />} />
-          <Route path="/stats" element={<stats />} />
+          <Route path="/stats" element={<Stats />} />
           <Route path="*" element={NotFound} />
         </Routes>
         {/* Stretch: <LiveChat /> */}
