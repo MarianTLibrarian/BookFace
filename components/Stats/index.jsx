@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../client/pages/styles/Stats.css';
+
 import Dropdown from './Dropdown';
+import BooksStats from './BooksStats';
+import PagesStats from './PagesStats';
+import GenresStats from './GenresStats';
+
 
 export default function Stats() {
   const style = {
@@ -11,22 +16,22 @@ export default function Stats() {
   const totalBooks = 20;
   const totalDays = 267;
 
-  const [menusView, setMenusView] = React.useState('BOOKS');
+  const [menusView, setMenusView] = useState('BOOKS');
   const menus = ['BOOKS', 'PAGES', 'GENRES'];
 
   // To render selected stats
-  const [currentView, setCurrentView] = React.useState('');
+  const [currentView, setCurrentView] = useState('');
 
   const statsViews = () => {
     switch (currentView) {
       case 'BOOKS':
-        return <div className="stats-graph">this is books stats</div>;
+        return <BooksStats />;
       case 'PAGES':
-        return <div className="stats-graph">this is pages stats</div>;
+        return <PagesStats />;
       case 'GENRES':
-        return <div className="stats-graph">this is genres stats</div>;
+        return <GenresStats />;
       default:
-        return <div className="stats-graph">this is books stats</div>;
+        return <BooksStats />;
     }
   }
 
