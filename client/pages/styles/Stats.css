@@ -24,6 +24,10 @@
   padding: 2vw 3vw;
 }
 
+.stats-graph-overall-container {
+  display: flex;
+}
+
 .stats-graph-container {
   margin-top: 3vw;
   width: 100%;

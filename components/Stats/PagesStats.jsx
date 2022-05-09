@@ -44,6 +44,7 @@ export default function PagesStats() {
         <Bar
           data={state}
           options={{
+            indexAxis: 'y',
             plugins: {
               title: {
                 display: false,
