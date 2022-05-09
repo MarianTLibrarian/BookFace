@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper';
 import Popover from '@mui/material/Popover';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 const filterOptions = {
   all: 'All',
@@ -29,6 +30,13 @@ export default function SearchBar() {
     setAnchorElem(null);
   };
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+
+    const { value } = event.target;
+    // console.log(value);
+  };
+
   const open = !!anchorElem;
 
   return (
@@ -41,10 +49,15 @@ export default function SearchBar() {
         width: 720,
       }}
     >
-      <IconButton sx={{ p: '10px' }} aria-label="menu" onClick={handleExpand}>
-        <Typography>{filterOptions[searchFilter]}</Typography>
-        <ExpandMoreIcon />
-      </IconButton>
+      <Button
+        sx={{ p: '10px' }}
+        aria-label="menu"
+        color='inherit'
+        onClick={handleExpand}
+        endIcon={<ExpandMoreIcon />}
+      >
+        <Typography fontSize="small">{filterOptions[searchFilter]}</Typography>
+      </Button>
       <Popover
         open={open}
         anchorEl={anchorElem}
@@ -52,7 +65,11 @@ export default function SearchBar() {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       >
         {Object.entries(filterOptions).map(([value, label]) => (
-          <Typography key={value} sx={{ p: 1 }} onClick={() => handleFilterChange(value)}>
+          <Typography
+            key={value}
+            sx={{ p: 1, cursor: 'pointer' }}
+            onClick={() => handleFilterChange(value)}
+          >
             {label}
           </Typography>
         ))}
@@ -62,10 +79,13 @@ export default function SearchBar() {
         sx={{ ml: 1, flex: 1 }}
         inputProps={{ 'aria-label': 'search bookface' }}
         placeholder="Search for something"
+        endAdornment={
+          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" onSubmit={handleSearch}>
+            <SearchIcon />
+          </IconButton>
+        }
+        onSubmit={handleSearch}
       />
-      <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
     </Paper>
   );
 }
