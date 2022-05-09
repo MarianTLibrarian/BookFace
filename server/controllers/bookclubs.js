@@ -10,4 +10,6 @@ module.exports = {
   postMessage() {},
 
   joinClub() {},
+
+  deleteClub() {},
 };

@@ -1,5 +1,5 @@
-const controller = require('./controllers');
 const router = require('express').Router();
+const controller = require('./controllers');
 
 // ---                     ---
 // --- Books API endpoints ---
@@ -26,6 +26,6 @@ router.post('/bookclubs/messages', controller.bookclubs.postMessage);
 
 router.put('/bookclubs/join', controller.bookclubs.joinClub);
 
-router.delete('/bookclubs/delete', controller.bookclubs.deleteClub); 
+router.delete('/bookclubs/delete', controller.bookclubs.deleteClub);
 
 module.exports = router;
