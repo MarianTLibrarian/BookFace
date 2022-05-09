@@ -1,0 +1,143 @@
+.bookdetailmain {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  padding: 100px 250px 100px 250px;
+}
+/*BOOK DETAIL LEFT COL*/
+
+.bookdetailleftcol {
+  grid-column-start: 1/2;
+}
+
+.bookdetailimg {
+  width: 45% !important;
+}
+
+.bookdetailusrinputs {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  font-weight: bold;
+}
+
+.bookdetailreadingstatus, .bookdetailbookshelf, .bookdetailstartdate, .bookdetailenddate, .bookdetailrating {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+}
+
+/*BOOK DETAIL RIGHT COL*/
+.bookdetailrightcol {
+  grid-column-start: 2/3;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.bookdetailtitle {
+  font-size: 35px;
+  font-weight:bold
+}
+
+.bookdetaildynamicbtn {
+  position: absolute;
+  right: -10px;
+  top: 10px;
+}
+
+.bookdetailauthor {
+  font-size: larger;
+  font-weight: bold;
+  color: brown;
+}
+.bookdetaildesc {
+  border-top: 0.75px solid;
+  border-bottom: 0.75px solid;
+  padding: 15px 0px 15px 0px;
+  line-height: 30px;
+}
+
+.bookdetailmisctitle {
+  font-weight: bold;
+  color: grey;
+}
+
+/*MODAL*/
+.modalBox {
+  background-color: white;
+  position: absolute;
+  top: 210px;
+  left: 700px;
+  width: 700px;
+  height: 500px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 25% 25% 25% 25%;
+  color: black;
+  font-weight: bold;
+  border-radius: 3%;
+  align-items: center;
+}
+
+.modalbookshelf {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.modalreadingstats {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.modaldatestarted {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.modaldateend {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.modalrating {
+  grid-column: 1/3;
+  grid-row: 3/4;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalcancelbtn {
+  grid-column: 1/2;
+  grid-row: 4/5;
+}
+
+.modalsubmitbtn {
+  grid-column: 2/3;
+  grid-row: 4/5;
+}
+
+.react-datepicker-wrapper input {
+  width: 95%;
+}
+
+.modalcancelbtn, .modalsubmitbtn {
+  display: flex;
+  justify-content: center;
+}
+
+.modalcancelbtn button {
+  width: 80%;
+  background-color: brown;
+}
+
+.modalsubmitbtn button {
+  width: 80%;
+  background-color: brown;
+}
+
+
+

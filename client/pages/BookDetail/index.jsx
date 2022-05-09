@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Box, Button, TextField } from '@mui/material';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
-
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import BookIcon from '@mui/icons-material/Book';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+
+import { Modal, Box, Button, TextField, InputLabel, MenuItem, FormControl, Select, Rating } from '@mui/material';
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import Rating from '@mui/material/Rating';
+import './bookdetail.css';
 
+const style = {
+  'background': 'url(../assets/header-bg.jpg) no-repeat center center fixed',
+  // 'height': '350px'
+}
 
 export default function BookDetail({fakebookdetail}) {
   const [userLogged, setuserLogged] = useState(false);
@@ -48,6 +53,11 @@ export default function BookDetail({fakebookdetail}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleSubmit = ()=>{
+    //complete this submit function
+    alert('complete submit function')
+    handleClose();
+  }
   //materialui-bookshelffilter
   const filter = createFilterOptions();
   const [value, setBookshelf] = React.useState(null);
@@ -61,48 +71,68 @@ export default function BookDetail({fakebookdetail}) {
   const [endDate, setEndDate] = useState(new Date());
   //rating
   const [star, setStar] = useState(0);
+  //addtoshelf
+  const handleAddtoShelf = () => {
+    alert('added to shelf!')
+  }
 
 
 
   return (
-    <div className='bookdetailmain' style={{position: 'absolute', top: '120px'}}>
+    <div className='header-container'>
+      <div className='header' style={style}>
+        <div className='filter'></div>
+        <div className='main-content'>
+          <h1>{fakeData.title}</h1>
+        </div>
+      </div>
+      <div className='bookdetailmain' >
+      <div className='bookdetailleftcol'>
+          <img className='bookdetailimg' src={fakeData.imageLinks.thumbnail}/>
+          {userLogged?
+            <div className='bookdetailusrinputs'>
+              <div className='bookdetailreadingstatus'>
+              <CheckCircleIcon/>
+              {fakeData.readingStatus}</div>
+              <div className='bookdetailbookshelf'>
+              <BookIcon/>{fakeData.bookshelf}</div>
+              <div className='bookdetailstartdate'><AccessTimeFilledIcon/>Start Reading Date: {fakeData['start-read-date']}</div>
+              <div className='bookdetailenddate'><EmojiEmotionsIcon/>End Reading Date: {fakeData['finish-read-date']}</div>
+              <div className='bookdetailrating'><ReviewsIcon/>Rating:
+              <Rating name="read-only" value={fakeData.rating} readOnly />
+
+              </div>
+            </div>
+            : null}
+      </div>
       <div className='bookdetailrightcol'>
         <div className="bookdetailtitle">{fakeData.title}</div>
         <div className='bookdetaildynamicbtn'>
-          {userLogged? <AddBoxIcon onClick={()=>{alert('hi')}}/> : <ModeEditOutlineIcon/>}
+          {userLogged? <AddBoxIcon onClick={handleAddtoShelf}/> : <ModeEditOutlineIcon onClick={handleOpen}/>}
         </div>
         <div className='bookdetailauthor'> by {fakeData.authors[0]}</div>
         <div className='bookdetaildesc'>{fakeData.description}</div>
         <div className='bookdetailgenre'>
-          Genres
+          <p className='bookdetailmisctitle'>GENRES</p>
           <p>{fakeData.categories}</p>
         </div>
         <div className='bookdetailpublishdetails'>
+          <p className='bookdetailmisctitle'>PUBLISH INFO</p>
           Published {fakeData.publishedDate} by {fakeData.publisher}
         </div>
-        <div className='bookdetailisbn'>{fakeData.isbn13}</div>
+        <div className='bookdetailisbn'>
+          <p className='bookdetailmisctitle'>ISBN</p>
+          {fakeData.isbn13}
+        </div>
       </div>
-      <div className='bookdetailleftcol'>
-        <img className='bookdetailimg' src={fakeData.imageLinks.thumbnail}></img>
-        {userLogged?
-          <div className='bookdetailusrinputs'>
-            <div className='bookdetailreadingstatus'>{fakeData.readingStatus}</div>
-            <div className='bookdetailbookshelf'>{fakeData.bookshelf}</div>
-            <div className='bookdetailstartdate'>Start Reading Date: {fakeData['start-read-date']}</div>
-            <div className='bookdetailenddate'>End Reading Date: {fakeData['finish-read-date']}</div>
-            <div className='bookdetailrating'>Rating: {fakeData.rating}</div>
-          </div>
-          : null}
-      </div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box style={{backgroundColor: 'orange',color: 'red', position:'absolute', top: '150px', left: '150px', width: '500px', height: '500px', padding:'40px'}}>
-          <div className='modalbookshelf' style={{ color: 'black', backgroundColor:'green'}}>
+        <Box className='modalBox'>
+          <div className='modalbookshelf'>
             <Autocomplete
               value={value}
               onChange={(event, newValue) => {
@@ -157,7 +187,7 @@ export default function BookDetail({fakebookdetail}) {
               )}
             />
           </div>
-          <div className='modalreadingstats' style={{backgroundColor:'red'}}>
+          <div className='modalreadingstats' >
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Reading Status</InputLabel>
               <Select
@@ -175,13 +205,15 @@ export default function BookDetail({fakebookdetail}) {
           </div>
 
           <div className='modaldatestarted'>
+            DATE STARTED
             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
           </div>
           <div className='modaldateend'>
+            DATE FINISHED
             <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
           </div>
           <div className='modalrating'>
-            Rating:
+            RATE THIS BOOK
               <Rating
                 name="simple-controlled"
                 value={star}
@@ -190,23 +222,21 @@ export default function BookDetail({fakebookdetail}) {
                 }}
               />
           </div>
-          <div>
-            <Button variant="contained">Cancel</Button>
+          <div className='modalcancelbtn'>
+            <Button variant="contained" onClick={handleClose}>Cancel</Button>
           </div>
-          <div>
-            <Button variant="contained">Submit</Button>
+          <div className='modalsubmitbtn'>
+            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
           </div>
-
-
-
-
-
-
-
         </Box>
       </Modal>
-
+      </div>
     </div>
+
+
+
+
+
   );
 }
 
