@@ -1,6 +1,6 @@
 const db = require('../../db');
 const axios = require('axios');
-const { nytConfig } = require('../../db/exampleConfig');
+const { nytConfig } = require('../../db/config');
 const {collection, getDocs, addDoc, query} = require('firebase/firestore');
 
 

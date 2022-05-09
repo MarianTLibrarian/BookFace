@@ -27,4 +27,4 @@ dist-ssr
 .env
 .env.local
 components/Firebase/firebaseConfig.js
-db/exampleConfig.js
+db/config.js
