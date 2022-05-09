@@ -28,4 +28,13 @@ router.put('/bookclubs/join', controller.bookclubs.joinClub);
 
 router.delete('/bookclubs/delete', controller.bookclubs.deleteClub);
 
+
+
+// ---                          ---
+// --- Bookshelves API endpoints ---
+// ---                          ---
+
+router.get('/bookshelves', controller.bookshelves.allBookshelves);
+router.post('/bookshelves/create', controller.bookshelves.addBookshelf);
+
 module.exports = router;

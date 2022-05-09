@@ -1,4 +1,5 @@
-const PersonalBooks = {
+
+const data = {
 	"userId": 1,
 	"results":
 		[
@@ -119,4 +120,5 @@ const PersonalBooks = {
 		]
 }
 
-export default PersonalBooks;
+export default data;
+
