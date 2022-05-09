@@ -9,6 +9,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import Rating from '@mui/material/Rating';
+
+
 export default function BookDetail({fakebookdetail}) {
   const [userLogged, setuserLogged] = useState(false);
   const [fakeData, setFakeData] = useState({
@@ -50,6 +56,12 @@ export default function BookDetail({fakebookdetail}) {
   const handleChange = (event) => {
     setStatus(event.target.value);
   };
+  //datepicker
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  //rating
+  const [star, setStar] = useState(0);
+
 
 
   return (
@@ -162,10 +174,29 @@ export default function BookDetail({fakebookdetail}) {
             </FormControl>
           </div>
 
-          <div className='datestarted'>
-
-
+          <div className='modaldatestarted'>
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
           </div>
+          <div className='modaldateend'>
+            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+          </div>
+          <div className='modalrating'>
+            Rating:
+              <Rating
+                name="simple-controlled"
+                value={star}
+                onChange={(event, newValue) => {
+                  setStar(newValue);
+                }}
+              />
+          </div>
+          <div>
+            <Button variant="contained">Cancel</Button>
+          </div>
+          <div>
+            <Button variant="contained">Submit</Button>
+          </div>
+
 
 
 
