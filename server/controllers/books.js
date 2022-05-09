@@ -1,19 +1,66 @@
 const models = require('../../db/models');
 
+
 module.exports = {
-  searchBooks() {},
+  searchBooks() { },
 
-  personalBooks() {},
+  personalBooks() { },
 
-  popularBooks() {},
+  popularBooks(req, res) {
+    models.books.popularBooks(req, (err, data) => {
+      if (err) {
+        console.log('controller error from popularBooks:', err);
+        res.status(400).send(err);
+      } else {
+        const fictionBooks = [];
+        const nonfictionBooks = [];
+        data[0].books.forEach(item => {
+          const book = {
+            isbn13: item.primary_isbn13,
+            author: item.author,
+            book_image: item.book_image,
+            title: item.title,
+            description: item.description,
+            rank: item.rank
+          }
+          fictionBooks.push(book);
+        })
+        data[1].books.forEach(item => {
+          const book = {
+            isbn13: item.primary_isbn13,
+            author: item.author,
+            book_image: item.book_image,
+            title: item.title,
+            description: item.description,
+            rank: item.rank
+          }
+          nonfictionBooks.push(book);
+        })
 
-  addBook() {},
+        const popularBooks = {
+          lists: [
+            {
+              list_name: data[0].list_name,
+              books: fictionBooks,
+            },
+            {
+              list_name: data[1].list_name,
+              books: nonfictionBooks,
+            }
+          ]
+        }
+        res.status(200).send(popularBooks);
+      }
+    })
+  },
 
-  updateStatus() {},
+  addBook() { },
 
-  addToBookshelf() {},
+  updateStatus() { },
 
-  reviewBook() {},
+  addToBookshelf() { },
 
-  rateBook() {},
+  reviewBook() { },
+
+  rateBook() { },
 };
