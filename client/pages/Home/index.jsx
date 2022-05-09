@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Home.css';
 import Trends from './Trends';
 import BookClubs from './BookClubs';
+import PopularBooks from '../../../fakedata/books/popularBooks'
+import PopularBookclubs from '../../../fakedata/bookClubs/popularBookclubs'
 
 export default function Home() {
 
-  const [trends, setTrends] = useState([1, 2, 3, 4])
-  const [bookClubs, setBookClubs] = useState([1, 2, 3, 4, 5, 6, 7, 8])
+  const [trends, setTrends] = useState([])
+  const [bookClubs, setBookClubs] = useState([])
+
+  useEffect(() => {
+    setTrends(PopularBooks.lists[0].books);
+    const featuredClubs = PopularBookclubs.results.slice(0, 8)
+    setBookClubs(featuredClubs)
+  }, [])
 
   const style = {
     'background': 'url(../assets/header-bg.jpg) no-repeat center center fixed'
@@ -63,13 +71,13 @@ export default function Home() {
 
       <div className='surprise'>
         <h1>SURPRISE ME!</h1>
-        <div class="card">
-          <div class="imgBox">
-            <div class="bark"></div>
-            <img src="../assets/logo.png" />
+        <div className='card'>
+          <div className='imgBox'>
+            <div className='bark'></div>
+            <img src='../assets/logo.png' />
           </div>
-          <div class="details">
-            <h4 class="color1">READ KATY'S NOTION OR GO BACK TO SCHOOL!!!</h4>
+          <div className='details'>
+            <h4 className='color1'>READ KATY'S NOTION OR GO BACK TO SCHOOL!!!</h4>
 
           </div>
         </div>

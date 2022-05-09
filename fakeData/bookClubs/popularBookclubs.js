@@ -1,4 +1,4 @@
-{
+const PopularBookClubs = {
     "userId": 1,
     "results": [
         {
@@ -479,3 +479,5 @@
         }
     ]
 }
+
+export default PopularBookClubs;

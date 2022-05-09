@@ -1,5 +1,6 @@
 
-{"num_results": 10,
+const PopularBooks = {
+	"num_results": 10,
 	"lists": [
 		{
 			"list_name": "Combined Print and E-Book Fiction",
@@ -52,7 +53,7 @@
 			]
 		},
 		{
-		  "list_name": "Combined Print and E-Book Nonfiction",
+			"list_name": "Combined Print and E-Book Nonfiction",
 			"books": [
 				{
 					"isbn13": "9780063037328",
@@ -103,3 +104,5 @@
 		}
 	]
 }
+
+export default PopularBooks;
