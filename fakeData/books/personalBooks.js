@@ -1,5 +1,4 @@
-
-{
+const PersonalBooks = {
 	"userId": 1,
 	"results":
 		[
@@ -119,3 +118,5 @@
       }
 		]
 }
+
+export default PersonalBooks;

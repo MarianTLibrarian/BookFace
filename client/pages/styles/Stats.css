@@ -1,12 +1,13 @@
 .stats-section {
   display: flex;
+  padding: 20px 50px;
 }
 
 .stats-sidebar {
   width: 20vw;
   height: 100%;
   padding: 2vw 3vw;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
 }
 
 .stats-sidebar h3 {
@@ -15,12 +16,12 @@
 
 .sidebar-divider {
   border-top: 1px solid black;
-  margin-top: calc(.2vw + 1vmin);;
-  padding: 10px 0;
+  margin-top: calc(.2vw + 1vmin);
+  padding: 30px 0;
 }
 
-.stats-graph {
+.stats-graph-container {
   width: 80vw;
   padding: 2vw 3vw;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
 }
