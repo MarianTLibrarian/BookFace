@@ -1,5 +1,5 @@
 
-{
+const data = {
 	"userId": 1,
 	"results":
 		[
@@ -119,3 +119,6 @@
       }
 		]
 }
+
+export default data;
+
