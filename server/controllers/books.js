@@ -10,7 +10,7 @@ module.exports = {
     models.books.popularBooks(req, (err, data) => {
       if (err) {
         console.log('controller error from popularBooks:', err);
-        res.status(400);
+        res.sendStatus(400);
       } else {
         const fictionBooks = [];
         const nonfictionBooks = [];
