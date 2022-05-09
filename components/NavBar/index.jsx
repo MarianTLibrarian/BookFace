@@ -9,18 +9,18 @@ export default function NavBar() {
 
   const handleSignIn = () => {
     if (user) {
-      userSignOut().then(() => setUser(null));
-    } else {
-      signInWithGoogle()
-        .then((result) => {
-          if (!result) throw result;
-          // updateState({ ...result });
-          const { user: newUser, token } = result;
-          setUser(newUser);
-          setToken(token);
-        })
-        .catch(console.error);
+      return userSignOut().then(() => setUser(null));
     }
+
+    return signInWithGoogle()
+      .then((result) => {
+        if (!result) throw result;
+
+        const { user: newUser, token } = result;
+        setUser(newUser);
+        setToken(token);
+      })
+      .catch(console.error);
   };
 
   return (
