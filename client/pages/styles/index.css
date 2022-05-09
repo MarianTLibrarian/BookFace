@@ -163,3 +163,7 @@ button:hover {
   line-height: 26px;
   font-weight: bold;
 }
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: transparent !important;
+}

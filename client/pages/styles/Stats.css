@@ -1,0 +1,26 @@
+.stats-section {
+  display: flex;
+}
+
+.stats-sidebar {
+  width: 20vw;
+  height: 100%;
+  padding: 2vw 3vw;
+  background-color: aquamarine;
+}
+
+.stats-sidebar h3 {
+  font-size: calc(1.2vw + .5vmin);
+}
+
+.sidebar-divider {
+  border-top: 1px solid black;
+  margin-top: calc(.2vw + 1vmin);;
+  padding: 10px 0;
+}
+
+.stats-graph {
+  width: 80vw;
+  padding: 2vw 3vw;
+  background-color: blueviolet;
+}

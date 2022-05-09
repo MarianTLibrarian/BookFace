@@ -1,16 +1,21 @@
 import React from 'react';
+import '../../client/pages/styles/Stats.css';
+import Dropdown from './Dropdown';
 
 export default function Stats() {
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
   };
 
+  // To do: dynamically render the numbers
   const totalBooks = 20;
   const totalDays = 267;
 
-  const handleViewStats = () => {
-    console.log('clicked')
-  }
+  const [menusView, setMenusView] = React.useState('BOOKS');
+  const menus = ['BOOKS', 'PAGES', 'GENRES'];
+
+  // To render selected stats
+  const [currentView, setCurrentView] = React.useState('');
 
   return (
     <div className="Stats">
@@ -38,21 +43,12 @@ export default function Stats() {
         <div className="stats-sidebar">
           <h3>READING STATS</h3>
           <div className="sidebar-divider">
-
-            <div className="stats-dropdown">
-              <button type="submit" className="drop-button">
-                <div>BOOKS</div>
-                <div>▼</div>
-              </button>
-              <div className="stats-dropdown-content">
-                <ul>
-                  <li onClick={handleViewStats}>BOOKS</li>
-                  <li onClick={handleViewStats}>PAGES</li>
-                  <li onClick={handleViewStats}>GENRE</li>
-                </ul>
-              </div>
-            </div>
-
+            <Dropdown
+              menus={menus}
+              menusView={menusView}
+              handleMenuView={setMenusView}
+              handleViewChange={setCurrentView}
+            />
           </div>
         </div>
 
