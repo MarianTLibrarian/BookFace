@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "serve": "nodemon server",
     "build": "vite build",
     "preview": "vite preview",
     "test": "jest --config=jest.config.js"
