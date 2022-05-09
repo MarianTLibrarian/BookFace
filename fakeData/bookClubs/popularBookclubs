@@ -251,7 +251,7 @@
               "posterUserImg": "https://avatars.githubusercontent.com/u/84065478?v=4",
               "post_body": "Hi I'm Cory and I've been here the whole time.",
               "post_date": "2022-04-27T09:05:00.000Z"
-            },
+            }
           ]
         },
         {
