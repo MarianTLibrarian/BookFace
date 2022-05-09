@@ -8,6 +8,10 @@ export default function Stats() {
   const totalBooks = 20;
   const totalDays = 267;
 
+  const handleViewStats = () => {
+    console.log('clicked')
+  }
+
   return (
     <div className="Stats">
       <div className="stats-header-container">
@@ -35,21 +39,27 @@ export default function Stats() {
           <h3>READING STATS</h3>
           <div className="sidebar-divider">
 
-            <div className="dropdown">
+            <div className="stats-dropdown">
               <button type="submit" className="drop-button">
                 <div>BOOKS</div>
                 <div>▼</div>
               </button>
-              <div className="dropdown-content">
-                <div>BOOKS</div>
-                <div>PAGES</div>
-                <div>GENRE</div>
+              <div className="stats-dropdown-content">
+                <ul>
+                  <li onClick={handleViewStats}>BOOKS</li>
+                  <li onClick={handleViewStats}>PAGES</li>
+                  <li onClick={handleViewStats}>GENRE</li>
+                </ul>
               </div>
             </div>
+
           </div>
         </div>
 
-        <div className="stats-graph">This is where stats go</div>
+        <div className="stats-graph">
+          This is where stats go
+        </div>
+
       </div>
     </div>
   );

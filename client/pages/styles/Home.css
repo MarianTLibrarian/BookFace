@@ -301,43 +301,53 @@ padding:80px;
   border: 2px solid black;
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
   color: black;
   font-size: 16px;
   font-weight: bold;
   text-align: left;
+  cursor: pointer;
 }
 
-.dropdown {
+.stats-dropdown {
   width: 100%;
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
-.dropdown-content {
+.stats-dropdown-content {
   width: 100%;
   display: none;
   position: absolute;
   background-color: #f9f9f9;
   z-index: 1;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
 }
 
-.dropdown-content div {
+.stats-dropdown-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stats-dropdown-content li {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
   font-weight: bold;
+  text-align: left;
 }
 
-.dropdown-content div:hover {background-color: #f1f1f1}
+.stats-dropdown-content li:hover {
+  background-color: rgba(0, 0, 0, 0.14);
+}
 
-.dropdown:hover .dropdown-content {
+.stats-dropdown:hover .stats-dropdown-content {
   display: block;
-  cursor: pointer;
 }
 
-.dropdown:hover .drop-button {
+.stats-dropdown:hover .drop-button {
   background-color: transparent;
 }
 
