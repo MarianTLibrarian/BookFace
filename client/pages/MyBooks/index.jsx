@@ -1,46 +1,41 @@
 import React from 'react';
 import axios from 'axios';
-import SideBar from './sidebar.jsx';
-import useStore from './useStore';
+import SideBar from './sidebar';
+import useStore from '../../userStore';
 
-const { personalBooks } = require('../../../server/controllers/books.js')
-
-const { user } = useStore();
-console.log(user);
+const { router } = '../../../server/routes';
 
 
+export default function MyBooks() {
 
+  const { user } = useStore();
+   console.log('user', user)
 
-class BookShelf extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pageview: "",
-      books: []
-    }
-
+  const getBooks = function() {
+    axios.get('/books')
+    .then(data => {
+      console.log(data)
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
- componentDidMount() {
-   this.getBooks();
- }
+  const componentDidMount = function() {
+    getBooks()
+    console.log('mounted')
+  }
 
- getBooks () {
-
- }
-
+  componentDidMount();
 
 
-  render() {
     return(
       <div>
-        <div classname="sidebar">
+        <div className="sidebar">
           <SideBar />
-
         </div>
       </div>
     )
-  }
-}
 
+}
 
