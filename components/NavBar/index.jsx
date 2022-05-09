@@ -1,9 +1,28 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { signInWithGoogle } from '../Firebase';
+import { signInWithGoogle, userSignOut } from '../Firebase';
+import useStore from '../../client/userStore';
 
 export default function NavBar() {
+  const { user, setUser, setToken } = useStore();
+
+  const handleSignIn = () => {
+    if (user) {
+      userSignOut().then(() => setUser(null));
+    } else {
+      signInWithGoogle()
+        .then((result) => {
+          if (!result) throw result;
+          // updateState({ ...result });
+          const { user: newUser, token } = result;
+          setUser(newUser);
+          setToken(token);
+        })
+        .catch(console.error);
+    }
+  };
+
   return (
     <div className="nav-container">
       <div className="nav">
@@ -30,8 +49,8 @@ export default function NavBar() {
           <NavLink activeClassName="active" to="/bookclubs">
             My Clubs
           </NavLink>
-          <NavLink activeClassName="active" to="#" onClick={signInWithGoogle}>
-            Sign In
+          <NavLink activeClassName="active" to="#" onClick={handleSignIn}>
+            {user ? 'Sign Out' : 'Sign In'}
           </NavLink>
         </div>
       </div>
