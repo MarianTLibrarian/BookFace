@@ -35,6 +35,7 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "jest": "^28.1.0",
+    "nodemon": "^2.0.16",
     "prettier": "2.6.2",
     "vite": "^2.9.7"
   }
