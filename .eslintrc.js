@@ -13,7 +13,6 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'react/prop-types': 'off',
-    'jsx-a11y/click-events-have-key-events': 'off'
+    'react/prop-types': 'off'
   },
 };
