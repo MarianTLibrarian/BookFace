@@ -16,12 +16,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import './bookdetail.css';
 
 const style = {
-  'background': 'url(../assets/header-bg.jpg) no-repeat center center fixed',
-  // 'height': '350px'
+  'background': 'url(../assets/header-bg.jpg) no-repeat center center fixed'
 }
 
 export default function BookDetail({fakebookdetail}) {
-  const [userLogged, setuserLogged] = useState(false);
+  const [userLogged, setuserLogged] = useState(true);
   const [fakeData, setFakeData] = useState({
     "isbn13": 9781950968428,
     "title": "About Time: A History of Civilization in Twelve Clocks",
@@ -49,66 +48,73 @@ export default function BookDetail({fakebookdetail}) {
     { title:'readingwithHailee' },
     { title:'readingwithJP' },
     { title:'HappyReading' },]);
-  //materialui--modal
+  // materialui--modal
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSubmit = ()=>{
-    //complete this submit function
+    // complete this submit function
     alert('complete submit function')
     handleClose();
   }
-  //materialui-bookshelffilter
+  // materialui-bookshelffilter
   const filter = createFilterOptions();
   const [value, setBookshelf] = React.useState(null);
-  //materialui-statusdropdown
+  // materialui-statusdropdown
   const [status, setStatus] = React.useState('');
   const handleChange = (event) => {
     setStatus(event.target.value);
   };
-  //datepicker
+  // datepicker
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  //rating
+  // rating
   const [star, setStar] = useState(0);
-  //addtoshelf
+  // addtoshelf
   const handleAddtoShelf = () => {
     alert('added to shelf!')
   }
 
-
+  const renderElement = () => {
+    if (!userLogged) {
+      return (<AddBoxIcon onClick={()=>{alert('reserved for signin')}}/>);
+    }
+    if (!fakeData.readingStatus) {
+      return (<AddBoxIcon onClick={handleAddtoShelf} />)
+    }
+      return (<ModeEditOutlineIcon onClick={handleOpen} />)
+  }
 
   return (
     <div className='header-container'>
       <div className='header' style={style}>
-        <div className='filter'></div>
+        <div className='filter' />
         <div className='main-content'>
           <h1>{fakeData.title}</h1>
         </div>
       </div>
       <div className='bookdetailmain' >
       <div className='bookdetailleftcol'>
-          <img className='bookdetailimg' src={fakeData.imageLinks.thumbnail}/>
+          <img className='bookdetailimg' alt='bookdetailimg' src={fakeData.imageLinks.thumbnail}/>
           {userLogged?
             <div className='bookdetailusrinputs'>
-              <div className='bookdetailreadingstatus'>
+              {fakeData.readingStatus? <div className='bookdetailreadingstatus'>
               <CheckCircleIcon/>
-              {fakeData.readingStatus}</div>
-              <div className='bookdetailbookshelf'>
-              <BookIcon/>{fakeData.bookshelf}</div>
-              <div className='bookdetailstartdate'><AccessTimeFilledIcon/>Start Reading Date: {fakeData['start-read-date']}</div>
-              <div className='bookdetailenddate'><EmojiEmotionsIcon/>End Reading Date: {fakeData['finish-read-date']}</div>
-              <div className='bookdetailrating'><ReviewsIcon/>Rating:
+              {fakeData.readingStatus}</div> :null}
+              {fakeData.bookshelf?<div className='bookdetailbookshelf'>
+              <BookIcon/>{fakeData.bookshelf}</div> : null}
+              {fakeData['start-read-date']?<div className='bookdetailstartdate'><AccessTimeFilledIcon/>Start Reading Date: {fakeData['start-read-date']}</div> :null}
+              {fakeData['finish-read-date']?<div className='bookdetailenddate'><EmojiEmotionsIcon/>End Reading Date: {fakeData['finish-read-date']}</div> :null}
+              {fakeData.rating? <div className='bookdetailrating'><ReviewsIcon/>Rating:
               <Rating name="read-only" value={fakeData.rating} readOnly />
-
-              </div>
+              </div>:null}
             </div>
             : null}
       </div>
       <div className='bookdetailrightcol'>
         <div className="bookdetailtitle">{fakeData.title}</div>
         <div className='bookdetaildynamicbtn'>
-          {userLogged? <AddBoxIcon onClick={handleAddtoShelf}/> : <ModeEditOutlineIcon onClick={handleOpen}/>}
+          {renderElement()}
         </div>
         <div className='bookdetailauthor'> by {fakeData.authors[0]}</div>
         <div className='bookdetaildesc'>{fakeData.description}</div>
@@ -197,9 +203,9 @@ export default function BookDetail({fakebookdetail}) {
                 label="Reading Status"
                 onChange={handleChange}
               >
-                <MenuItem value={'toread'}>To Read</MenuItem>
-                <MenuItem value={'reading'}>Reading</MenuItem>
-                <MenuItem value={'read'}>Read</MenuItem>
+                <MenuItem value="toread">To Read</MenuItem>
+                <MenuItem value="reading">Reading</MenuItem>
+                <MenuItem value="read">Read</MenuItem>
               </Select>
             </FormControl>
           </div>
