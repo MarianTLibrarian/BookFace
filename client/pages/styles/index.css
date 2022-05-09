@@ -13,3 +13,153 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 46px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+
+
+/***********************     Nav     ***********************/
+.nav-container {
+  position: absolute;
+  width: 100%;
+  padding: 40px 40px 20px 40px;
+  z-index: 1;
+}
+
+.nav {
+  display: flex;
+  position: relative;
+  padding-bottom: 20px;
+  border-bottom: 2px solid white;
+  width: 100%;
+
+}
+
+.logo {
+  width: 40%;
+}
+
+.logo img {
+  width: 40px;
+  float: left;
+}
+
+.logo h3 {
+  color: white;
+  font-weight: 800;
+  float: left;
+  padding-left: 20px;
+  margin: 0;
+  line-height: 40px;
+}
+
+.clear {
+  clear: both;
+}
+
+.menu {
+  width: 60%;
+  text-align: right;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  padding-left: 20px;
+  line-height: 40px;
+  transition: 0.5s;
+}
+
+.menu a:hover {
+  color: #B9946A;
+}
+
+.header {
+  position: relative;
+  top: 0;
+  z-index: 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover !important;
+  height: 700px;
+  width: 100%;
+}
+
+.filter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.header img {
+  width: 100%;
+}
+
+.main-content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content h1 {
+  color: white;
+  font-size: 60px;
+  margin: 0;
+}
+
+.main-content h3 {
+  color: white;
+  padding-top: 10px;
+  margin: 0;
+  opacity: 0.8;
+}
+
+button {
+  background: transparent;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: white;
+  padding: 15px 60px;
+  border: 2px solid white;
+  transition: 0.5s;
+}
+
+button:hover {
+  background: #B9946A;
+}
+
+.description {
+  background: black;
+  padding: 60px;
+  color: white;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+}
+
+.text {
+  width: 900px;
+  line-height: 26px;
+  font-weight: bold;
+}

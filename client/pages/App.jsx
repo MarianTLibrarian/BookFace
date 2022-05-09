@@ -21,8 +21,8 @@ function NotFound() {
 
 export default function App() {
   return (
-    <>
-      <div>App.jsx</div>
+    <div>
+
       <Router>
         <NavBar />
         <Routes>
@@ -36,6 +36,6 @@ export default function App() {
         </Routes>
         {/* Stretch: <LiveChat /> */}
       </Router>
-    </>
+    </div>
   );
 }
