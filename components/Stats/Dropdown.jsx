@@ -17,10 +17,10 @@ export default function Dropdown({ menus, menusView, handleMenuView, handleViewC
         sx={{ border: '2px solid black'}}
       >
         <Select
-          id="stats-select"
-          label="Reading Stats"
+          id="select"
           value={menusView}
           onChange={handleChange}
+          sx={{ 'fn': '2px solid black'}}
         >
           {menus.map((menu) => (
             <MenuItem

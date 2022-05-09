@@ -17,6 +17,19 @@ export default function Stats() {
   // To render selected stats
   const [currentView, setCurrentView] = React.useState('');
 
+  const statsViews = () => {
+    switch (currentView) {
+      case 'BOOKS':
+        return <div className="stats-graph">this is books stats</div>;
+      case 'PAGES':
+        return <div className="stats-graph">this is pages stats</div>;
+      case 'GENRES':
+        return <div className="stats-graph">this is genres stats</div>;
+      default:
+        return <div className="stats-graph">this is books stats</div>;
+    }
+  }
+
   return (
     <div className="Stats">
       <div className="stats-header-container">
@@ -51,11 +64,7 @@ export default function Stats() {
             />
           </div>
         </div>
-
-        <div className="stats-graph">
-          This is where stats go
-        </div>
-
+        {statsViews()}
       </div>
     </div>
   );
