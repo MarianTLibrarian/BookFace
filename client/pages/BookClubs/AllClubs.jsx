@@ -6,13 +6,10 @@ export default function BookClubs(props) {
   const [show, setShow] = useState(false)
   const text = props.club.bookclubInfo.description.substring(0, 200) + "...";
 
-  const handleToggle = () => {
-    setShow(!show)
-  }
 
   return (
     <div className='club-container'>
-      <div className='club' onMouseEnter={handleToggle} onMouseLeave ={handleToggle}className={`${show ? "show club" : "club"}`}>
+      <div className='club'>
         <div className='col-left'>
           <div className='join-modal'>
             <button type='button'>JOIN</button>
