@@ -61,7 +61,7 @@ export default function BookDetail({fakebookdetail}) {
   const filter = createFilterOptions();
   const [value, setBookshelf] = React.useState(null);
   // materialui-statusdropdown
-  const [status, setStatus] = React.useState('');
+  const [status, setStatus] = React.useState('toread');
   const handleChange = (event) => {
     setStatus(event.target.value);
   };
@@ -189,13 +189,13 @@ export default function BookDetail({fakebookdetail}) {
               sx={{ width: 300 }}
               freeSolo
               renderInput={(params) => (
-                <TextField {...params} label="Add to your bookshelf" />
+                <TextField {...params} id="outlined-basic" variant="filled" sx={{border: '2px solid black', bgcolor: 'white'}} label="Add to your bookshelf"/>
               )}
             />
           </div>
           <div className='modalreadingstats' >
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Reading Status</InputLabel>
+            <FormControl fullWidth sx={{border: '2px solid black'}} >
+              {/* <InputLabel id="demo-simple-select-label">Reading Status</InputLabel> */}
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
