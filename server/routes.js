@@ -5,6 +5,7 @@ const controller = require('./controllers');
 // --- Books API endpoints ---
 // ---                     ---
 router.get('/search', controller.books.searchBooks);
+router.get('/details', controller.books.bookDetails);
 router.get('/books', controller.books.personalBooks);
 router.get('/popularBooks', controller.books.popularBooks);
 

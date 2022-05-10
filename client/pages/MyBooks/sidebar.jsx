@@ -1,9 +1,7 @@
 import React from 'react';
 
-
 export default function SideBar() {
-
-  return(
+  return (
     <div className="sidebar">
       <h2>My Books</h2>
       <h3>All</h3>
@@ -11,7 +9,5 @@ export default function SideBar() {
       <h3>Currently Reading</h3>
       <h3>Want To Read</h3>
     </div>
-  )
+  );
 }
-
-
