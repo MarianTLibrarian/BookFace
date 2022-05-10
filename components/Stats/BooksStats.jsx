@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../client/pages/styles/Stats.css';
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,7 +11,7 @@ import {
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
 
-// import PersonalBooks from '../../fakeData/books/personalBooks';
+import data from '../../fakeData/books/personalBooks';
 
 export default function BooksStats() {
   ChartJS.register(
@@ -24,15 +23,27 @@ export default function BooksStats() {
     Legend
   );
 
+  const totalReadPerYear = {};
+  const finishedTitle = [];
+
+  for (let i = 0; i < data.results.length; i += 1) {
+    const isRead = data.results[i].readingStatus === 'read';
+    if (isRead) {
+      finishedTitle.push(data.results[i].title);
+      const year = data.results[i]['finish-read-date'].slice(0, 4);
+      totalReadPerYear[year] = (totalReadPerYear[year] || 0) + 1;
+    }
+  }
+
   const state = {
-    labels: ['2018', '2019', '2020', '2021', '2022'],
+    labels: Object.keys(totalReadPerYear),
     datasets: [
       {
         label: 'Total Number of Pages Read',
         backgroundColor: '#EAA800',
         borderColor: '#EAA800',
         borderWidth: 2,
-        data: [65, 59, 80, 81, 56]
+        data: Object.values(totalReadPerYear)
       }
     ]
   }
@@ -41,7 +52,7 @@ export default function BooksStats() {
     <div className="stats-container">
       <h3>Total number of books you have read over the years</h3>
       <div className="stats-graph-overall-container">
-        <div> Accordion to be added </div>
+        {/* <div> Accordion to be added </div> */}
         <div className="stats-graph-container">
         <Bar
           data={state}

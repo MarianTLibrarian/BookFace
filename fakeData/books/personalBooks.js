@@ -17,7 +17,7 @@ const data = {
                       "thumbnail": "http://books.google.com/books/content?id=rgIDEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         },
         "language": "en",
-        "readingStatus": "reading",
+        "readingStatus": "read",
         "rating" : 5,
         "bookshelf": "Haley's Bookshelf",
         "review" : "not so good",
@@ -39,7 +39,7 @@ const data = {
           "thumbnail": "http://books.google.com/books/content?id=aTCKDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         },
         "language": "en",
-        "readingStatus": "reading",
+        "readingStatus": "read",
         "averageRating": 3,
         "ratingsCount": 89,
         "bookshelf": "Haley's Bookshelf",
@@ -62,7 +62,7 @@ const data = {
           "thumbnail": "http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         },
         "language": "en",
-        "readingStatus": "reading",
+        "readingStatus": "read",
         "averageRating": 4,
         "ratingsCount": 35,
         "bookshelf": "Haley's Bookshelf",
@@ -85,7 +85,7 @@ const data = {
           "thumbnail": "http://books.google.com/books/content?id=T7iJDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         },
         "language": "en",
-        "readingStatus": "reading",
+        "readingStatus": "read",
         "averageRating": 4.5,
         "ratingsCount": 12,
         "bookshelf": "Haley's Bookshelf",
