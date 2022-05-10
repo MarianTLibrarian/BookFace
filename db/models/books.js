@@ -1,7 +1,8 @@
 const axios = require('axios');
+const { collection, getDocs, addDoc, query, where, updateDoc, doc, limit } = require('firebase/firestore');
 const db = require('..');
 const { nytConfig } = require('../config');
-const { collection, getDocs, addDoc, query } = require('firebase/firestore');
+
 
 const googleBooksAPIUrl = 'https://www.googleapis.com/books/v1/volumes';
 
@@ -18,7 +19,20 @@ module.exports = {
     return (await axios.get(url)).data;
   },
 
-  personalBooks() {},
+  personalBooks(req, callback) {
+    const {userId, count = 10} = req.body;
+    const q = query(collection(db, 'PersonalBookLibrary'), where("userId", "==", `${userId}`), limit(count));
+    getDocs(q)
+      .then(snapshot => {
+        const myBooks = [];
+        snapshot.forEach((document) => {
+          myBooks.push({...document.data()});
+        })
+        callback(null, {userId: `${userId}`, results: myBooks});
+      })
+      .catch(err => console.log('Error in getting all personal books: ', err))
+
+  },
 
   popularBooks(req, callback) {
     const key = nytConfig.apiKey;
@@ -38,13 +52,57 @@ module.exports = {
       });
   },
 
-  addBook() {},
+  addBook(req, callback) {
+    let {isbn, userId, title, authors, publisher, publishedDate, description, pageCount, categories, imageLinks, language} = req.body;
+    console.log(isbn, userId, title, authors, publisher, publishedDate, description, pageCount, categories, imageLinks, language);
+    isbn = parseInt(isbn, 10);
+    pageCount = parseInt(pageCount, 10);
+    addDoc(collection(db, 'PersonalBookLibrary'), {
+      userId,
+      isbn,
+      title,
+      authors,
+      publisher,
+      publishedDate,
+      description,
+      pageCount,
+      categories,
+      imageLinks,
+      language,
+      readingStatus: "toread",
+      rating: 0,
+      bookshelf: "none",
+      review: "",
+      review_date: "",
+      startReadDate: "",
+      endReadDate: ""
+    })
+    .then(()=>{
+      callback(null, 'created')
+    })
+    .catch(err => console.log('Error in add a book: ', err))
+   },
 
-  updateStatus() {},
-
-  addToBookshelf() {},
-
-  reviewBook() {},
-
-  rateBook() {},
+  updateBook(req, callback) {
+    let {rating, isbn, userId, bookshelf, startReadDate, endReadDate, readingStatus, review, review_date} = req.body;
+    isbn = parseInt(isbn, 10);
+    rating = parseInt(rating, 10);
+    const q = query(collection(db, 'PersonalBookLibrary'), where("userId", "==", `${userId}`), where("isbn", "==", isbn));
+    getDocs(q)
+      .then(snapshot => {
+        const id = [];
+        snapshot.forEach((document) => {
+          id.push(document.id);
+        })
+        return id[0];
+      })
+      .then(id => {
+        const docRef = doc(db, 'PersonalBookLibrary', id);
+        updateDoc(docRef,  {rating, bookshelf, startReadDate, endReadDate, readingStatus, review, review_date })
+          .then(() => {
+            callback(null, 'created');
+          })
+      })
+      .catch(err => console.log('Error in update rating: ', err))
+  },
 };

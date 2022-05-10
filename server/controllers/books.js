@@ -21,7 +21,17 @@ module.exports = {
     }
   },
 
-  personalBooks() {},
+  personalBooks(req, res) {
+    models.books.personalBooks(req, (err, results)=>{
+      if (err) {
+        console.log('Unable to get all personal Books');
+        res.sendStatus(500);
+      } else {
+        res.status(201).send(results);
+      }
+    })
+
+  },
 
   popularBooks(req, res) {
     models.books.popularBooks(req, (err, data) => {
@@ -71,13 +81,25 @@ module.exports = {
     });
   },
 
-  addBook() {},
+  addBook(req, res) {
+    models.books.addBook(req, (err, results)=>{
+      if (err) {
+        console.log('Unable to add book to personal library');
+        res.sendStatus(500);
+      } else {
+        res.status(201).send(results);
+      }
+    })
+  },
 
-  updateStatus() {},
-
-  addToBookshelf() {},
-
-  reviewBook() {},
-
-  rateBook() {},
+  updateBook(req, res) {
+    models.books.updateBook(req, (err, results)=>{
+      if (err) {
+        console.log('Unable to update rating');
+        res.sendStatus(500);
+      } else {
+        res.status(201).send(results);
+      }
+    })
+  },
 };
