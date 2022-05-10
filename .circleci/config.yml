@@ -25,7 +25,7 @@ jobs:
       - checkout
       - run:
           name: 'Format check with ✨Prettier✨'
-          command: 'npx prettier --check'
+          command: 'npm run prettier:check'
 
   eslint-check:
     docker:
@@ -34,7 +34,7 @@ jobs:
       - checkout
       - run:
           name: 'Style check with ESLint'
-          command: 'eslint --cache --color --config ./.eslintrc.js .'
+          command: 'npm run eslint:check'
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
