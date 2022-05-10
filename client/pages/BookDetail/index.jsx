@@ -103,8 +103,8 @@ export default function BookDetail({fakebookdetail}) {
   }
 
   useEffect(()=>{
-    axios.get('http://localhost:3030/books', {proxy: {url: 'https://localhost:3030/books'}},{body: {
-      "userID": 1
+    axios.get('http://localhost:3030/books', {params: {
+      userId: 1
     }})
     .then((data)=>{console.log(data)})
     .catch(err=>{console.log(err)})
