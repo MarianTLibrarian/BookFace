@@ -1,5 +1,6 @@
 
-{"num_results": 10,
+const data = {
+	"num_results": 10,
 	"lists": [
 		{
 			"list_name": "Combined Print and E-Book Fiction",
@@ -103,3 +104,5 @@
 		}
 	]
 }
+
+export default data;

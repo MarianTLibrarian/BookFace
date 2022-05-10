@@ -1,0 +1,139 @@
+.search-bar input {
+  width: 200px;
+  padding: 10px;
+  text-align: left;
+  border-radius: 0;
+}
+
+.search-bar .search {
+  text-align: right;
+  padding: 0;
+  padding-bottom: 20px;
+}
+
+.club-of-the-day {
+  display: flex;
+  box-shadow: 5px 5px 5px #bdb4b2;
+  border-radius: 20px;
+}
+
+.club-left {
+  width: 40%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover !important;
+  height: 500px;
+  border-radius: 20px 0 0 20px;
+
+}
+
+.club-left img {
+  width: 100%;
+
+}
+
+.club-right {
+  width: 60%;
+  text-align: left;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  background: var(--beige);
+  border-radius: 0 20px 20px 0;
+  justify-content: center;
+}
+
+.club-right h1 {
+  border-bottom: 1px solid black;
+}
+
+.club-right h3 {
+  color: #44231A;
+  font-size: 26px;
+  padding-top: 20px;
+}
+
+.club-right h5 {
+  padding: 10px 0;
+  opacity: 0.7;
+}
+
+.club-right p {
+  padding-top: 10px;
+}
+
+.allClubs {
+  padding-top: 60px;
+}
+
+.allClubs .club-container {
+  padding: 0;
+}
+
+.allClubs .club {
+  padding: 20px 0;
+  box-shadow: none;
+}
+
+.allClubs .club-container:nth-child(odd) {
+  padding-right: 20px;
+}
+
+.allClubs .club-container:nth-child(even) {
+  padding-left: 20px;
+}
+
+.allClubs p span {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.allClubs .col-left {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+
+}
+
+.allClubs .col-right {
+  padding-left: 40px;
+
+}
+
+
+.allClubs .col-left img {
+  border-radius: 20px
+}
+
+.join-modal {
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  width: 150px;
+  height: 150px;
+  transition: 1s;
+  border-radius: 20px;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.club-container:hover .join-modal {
+  visibility: visible;
+  opacity: 1;
+}
+
+.join-modal button{
+text-align: center;
+  font-weight: bold;
+padding:10px 20px
+}
+
+.join-modal button:hover{
+  font-weight: bold;
+}

@@ -5,6 +5,7 @@ const controller = require('./controllers');
 // --- Books API endpoints ---
 // ---                     ---
 router.get('/search', controller.books.searchBooks);
+router.get('/details', controller.books.bookDetails);
 router.get('/books', controller.books.personalBooks);
 router.get('/popularBooks', controller.books.popularBooks);
 
@@ -27,5 +28,14 @@ router.post('/bookclubs/messages', controller.bookclubs.postMessage);
 router.put('/bookclubs/join', controller.bookclubs.joinClub);
 
 router.delete('/bookclubs/delete', controller.bookclubs.deleteClub);
+
+
+
+// ---                          ---
+// --- Bookshelves API endpoints ---
+// ---                          ---
+
+router.get('/bookshelves', controller.bookshelves.allBookshelves);
+router.post('/bookshelves/create', controller.bookshelves.addBookshelf);
 
 module.exports = router;
