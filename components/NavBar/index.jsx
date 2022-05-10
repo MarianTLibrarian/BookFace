@@ -9,14 +9,20 @@ export default function NavBar() {
 
   const handleSignIn = () => {
     if (user) {
-      return userSignOut().then(() => setUser(null));
+      return userSignOut().then(() => {
+        localStorage.removeItem('user_data');
+        setUser(null);
+      });
     }
 
     return signInWithGoogle()
       .then((result) => {
-        if (!result) throw result;
+        if (!result || !result.user || !result.token) throw result;
 
         const { user: newUser, token } = result;
+
+        localStorage.setItem('user_data', JSON.stringify(newUser));
+
         setUser(newUser);
         setToken(token);
       })
@@ -27,19 +33,15 @@ export default function NavBar() {
     <div className="nav-container">
       <div className="nav">
         <div className="logo">
-          <img alt="logo" src="../assets/logo.png" />
-          <h3>BOOKFACE.</h3>
+          {' '}
+          <a href="/">
+            <img alt="logo" src="../assets/logo.png" />
+            <h3>BOOKFACE.</h3>
+          </a>
           <div className="clear" />
         </div>
         <div className="menu">
-          <NavLink
-            activeStyle={{
-              fontWeight: 'bold',
-              color: 'black',
-            }}
-            exact
-            to="/"
-          >
+          <NavLink exact to="/">
             Home
           </NavLink>
 

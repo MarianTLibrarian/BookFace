@@ -4,6 +4,7 @@ module.exports = {
 
   allClubs(req, res) {
     models.bookclubs.allClubs(req, (err, data) => {
+
       if(err) {
         console.log('controller error from allClubs: ', err);
         res.sendStatus(400);
@@ -13,13 +14,59 @@ module.exports = {
     })
   },
 
-  myClubs() {},
+  myClubs(req, res) {
+    models.bookclubs.myClubs(req, (err, data) => {
+      if(err) {
+        console.log('controller error from myClubs: ', err);
+        res.sendStatus(400);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
 
-  createClub() {},
+  createClub(req, res) {
+ 
+    models.bookclubs.createClub(req.body, (err) => {
+      if(err) {
+        console.log('controller error from createClub: ', err);
+        res.sendStatus(400);
+      } else {
+        res.status(201).send("created");
+      }
+    })
+  },
 
-  postMessage() {},
+  postMessage(req, res) {
+    models.bookclubs.postMessage(req.body, (err) => {
+      if(err) {
+        console.log('controller error from postMessage: ', err);
+        res.sendStatus(400);
+      } else {
+        res.status(201).send("created");
+      }
+    })
+  },
 
-  joinClub() {},
+  joinClub(req, res) {
+    models.bookclubs.joinClub(req.body, (err) => {
+      if(err) {
+        console.log('controller error from joinClub: ', err);
+        res.sendStatus(400);
+      } else {
+        res.status(201).send("added");
+      }
+    })
+  },
 
-  deleteClub() {},
+  deleteClub(req, res) {
+    models.bookclubs.deleteClub(req.body, (err) => {
+      if(err) {
+        console.log('controller error from deleteClub: ', err);
+        res.sendStatus(400);
+      } else {
+        res.status(204).send("deleted");
+      }
+    })
+  },
 };
