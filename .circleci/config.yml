@@ -15,28 +15,29 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: 'Say hello'
+          command: 'echo Hello, World!'
   prettier-check:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
       - run:
-          name: "Check formatting with ✨Prettier✨"
-          command: "npx prettier --check"
-  eslint-report:
+          name: 'Format check with ✨Prettier✨'
+          command: 'npx prettier --check'
+  eslint-check:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
       - run:
-          name: "Enforce style guide with 🛡️ESLint🛡️"
-          command: "" #TODO:
+          name: 'Style check with ESLint'
+          command: 'eslint --cache --color --config ./.eslintrc.js .'
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  style-guide-workflow:
     jobs:
-      - say-hello
+      - prettier-check
+      - eslint-check
