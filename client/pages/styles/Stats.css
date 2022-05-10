@@ -1,0 +1,34 @@
+.stats-section {
+  display: flex;
+  padding: 20px 50px;
+}
+
+.stats-sidebar {
+  width: 20vw;
+  height: 100%;
+  padding: 2vw 3vw;
+}
+
+.stats-sidebar h3 {
+  font-size: calc(1.2vw + .5vmin);
+}
+
+.sidebar-divider {
+  border-top: 1px solid black;
+  margin-top: calc(.2vw + 1vmin);
+  padding: 30px 0;
+}
+
+.stats-container {
+  width: 80vw;
+  padding: 2vw 3vw;
+}
+
+.stats-graph-overall-container {
+  display: flex;
+}
+
+.stats-graph-container {
+  margin-top: 3vw;
+  width: 100%;
+}

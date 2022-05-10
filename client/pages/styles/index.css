@@ -179,6 +179,10 @@ button:hover {
   font-weight: bold;
 }
 
+.MuiOutlinedInput-notchedOutline {
+  border-color: transparent !important;
+}
+
 .page-content{
  display: flex;
  width:1200px;
