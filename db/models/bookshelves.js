@@ -10,7 +10,7 @@ module.exports = {
       .then(snapshot => {
         const allBookshelves = [];
         snapshot.forEach((document) => {
-          allBookshelves.push(document.data().bookshelf)
+          allBookshelves.push({title: document.data().bookshelf})
         })
         const result = {
           userId,
