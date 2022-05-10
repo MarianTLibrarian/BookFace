@@ -32,6 +32,7 @@ h1 {
 
 :root {
   --beige: #ddc9b4;
+  --wood:#B9946A
 }
 
 
@@ -124,6 +125,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding:0 40px;
 }
 
 .main-content h1 {
@@ -173,10 +175,11 @@ button:hover {
   justify-content: center;
 }
 
-.text {
+.text{
   width: 900px;
   line-height: 26px;
   font-weight: bold;
+  text-align: center;
 }
 
 .MuiOutlinedInput-notchedOutline {
