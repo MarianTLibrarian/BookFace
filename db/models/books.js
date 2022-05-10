@@ -20,7 +20,7 @@ module.exports = {
   },
 
   personalBooks(req, callback) {
-    const {userId, count = 10} = req.body;
+    const {userId, count = 10} = req.query;
     const q = query(collection(db, 'PersonalBookLibrary'), where("userId", "==", `${userId}`), limit(count));
     getDocs(q)
       .then(snapshot => {
