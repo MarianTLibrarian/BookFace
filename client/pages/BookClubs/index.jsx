@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AllClubs from './AllClubs';
-import PopularBookclubs from '../../../fakedata/bookClubs/popularBookclubs'
+import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs'
 
 export default function BookClubs() {
 
@@ -23,7 +23,7 @@ export default function BookClubs() {
     <div className='book-clubs'>
       <div className='header-container'>
         <div className='header' style={style}>
-          <div className='filter'></div>
+          <div className='filter' />
           <div className='main-content'>
             <div>
               <h1>BOOK CLUBS</h1>
@@ -40,8 +40,7 @@ export default function BookClubs() {
           </div>
 
           <div className='club-of-the-day'>
-            <div className='club-left' style={clubImg}>
-            </div>
+            <div className='club-left' style={clubImg} />
             <div className='club-right'>
               <h1>CLUB OF THE DAY</h1>
               <h3>{bookClub.bookclubName}</h3>
@@ -57,9 +56,7 @@ export default function BookClubs() {
         </div>
         <div className='allClubs'>
           {
-            allClubs.map((club, index) => {
-              return <AllClubs club={club} key={index} />
-            })
+            allClubs.map((club) => <AllClubs club={club} key={club} />)
           }
         </div>
       </div>

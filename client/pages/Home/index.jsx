@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Home.css';
-import SearchBar from '../../../components/SearchBar/index.jsx';
+import SearchBar from '../../../components/SearchBar';
 import Trends from './Trends';
 import BookClubs from './BookClubs';
-import PopularBooks from '../../../fakedata/books/popularBooks'
-import PopularBookclubs from '../../../fakedata/bookClubs/popularBookclubs'
+import PopularBooks from '../../../fakeData/books/popularBooks'
+import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs'
 
 export default function Home() {
 
@@ -70,11 +70,11 @@ export default function Home() {
         <h1>SURPRISE ME!</h1>
         <div className='card'>
           <div className='imgBox'>
-            <div className='bark'></div>
-            <img src='../assets/logo.png' />
+            <div className='bark' />
+            <img src='../assets/logo.png' alt="BookFace Logo"/>
           </div>
           <div className='details'>
-            <h4 className='color1'>READ KATY'S NOTION OR GO BACK TO SCHOOL!!!</h4>
+            <h4 className='color1'>READ KATY&apos;S NOTION OR GO BACK TO SCHOOL!!!</h4>
 
           </div>
         </div>
