@@ -3,20 +3,13 @@ import axios from 'axios';
 import SideBar from './sidebar';
 import Carousel from './carousel';
 import useStore from '../../userStore';
-import data from '../../../fakeData/books/personalBooks'
-
-const { router } = '../../../server/routes';
-
-
+import data from '../../../fakeData/books/personalBooks';
 
 export default function MyBooks() {
-
-
   const [books, setBooks] = useState(data);
 
-
   const { user } = useStore();
-   console.log('user', user)
+  console.log('user', user);
 
   // const getBooks = function() {
   //   axios.get('/books')
@@ -28,21 +21,16 @@ export default function MyBooks() {
   //   })
   // }
 
-useEffect (() => {
+  useEffect(() => {
     setBooks(data);
-  })
+  });
 
-
-
-
-    return(
-      <div>
-        <div className="sidebar">
-          <SideBar />
-          <Carousel books={books.results}/>
-        </div>
+  return (
+    <div>
+      <div className="sidebar">
+        <SideBar />
+        <Carousel books={books.results} />
       </div>
-    )
-
+    </div>
+  );
 }
-
