@@ -11,10 +11,7 @@ router.get('/popularBooks', controller.books.popularBooks);
 
 router.post('/books', controller.books.addBook);
 
-router.put('/books/status', controller.books.updateStatus);
-router.put('/books/bookshelf', controller.books.addToBookshelf);
-router.put('/books/review', controller.books.reviewBook);
-router.put('/books/rating', controller.books.rateBook);
+router.put('/books/update', controller.books.updateBook);
 
 // ---                          ---
 // --- Book Clubs API endpoints ---
@@ -27,7 +24,7 @@ router.post('/bookclubs/messages', controller.bookclubs.postMessage);
 
 router.put('/bookclubs/join', controller.bookclubs.joinClub);
 
-router.delete('/bookclubs/delete', controller.bookclubs.deleteClub);
+router.put('/bookclubs/leave', controller.bookclubs.deleteClub);
 
 
 
