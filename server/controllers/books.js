@@ -2,9 +2,23 @@ const models = require('../../db/models');
 
 module.exports = {
   async searchBooks(req, res) {
-    const books = await models.books.searchBooks(req.query);
+    try {
+      const books = await models.books.searchBooks(req.query.q);
+      res.status(200).send(books);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
+    }
+  },
 
-    res.status(200).send(books);
+  async bookDetails(req, res) {
+    try {
+      const details = await models.books.bookDetails(req.query.q);
+      res.status(200).send(details);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
+    }
   },
 
   personalBooks() {},

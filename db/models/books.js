@@ -6,10 +6,16 @@ const { collection, getDocs, addDoc, query } = require('firebase/firestore');
 const googleBooksAPIUrl = 'https://www.googleapis.com/books/v1/volumes';
 
 module.exports = {
-  async searchBooks(query) {
-    const url = `${googleBooksAPIUrl}?q=${query}`;
+  async searchBooks(q) {
+    const url = `${googleBooksAPIUrl}?q=${q}`;
 
     return (await axios.get(url)).data.items;
+  },
+
+  async bookDetails(volumeId) {
+    const url = `${googleBooksAPIUrl}/${volumeId}`;
+
+    return (await axios.get(url)).data;
   },
 
   personalBooks() {},
