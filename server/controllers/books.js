@@ -21,7 +21,17 @@ module.exports = {
     }
   },
 
-  personalBooks() {},
+  personalBooks(req, res) {
+    models.books.personalBooks(req, (err, results)=>{
+      if (err) {
+        console.log('Unable to get all personal Books');
+        res.sendStatus(500);
+      } else {
+        res.status(201).send(results);
+      }
+    })
+
+  },
 
   popularBooks(req, res) {
     models.books.popularBooks(req, (err, data) => {
@@ -71,39 +81,18 @@ module.exports = {
     });
   },
 
-  addBook() {},
-
-  // updateStatus(req, res) {
-  //   let {status, isbn, userId} = req.body;
-  //   // console.log(status, isbn, userId);
-  //   models.books.updateStatus(req, (err, results)=>{
-  //     if (err) {
-  //       console.log('Unable to update reading status');
-  //       res.sendStatus(500);
-  //     } else {
-  //       res.status(201).send(results);
-  //     }
-  //   })
-
-  // },
-
-  // addToBookshelf(req, res) {
-  //   let {bookshelf, isbn, userId} = req.body;
-  //   models.books.addToBookshelf(req, (err, results)=>{
-  //     if (err) {
-  //       console.log('Unable to update bookshelf');
-  //       res.sendStatus(500);
-  //     } else {
-  //       res.status(201).send(results);
-  //     }
-  //   })
-
-  // },
-
-  // reviewBook() {},
+  addBook(req, res) {
+    models.books.addBook(req, (err, results)=>{
+      if (err) {
+        console.log('Unable to add book to personal library');
+        res.sendStatus(500);
+      } else {
+        res.status(201).send(results);
+      }
+    })
+  },
 
   updateBook(req, res) {
-    // let {rating, isbn, userId} = req.body;
     models.books.updateBook(req, (err, results)=>{
       if (err) {
         console.log('Unable to update rating');
