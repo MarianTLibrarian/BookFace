@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/BookClubs.css';
 
-export default function BookClubs({ club }) {
+export default function BookClubs({ club, user }) {
   const { imageUrl, bookclubName, membersCount, description } = club.bookclubInfo;
 
-  const [show, setShow] = useState(false);
   const text = `${description.substring(0, 200)}...`;
-
 
   return (
     <div className='club-container'>
       <div className='club'>
         <div className='col-left'>
-          <div className='join-modal'>
+          {user ? <div className='join-modal'>
             <button type='button'>JOIN</button>
-          </div>
+          </div> : null}
           <img src={imageUrl} alt="clubCover" />
         </div>
         <div className="col-right">

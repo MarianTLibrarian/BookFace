@@ -17,6 +17,17 @@ export default function BookClubs() {
 
   const clubImg = { background: `url('${bookClub.imageUrl}') no-repeat center center` }
 
+
+  const handleUserLogin = () => signInWithGoogle()
+    .then((result) => {
+      if (!result || !result.user || !result.token) throw result;
+      const { user: newUser, token } = result;
+      localStorage.setItem('user_data', JSON.stringify(newUser));
+      setUser(newUser);
+      setToken(token);
+    })
+    .catch(console.error)
+
   const renderView = () => {
     if (!user) {
       return <div className='club-of-the-day'>
@@ -27,24 +38,14 @@ export default function BookClubs() {
           <h5>{bookClub.membersCount} Members</h5>
           <p>{bookClub.description}</p>
           <div className='join green-btn'>
-            <button type='button' onClick={handleuserLogin}>JOIN</button>
+            <button type='button' onClick={handleUserLogin}>LOG IN</button>
           </div>
         </div>
       </div>
-    } else {
-      return <div>LOGGED IN</div>
     }
+      return <div className='most-visited-clubs'>LOGGED IN</div>
   }
 
-  const handleuserLogin = () => signInWithGoogle()
-      .then((result) => {
-        if (!result || !result.user || !result.token) throw result;
-        const { user: newUser, token } = result;
-        localStorage.setItem('user_data', JSON.stringify(newUser));
-        setUser(newUser);
-        setToken(token);
-      })
-      .catch(console.error)
 
   useEffect(() => {
     setBookClub(PopularBookclubs.results[0].bookclubInfo);
@@ -76,7 +77,7 @@ export default function BookClubs() {
         </div>
         <div className='allClubs'>
           {
-            allClubs.map((club) => <AllClubs club={club} key={club} />)
+            allClubs.map((club) => <AllClubs club={club} user={user} key={club} />)
           }
         </div>
       </div>
