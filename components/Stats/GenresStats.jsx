@@ -4,20 +4,33 @@ import '../../client/pages/styles/Stats.css';
 import { Chart as ChartJS, ArcElement, Legend, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
-// import PersonalBooks from '../../fakeData/books/personalBooks';
+import data from '../../fakeData/books/personalBooks';
 
 export default function GenresStats() {
   ChartJS.register(ArcElement, Legend, Tooltip);
 
+  const totalReadPerGenre = {};
+
+  for (let i = 0; i < data.results.length; i += 1) {
+    const isRead = data.results[i].readingStatus === 'read';
+    if (isRead) {
+      const genres = data.results[i].categories; // array
+      for (let j = 0; j < genres.length; j += 1) {
+        const genre = genres[j];
+        totalReadPerGenre[genre] = (totalReadPerGenre[genre] || 0) + 1;
+      }
+    }
+  }
+
   const state = {
-    labels: ['Horror', 'Mystery', 'Fiction'],
+    labels: Object.keys(totalReadPerGenre),
     datasets: [
       {
         label: 'Rainfall',
         backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         borderColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
         borderWidth: 2,
-        data: [65, 59, 80],
+        data: Object.values(totalReadPerGenre),
       },
     ],
   };
