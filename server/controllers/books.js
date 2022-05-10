@@ -73,7 +73,19 @@ module.exports = {
 
   addBook() {},
 
-  updateStatus() {},
+  updateStatus(req, res) {
+    let {status, isbn, userId} = req.body;
+    // console.log(status, isbn, userId);
+    models.books.updateStatus(req, (err, results)=>{
+      if (err) {
+        console.log('Unable to update reading status');
+        res.sendStatus(500);
+      } else {
+        res.status(201).send(results)
+      }
+    })
+
+  },
 
   addToBookshelf() {},
 
