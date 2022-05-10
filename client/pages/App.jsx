@@ -1,21 +1,15 @@
-import React, { useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  // Switch,
-  Route,
-  // Link
-} from 'react-router-dom';
-
-import Home from './Home';
-import BookClubs from './BookClubs';
-import BookClubDetail from './BookClubDetail';
-import MyBooks from './MyBooks';
-import BookDetail from './BookDetail';
-import Stats from '../../components/Stats';
-import NavBar from '../../components/NavBar';
+import React, { Suspense, useEffect, lazy } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import useStore from '../userStore';
+
+const NavBar = lazy(() => import('../../components/NavBar'));
+const Stats = lazy(() => import('../../components/Stats'));
+const BookClubDetail = lazy(() => import('./BookClubDetail'));
+const BookClubs = lazy(() => import('./BookClubs'));
+const BookDetail = lazy(() => import('./BookDetail'));
+const Home = lazy(() => import('./Home'));
+const MyBooks = lazy(() => import('./MyBooks'));
 
 function NotFound() {
   return <>You have landed on a page that does not exist</>;
@@ -32,7 +26,7 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <Suspense fallback={<>Loading ...</>}>
       <Router>
         <NavBar />
         <Routes>
@@ -46,6 +40,6 @@ export default function App() {
         </Routes>
         {/* Stretch: <LiveChat /> */}
       </Router>
-    </div>
+    </Suspense>
   );
 }
