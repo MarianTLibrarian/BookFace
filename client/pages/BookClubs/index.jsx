@@ -1,23 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import AllClubs from './AllClubs';
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs'
+import { signInWithGoogle } from '../../../components/Firebase';
+import useStore from '../../userStore';
 
 export default function BookClubs() {
 
   const [bookClub, setBookClub] = useState([])
   const [allClubs, setAllClubs] = useState([])
+  const { user, setUser, setToken } = useStore();
 
-
-  useEffect(() => {
-    setBookClub(PopularBookclubs.results[0].bookclubInfo);
-    setAllClubs(PopularBookclubs.results)
-  }, [])
 
   const style = {
     'background': 'url(../assets/header-bg.jpg) no-repeat center center fixed'
   }
 
   const clubImg = { background: `url('${bookClub.imageUrl}') no-repeat center center` }
+
+  const renderView = () => {
+    if (!user) {
+      return <div className='club-of-the-day'>
+        <div className='club-left' style={clubImg} />
+        <div className='club-right'>
+          <h1>CLUB OF THE DAY</h1>
+          <h3>{bookClub.bookclubName}</h3>
+          <h5>{bookClub.membersCount} Members</h5>
+          <p>{bookClub.description}</p>
+          <div className='join green-btn'>
+            <button type='button' onClick={handleuserLogin}>JOIN</button>
+          </div>
+        </div>
+      </div>
+    } else {
+      return <div>LOGGED IN</div>
+    }
+  }
+
+  const handleuserLogin = () => signInWithGoogle()
+      .then((result) => {
+        if (!result || !result.user || !result.token) throw result;
+        const { user: newUser, token } = result;
+        localStorage.setItem('user_data', JSON.stringify(newUser));
+        setUser(newUser);
+        setToken(token);
+      })
+      .catch(console.error)
+
+  useEffect(() => {
+    setBookClub(PopularBookclubs.results[0].bookclubInfo);
+    setAllClubs(PopularBookclubs.results);
+    renderView();
+  }, [user])
+
 
   return (
     <div className='book-clubs'>
@@ -38,21 +72,7 @@ export default function BookClubs() {
               <input />
             </div>
           </div>
-
-          <div className='club-of-the-day'>
-            <div className='club-left' style={clubImg} />
-            <div className='club-right'>
-              <h1>CLUB OF THE DAY</h1>
-              <h3>{bookClub.bookclubName}</h3>
-              <h5>{bookClub.membersCount} Members</h5>
-              <p>{bookClub.description}</p>
-              <div className='join green-btn'>
-                <button type='button'>JOIN</button>
-              </div>
-            </div>
-          </div>
-
-
+          {renderView()}
         </div>
         <div className='allClubs'>
           {

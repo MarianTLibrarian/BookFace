@@ -17,8 +17,6 @@ export default function BookClubDetail() {
     background: `url('${myClub[0].bookclubInfo.imageUrl}') no-repeat center center fixed`
   }
 
-  console.log(myClub)
-
   return (
     <div className='book-club-detail'>
       <div className='header-container'>
