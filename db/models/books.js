@@ -20,7 +20,7 @@ module.exports = {
   },
 
   personalBooks(req, callback) {
-    let {userId, count = 10} = req.body;
+    const {userId, count = 10} = req.body;
     const q = query(collection(db, 'PersonalBookLibrary'), where("userId", "==", `${userId}`), limit(count));
     getDocs(q)
       .then(snapshot => {
@@ -84,7 +84,7 @@ module.exports = {
    },
 
   updateBook(req, callback) {
-    let {rating, isbn, userId, bookshelf, startReadDate, endReadDate, status, review, review_date} = req.body;
+    let {rating, isbn, userId, bookshelf, startReadDate, endReadDate, readingStatus, review, review_date} = req.body;
     isbn = parseInt(isbn, 10);
     rating = parseInt(rating, 10);
     const q = query(collection(db, 'PersonalBookLibrary'), where("userId", "==", `${userId}`), where("isbn", "==", isbn));
@@ -98,7 +98,7 @@ module.exports = {
       })
       .then(id => {
         const docRef = doc(db, 'PersonalBookLibrary', id);
-        updateDoc(docRef,  {rating: rating, bookshelf: `${bookshelf}`, startReadDate: `${startReadDate}`, endReadDate: `${endReadDate}`, stats: `${status}`, review: `${review}`,review_date: `${review_date}` })
+        updateDoc(docRef,  {rating, bookshelf, startReadDate, endReadDate, readingStatus, review, review_date })
           .then(() => {
             callback(null, 'created');
           })
