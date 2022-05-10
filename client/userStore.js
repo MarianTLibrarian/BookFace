@@ -7,7 +7,9 @@ const useStore = create((set) => ({
   token: null,
   setToken: (token) => set(() => ({ token })),
 
-  updateState: (state) => set(() => ({ ...state }))
+  updateState: (state) => set(() => ({ ...state })),
+
+  expressUrl: 'http://localhost:3030'
 }));
 
 export default useStore;
