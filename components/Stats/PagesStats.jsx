@@ -44,8 +44,8 @@ export default function PagesStats() {
     datasets: [
       {
         label: 'Total Number of Pages Read',
-        backgroundColor: '#EAA800',
-        borderColor: '#EAA800',
+        backgroundColor: ["hsl(90, 70%, 50%)", "hsl(186, 70%, 50%)", "hsl(56, 70%, 50%)", "hsl(104, 70%, 50%)"],
+        borderColor: ["hsl(90, 70%, 50%)", "hsl(186, 70%, 50%)", "hsl(56, 70%, 50%)", "hsl(103, 70%, 50%)", "hsl(104, 70%, 50%)"],
         borderWidth: 2,
         data: Object.values(totalPagesPerYear)
       }
