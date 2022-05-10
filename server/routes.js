@@ -26,7 +26,7 @@ router.post('/bookclubs/messages', controller.bookclubs.postMessage);
 
 router.put('/bookclubs/join', controller.bookclubs.joinClub);
 
-router.delete('/bookclubs/delete', controller.bookclubs.deleteClub);
+router.put('/bookclubs/delete', controller.bookclubs.deleteClub);
 
 
 
