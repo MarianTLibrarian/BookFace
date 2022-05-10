@@ -17,17 +17,19 @@ jobs:
       - run:
           name: 'Say hello'
           command: 'echo Hello, World!'
+
   prettier-check:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/openjdk:17.0-node
     steps:
       - checkout
       - run:
           name: 'Format check with ✨Prettier✨'
           command: 'npx prettier --check'
+
   eslint-check:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/openjdk:17.0-node
     steps:
       - checkout
       - run:
