@@ -4,7 +4,8 @@ import SideBar from './sidebar';
 import Carousel from './carousel';
 import ReadingGoals from './readingGoals';
 import useStore from '../../userStore';
-import data from '../../../fakeData/books/personalBooks'
+import data from '../../../fakeData/books/personalBooks';
+// import { allBookshelves } from '../../../db/models/bookshelves';
 
 const { router } = '../../../server/routes';
 
@@ -14,31 +15,25 @@ export default function MyBooks() {
 
   const [books, setBooks] = useState([]);
   const [currentView, setCurrentView] = useState('');
+  const { user, setUser, setToken } = useStore();
 
   const handleClick = (event) => {
     setCurrentView(event.target.innerText);
-    // setBooks - get an array of books from the clicked bookshelf
+
 
   }
 
-  const bookshelves = [];
-  for (let i = 0; i < data.results.length; i += 1) {
-    bookshelves.push(data.results[i].bookshelf);
-  }
 
-  const uniqueBookshelves = [];
-  function removeDuplicates(arr) {
-    arr.forEach(element => {
-        if (!uniqueBookshelves.includes(element)) {
-            uniqueBookshelves.push(element);
-        }
-    });
-    return uniqueBookshelves;
-  }
-  removeDuplicates(bookshelves);
-
-  const { user } = useStore();
-  console.log('user', user)
+  // const uniqueBookshelves = [];
+  // function removeDuplicates(arr) {
+  //   arr.forEach(element => {
+  //       if (!uniqueBookshelves.includes(element)) {
+  //           uniqueBookshelves.push(element);
+  //       }
+  //   });
+  //   return uniqueBookshelves;
+  // }
+  // removeDuplicates(bookshelves);
 
   // const getBooks = function() {
   //   axios.get('/books')
@@ -50,8 +45,32 @@ export default function MyBooks() {
   //   })
   // }
 
+  // const getBookshelves = (uid) => {
+  //   axios.get('/bookshelves', { params: {userId: 1}})
+  //     .then(({data}) => {
+  //       console.log('THIS', data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }
+
+  const getBookshelves = (userId) => {
+    axios({
+      method: 'get',
+      url: 'localhost:3030/bookshelves',
+      params: { userId: '1' }
+    })
+    .then(({ data }) => {
+      console.log('HERE!!!', data)
+    })
+    .catch((err) => {
+      console.log('error on client side')
+    });
+  }
+
   useEffect(() => {
-    setBooks(data);
+    getBookshelves();
   })
 
   const style = {
@@ -89,7 +108,7 @@ export default function MyBooks() {
 
           <div className='content-container'>
             <div className='content-left'>
-              <div className='my-bookshelves'>
+              {/* <div className='my-bookshelves'>
                 <h2>My Bookshelves</h2>
                   {uniqueBookshelves.map(shelf => (
                     <p
@@ -99,7 +118,7 @@ export default function MyBooks() {
                       {shelf}
                     </p>
                   ))}
-              </div>
+              </div> */}
 
               <div className='my-book-clubs'>
                 {/* To Do: dynamically render book clubs */}

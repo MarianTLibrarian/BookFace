@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-export default function ReadinGoals() {
+export default function ReadingGoals() {
 
 
   return (
