@@ -1,17 +1,26 @@
-const db = require('../../db');
 const axios = require('axios');
-const { nytConfig } = require('../../db/config');
-const {collection, getDocs, addDoc, query} = require('firebase/firestore');
+const db = require('..');
+const { nytConfig } = require('../config');
+const { collection, getDocs, addDoc, query } = require('firebase/firestore');
 
+const googleBooksAPIUrl = 'https://www.googleapis.com/books/v1/volumes';
 
 module.exports = {
+  async searchBooks(q) {
+    const url = `${googleBooksAPIUrl}?q=${q}`;
 
-  searchBooks() { },
+    return (await axios.get(url)).data.items;
+  },
 
-  personalBooks() { },
+  async bookDetails(volumeId) {
+    const url = `${googleBooksAPIUrl}/${volumeId}`;
+
+    return (await axios.get(url)).data;
+  },
+
+  personalBooks() {},
 
   popularBooks(req, callback) {
-
     const key = nytConfig.apiKey;
     const option = {
       method: 'get',
@@ -21,7 +30,7 @@ module.exports = {
       },
     };
     return axios(option)
-      .then(res => {
+      .then((res) => {
         callback(null, res.data.results.lists);
       })
       .catch((err) => {
@@ -29,14 +38,13 @@ module.exports = {
       });
   },
 
-  addBook() { },
+  addBook() {},
 
-  updateStatus() { },
+  updateStatus() {},
 
-  addToBookshelf() { },
+  addToBookshelf() {},
 
-  reviewBook() { },
+  reviewBook() {},
 
-  rateBook() { },
-
+  rateBook() {},
 };
