@@ -22,6 +22,7 @@ module.exports = {
   },
 
   personalBooks(req, res) {
+    // console.log(req.query);
     models.books.personalBooks(req, (err, results)=>{
       if (err) {
         console.log('Unable to get all personal Books');
