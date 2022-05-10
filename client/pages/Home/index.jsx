@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Home.css';
+import SearchBar from '../../../components/SearchBar/index.jsx';
 import Trends from './Trends';
 import BookClubs from './BookClubs';
 import PopularBooks from '../../../fakedata/books/popularBooks'
