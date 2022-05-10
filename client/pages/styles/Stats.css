@@ -1,6 +1,33 @@
-.stats-section {
+.main-stats {
   display: flex;
-  padding: 20px 50px;
+  text-align: center;
+  width: 50vw;
+}
+
+.stats-upper-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-calendar-container {
+  height: 100%;
+  width: 100%;
+  margin: calc(3vw + 1vmin) 0;
+}
+
+.stats-calendar {
+  height: 280px;
+  width: 100%;
+  padding: calc(.1vw + 1vmin);
+}
+
+.stats-calendar div {
+  text-align: center;
+}
+
+.stats-bottom-section {
+  display: flex;
+  padding-bottom: 50px;
 }
 
 .stats-sidebar {
@@ -20,12 +47,8 @@
 }
 
 .stats-container {
-  width: 80vw;
+  width: calc(80vw + 1vmin);
   padding: 2vw 3vw;
-}
-
-.stats-graph-overall-container {
-  display: flex;
 }
 
 .stats-graph-container {
