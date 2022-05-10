@@ -3,6 +3,7 @@ import AllClubs from './AllClubs';
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs'
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
+import ClubCarousel from './ClubCarousel';
 
 export default function BookClubs() {
 
@@ -43,7 +44,10 @@ export default function BookClubs() {
         </div>
       </div>
     }
-      return <div className='most-visited-clubs'>LOGGED IN</div>
+      return <div className='all-my-clubs'>
+        LOGGED IN
+        <ClubCarousel />
+      </div>
   }
 
 
