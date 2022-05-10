@@ -193,3 +193,8 @@ button:hover {
  margin:auto;
  flex-direction: column;
 }
+
+.content-container p{
+  padding:5px 0;
+  line-height:24px;
+}

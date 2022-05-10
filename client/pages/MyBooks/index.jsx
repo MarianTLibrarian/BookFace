@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SideBar from './sidebar';
 import Carousel from './carousel';
+import ReadingGoals from './readingGoals';
 import useStore from '../../userStore';
-<<<<<<< HEAD
 import data from '../../../fakeData/books/personalBooks'
 
 const { router } = '../../../server/routes';
@@ -12,21 +12,33 @@ const { router } = '../../../server/routes';
 
 export default function MyBooks() {
 
+  const [books, setBooks] = useState([]);
+  const [currentView, setCurrentView] = useState('');
 
-  const [books, setBooks] = useState(data);
+  const handleClick = (event) => {
+    setCurrentView(event.target.innerText);
+    // setBooks - get an array of books from the clicked bookshelf
 
+  }
+
+  const bookshelves = [];
+  for (let i = 0; i < data.results.length; i += 1) {
+    bookshelves.push(data.results[i].bookshelf);
+  }
+
+  const uniqueBookshelves = [];
+  function removeDuplicates(arr) {
+    arr.forEach(element => {
+        if (!uniqueBookshelves.includes(element)) {
+            uniqueBookshelves.push(element);
+        }
+    });
+    return uniqueBookshelves;
+  }
+  removeDuplicates(bookshelves);
 
   const { user } = useStore();
-   console.log('user', user)
-=======
-import data from '../../../fakeData/books/personalBooks';
-
-export default function MyBooks() {
-  const [books, setBooks] = useState(data);
-
-  const { user } = useStore();
-  console.log('user', user);
->>>>>>> main
+  console.log('user', user)
 
   // const getBooks = function() {
   //   axios.get('/books')
@@ -38,36 +50,83 @@ export default function MyBooks() {
   //   })
   // }
 
-<<<<<<< HEAD
-useEffect (() => {
+  useEffect(() => {
     setBooks(data);
   })
 
-
-
-
-    return(
-      <div>
-        <div className="sidebar">
-          <SideBar />
-          <Carousel books={books.results}/>
-        </div>
-      </div>
-    )
-
-=======
-  useEffect(() => {
-    setBooks(data);
-  });
+  const style = {
+    background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
+  };
 
   return (
     <div>
-      <div className="sidebar">
-        <SideBar />
-        <Carousel books={books.results} />
+      <div className="header-container">
+        <div className="header" style={style}>
+          <div className="filter"></div>
+          <div className="main-content">
+            <div>
+              <div className="mybooks">
+                <h1>
+                  My Books
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="description">
+        <div className="banner">
+          <p>Description</p>
+        </div>
+      </div>
+      <div className='page-content'>
+        <div style={{ 'width': '100%' }}>
+          <div className='search-bar'>
+            <div className='search'>
+              <input />
+            </div>
+          </div>
+
+          <div className='content-container'>
+            <div className='content-left'>
+              <div className='my-bookshelves'>
+                <h2>My Bookshelves</h2>
+                  {uniqueBookshelves.map(shelf => (
+                    <p
+                      value={shelf}
+                      onClick={handleClick}
+                    >
+                      {shelf}
+                    </p>
+                  ))}
+              </div>
+
+              <div className='my-book-clubs'>
+                {/* To Do: dynamically render book clubs */}
+                <h2>My Book Clubs</h2>
+                  <p>All</p>
+                  <p>Read</p>
+                  <p>Currently Reading</p>
+                  <p>Want To Read</p>
+                  {/* <SideBar /> */}
+              </div>
+              <div className='reading-goal'>
+                <h2>Reading Goals</h2>
+                  <ReadingGoals />
+              </div>
+            </div>
+
+            {/* NOTE: Bookshelves get rendered here */}
+            <div className='content-right'>
+              <Carousel books={books}/>
+              HEREEE
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
-  );
->>>>>>> main
+  )
+
 }
 
