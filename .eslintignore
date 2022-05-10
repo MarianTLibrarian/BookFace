@@ -1,0 +1,6 @@
+dist
+node_modules
+assets
+fakeData
+
+package*.json
