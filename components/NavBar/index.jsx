@@ -26,17 +26,13 @@ export default function NavBar() {
   return (
     <div className="nav-container">
       <div className="nav">
-        <div className="logo">
+        <div className="logo"> <a href='/'>
           <img alt="logo" src="../assets/logo.png" />
-          <h3>BOOKFACE.</h3>
+          <h3>BOOKFACE.</h3></a>
           <div className="clear" />
         </div>
         <div className="menu">
           <NavLink
-            activeStyle={{
-              fontWeight: 'bold',
-              color: 'black',
-            }}
             exact
             to="/"
           >
