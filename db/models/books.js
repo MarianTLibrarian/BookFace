@@ -42,59 +42,72 @@ module.exports = {
   addBook() { },
 
   updateStatus(req, callback) {
-    console.log(req.body);
-    const {status, isbn, userId} = req.body;
-    const q = query(collection(db, "userBooksTest"), where("userId", "==", `${userId}`), where("isbn", "==", isbn.toNumber()));
-
-    // const docRef = getDocs(q);
-    // updateDoc(docRef, {status: 'reading'})
-    // .then(()=>{console.log('updated')})
-    // .catch(err=> console.log(err));
+    let {status, isbn, userId} = req.body;
+    isbn = parseInt(isbn, 10);
+    const q = query(collection(db, 'userBooksTest'), where("userId", "==", `${userId}`), where("isbn", "==", isbn));
     getDocs(q)
-    .then(snapshot=>new Promise((resolve, reject)=>{
-        const mybooks = [];
-        snapshot.forEach(doc=>{
-          mybooks.push({id:doc.id})
-        });
-        resolve(mybooks);
-      }))
-    .then((mybooks)=>{
-      console.log(mybooks[0].id);
-      const docRef = doc(db, 'userBooksTest', mybooks[0].id);
-
-      updateDoc(docRef, {status: 'reading'})
-      .then(()=>{
-        console.log('success');
-        callback(null, 'created');
+      .then(snapshot => {
+        const id = [];
+        snapshot.forEach((document) => {
+          id.push(document.id)
+        })
+        return id[0]
       })
-      .catch(()=>{console.log('modalerror')});
-    })
-    .catch(err=>console.log(err));
-    // console.log(mybooks, '1')
-
-    // const docRef = collection(db, 'userBooksTest', mybooks[0].id)
-    // updateDoc(docRef, {status: 'reading'})
-    // .then(()=>{console.log('success')})
-    // .catch(()=>{console.log('modalerror')});
-
-    // const q = query(collection(db, "userBooks"), where("userId", "==", `${userId}`));
-
-    // getDocs(q)
-    //   .then(snapshot=>{
-    //     const mybooks = [];
-    //     snapshot.forEach(doc=>{
-    //       mybooks.push({...doc.data(), id: doc.id})
-    //     })
-    //     callback(null, mybooks)
-    //   })
-    //   .catch(err=>console.log(err));
-
+      .then(id => {
+        const docRef = doc(db, 'userBooksTest', id);
+        updateDoc(docRef,  {status: `${status}`} )
+          .then(() => {
+            callback(null, 'created');
+          })
+      })
+      .catch(err => console.log('Error in update reading status: ', err))
   },
 
 
-  addToBookshelf() {},
+  addToBookshelf(req, callback) {
+    let {bookshelf, isbn, userId} = req.body;
+    isbn = parseInt(isbn, 10);
+    const q = query(collection(db, 'userBooksTest'), where("userId", "==", `${userId}`), where("isbn", "==", isbn));
+    getDocs(q)
+      .then(snapshot => {
+        const id = [];
+        snapshot.forEach((document) => {
+          id.push(document.id)
+        })
+        return id[0]
+      })
+      .then(id => {
+        const docRef = doc(db, 'userBooksTest', id);
+        updateDoc(docRef,  {bookshelf: `${bookshelf}`} )
+          .then(() => {
+            callback(null, 'created');
+          })
+      })
+      .catch(err => console.log('Error in update bookshelf: ', err))
+  },
 
   reviewBook() {},
 
-  rateBook() {},
+  rateBook(req, callback) {
+    let {rating, isbn, userId} = req.body;
+    isbn = parseInt(isbn, 10);
+    rating = parseInt(rating, 10);
+    const q = query(collection(db, 'userBooksTest'), where("userId", "==", `${userId}`), where("isbn", "==", isbn));
+    getDocs(q)
+      .then(snapshot => {
+        const id = [];
+        snapshot.forEach((document) => {
+          id.push(document.id)
+        })
+        return id[0]
+      })
+      .then(id => {
+        const docRef = doc(db, 'userBooksTest', id);
+        updateDoc(docRef,  {rating: `${rating}`} )
+          .then(() => {
+            callback(null, 'created');
+          })
+      })
+      .catch(err => console.log('Error in update rating: ', err))
+  },
 };

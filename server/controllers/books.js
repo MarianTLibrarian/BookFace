@@ -81,15 +81,36 @@ module.exports = {
         console.log('Unable to update reading status');
         res.sendStatus(500);
       } else {
-        res.status(201).send(results)
+        res.status(201).send(results);
       }
     })
 
   },
 
-  addToBookshelf() {},
+  addToBookshelf(req, res) {
+    let {bookshelf, isbn, userId} = req.body;
+    models.books.addToBookshelf(req, (err, results)=>{
+      if (err) {
+        console.log('Unable to update bookshelf');
+        res.sendStatus(500);
+      } else {
+        res.status(201).send(results);
+      }
+    })
+
+  },
 
   reviewBook() {},
 
-  rateBook() {},
+  rateBook(req, res) {
+    let {rating, isbn, userId} = req.body;
+    models.books.rateBook(req, (err, results)=>{
+      if (err) {
+        console.log('Unable to update rating');
+        res.sendStatus(500);
+      } else {
+        res.status(201).send(results);
+      }
+    })
+  },
 };
