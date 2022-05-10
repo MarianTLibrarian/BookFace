@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../client/pages/styles/Stats.css';
 
+import data from '../../fakeData/books/personalBooks';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,7 +14,6 @@ import {
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
 
-import data from '../../fakeData/books/personalBooks';
 
 export default function PagesStats() {
   ChartJS.register(
@@ -73,3 +74,5 @@ export default function PagesStats() {
     </div>
   )
 }
+
+

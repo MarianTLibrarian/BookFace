@@ -4,6 +4,10 @@
   width: 50vw;
 }
 
+.main-stats span {
+  color: #f47560;
+}
+
 .stats-upper-section {
   display: flex;
   flex-direction: column;
@@ -37,7 +41,7 @@
 }
 
 .stats-sidebar h3 {
-  font-size: calc(1.2vw + .5vmin);
+  font-size: calc(1vw + .5vmin);
 }
 
 .sidebar-divider {
@@ -49,6 +53,14 @@
 .stats-container {
   width: calc(80vw + 1vmin);
   padding: 2vw 3vw;
+}
+
+.genres-stats-container {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  height: 50vh;
+  width: 100%;
 }
 
 .stats-graph-container {

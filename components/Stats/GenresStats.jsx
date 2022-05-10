@@ -1,57 +1,60 @@
 import React from 'react';
 import '../../client/pages/styles/Stats.css';
+import { ResponsivePie } from '@nivo/pie'
 
-import { Chart as ChartJS, ArcElement, Legend, Tooltip } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
-
-import data from '../../fakeData/books/personalBooks';
-
-export default function GenresStats() {
-  ChartJS.register(ArcElement, Legend, Tooltip);
-
-  const totalReadPerGenre = {};
-
-  for (let i = 0; i < data.results.length; i += 1) {
-    const isRead = data.results[i].readingStatus === 'read';
-    if (isRead) {
-      const genres = data.results[i].categories; // array
-      for (let j = 0; j < genres.length; j += 1) {
-        const genre = genres[j];
-        totalReadPerGenre[genre] = (totalReadPerGenre[genre] || 0) + 1;
-      }
-    }
+const pieData = [
+  {
+    id: "Horror",
+    label: "Horror",
+    value: 1,
+    color: "hsl(90, 70%, 50%)"
+  },
+  {
+    id: "Psychology",
+    label: "Psychology",
+    value: 2,
+    color: "hsl(56, 70%, 50%)"
+  },
+  {
+    id: "Fiction",
+    label: "Fiction",
+    value: 3,
+    color: "hsl(103, 70%, 50%)"
+  },
+  {
+    id: "History",
+    label: "History",
+    value: 5,
+    color: "hsl(186, 70%, 50%)"
+  },
+  {
+    id: "Romance",
+    label: "Romance",
+    value: 1,
+    color: "hsl(104, 70%, 50%)"
   }
+];
 
-  const state = {
-    labels: Object.keys(totalReadPerGenre),
-    datasets: [
-      {
-        label: 'Rainfall',
-        backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-        borderColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-        borderWidth: 2,
-        data: Object.values(totalReadPerGenre),
-      },
-    ],
-  };
-
+export default function GenresStats () {
   return (
-    <div className="stats-container" style={{ width: '50vw'}}>
-      <h3>Genres You Enjoyed The Most</h3>
-      <div className="stats-graph-container">
-        <Doughnut
-          data={state}
-          options={{
-            title: {
-              display: false,
-            },
-            legend: {
-              display: true,
-              position: 'right',
-            },
-          }}
-        />
-      </div>
+    <div className="genres-stats-container">
+      <ResponsivePie
+        data={pieData}
+        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+        innerRadius={0.5}
+        padAngle={0.7}
+        cornerRadius={3}
+        activeOuterRadiusOffset={8}
+        borderWidth={1}
+        borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+        arcLinkLabelsSkipAngle={10}
+        arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsThickness={2}
+        arcLinkLabelsColor={{ from: "color" }}
+        arcLabelsSkipAngle={10}
+        arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
+      />
+      <div style={{ width: '20%' }} />
     </div>
   );
-}
+};

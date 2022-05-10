@@ -17,10 +17,10 @@ export default function BooksStats() {
 
       const url = data.results[i].imageLinks.smallThumbnail;
 
-      console.log(year, ' -> URL IS: ', url)
+      // console.log(year, ' -> URL IS: ', url)
       booksPerYear[year] = url;
       if (booksPerYear[year]) {
-        console.log('DUPLICATE: ', year)
+        // console.log('DUPLICATE: ', year)
       }
 
     }

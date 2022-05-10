@@ -7,7 +7,6 @@ import BooksStats from './BooksStats';
 import PagesStats from './PagesStats';
 import GenresStats from './GenresStats';
 
-
 export default function Stats() {
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -45,8 +44,7 @@ export default function Stats() {
             <div>
               <div className="main-stats">
                 <h1>
-                  You have read
-                  {totalBooks} books in the past {totalDays} days
+                  You have read <span>{totalBooks}</span> books in the past <span>{totalDays}</span> days
                 </h1>
               </div>
             </div>
