@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -100,6 +101,14 @@ export default function BookDetail({fakebookdetail}) {
     }
       return (<ModeEditOutlineIcon onClick={handleOpen} />)
   }
+
+  useEffect(()=>{
+    axios.get('http://localhost:3030/books', {proxy: {url: 'https://localhost:3030/books'}},{body: {
+      "userID": 1
+    }})
+    .then((data)=>{console.log(data)})
+    .catch(err=>{console.log(err)})
+  },[])
 
   return (
     <div className='header-container'>
