@@ -140,6 +140,9 @@ h1 {
   margin: 0;
   opacity: 0.8;
 }
+.main-content-btn{
+  padding-top:40px
+}
 
 button {
   background: transparent;
