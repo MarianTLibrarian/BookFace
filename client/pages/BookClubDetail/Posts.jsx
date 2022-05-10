@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 export default function Posts({ post }) {
 
-  console.log(post)
   return (
     <div className='club-post'>
       <div className='post-header'>

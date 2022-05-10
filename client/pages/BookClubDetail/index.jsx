@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
-import PopularBookclubs from '../../../fakedata/bookClubs/popularBookclubs';
+import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
 import '../styles/BookClubDetails.css';
 import SendIcon from '@mui/icons-material/Send';
 
