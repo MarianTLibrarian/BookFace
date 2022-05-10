@@ -4,10 +4,7 @@ import SideBar from './sidebar';
 import Carousel from './carousel';
 import ReadingGoals from './readingGoals';
 import useStore from '../../userStore';
-import data from '../../../fakeData/books/personalBooks';
-// import { allBookshelves } from '../../../db/models/bookshelves';
 
-const { router } = '../../../server/routes';
 
 
 
