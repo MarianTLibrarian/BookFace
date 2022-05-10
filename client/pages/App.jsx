@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,11 +15,22 @@ import BookDetail from './BookDetail';
 import Stats from '../../components/Stats';
 import NavBar from '../../components/NavBar';
 
+import useStore from '../userStore';
+
 function NotFound() {
   return <>You have landed on a page that does not exist</>;
 }
 
 export default function App() {
+  const { setUser } = useStore();
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user_data');
+    if (userData) {
+      setUser(userData);
+    }
+  }, []);
+
   return (
     <div>
       <Router>
