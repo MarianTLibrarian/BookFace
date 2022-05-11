@@ -1273,11 +1273,7 @@
   dependencies:
     "@react-spring/web" "9.3.1"
 
-<<<<<<< HEAD
-"@popperjs/core@^2.0.0", "@popperjs/core@^2.11.5", "@popperjs/core@^2.9.2":
-=======
 "@popperjs/core@^2.11.5":
->>>>>>> main
   "integrity" "sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw=="
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.5.tgz"
   "version" "2.11.5"
@@ -4732,11 +4728,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-<<<<<<< HEAD
-"prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1", "prop-types@>= 15.5.10 < 16.0.0":
-=======
 "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.8.1", "prop-types@>= 15.5.10 < 16.0.0":
->>>>>>> main
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -4849,16 +4841,6 @@
   "resolved" "https://registry.npmjs.org/react-clock/-/react-clock-3.1.0.tgz"
   "version" "3.1.0"
   dependencies:
-<<<<<<< HEAD
-    "@popperjs/core" "^2.9.2"
-    "classnames" "^2.2.6"
-    "date-fns" "^2.24.0"
-    "prop-types" "^15.7.2"
-    "react-onclickoutside" "^6.12.0"
-    "react-popper" "^2.2.5"
-
-"react-dom@^15.5.x || ^16.x || ^17.x", "react-dom@^16.8.0  || ^17.0.0", "react-dom@^16.8.0 || ^17 || ^18", "react-dom@^16.9.0 || ^17", "react-dom@^17.0.0 || ^18.0.0", "react-dom@^18.0.0", "react-dom@>=16.6.0", "react-dom@>=16.8":
-=======
     "@wojtekmaj/date-utils" "^1.0.0"
     "get-user-locale" "^1.4.0"
     "merge-class-names" "^1.1.1"
@@ -4897,7 +4879,6 @@
     "react-time-picker" "^4.5.0"
 
 "react-dom@^15.5.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.3.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8.0  || ^17.0.0", "react-dom@^17.0.0 || ^18.0.0", "react-dom@^18.0.0", "react-dom@>=16.6.0", "react-dom@>=16.8":
->>>>>>> main
   "integrity" "sha512-fU1Txz7Budmvamp7bshe4Zi32d0ll7ect+ccxNu9FlObT605GOEB8BfO4tmRJ39R5Zj831VCpvQ05QPBW5yb+w=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.1.0.tgz"
   "version" "18.1.0"
@@ -4905,8 +4886,6 @@
     "loose-envify" "^1.1.0"
     "scheduler" "^0.22.0"
 
-<<<<<<< HEAD
-=======
 "react-fit@^1.4.0":
   "integrity" "sha512-cf9sFKbr1rlTB9fNIKE5Uy4NCMUOqrX2mdJ69V4RtmV4KubPdtnbIP1tEar16GXaToCRr7I7c9d2wkTNk9TV5g=="
   "resolved" "https://registry.npmjs.org/react-fit/-/react-fit-1.4.0.tgz"
@@ -4916,7 +4895,6 @@
     "prop-types" "^15.6.0"
     "tiny-warning" "^1.0.0"
 
->>>>>>> main
 "react-is@^16.13.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -4987,11 +4965,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-<<<<<<< HEAD
-"react@^15.5.x || ^16.x || ^17.x", "react@^16.8.0  || ^17.0.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17", "react@^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.1.0", "react@>= 16.14.0 < 18.0.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
-=======
 "react@^15.5.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.3.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0  || ^17.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.1.0", "react@>= 16.14.0 < 18.0.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
->>>>>>> main
   "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   "version" "18.1.0"
