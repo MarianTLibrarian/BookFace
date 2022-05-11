@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import AllClubs from './AllClubs';
+import '../styles/BookClubs.css';
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs'
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
+
 
 export default function BookClubs() {
 
   const [bookClub, setBookClub] = useState([])
   const [allClubs, setAllClubs] = useState([])
   const { user, setUser, setToken } = useStore();
-
 
   const style = {
     'background': 'url(../assets/header-bg.jpg) no-repeat center center fixed'
