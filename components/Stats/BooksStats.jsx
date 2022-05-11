@@ -47,6 +47,7 @@ export default function BookStats() {
         backgroundColor: ['#61cdbb', '#f47560', '#e8c1a0', '#97e3d5'],
         borderColor: ['#61cdbb', '#f47560', '#e8c1a0', '#97e3d5'],
         borderWidth: 2,
+        maxBarThickness: 70,
         data: Object.values(totalReadPerYear).reverse(),
       },
     ],
@@ -65,6 +66,7 @@ export default function BookStats() {
                   font: {
                     size: 16,
                   },
+                  precision: 0
                 },
               },
               y: {

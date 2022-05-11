@@ -51,6 +51,7 @@ export default function PagesStats() {
         backgroundColor: ['#f47560', '#e8c1a0', '#61cdbb', '#97e3d5'],
         borderColor: ['#f47560', '#e8c1a0', '#61cdbb', '#97e3d5'],
         borderWidth: 2,
+        maxBarThickness: 70,
         data: Object.values(totalPagesPerYear).reverse(),
       },
     ],
@@ -69,6 +70,7 @@ export default function PagesStats() {
                   font: {
                     size: 16,
                   },
+                  precision: 0
                 },
               },
               y: {
