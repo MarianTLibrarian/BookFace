@@ -48,7 +48,7 @@ export default function BookDetail() {
     axios
       .put(`${expressUrl}/books/update`,  updatedbook )
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         setBookDetails({
           isbn: bookDetails.isbn,
           rating: star,
