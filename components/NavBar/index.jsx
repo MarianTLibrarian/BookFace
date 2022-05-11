@@ -4,13 +4,14 @@ import AccountMenu from './AccountMenu';
 
 import { signInWithGoogle } from '../Firebase';
 import useStore from '../../client/userStore';
+import SearchBar from '../SearchBar';
 
 export default function NavBar() {
   const { user, setUser, setToken } = useStore();
 
   const handleSignIn = () => {
     if (!user) {
-      return signInWithGoogle()
+      signInWithGoogle()
         .then((result) => {
           if (!result || !result.user || !result.token) throw result;
 
@@ -37,22 +38,21 @@ export default function NavBar() {
           <div className="clear" />
         </div>
         <div className="menu">
+          <div className="nav-search">
+            <SearchBar />
+          </div>
           <NavLink exact to="/">
             Home
           </NavLink>
-          {user ?
+          {user ? (
             <NavLink activeClassName="active" to="/mybooks">
               My Books
             </NavLink>
-            : null
-          }
+          ) : null}
           <NavLink activeClassName="active" to="/bookclubs">
             {user ? 'My clubs' : 'Clubs'}
           </NavLink>
-          {user ?
-            <AccountMenu />
-            : <a onClick={handleSignIn} >Sign In</a>
-          }
+          {user ? <AccountMenu /> : <a onClick={handleSignIn}>Sign In</a>}
         </div>
       </div>
     </div>
