@@ -1,7 +1,6 @@
 .main-stats {
   display: flex;
   text-align: center;
-  width: 50vw;
 }
 
 .main-stats span {

@@ -38,22 +38,34 @@ export default function Stats() {
     getTotal(1);
   }, []);
 
-  //
-  // const [count, setCount] = useState('0');
-  // useEffect(() => {
-  //   let start = 0;
-  //   const end = parseInt(number.substring(0, 3))
-  //   if (start === end) return;
-  //   let totalMilSecDur = parseInt(duration);
-  //   let incrementTime = (totalMilSecDur / end) * 1000;
-  // }, [number, duration]);
-  //
+  /*
+  * Count animation
+  */
+  const [progressBar, setProgressBar] = useState(0);
+  const speed='.3';
+  const count = totalRead.length;
+  const pace = count / speed;
 
+  const updatePercentage = () => {
+    setTimeout(() => {
+      setProgressBar(progressBar + 1);
+    }, pace);
+  };
+
+  useEffect(() => {
+    if (count > 0) updatePercentage();
+  }, [count]);
+
+  useEffect(() => {
+    if (progressBar < count) updatePercentage();
+  }, [progressBar]);
+
+  /*
+  * Conditional rendering of stats
+  */
   const [menusView, setMenusView] = useState('BOOKS');
-  const menus = ['BOOKS', 'PAGES', 'GENRES'];
-
-  // To render selected stats
   const [currentView, setCurrentView] = useState('');
+  const menus = ['BOOKS', 'PAGES', 'GENRES'];
 
   const statsViews = () => {
     switch (currentView) {
@@ -77,7 +89,7 @@ export default function Stats() {
             <div>
               <div className="main-stats">
                 <h1>
-                  You have read <span>{totalRead.length}</span> out of <span>{allBooksCount}</span> books
+                  You have read <span>{progressBar}</span> out of <span>{allBooksCount}</span> books
                 </h1>
               </div>
             </div>
