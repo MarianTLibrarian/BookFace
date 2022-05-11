@@ -133,16 +133,30 @@ export default function MyBooks() {
                 <h2>My Book Clubs</h2>
                   {bookclubs.map(club => (
                     <div key={club}>
-                      <Link to='/bookclubdetail'>
+                      <Link to='/bookclubdetail' style={{'text-decoration': 'none', 'color': 'black'}}>
                         {club}
                       </Link>
                     </div>
                   ))}
               </div>
+
               <div className='reading-goal'>
-                <h2>Reading Goals</h2>
+                <Link to='/stats' style={{'text-decoration': 'none', 'color': 'black'}}>
+                  <h2 style={{
+                    'display': 'flex',
+                    'flex-direction': 'row',
+                    'align-items': 'center',
+                    'justify-content': 'space-between'
+                  }}>
+                    Reading Goals
+                    <span
+                      style={{'font-size': '12px', 'padding-right': '1em'}}
+                    >&#9658;</span>
+                  </h2>
+                </Link>
                   <ReadingGoals />
               </div>
+
             </div>
 
             {/* NOTE: Bookshelves get rendered here */}
