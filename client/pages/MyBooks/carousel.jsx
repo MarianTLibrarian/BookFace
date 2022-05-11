@@ -3,20 +3,22 @@ import '../styles/MyBooks.css';
 
 export default function Carousel({ selectedBookshelf, allBooks }) {
   const [currentBookshelf, setCurrentBookshelf] = useState([]);
+console.log('selectedBookshelf', selectedBookshelf);
+  console.log('allbooks', allBooks);
+  console.log('currentBookshelf', currentBookshelf);
 
-
-  useEffect(()=>{
+  useEffect(()=> {
     if (selectedBookshelf === 'All') {
       setCurrentBookshelf(allBooks);
+      console.log('uecbs', currentBookshelf)
     } else {
       setCurrentBookshelf(allBooks.filter(book => (
         book.bookshelf === selectedBookshelf
-      )))
-    }
-  },[selectedBookshelf]);
+        )))
+      }
+    },[selectedBookshelf]);
 
-
-
+ // setBookDetail function click event to bookcover div<<
   return (
     <div className="carousel">
       <h3>Books</h3>

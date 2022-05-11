@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import SideBar from './sidebar';
 import Carousel from './carousel';
 import ReadingGoals from './readingGoals';
 import useStore from '../../userStore';
@@ -15,6 +14,8 @@ export default function MyBooks() {
   const [bookclubs, setBookclubs] = useState([]);
   const [bookshelves, setBookshelves] = useState([]);
   const [currentView, setCurrentView] = useState('All');
+
+
 
   const handleClick = (event) => {
     setCurrentView(event.target.innerText);
@@ -38,7 +39,6 @@ export default function MyBooks() {
   const getBookclubs = (uid) => {
     axios.get('http://localhost:3030/myBookclubs', { params: {userId: "qwew"}})
     .then(({data}) => {
-      // console.log('bookclubs', data);
       const temp = [];
       for(let i = 0; i < data.results.length; i += 1) {
         temp.push(data.results[i].bookclubInfo.bookclubName);
@@ -55,7 +55,6 @@ export default function MyBooks() {
   const getBooks = (uid) => {
   axios.get('http://localhost:3030/books', { params: {userId: 1}})
     .then(({data}) => {
-      // console.log('books', data);
       // const container = [];
       // for(let i = 0; i < data.results.length; i += 1) {
       //   const temp = {};
@@ -70,37 +69,11 @@ export default function MyBooks() {
     })
   }
 
-
-
-  // const getBookshelves = (uid) => {
-  //   axios.get('/bookshelves', { params: {userId: 1}})
-  //     .then(({data}) => {
-  //       console.log('THIS', data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-
-  // const getBookshelves = (userId) => {
-  //   axios({
-  //     method: 'get',
-  //     url: 'localhost:3030/bookshelves',
-  //     params: { userId: '1' }
-  //   })
-  //   .then(({ data }) => {
-  //     console.log('HERE!!!', data)
-  //   })
-  //   .catch((err) => {
-  //     console.log('error on client side')
-  //   });
-  // }
-
   useEffect(() => {
-    getBookshelves();
     getBooks();
+    getBookshelves();
     getBookclubs();
-  },[])
+  }, [])
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -124,7 +97,7 @@ export default function MyBooks() {
       </div>
       <div className="description">
         <div className="banner">
-          <p>Description</p>
+          <p>View and Manage Bookshelves, Book Clubs, and Reading Goals</p>
         </div>
       </div>
       <div className='page-content'>
