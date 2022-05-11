@@ -13,6 +13,9 @@ const useStore = create((set) => ({
 
   searchQuery: '',
   setSearchQuery: (query) => set(() => ({ searchQuery: query })),
+
+  bookDetails: '',
+  setBookDetails: (details) => set(() => ({ bookDetails: details})),
 }));
 
 export default useStore;
