@@ -24,6 +24,7 @@ export default function MyBooks() {
 
   // filtered by search
   const [renderedBooks, setRenderedBooks] = useState(<div className="loading">Loading ...</div>);
+  // TODO: these get rendered out to the page
   const [renderedClubs, setRenderedClubs] = useState(<div className="loading">Loading ...</div>);
   const [renderedShelves, setRenderedShelves] = useState(
     <div className="loading">Loading ...</div>,
@@ -37,7 +38,7 @@ export default function MyBooks() {
   // NOTE: get bookshelves by userId is working
   const getBookshelves = (uid) => {
     axios
-      .get(`${expressUrl}/bookshelves`, { params: { userId: 1 } })
+      .get(`${expressUrl}/bookshelves`, { params: { userId: uid } })
       .then(({ data }) => {
         const temp = [];
         for (let i = 0; i < data.results.length; i += 1) {
@@ -53,7 +54,7 @@ export default function MyBooks() {
   // NOTE: get bookclubs by userId is working
   const getBookclubs = (uid) => {
     axios
-      .get(`${expressUrl}/myBookclubs`, { params: { userId: 'qwew' } })
+      .get(`${expressUrl}/myBookclubs`, { params: { userId: uid } })
       .then(({ data }) => {
         // console.log('bookclubs', data);
         const temp = [];
@@ -71,7 +72,7 @@ export default function MyBooks() {
   // Default data for the book gallery
   const getBooks = (uid) => {
     axios
-      .get(`${expressUrl}/books`, { params: { userId: 1 } })
+      .get(`${expressUrl}/books`, { params: { userId: uid } })
       .then(({ data }) => {
         // console.log('books', data);
         // const container = [];
@@ -155,7 +156,9 @@ export default function MyBooks() {
         <div style={{ width: '100%' }}>
           <div className="books-search-bar">
             <div className="the-first-two-thirds" />
-            <div className="books-search">{/* <SearchBar filterOptions={filterOptions} /> */}</div>
+            <div className="books-search">
+              <SearchBar filterOptions={filterOptions} />
+            </div>
           </div>
 
           <div className="content-container">
@@ -216,7 +219,7 @@ export default function MyBooks() {
 
             {/* NOTE: Bookshelves get rendered here */}
             <div className="contentRight">
-              <Carousel selectedBookshelf={currentView} allBooks={allBooks} />
+              <Carousel selectedBookshelf={currentView} allBooks={renderedBooks} />
             </div>
           </div>
         </div>
