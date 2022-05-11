@@ -31,6 +31,7 @@ export default function MyBooks() {
 
 
   const handleClick = (event) => {
+    event.preventDefault();
     setCurrentView(event.target.innerText);
   };
 
@@ -220,6 +221,8 @@ export default function MyBooks() {
             <div className="contentRight">
               <Carousel selectedBookshelf={currentView} allBooks={renderedBooks} />
             </div>
+
+
           </div>
         </div>
       </div>
