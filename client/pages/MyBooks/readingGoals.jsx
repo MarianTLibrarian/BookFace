@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { string, number, bool } from 'prop-types';
 import '../styles/Stats.css';
 
 const INITIAL_OFFSET = 25;

@@ -13,8 +13,8 @@ export default function Stats() {
   };
 
   // To do: dynamically render the numbers
-  const totalBooks = 20;
-  const totalDays = 267;
+  const totalBooks = 1;
+  const totalDays = 131;
 
 
   const [progressBar, setProgressBar] = useState(0)
@@ -63,7 +63,7 @@ export default function Stats() {
             <div>
               <div className="main-stats">
                 <h1>
-                  You have read <span>{totalBooks}</span> books in the past <span>{totalDays}</span> days
+                  You have read <span>{totalBooks}</span> book in the past <span>{totalDays}</span> days
                 </h1>
               </div>
             </div>

@@ -1,8 +1,5 @@
 import React from 'react';
 import '../../client/pages/styles/Stats.css';
-
-import data from '../../fakeData/books/personalBooks';
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,7 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
-
+import data from '../../fakeData/books/personalBooks';
 
 export default function PagesStats() {
   ChartJS.register(
@@ -43,7 +40,7 @@ export default function PagesStats() {
     labels: Object.keys(totalPagesPerYear).reverse(),
     datasets: [
       {
-        label: 'Total Number of Pages Read',
+        label: 'Total Number of Pages',
         backgroundColor: ["#f47560", "#e8c1a0", "#61cdbb", "#97e3d5"],
         borderColor: ["#f47560", "#e8c1a0", "#61cdbb", "#97e3d5"],
         borderWidth: 2,
@@ -59,14 +56,42 @@ export default function PagesStats() {
         <Bar
           data={state}
           options={{
+            scales: {
+              x: {
+                ticks: {
+                  font: {
+                    size: 16
+                  },
+                },
+              },
+              y: {
+                ticks: {
+                  font: {
+                    size: 30,
+                    weight: 'bold'
+                  }
+                },
+                grid: {
+                  display: false,
+                }
+              }
+            },
+            label: {
+              fontSize: 20
+            },
             indexAxis: 'y',
             plugins: {
-              title: {
-                display: false,
-              },
               legend: {
                 display: false,
-              }
+              },
+              tooltip: {
+                titleFont: {
+                  size: 20
+                },
+                bodyFont: {
+                  size: 16
+                },
+              },
             }
           }}
         />
