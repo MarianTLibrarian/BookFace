@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -94,6 +95,9 @@ export default function AccountMenu() {
         </MenuItem>
         <MenuItem>
           <Avatar /> My account
+        </MenuItem>
+        <MenuItem>
+          <Avatar /> <Link to='/stats'> My Reading Stats </Link>
         </MenuItem>
         <Divider />
         <MenuItem>
