@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 // import SideBar from './sidebar';
 import Carousel from './carousel';
-import ReadingGoals from './readingGoals';
+import ReadingStatsWidget from './ReadingStatsWidget';
 import useStore from '../../userStore';
 import '../styles/MyBooks.css';
 import '../styles/BookClubDetails.css';
 
 export default function MyBooks() {
-
-  // calculate the % of books read
-  let percentageRead = 72;
 
   const { user, setUser, setToken } = useStore();
   const [allBooks, setAllBooks] = useState([]);
@@ -154,23 +151,15 @@ export default function MyBooks() {
                     'align-items': 'center',
                     'justify-content': 'space-between'
                   }}>
-                    Reading Goals
+                    Reading Stats
                     <span
                       style={{'font-size': '12px', 'padding-right': '1em'}}
                     >&#9658;</span>
                   </h2>
                 </Link>
-                  <ReadingGoals
-                    className="reading-goal"
-                    strokeColor="var(--sunset)"
-                    strokeWidth="5"
-                    innerText="READ"
-                    percentage={percentageRead}
-                    trailStrokeWidth="5"
-                    trailStrokeColor="var(--dark-beige)"
-                    trailSpaced='true'
-                    speed='2'
-                  />
+                <div style={{'border': '1px solid transparent'}}>
+                  <ReadingStatsWidget />
+                </div>
               </div>
 
             </div>

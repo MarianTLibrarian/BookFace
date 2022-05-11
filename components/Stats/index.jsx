@@ -38,26 +38,16 @@ export default function Stats() {
     getTotal(1);
   }, []);
 
-
-  /// Animation to-do
-
-  // const [progressBar, setProgressBar] = useState(0)
-  // const UpdateNumbers = () => {
-  //   setTimeout(() => {
-  //     setProgressBar(progressBar + 1)
-  //   }, 5)
-  // }
-
+  //
+  // const [count, setCount] = useState('0');
   // useEffect(() => {
-  //   if (totalBooks > 0) UpdateNumbers()
-  // }, [totalBooks])
-
-  // useEffect(() => {
-  //   if (progressBar < totalBooks) UpdateNumbers()
-  // }, [progressBar])
-
-
-  ///
+  //   let start = 0;
+  //   const end = parseInt(number.substring(0, 3))
+  //   if (start === end) return;
+  //   let totalMilSecDur = parseInt(duration);
+  //   let incrementTime = (totalMilSecDur / end) * 1000;
+  // }, [number, duration]);
+  //
 
   const [menusView, setMenusView] = useState('BOOKS');
   const menus = ['BOOKS', 'PAGES', 'GENRES'];
