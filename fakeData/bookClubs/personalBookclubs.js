@@ -1,4 +1,4 @@
-[
+const PersonalBookClubs = [
   {
     "bookclubId": 1,
     "bookclubInfo": {
@@ -18,7 +18,7 @@
       "categories": [
         " Literature & Fiction"
       ],
-      "imageUrl": "https://www.goodreads.com/photo/group/988700-read-with-jenna-official"
+      "imageUrl": "https://images.gr-assets.com/groups/1643040655p8/988700.jpg"
     },
     "posts": [
       {
@@ -205,3 +205,5 @@
     ]
   }
 ]
+
+export default PersonalBookClubs;

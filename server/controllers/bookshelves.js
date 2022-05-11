@@ -2,7 +2,6 @@ const models = require('../../db/models');
 
 module.exports = {
   allBookshelves(req, res) {
-    console.log('req', req);
     models.bookshelves.allBookshelves(req, (err, data) => {
       if (err) {
         console.log('controller error from allBookshelves: ', err);

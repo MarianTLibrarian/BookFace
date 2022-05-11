@@ -4,6 +4,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
+
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
