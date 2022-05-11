@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import '../../client/pages/styles/Stats.css';
 
 import Dropdown from './Dropdown';
+import CalendarStats from './CalendarStats';
 import BooksStats from './BooksStats';
 import PagesStats from './PagesStats';
 import GenresStats from './GenresStats';
-
 
 export default function Stats() {
   const style = {
@@ -44,33 +44,36 @@ export default function Stats() {
             <div>
               <div className="main-stats">
                 <h1>
-                  You have read {totalBooks} books in the past {totalDays} days
+                  You have read <span>{totalBooks}</span> books in the past <span>{totalDays}</span> days
                 </h1>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="description">
-        <div className="stats-banner">
-          <p>Did you know? Regular Readers Contribute to Their Communities More.</p>
+
+      <div className="stats-upper-section">
+
+        <div className="stats-calendar-container">
+        <CalendarStats />
+        </div>
+
+        <div className="stats-bottom-section">
+          <div className="stats-sidebar">
+            <h3>READING STATS</h3>
+            <div className="sidebar-divider">
+              <Dropdown
+                menus={menus}
+                menusView={menusView}
+                handleMenuView={setMenusView}
+                handleViewChange={setCurrentView}
+              />
+            </div>
+          </div>
+          {statsViews()}
         </div>
       </div>
 
-      <div className="stats-section">
-        <div className="stats-sidebar">
-          <h3>READING STATS</h3>
-          <div className="sidebar-divider">
-            <Dropdown
-              menus={menus}
-              menusView={menusView}
-              handleMenuView={setMenusView}
-              handleViewChange={setCurrentView}
-            />
-          </div>
-        </div>
-        {statsViews()}
-      </div>
     </div>
   );
 }
