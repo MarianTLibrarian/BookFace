@@ -1,11 +1,22 @@
-.search-bar input {
-  width: 200px;
+.club-search-bar {
+  display: grid;
+  width: 100%;
+
+  grid-template-columns: 2fr 1fr;
+
+  margin-bottom: 1rem;
+}
+
+.club-search-bar input {
+  width: 240px;
   padding: 10px;
   text-align: left;
   border-radius: 0;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
-.search-bar .search {
+.club-search-bar .search {
   text-align: right;
   padding: 0;
   padding-bottom: 20px;
