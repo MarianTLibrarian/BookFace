@@ -10,66 +10,60 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import {Bar} from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
-export default function BookStats () {
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-  );
+export default function BookStats() {
+  ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
   const [totalReadPerYear, setTotalReadPerYear] = useState({});
 
   const getBooksTotal = (uid) => {
-    axios.get('http://localhost:3030/books', { params: {userId: uid} })
-    .then(({data}) => {
-      const yearData = {};
-      for (let i = 0; i < data.results.length; i += 1) {
+    axios
+      .get('http://localhost:3030/books', { params: { userId: uid } })
+      .then(({ data }) => {
+        const yearData = {};
+        for (let i = 0; i < data.results.length; i += 1) {
           if (data.results[i].readingStatus === 'read') {
             const year = data.results[i].endReadDate.slice(0, 4);
             yearData[year] = (yearData[year] || 0) + 1;
-            setTotalReadPerYear(yearData)
+            setTotalReadPerYear(yearData);
           }
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
-      })
-    }
+      });
+  };
 
   useEffect(() => {
     getBooksTotal(1);
-  },[])
+  }, []);
 
   const state = {
     labels: Object.keys(totalReadPerYear).reverse(),
     datasets: [
       {
         label: 'Total Number of Books',
-        backgroundColor: [ "#61cdbb", "#f47560", "#e8c1a0", "#97e3d5"],
-        borderColor: [ "#61cdbb", "#f47560", "#e8c1a0", "#97e3d5"],
+        backgroundColor: ['#61cdbb', '#f47560', '#e8c1a0', '#97e3d5'],
+        borderColor: ['#61cdbb', '#f47560', '#e8c1a0', '#97e3d5'],
         borderWidth: 2,
-        data: Object.values(totalReadPerYear).reverse()
-      }
-    ]
-  }
+        data: Object.values(totalReadPerYear).reverse(),
+      },
+    ],
+  };
 
   return (
     <div className="stats-container">
       <h3>Total number of books you have read over the years</h3>
       <div className="stats-graph-container">
-      <Bar
+        <Bar
           data={state}
           options={{
             scales: {
               x: {
                 ticks: {
                   font: {
-                    size: 16
+                    size: 16,
                   },
                 },
               },
@@ -77,16 +71,16 @@ export default function BookStats () {
                 ticks: {
                   font: {
                     size: 30,
-                    weight: 'bold'
-                  }
+                    weight: 'bold',
+                  },
                 },
                 grid: {
                   display: false,
-                }
-              }
+                },
+              },
             },
             label: {
-              fontSize: 20
+              fontSize: 20,
             },
             indexAxis: 'y',
             plugins: {
@@ -95,16 +89,16 @@ export default function BookStats () {
               },
               tooltip: {
                 titleFont: {
-                  size: 20
+                  size: 20,
                 },
                 bodyFont: {
-                  size: 16
+                  size: 16,
                 },
               },
-            }
+            },
           }}
         />
       </div>
     </div>
-  )
+  );
 }
