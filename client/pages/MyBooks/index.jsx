@@ -23,12 +23,10 @@ export default function MyBooks() {
   const [bookshelves, setBookshelves] = useState([]);
 
   // filtered by search
-  const [renderedBooks, setRenderedBooks] = useState(<div className="loading">Loading ...</div>);
+  const [renderedBooks, setRenderedBooks] = useState([]);
   // TODO: these get rendered out to the page
-  const [renderedClubs, setRenderedClubs] = useState(<div className="loading">Loading ...</div>);
-  const [renderedShelves, setRenderedShelves] = useState(
-    <div className="loading">Loading ...</div>,
-  );
+  const [renderedClubs, setRenderedClubs] = useState([]);
+  const [renderedShelves, setRenderedShelves] = useState([]);
   const [currentView, setCurrentView] = useState('All');
 
   const handleClick = (event) => {
