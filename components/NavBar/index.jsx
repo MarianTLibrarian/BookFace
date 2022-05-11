@@ -1,33 +1,30 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import AccountMenu from './AccountMenu';
 
-import { signInWithGoogle, userSignOut } from '../Firebase';
+import { signInWithGoogle } from '../Firebase';
 import useStore from '../../client/userStore';
 
 export default function NavBar() {
   const { user, setUser, setToken } = useStore();
 
   const handleSignIn = () => {
-    if (user) {
-      return userSignOut().then(() => {
-        localStorage.removeItem('user_data');
-        setUser(null);
-      });
-    }
+    if (!user) {
+      return signInWithGoogle()
+        .then((result) => {
+          if (!result || !result.user || !result.token) throw result;
 
-    return signInWithGoogle()
-      .then((result) => {
-        if (!result || !result.user || !result.token) throw result;
+          const { user: newUser, token } = result;
 
-        const { user: newUser, token } = result;
-
-        localStorage.setItem('user_data', JSON.stringify(newUser));
+          localStorage.setItem('user_data', JSON.stringify(newUser));
 
         setUser(newUser);
         setToken(token);
       })
       .catch(console.error);
+
   };
+  }
 
   return (
     <div className="nav-container">
@@ -44,16 +41,19 @@ export default function NavBar() {
           <NavLink exact to="/">
             Home
           </NavLink>
-
-          <NavLink activeClassName="active" to="/mybooks">
-            My Books
-          </NavLink>
+          {user ?
+            <NavLink activeClassName="active" to="/mybooks">
+              My Books
+            </NavLink>
+            : null
+          }
           <NavLink activeClassName="active" to="/bookclubs">
-            My Clubs
+            {user ? 'My clubs' : 'Clubs'}
           </NavLink>
-          <NavLink activeClassName="active" to="#" onClick={handleSignIn}>
-            {user ? 'Sign Out' : 'Sign In'}
-          </NavLink>
+          {user ?
+            <AccountMenu />
+            : <a onClick={handleSignIn} >Sign In</a>
+          }
         </div>
       </div>
     </div>

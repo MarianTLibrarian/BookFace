@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -10,8 +11,14 @@ import ReviewsIcon from '@mui/icons-material/Reviews';
 import { Modal, Box, Button, TextField, InputLabel, MenuItem, FormControl, Select, Rating } from '@mui/material';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import DatePicker from 'react-date-picker';
+// import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from 'react-date-picker/dist/entry.nostyle';
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
+
+import { signInWithGoogle } from '../../../components/Firebase';
+import useStore from '../../userStore';
 
 import './bookdetail.css';
 
@@ -20,7 +27,7 @@ const style = {
 }
 
 export default function BookDetail({fakebookdetail}) {
-  const [userLogged, setuserLogged] = useState(true);
+  const { user, setUser, setToken } = useStore();
   const [fakeData, setFakeData] = useState({
     "isbn13": 9781950968428,
     "title": "About Time: A History of Civilization in Twelve Clocks",
@@ -74,16 +81,37 @@ export default function BookDetail({fakebookdetail}) {
   const handleAddtoShelf = () => {
     alert('added to shelf!')
   }
+  // addtoshelf w/o login
+  const handleuserLogin = () => signInWithGoogle()
+      .then((result) => {
+        if (!result || !result.user || !result.token) throw result;
+
+        const { user: newUser, token } = result;
+
+        localStorage.setItem('user_data', JSON.stringify(newUser));
+
+        setUser(newUser);
+        setToken(token);
+      })
+      .catch(console.error)
 
   const renderElement = () => {
-    if (!userLogged) {
-      return (<AddBoxIcon onClick={()=>{alert('reserved for signin')}}/>);
+    if (!user) {
+      return (<AddBoxIcon onClick={handleuserLogin}/>);
     }
     if (!fakeData.readingStatus) {
       return (<AddBoxIcon onClick={handleAddtoShelf} />)
     }
       return (<ModeEditOutlineIcon onClick={handleOpen} />)
   }
+
+  useEffect(()=>{
+    axios.get('http://localhost:3030/books', {params: {
+      userId: 1
+    }})
+    .then((data)=>{console.log(data)})
+    .catch(err=>{console.log(err)})
+  },[])
 
   return (
     <div className='header-container'>
@@ -96,7 +124,7 @@ export default function BookDetail({fakebookdetail}) {
       <div className='bookdetailmain' >
       <div className='bookdetailleftcol'>
           <img className='bookdetailimg' alt='bookdetailimg' src={fakeData.imageLinks.thumbnail}/>
-          {userLogged?
+          {user?
             <div className='bookdetailusrinputs'>
               {fakeData.readingStatus? <div className='bookdetailreadingstatus'>
               <CheckCircleIcon/>
@@ -212,11 +240,11 @@ export default function BookDetail({fakebookdetail}) {
 
           <div className='modaldatestarted'>
             DATE STARTED
-            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            <DatePicker value={startDate} onChange={(date) => setStartDate(date)} />
           </div>
           <div className='modaldateend'>
             DATE FINISHED
-            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+            <DatePicker value={endDate} onChange={(date) => setEndDate(date)} />
           </div>
           <div className='modalrating'>
             RATE THIS BOOK

@@ -118,3 +118,48 @@ align-items: center;
   font-weight:500;
 
 }
+
+.required{
+  text-align:center;
+  display: flex;
+  width:100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.3;
+}
+
+.lock{
+  margin-top:40px;
+  border:2px solid black;
+  display: flex;
+  width:150px;
+  height:150px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;;
+}
+
+.lock svg{
+  height: 50px;
+    width: 100px;
+}
+.main-content-btn{
+  padding-top:40px;
+}
+.main-content-btn button{
+  font-weight:bold;
+}
+
+.search-bar input {
+  width: 200px;
+  padding: 10px;
+  text-align: left;
+  border-radius: 0;
+}
+
+.search-bar .search {
+  text-align: right;
+  padding: 0;
+  padding-bottom: 20px;
+}
