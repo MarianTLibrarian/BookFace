@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import AllClubs from './AllClubs';
-import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
+import React, { useEffect, useState } from 'react';
 import { signInWithGoogle } from '../../../components/Firebase';
-import useStore from '../../userStore';
-import ClubCarousel from './ClubCarousel';
 import SearchBar from '../../../components/SearchBar';
+import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
+import useStore from '../../userStore';
 import '../styles/BookClubs.css';
+import AllClubs from './AllClubs';
 
 const filterOptions = { clubs: 'Clubs', myClubs: 'My Clubs' };
 
 export default function BookClubs() {
   const [bookClub, setBookClub] = useState([]);
   const [allClubs, setAllClubs] = useState([]);
+  const [renderedClubs, setRenderedClubs] = useState(<div className="loading">Loading ...</div>);
+
   const { user, setUser, setToken, searchQuery } = useStore();
 
   const style = {
@@ -50,34 +51,35 @@ export default function BookClubs() {
         </div>
       );
     }
-      return <div className='most-visited-clubs'>LOGGED IN</div>
-  }
+    return <div className="most-visited-clubs">LOGGED IN</div>;
+  };
 
   const hasQuery = ({ bookclubInfo }) => {
     const { bookclubName, description } = bookclubInfo;
-
-    console.log({ bookclubName });
-    console.log({ description });
 
     const queryRE = new RegExp(searchQuery, 'i');
 
     return queryRE.test(bookclubName) || queryRE.test(description);
   };
 
-  const renderClubs = () =>
-    searchQuery
-      ? allClubs.reduce(
-          (renderList, club) =>
-            hasQuery(club) &&
-            renderList.push(<AllClubs club={club} user={user} key={club.bookclubId} />),
-          [],
-        )
-      : allClubs.map((club) => <AllClubs club={club} user={user} key={club.bookclubId} />);
+  useEffect(() => {
+    setRenderedClubs(() => {
+      if (!searchQuery)
+        return allClubs.map((club) => <AllClubs club={club} user={user} key={Math.random()} />);
+
+      return allClubs.reduce(
+        (renderList, club) =>
+          hasQuery(club)
+            ? [...renderList, <AllClubs club={club} user={user} key={Math.random()} />]
+            : renderList,
+        [],
+      );
+    });
+  }, [searchQuery, allClubs]);
 
   useEffect(() => {
     setBookClub(PopularBookclubs.results[0].bookclubInfo);
     setAllClubs(PopularBookclubs.results);
-    renderView(); // TODO: wait. why is this here?
   }, [user]);
 
   return (
@@ -102,9 +104,7 @@ export default function BookClubs() {
           </div>
           {renderView()}
         </div>
-        <div className="allClubs">
-          {renderClubs()}
-        </div>
+        <div className="allClubs">{renderedClubs}</div>
       </div>
     </div>
   );
