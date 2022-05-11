@@ -22,8 +22,8 @@ export default function NavBar() {
         setToken(token);
       })
       .catch(console.error);
-
   };
+}
 
   return (
     <div className="nav-container">
