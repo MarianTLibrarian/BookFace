@@ -15,7 +15,7 @@ export default function MyBooks() {
   // calculate the % of books read
   const percentageRead = 72;
 
-  const { user, setUser, setToken, expressUrl } = useStore();
+  const { user, setUser, setToken, expressUrl, searchQuery } = useStore();
 
   // sources of truth
   const [allBooks, setAllBooks] = useState([]);
@@ -23,7 +23,11 @@ export default function MyBooks() {
   const [bookshelves, setBookshelves] = useState([]);
 
   // filtered by search
-  const [renderedBooks, setRenderedBooks] = useState()
+  const [renderedBooks, setRenderedBooks] = useState(<div className="loading">Loading ...</div>);
+  const [renderedClubs, setRenderedClubs] = useState(<div className="loading">Loading ...</div>);
+  const [renderedShelves, setRenderedShelves] = useState(
+    <div className="loading">Loading ...</div>,
+  );
   const [currentView, setCurrentView] = useState('All');
 
   const handleClick = (event) => {
@@ -85,22 +89,43 @@ export default function MyBooks() {
   };
 
   useEffect(() => {
-    // FIXME: each of these takes a `uid` argument
-    getBookshelves();
-    getBooks();
-    getBookclubs();
+    // FIXME: these are placeholder arguments
+    getBookshelves(1);
+    getBooks(1);
+    getBookclubs('qwew');
   }, []);
 
   useEffect(() => {
+    setRenderedBooks(() => {
+      if (!searchQuery) return allBooks;
 
+      const queryRE = new RegExp(searchQuery, 'i');
+      const hasQuery = ({ title, description }) => queryRE.test(title) || queryRE.test(description);
+
+      return allBooks.filter((book) => hasQuery(book));
+    });
   }, [allBooks]);
 
   useEffect(() => {
+    setRenderedClubs(() => {
+      if (!searchQuery) return bookclubs;
 
+      const queryRE = new RegExp(searchQuery, 'i');
+      const hasQuery = (clubName) => queryRE.test(clubName);
+
+      return bookclubs.filter((club) => hasQuery(club));
+    });
   }, [bookclubs]);
 
   useEffect(() => {
+    setRenderedShelves(() => {
+      if (!searchQuery) return bookshelves;
 
+      const queryRE = new RegExp(searchQuery, 'i');
+      const hasQuery = (shelfName) => queryRE.test(shelfName);
+
+      return bookshelves.filter((shelf) => hasQuery(shelf));
+    });
   }, [bookshelves]);
 
   const style = {
@@ -130,9 +155,7 @@ export default function MyBooks() {
         <div style={{ width: '100%' }}>
           <div className="books-search-bar">
             <div className="the-first-two-thirds" />
-            <div className="books-search">
-              {/* <SearchBar filterOptions={filterOptions} /> */}
-            </div>
+            <div className="books-search">{/* <SearchBar filterOptions={filterOptions} /> */}</div>
           </div>
 
           <div className="content-container">
@@ -151,15 +174,12 @@ export default function MyBooks() {
 
               <div className="my-book-clubs">
                 <h2>My Book Clubs</h2>
-                <Link to="/bookclubs" style={{ 'textDecoration': 'none', color: 'black' }}>
+                <Link to="/bookclubs" style={{ textDecoration: 'none', color: 'black' }}>
                   <p>All Clubs</p>
                 </Link>
                 {bookclubs.map((club) => (
                   <div key={club}>
-                    <Link
-                      to="/bookclubdetail"
-                      style={{ 'textDecoration': 'none', color: 'black' }}
-                    >
+                    <Link to="/bookclubdetail" style={{ textDecoration: 'none', color: 'black' }}>
                       {club}
                     </Link>
                   </div>
@@ -167,17 +187,17 @@ export default function MyBooks() {
               </div>
 
               <div className="reading-goal">
-                <Link to="/stats" style={{ 'textDecoration': 'none', color: 'black' }}>
+                <Link to="/stats" style={{ textDecoration: 'none', color: 'black' }}>
                   <h2
                     style={{
                       display: 'flex',
-                      'flexDirection': 'row',
-                      'alignItems': 'center',
-                      'justifyContent': 'space-between',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
                     }}
                   >
                     Reading Goals
-                    <span style={{ 'fontSize': '12px', 'paddingRight': '1em' }}>&#9658;</span>
+                    <span style={{ fontSize: '12px', paddingRight: '1em' }}>&#9658;</span>
                   </h2>
                 </Link>
                 <ReadingGoals
