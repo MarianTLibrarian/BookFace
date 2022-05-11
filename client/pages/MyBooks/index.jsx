@@ -169,7 +169,7 @@ export default function MyBooks() {
                     trailStrokeWidth="5"
                     trailStrokeColor="var(--dark-beige)"
                     trailSpaced='true'
-                    speed='10'
+                    speed='2'
                   />
               </div>
 
