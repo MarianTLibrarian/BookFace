@@ -10,6 +10,9 @@ import useStore from '../../userStore';
 
 export default function MyBooks() {
 
+  // calculate the % of books read
+  let percentageRead = 72;
+
   const [books, setBooks] = useState([]);
   const [currentView, setCurrentView] = useState('');
   const { user, setUser, setToken } = useStore();
@@ -128,7 +131,17 @@ export default function MyBooks() {
               </div>
               <div className='reading-goal'>
                 <h2>Reading Goals</h2>
-                  <ReadingGoals />
+                  <ReadingGoals
+                    className="reading-goal"
+                    strokeColor="var(--sunset)"
+                    strokeWidth="5"
+                    innerText="READ"
+                    percentage={percentageRead}
+                    trailStrokeWidth="5"
+                    trailStrokeColor="var(--dark-beige)"
+                    trailSpaced='true'
+                    speed='10'
+                  />
               </div>
             </div>
 

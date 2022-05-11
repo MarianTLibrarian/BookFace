@@ -106,3 +106,37 @@
     width: 90%;
   }
 }
+
+/***********************     ReadingGoals Widget     ***********************/
+
+  .chart-text {
+    transform: translateY(0.25em);
+  }
+
+  .chart-number {
+    font-size: 0.6em;
+    line-height: 1;
+    text-anchor: middle;
+    transform: translateY(-0.25em);
+  }
+
+  .chart-label {
+    font-size: 0.2em;
+    text-transform: uppercase;
+    text-anchor: middle;
+    transform: translateY(0.7em);
+  }
+
+  .figure-key-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .shape-circle {
+    display: inline-block;
+    vertical-align: middle;
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+  }
