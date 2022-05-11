@@ -55,7 +55,7 @@ export default function MyBooks() {
   const getBookshelves = (userId) => {
     axios({
       method: 'get',
-      url: 'https://localhost:3030/bookshelves',
+      url: 'localhost:3030/bookshelves',
       params: { userId: '1' }
     })
     .then(({ data }) => {
