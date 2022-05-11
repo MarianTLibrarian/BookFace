@@ -42,7 +42,7 @@ export default function SearchBar({ filterOptions = defaultFilterOptions }) {
 
   return (
     <Paper
-      component="form"
+      component="div"
       sx={{
         p: '2px 4px',
         display: 'flex',
@@ -85,7 +85,7 @@ export default function SearchBar({ filterOptions = defaultFilterOptions }) {
             <SearchIcon />
           </IconButton>
         }
-        // onChange={handleSearch}
+        onChange={handleSearch}
         onSubmit={handleSearch}
       />
     </Paper>
