@@ -33,13 +33,12 @@ h1 {
 :root {
   --light-gray: #eeeeee;
   --beige: #ddc9b4;
-  --wood:#B9946A;
+  --wood: #b9946a;
   --dark-beige: #e8c1a0;
   --sunset: #f47560;
   --cyan: #61cdbb;
   --light-cyan: #97e3d5;
 }
-
 
 /***********************     Nav     ***********************/
 .nav-container {
@@ -50,16 +49,17 @@ h1 {
 }
 
 .nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+
   position: relative;
   padding-bottom: 20px;
   border-bottom: 2px solid white;
   width: 100%;
-
 }
 
 .logo {
-  width: 40%;
+  /* width: 40%; */
 }
 
 .logo img {
@@ -81,8 +81,11 @@ h1 {
 }
 
 .menu {
-  width: 60%;
+  /* width: 60%; */
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .menu a {
@@ -95,7 +98,7 @@ h1 {
 }
 
 .menu a:hover {
-  color: #B9946A;
+  color: #b9946a;
 }
 
 .header {
@@ -130,7 +133,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding:0 40px;
+  padding: 0 40px;
 }
 
 .main-content h1 {
@@ -156,19 +159,19 @@ button {
   transition: 0.5s;
 }
 .green-btn button {
-  background:#67b27c;
-  border:none;
-  border-radius:5px;
+  background: #67b27c;
+  border: none;
+  border-radius: 5px;
   font-weight: bold;
   box-shadow: 3px 3px 5px #9e9795;
 }
 
 button:hover {
-  background: #B9946A;
+  background: #b9946a;
 }
 
 .green-btn {
-  padding-top:40px;
+  padding-top: 40px;
 }
 
 .description {
@@ -180,7 +183,7 @@ button:hover {
   justify-content: center;
 }
 
-.text{
+.text {
   width: 900px;
   line-height: 26px;
   font-weight: bold;
@@ -191,62 +194,61 @@ button:hover {
   border-color: transparent !important;
 }
 
-.page-content{
- display: flex;
- width:1200px;
- padding:100px 0;
- margin:auto;
- flex-direction: column;
+.page-content {
+  display: flex;
+  width: 1200px;
+  padding: 100px 0;
+  margin: auto;
+  flex-direction: column;
 }
-
 
 .club-container {
   width: 50%;
- float:left;
- padding:20px;
+  float: left;
+  padding: 20px;
 }
 
-.club{
-  background:white;
+.club {
+  background: white;
   box-shadow: 3px 3px 5px #bfbfbf;
   border-radius: 8px;
-  padding:15px;
+  padding: 15px;
   display: flex;
   align-items: center;
 }
 
 .col-left {
   width: 100px;
-  height:100px;
+  height: 100px;
 }
 
 .col-right {
   width: 70%;
   text-align: left;
-  padding-left:20px;
+  padding-left: 20px;
 }
 
-.col-left img{
+.col-left img {
   width: 100%;
-  height:100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.col-right p{
-  padding:5px 0;
+.col-right p {
+  padding: 5px 0;
   font-weight: bold;
 }
 
-.col-right p:nth-child(1){
-  font-size:18px;
+.col-right p:nth-child(1) {
+  font-size: 18px;
 }
 
-.col-right p:nth-child(2){
+.col-right p:nth-child(2) {
   opacity: 0.5;
 }
 
-.menu button{
-  margin:0;
+.menu button {
+  margin: 0;
 }
 
 /***********************     Footer     ***********************/
