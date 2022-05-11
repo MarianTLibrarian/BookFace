@@ -51,7 +51,7 @@
 .bookdetailauthor {
   font-size: larger;
   font-weight: bold;
-  color: brown;
+  color: var(--beige);
 }
 .bookdetaildesc {
   border-top: 0.75px solid;
@@ -131,12 +131,12 @@
 
 .modalcancelbtn button {
   width: 80%;
-  background-color: brown;
+  background-color: var(--beige);
 }
 
 .modalsubmitbtn button {
   width: 80%;
-  background-color: brown;
+  background-color: var(--beige);
 }
 
 .MuiFilledInput-root,
@@ -152,6 +152,15 @@
   background-color: white !important;
 }
 
-.react-calendar__tile, .react-calendar__month-view__days__day {
-  color: grey
+.react-calendar button {
+  /* padding: 0px; */
+  color: black;
+}
+
+.react-calendar__navigation button {
+  padding: 0px;
+}
+
+.react-calendar__tile--active {
+  background: var(--beige) !important;
 }
