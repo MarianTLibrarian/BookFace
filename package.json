@@ -25,7 +25,6 @@
     "firebase": "^9.8.1",
     "react": "^18.0.0",
     "react-chartjs-2": "^4.1.0",
-    "react-datepicker": "^4.7.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "zustand": "^4.0.0-rc.1"
