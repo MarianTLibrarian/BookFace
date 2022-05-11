@@ -46,7 +46,7 @@ export default function Home() {
         <p>Simple is Better.</p>
         <div className="trends-list">
           {trends.map((book) => (
-            <Trends book={book} key={book} />
+            <Trends book={book} key={Math.random()} />
           ))}
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function Home() {
         </div>
         <div className="right">
           <div className="clubs-list">
-            {bookClubs.map((club) => <BookClubs club={club} key={club} />)}
+            {bookClubs.map((club) => <BookClubs club={club} key={Math.random()} />)}
             <div className="clear" />
           </div>
         </div>
