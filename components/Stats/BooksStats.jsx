@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../../client/pages/styles/Stats.css';
 
 import {
@@ -11,7 +12,6 @@ import {
   Legend,
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
-import data from '../../fakeData/books/personalBooks';
 
 export default function BookStats () {
   ChartJS.register(
@@ -23,17 +23,28 @@ export default function BookStats () {
     Legend
   );
 
-  const totalReadPerYear = {};
-  const finishedTitle = [];
+  const [totalReadPerYear, setTotalReadPerYear] = useState({});
 
-  for (let i = 0; i < data.results.length; i += 1) {
-    const isRead = data.results[i].readingStatus === 'read';
-    if (isRead) {
-      finishedTitle.push(data.results[i].title);
-      const year = data.results[i]['finish-read-date'].slice(0, 4);
-      totalReadPerYear[year] = (totalReadPerYear[year] || 0) + 1;
+  const getBooksTotal = (uid) => {
+    axios.get('http://localhost:3030/books', { params: {userId: uid} })
+    .then(({data}) => {
+      const yearData = {};
+      for (let i = 0; i < data.results.length; i += 1) {
+          if (data.results[i].readingStatus === 'read') {
+            const year = data.results[i].endReadDate.slice(0, 4);
+            yearData[year] = (yearData[year] || 0) + 1;
+            setTotalReadPerYear(yearData)
+          }
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      })
     }
-  }
+
+  useEffect(() => {
+    getBooksTotal(1);
+  },[])
 
   const state = {
     labels: Object.keys(totalReadPerYear).reverse(),

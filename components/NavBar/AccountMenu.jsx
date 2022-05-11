@@ -29,7 +29,6 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-
   const handleSignOut = () => {
     if (user) {
       return userSignOut().then(() => {
@@ -38,7 +37,6 @@ export default function AccountMenu() {
       });
     }
   };
-
 
   return (
     <a>
@@ -97,7 +95,11 @@ export default function AccountMenu() {
           <Avatar /> My account
         </MenuItem>
         <MenuItem>
-          <Avatar /> <Link to='/stats'> My Reading Stats </Link>
+          <Avatar />
+          <Link to="/stats" style={{ 'text-decoration': 'none', color: 'black' }}>
+            {' '}
+            My Reading Stats{' '}
+          </Link>
         </MenuItem>
         <Divider />
         <MenuItem>
@@ -113,7 +115,7 @@ export default function AccountMenu() {
           Settings
         </MenuItem>
         <MenuItem onClick={handleSignOut}>
-          <ListItemIcon >
+          <ListItemIcon>
             <Logout fontSize="small" onClick={handleSignOut} />
           </ListItemIcon>
           Logout
