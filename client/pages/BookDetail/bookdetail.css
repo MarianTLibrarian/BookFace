@@ -152,3 +152,6 @@
   background-color: white !important;
 }
 
+.react-calendar__tile, .react-calendar__month-view__days__day {
+  color: grey
+}
