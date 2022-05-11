@@ -40,14 +40,14 @@ export default function PagesStats() {
   }
 
   const state = {
-    labels: Object.keys(totalPagesPerYear),
+    labels: Object.keys(totalPagesPerYear).reverse(),
     datasets: [
       {
         label: 'Total Number of Pages Read',
-        backgroundColor: ["hsl(90, 70%, 50%)", "hsl(186, 70%, 50%)", "hsl(56, 70%, 50%)", "hsl(104, 70%, 50%)"],
-        borderColor: ["hsl(90, 70%, 50%)", "hsl(186, 70%, 50%)", "hsl(56, 70%, 50%)", "hsl(103, 70%, 50%)", "hsl(104, 70%, 50%)"],
+        backgroundColor: ["#f47560", "#e8c1a0", "#61cdbb", "#97e3d5"],
+        borderColor: ["#f47560", "#e8c1a0", "#61cdbb", "#97e3d5"],
         borderWidth: 2,
-        data: Object.values(totalPagesPerYear)
+        data: Object.values(totalPagesPerYear).reverse()
       }
     ]
   }
@@ -66,7 +66,7 @@ export default function PagesStats() {
               },
               legend: {
                 display: false,
-            }
+              }
             }
           }}
         />
