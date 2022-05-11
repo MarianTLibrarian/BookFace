@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import SideBar from './sidebar';
 import Carousel from './carousel';
 import ReadingGoals from './readingGoals';
 import SearchBar from '../../../components/SearchBar';
@@ -29,7 +28,10 @@ export default function MyBooks() {
   const [renderedShelves, setRenderedShelves] = useState([]);
   const [currentView, setCurrentView] = useState('All');
 
+
+
   const handleClick = (event) => {
+    event.preventDefault();
     setCurrentView(event.target.innerText);
   };
 
@@ -147,7 +149,7 @@ export default function MyBooks() {
       </div>
       <div className="description">
         <div className="banner">
-          <p>Description</p>
+          <p>View and Manage Bookshelves, Book Clubs, and Reading Goals</p>
         </div>
       </div>
       <div className="page-content">
@@ -219,6 +221,8 @@ export default function MyBooks() {
             <div className="contentRight">
               <Carousel selectedBookshelf={currentView} allBooks={renderedBooks} />
             </div>
+
+
           </div>
         </div>
       </div>

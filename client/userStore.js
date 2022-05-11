@@ -14,7 +14,7 @@ const useStore = create((set) => ({
   searchQuery: '',
   setSearchQuery: (query) => set(() => ({ searchQuery: query })),
 
-  bookDetails: '',
+  bookDetails: null,
   setBookDetails: (details) => set(() => ({ bookDetails: details})),
 }));
 
