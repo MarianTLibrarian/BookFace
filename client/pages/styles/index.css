@@ -194,11 +194,6 @@ button:hover {
  flex-direction: column;
 }
 
-<<<<<<< HEAD
-.content-container p{
-  padding:5px 0;
-  line-height:24px;
-=======
 
 .club-container {
   width: 50%;
@@ -253,5 +248,4 @@ button:hover {
   padding: 40px;
   color: white;
   font-weight: bold;
->>>>>>> main
 }

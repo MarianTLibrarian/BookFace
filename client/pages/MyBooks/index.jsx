@@ -5,35 +5,6 @@ import axios from 'axios';
 import Carousel from './carousel';
 import ReadingGoals from './readingGoals';
 import useStore from '../../userStore';
-<<<<<<< HEAD
-
-
-
-
-export default function MyBooks() {
-
-  const [books, setBooks] = useState([]);
-  const [currentView, setCurrentView] = useState('');
-  const { user, setUser, setToken } = useStore();
-
-  const handleClick = (event) => {
-    setCurrentView(event.target.innerText);
-
-
-  }
-
-
-  // const uniqueBookshelves = [];
-  // function removeDuplicates(arr) {
-  //   arr.forEach(element => {
-  //       if (!uniqueBookshelves.includes(element)) {
-  //           uniqueBookshelves.push(element);
-  //       }
-  //   });
-  //   return uniqueBookshelves;
-  // }
-  // removeDuplicates(bookshelves);
-=======
 import '../styles/MyBooks.css';
 import '../styles/BookClubDetails.css';
 
@@ -49,7 +20,6 @@ export default function MyBooks() {
     setCurrentView(event.target.innerText);
   }
 
-  //NOTE: get bookshelves by userId is working
   const getBookshelves = (uid) => {
     axios.get('http://localhost:3030/bookshelves', { params: {userId: 1}})
       .then(({data}) => {
@@ -100,7 +70,6 @@ export default function MyBooks() {
     })
   }
 
->>>>>>> main
 
 
   // const getBookshelves = (uid) => {
@@ -113,29 +82,25 @@ export default function MyBooks() {
   //     })
   // }
 
-  const getBookshelves = (userId) => {
-    axios({
-      method: 'get',
-      url: 'localhost:3030/bookshelves',
-      params: { userId: '1' }
-    })
-    .then(({ data }) => {
-      console.log('HERE!!!', data)
-    })
-    .catch((err) => {
-      console.log('error on client side')
-    });
-  }
+  // const getBookshelves = (userId) => {
+  //   axios({
+  //     method: 'get',
+  //     url: 'localhost:3030/bookshelves',
+  //     params: { userId: '1' }
+  //   })
+  //   .then(({ data }) => {
+  //     console.log('HERE!!!', data)
+  //   })
+  //   .catch((err) => {
+  //     console.log('error on client side')
+  //   });
+  // }
 
   useEffect(() => {
     getBookshelves();
-<<<<<<< HEAD
-  })
-=======
     getBooks();
     getBookclubs();
   },[])
->>>>>>> main
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -172,42 +137,18 @@ export default function MyBooks() {
 
           <div className='content-container'>
             <div className='content-left'>
-<<<<<<< HEAD
-              {/* <div className='my-bookshelves'>
-                <h2>My Bookshelves</h2>
-                  {uniqueBookshelves.map(shelf => (
-                    <p
-=======
               <div className='my-bookshelves'>
                 <h2>My Bookshelves</h2>
                   <p value={'All'} onClick={handleClick}>All</p>
                   {bookshelves.map(shelf => (
                     <p
                       key={Math.random()}
->>>>>>> main
                       value={shelf}
                       onClick={handleClick}
                     >
                       {shelf}
                     </p>
                   ))}
-<<<<<<< HEAD
-              </div> */}
-
-              <div className='my-book-clubs'>
-                {/* To Do: dynamically render book clubs */}
-                <h2>My Book Clubs</h2>
-                  <p>All</p>
-                  <p>Read</p>
-                  <p>Currently Reading</p>
-                  <p>Want To Read</p>
-                  {/* <SideBar /> */}
-              </div>
-              <div className='reading-goal'>
-                <h2>Reading Goals</h2>
-                  <ReadingGoals />
-              </div>
-=======
               </div>
 
               <div className='my-book-clubs'>
@@ -239,20 +180,14 @@ export default function MyBooks() {
                   <ReadingGoals />
               </div>
 
->>>>>>> main
             </div>
 
             {/* NOTE: Bookshelves get rendered here */}
             <div className='content-right'>
-<<<<<<< HEAD
-              <Carousel books={books}/>
-              HEREEE
-=======
               <Carousel
                 selectedBookshelf={currentView}
                 allBooks={allBooks}
               />
->>>>>>> main
             </div>
 
           </div>
@@ -260,9 +195,5 @@ export default function MyBooks() {
       </div>
     </div>
   )
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 }
 

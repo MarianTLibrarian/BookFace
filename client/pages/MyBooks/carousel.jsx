@@ -15,22 +15,8 @@ export default function Carousel({ selectedBookshelf, allBooks }) {
     }
   },[selectedBookshelf]);
 
-<<<<<<< HEAD
-=======
-  // const shelfView = () => {
-  //   switch (selectedBookshelf) {
-  //     case 'BOOKS':
-  //       return <BooksStats />;
-  //     case 'PAGES':
-  //       return <PagesStats />;
-  //     case 'GENRES':
-  //       return <GenresStats />;
-  //     default:
-  //       return <BooksStats />;
-  //   }
-  // }
 
->>>>>>> main
+
   return (
     <div className="carousel">
       <h3>Books</h3>
