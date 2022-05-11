@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import React, { useEffect, useRef, useState } from 'react';
 import { signInWithGoogle } from '../../../components/Firebase';
 import SearchBar from '../../../components/SearchBar';
+import PersonalBookClubs from '../../../fakeData/bookClubs/personalBookclubs';
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
 import useStore from '../../userStore';
 import '../styles/BookClubs.css';
 import AllClubs from './AllClubs';
+import Carousel from './Carousel';
 
 const filterOptions = { clubs: 'Clubs', myClubs: 'My Clubs' };
 
@@ -12,8 +16,11 @@ export default function BookClubs() {
   const [bookClub, setBookClub] = useState([]);
   const [allClubs, setAllClubs] = useState([]);
   const [renderedClubs, setRenderedClubs] = useState(<div className="loading">Loading ...</div>);
-
+  const [myBookClubs, setMyBookClubs] = useState([]);
   const { user, setUser, setToken, searchQuery } = useStore();
+  const [imgStyle, setImgStyle] = useState(0);
+  const [imgWidth, setImgWidth] = useState(0);
+  const ref = useRef(null);
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -31,6 +38,22 @@ export default function BookClubs() {
         setToken(token);
       })
       .catch(console.error);
+
+  const measureWidth = (width) => {
+    setImgWidth(width);
+  };
+
+  const handleNext = () => {
+    if (Math.abs(imgStyle) < myBookClubs.length * imgWidth - ref.current.offsetWidth) {
+      setImgStyle(imgStyle - imgWidth);
+    }
+  };
+
+  const handlePrev = () => {
+    if (imgStyle !== 0) {
+      setImgStyle(imgStyle + imgWidth);
+    }
+  };
 
   const renderView = () => {
     if (!user) {
@@ -51,7 +74,29 @@ export default function BookClubs() {
         </div>
       );
     }
-    return <div className="most-visited-clubs">LOGGED IN</div>;
+    return (
+      <div>
+        <div className="club-btns">
+          <div className="prev">
+            <button onClick={handlePrev} type="button">
+              <ArrowBackIosIcon />
+            </button>
+          </div>
+          <div className="next">
+            <button onClick={handleNext} type="button">
+              <ArrowForwardIosIcon />
+            </button>
+          </div>
+        </div>
+        <div className="my-book-clubs-container" ref={ref}>
+          <div className="my-book-clubs" style={{ transform: `translate(${imgStyle}px)` }}>
+            {myBookClubs.map((club) => (
+              <Carousel width={measureWidth} club={club} key={club.bookclubInfo.bookclubName} />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
   };
 
   const hasQuery = ({ bookclubInfo }) => {
@@ -80,6 +125,7 @@ export default function BookClubs() {
   useEffect(() => {
     setBookClub(PopularBookclubs.results[0].bookclubInfo);
     setAllClubs(PopularBookclubs.results);
+    setMyBookClubs(PersonalBookClubs);
   }, [user]);
 
   return (
