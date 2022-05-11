@@ -27,29 +27,8 @@ const style = {
 }
 
 export default function BookDetail({fakebookdetail}) {
-  const { user, setUser, setToken } = useStore();
-  const [fakeData, setFakeData] = useState({
-    "isbn13": 9781950968428,
-    "title": "About Time: A History of Civilization in Twelve Clocks",
-    "authors": [ "David Rooney"],
-    "publisher": "W. W. Norton & Company",
-    "publishedDate": "2021-08-17",
-    "description": "A captivating, surprising history of timekeeping and how it has shaped our world. For thousands of years, people of all cultures have made and used clocks, from the city sundials of ancient Rome to the medieval water clocks of imperial China, hourglasses fomenting revolution in the...",
-    "pageCount": 288,
-    "categories": ["History"],
-    "imageLinks": {
-                  "smallThumbnail": "http://books.google.com/books/content?id=rgIDEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-                  "thumbnail": "http://books.google.com/books/content?id=rgIDEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-    },
-    "language": "en",
-    "readingStatus": "reading",
-    "rating" : 5,
-    "bookshelf": "Haley's Bookshelf",
-    "review" : "not so good",
-    "review_date": "2021-08-25",
-    "start-read-date": "2021-12-18",
-    "finish-read-date": "2022-05-19"
-  });
+  const { user, setUser, setToken, bookDetails, expressUrl } = useStore();
+
   const [fakebookshelves, setFakebookshelves] = useState([
     { title: 'readingwithHaley' },
     { title:'readingwithHailee' },
@@ -99,7 +78,7 @@ export default function BookDetail({fakebookdetail}) {
     if (!user) {
       return (<AddBoxIcon onClick={handleuserLogin}/>);
     }
-    if (!fakeData.readingStatus) {
+    if (!bookDetails.readingStatus) {
       return (<AddBoxIcon onClick={handleAddtoShelf} />)
     }
       return (<ModeEditOutlineIcon onClick={handleOpen} />)
@@ -113,50 +92,65 @@ export default function BookDetail({fakebookdetail}) {
     .catch(err=>{console.log(err)})
   },[])
 
+  const getBookshelves = (uid) => {
+  axios
+    .get(`${expressUrl}/bookshelves`, { params: { userId: uid } })
+    .then(({ data }) => {
+      const temp = [];
+      for (let i = 0; i < data.results.length; i += 1) {
+        temp.push(data.results[i].title);
+      }
+      setBookshelves(temp);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  };
+
   return (
     <div className='header-container'>
       <div className='header' style={style}>
         <div className='filter' />
         <div className='main-content'>
-          <h1>{fakeData.title}</h1>
+          <h1>{bookDetails.title}</h1>
         </div>
       </div>
       <div className='bookdetailmain' >
       <div className='bookdetailleftcol'>
-          <img className='bookdetailimg' alt='bookdetailimg' src={fakeData.imageLinks.thumbnail}/>
+          <img className='bookdetailimg' alt='bookdetailimg' src={bookDetails.imageLinks.thumbnail}/>
           {user?
             <div className='bookdetailusrinputs'>
-              {fakeData.readingStatus? <div className='bookdetailreadingstatus'>
+              {bookDetails.readingStatus? <div className='bookdetailreadingstatus'>
               <CheckCircleIcon/>
-              {fakeData.readingStatus}</div> :null}
-              {fakeData.bookshelf?<div className='bookdetailbookshelf'>
-              <BookIcon/>{fakeData.bookshelf}</div> : null}
-              {fakeData['start-read-date']?<div className='bookdetailstartdate'><AccessTimeFilledIcon/>Start Reading Date: {fakeData['start-read-date']}</div> :null}
-              {fakeData['finish-read-date']?<div className='bookdetailenddate'><EmojiEmotionsIcon/>End Reading Date: {fakeData['finish-read-date']}</div> :null}
-              {fakeData.rating? <div className='bookdetailrating'><ReviewsIcon/>Rating:
-              <Rating name="read-only" value={fakeData.rating} readOnly />
+              {bookDetails.readingStatus}</div> :null}
+              {bookDetails.bookshelf?<div className='bookdetailbookshelf'>
+              <BookIcon/>{bookDetails.bookshelf}</div> : null}
+              {bookDetails['start-read-date']?<div className='bookdetailstartdate'><AccessTimeFilledIcon/>Start Reading Date: {bookDetails['start-read-date']}</div> :null}
+              {bookDetails['finish-read-date']?<div className='bookdetailenddate'><EmojiEmotionsIcon/>End Reading Date: {bookDetails['finish-read-date']}</div> :null}
+              {bookDetails.rating? <div className='bookdetailrating'><ReviewsIcon/>Rating:
+              <Rating name="read-only" value={bookDetails.rating} readOnly />
               </div>:null}
             </div>
             : null}
       </div>
       <div className='bookdetailrightcol'>
-        <div className="bookdetailtitle">{fakeData.title}</div>
+        <div className="bookdetailtitle">{bookDetails.title}</div>
         <div className='bookdetaildynamicbtn'>
           {renderElement()}
         </div>
-        <div className='bookdetailauthor'> by {fakeData.authors[0]}</div>
-        <div className='bookdetaildesc'>{fakeData.description}</div>
+        <div className='bookdetailauthor'> by {bookDetails.authors[0]}</div>
+        <div className='bookdetaildesc'>{bookDetails.description}</div>
         <div className='bookdetailgenre'>
           <p className='bookdetailmisctitle'>GENRES</p>
-          <p>{fakeData.categories}</p>
+          <p>{bookDetails.categories}</p>
         </div>
         <div className='bookdetailpublishdetails'>
           <p className='bookdetailmisctitle'>PUBLISH INFO</p>
-          Published {fakeData.publishedDate} by {fakeData.publisher}
+          Published {bookDetails.publishedDate} by {bookDetails.publisher}
         </div>
         <div className='bookdetailisbn'>
           <p className='bookdetailmisctitle'>ISBN</p>
-          {fakeData.isbn13}
+          {bookDetails.isbn}
         </div>
       </div>
       <Modal
