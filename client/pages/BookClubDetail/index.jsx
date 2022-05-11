@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import LockIcon from '@mui/icons-material/Lock';
+import ForumIcon from '@mui/icons-material/Forum';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
-
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
 
 export default function BookClubDetail() {
-
   const [myClub, setMyClub] = useState(PopularBookclubs.results);
   const { user, setUser, setToken } = useStore();
+  const [chat, setChat] = useState(false)
 
-  useEffect(() => {
-
-  }, [])
 
   const handleUserLogin = () => signInWithGoogle()
     .then((result) => {
@@ -28,8 +25,34 @@ export default function BookClubDetail() {
     })
     .catch(console.error)
 
+  const liveChat = () => {
+    setChat(!chat)
+  }
   const style = {
     background: `url('${myClub[0].bookclubInfo.imageUrl}') no-repeat center center fixed`
+  }
+
+  const renderChat = () => {
+    if (!chat) {
+      return <div>
+        <div className='write-post'>
+          <textarea placeHolder='Leave A Comment...' />
+          <div className='submit'>
+            <div className='submit-btn'>
+              <SendIcon />
+            </div>
+          </div>
+        </div>
+        <div className='club-posts'>
+          {myClub[0].posts.map(post =>
+            <Posts post={post} key={post} />
+          )}
+        </div>
+      </div>
+    }
+    return <div className='chat-box'>
+      @@
+    </div>
   }
 
   const renderView = () => {
@@ -40,7 +63,6 @@ export default function BookClubDetail() {
             <input />
           </div>
         </div>
-
         <div className='content-container'>
           <div className='content-left'>
             <div className='my-clubs'>
@@ -60,30 +82,28 @@ export default function BookClubDetail() {
             </div>
           </div>
           <div className='content-right'>
-            <div className='write-post'>
-
-              <textarea placeHolder='Leave A Comment...' />
-              <div className='submit'>
-                <div className='submit-btn'>
-                  <SendIcon />
-                </div>
-              </div>
-            </div>
-            <div className='club-posts'>
-              {myClub[0].posts.map(post =>
-                <Posts post={post} key={post} />
-              )}
-            </div>
+            {renderChat()}
           </div>
         </div>
       </div>
     }
+
     return <div className='required'>
       <div className='lock' role='button' onClick={handleUserLogin} onKeyUp={handleUserLogin} tabIndex='0'>
         <LockIcon />
       </div>
     </div>
+  }
 
+  const renderIcon = () => {
+    if (user) {
+      return <div className='live-chat' role='button' onClick={liveChat} onKeyUp={liveChat} tabIndex='0'>
+        <div className='icon'>
+          <ForumIcon />
+        </div>
+      </div>
+    }
+    return null;
   }
 
   return (
@@ -113,6 +133,7 @@ export default function BookClubDetail() {
       <div className='page-content'>
         {renderView()}
       </div>
+      {renderIcon()}
     </div>
   );
 }

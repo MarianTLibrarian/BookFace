@@ -7,7 +7,8 @@
     "serve": "nodemon server",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "jest --config=jest.config.js"
+    "test": "jest --config=jest.config.js",
+    "socket": "nodemon socket.js"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -28,6 +29,8 @@
     "react-datetime-picker": "^3.5.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
+    "socket.io": "^4.5.0",
+    "socket.io-client": "^4.5.0",
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {

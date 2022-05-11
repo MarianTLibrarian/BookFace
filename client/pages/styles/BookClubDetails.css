@@ -163,3 +163,23 @@ align-items: center;
   padding: 0;
   padding-bottom: 20px;
 }
+
+.live-chat{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background:var(--beige);
+  width:60px;
+  height:60px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+.live-chat svg{
+  color:white !important;
+}
+.live-chat:hover{
+  background:var(--wood);
+}
