@@ -20,11 +20,7 @@ export default function Carousel({ selectedBookshelf, allBooks }) {
         book.bookshelf === selectedBookshelf
       )))
     }
-<<<<<<< HEAD
   }, [selectedBookshelf, allBooks]);
-=======
-  }, [selectedBookshelf]);
->>>>>>> main
 
   // setBookDetail function click event to bookcover div<<
   return (
