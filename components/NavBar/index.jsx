@@ -24,6 +24,7 @@ export default function NavBar() {
       .catch(console.error);
 
   };
+  }
 
   return (
     <div className="nav-container">
