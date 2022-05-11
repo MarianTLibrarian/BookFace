@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
@@ -21,8 +22,11 @@ const defaultFilterOptions = {
 export default function SearchBar({ filterOptions = defaultFilterOptions }) {
   const [searchFilter, setSearchFilter] = useState(() => Object.keys(filterOptions)[0]);
   const [anchorElem, setAnchorElem] = useState(null);
+  const navigateTo = useNavigate();
 
-  const { setSearchQuery } = useStore();
+  // const { setSearchQuery } = useStore();
+  const searchQuery = useStore((state) => state.searchQuery);
+  const setSearchQuery = useStore((state) => state.setSearchQuery);
 
   const handleExpand = (event) => {
     setAnchorElem(event.currentTarget);
@@ -36,6 +40,12 @@ export default function SearchBar({ filterOptions = defaultFilterOptions }) {
   const handleSearch = (event) => {
     event.preventDefault();
     setSearchQuery(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    navigateTo('/search');
   };
 
   const open = !!anchorElem;
@@ -53,7 +63,7 @@ export default function SearchBar({ filterOptions = defaultFilterOptions }) {
       <Button
         sx={{ p: '10px' }}
         aria-label="menu"
-        color='inherit'
+        color="inherit"
         onClick={handleExpand}
         endIcon={<ExpandMoreIcon />}
       >
@@ -81,12 +91,12 @@ export default function SearchBar({ filterOptions = defaultFilterOptions }) {
         inputProps={{ 'aria-label': 'search bookface' }}
         placeholder="Search for something"
         endAdornment={
-          <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onSubmit={handleSearch}>
+          <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={handleSubmit}>
             <SearchIcon />
           </IconButton>
         }
         onChange={handleSearch}
-        onSubmit={handleSearch}
+        onSubmit={handleSubmit}
       />
     </Paper>
   );
