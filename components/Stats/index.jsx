@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../client/pages/styles/Stats.css';
 
 import Dropdown from './Dropdown';
@@ -15,6 +15,25 @@ export default function Stats() {
   // To do: dynamically render the numbers
   const totalBooks = 20;
   const totalDays = 267;
+
+
+  const [progressBar, setProgressBar] = useState(0)
+  const UpdateNumbers = () => {
+    setTimeout(() => {
+      setProgressBar(progressBar + 1)
+    }, 5)
+  }
+
+  useEffect(() => {
+    if (totalBooks > 0) UpdateNumbers()
+  }, [totalBooks])
+
+  useEffect(() => {
+    if (progressBar < totalBooks) UpdateNumbers()
+  }, [progressBar])
+
+
+  ///
 
   const [menusView, setMenusView] = useState('BOOKS');
   const menus = ['BOOKS', 'PAGES', 'GENRES'];

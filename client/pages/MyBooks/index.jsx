@@ -10,6 +10,9 @@ import '../styles/BookClubDetails.css';
 
 export default function MyBooks() {
 
+  // calculate the % of books read
+  let percentageRead = 72;
+
   const { user, setUser, setToken } = useStore();
   const [allBooks, setAllBooks] = useState([]);
   const [bookclubs, setBookclubs] = useState([]);
@@ -131,6 +134,9 @@ export default function MyBooks() {
               <div className='my-book-clubs'>
 
                 <h2>My Book Clubs</h2>
+                  <Link to ='/bookclubs'style={{'text-decoration': 'none', 'color': 'black'}}>
+                    <p>All Clubs</p>
+                  </Link>
                   {bookclubs.map(club => (
                     <div key={club}>
                       <Link to='/bookclubdetail' style={{'text-decoration': 'none', 'color': 'black'}}>
@@ -154,7 +160,17 @@ export default function MyBooks() {
                     >&#9658;</span>
                   </h2>
                 </Link>
-                  <ReadingGoals />
+                  <ReadingGoals
+                    className="reading-goal"
+                    strokeColor="var(--sunset)"
+                    strokeWidth="5"
+                    innerText="READ"
+                    percentage={percentageRead}
+                    trailStrokeWidth="5"
+                    trailStrokeColor="var(--dark-beige)"
+                    trailSpaced='true'
+                    speed='10'
+                  />
               </div>
 
             </div>
