@@ -5,6 +5,7 @@ import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
 import ClubCarousel from './ClubCarousel';
 import SearchBar from '../../../components/SearchBar';
+import '../styles/BookClubs.css';
 
 const filterOptions = { clubs: 'Clubs', myClubs: 'My Clubs' };
 
@@ -49,13 +50,8 @@ export default function BookClubs() {
         </div>
       );
     }
-    return (
-      <div className="all-my-clubs">
-        LOGGED IN
-        <ClubCarousel />
-      </div>
-    );
-  };
+      return <div className='most-visited-clubs'>LOGGED IN</div>
+  }
 
   const hasQuery = ({ bookclubInfo }) => {
     const { bookclubName, description } = bookclubInfo;
