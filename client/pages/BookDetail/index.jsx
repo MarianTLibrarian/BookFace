@@ -11,8 +11,11 @@ import ReviewsIcon from '@mui/icons-material/Reviews';
 import { Modal, Box, Button, TextField, InputLabel, MenuItem, FormControl, Select, Rating } from '@mui/material';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import DatePicker from 'react-date-picker';
+// import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from 'react-date-picker/dist/entry.nostyle';
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
 
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
@@ -237,11 +240,11 @@ export default function BookDetail({fakebookdetail}) {
 
           <div className='modaldatestarted'>
             DATE STARTED
-            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            <DatePicker value={startDate} onChange={(date) => setStartDate(date)} />
           </div>
           <div className='modaldateend'>
             DATE FINISHED
-            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+            <DatePicker value={endDate} onChange={(date) => setEndDate(date)} />
           </div>
           <div className='modalrating'>
             RATE THIS BOOK
