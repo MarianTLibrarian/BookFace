@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import SideBar from './sidebar';
+// import SideBar from './sidebar';
 import Carousel from './carousel';
 import ReadingGoals from './readingGoals';
 import useStore from '../../userStore';
@@ -11,10 +11,10 @@ import '../styles/BookClubDetails.css';
 export default function MyBooks() {
 
   const { user, setUser, setToken } = useStore();
-  const [books, setBooks] = useState([]);
+  const [allBooks, setAllBooks] = useState([]);
   const [bookclubs, setBookclubs] = useState([]);
   const [bookshelves, setBookshelves] = useState([]);
-  const [currentView, setCurrentView] = useState('');
+  const [currentView, setCurrentView] = useState('All');
 
   const handleClick = (event) => {
     setCurrentView(event.target.innerText);
@@ -35,39 +35,43 @@ export default function MyBooks() {
       })
   }
 
-   //NOTE: get books by userId is working
-   //Default data for the book gallery
-  const getBooks = (uid) => {
-  axios.get('http://localhost:3030/books', { params: {userId: 1}})
+  //NOTE: get bookclubs by userId is working
+  const getBookclubs = (uid) => {
+    axios.get('http://localhost:3030/myBookclubs', { params: {userId: "qwew"}})
     .then(({data}) => {
-      console.log('books', data);
+      // console.log('bookclubs', data);
       const temp = [];
       for(let i = 0; i < data.results.length; i += 1) {
-        temp.push(data.results[i].imageLinks.smallThumbnail);
+        temp.push(data.results[i].bookclubInfo.bookclubName);
       }
-      setBooks(temp);
+      setBookclubs(temp);
     })
     .catch(err => {
       console.log(err);
     })
   }
 
-   //NOTE: get bookclubs by userId is working
-  const getBookclubs = (uid) => {
-    axios.get('http://localhost:3030/myBookclubs', { params: {userId: "qwew"}})
-      .then(({data}) => {
-        console.log('bookclubs', data);
-        // state change here
-        const temp = [];
-        for(let i = 0; i < data.results.length; i += 1) {
-          temp.push(data.results[i].bookclubInfo.bookclubName);
-        }
-        setBookclubs(temp);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
+  //NOTE: get books by userId is working
+  //Default data for the book gallery
+  const getBooks = (uid) => {
+  axios.get('http://localhost:3030/books', { params: {userId: 1}})
+    .then(({data}) => {
+      // console.log('books', data);
+      // const container = [];
+      // for(let i = 0; i < data.results.length; i += 1) {
+      //   const temp = {};
+      //   temp.bookshelf = data.results[i].bookshelf;
+      //   temp.img = data.results[i].imageLinks.smallThumbnail;
+      //   container.push(temp);
+      // }
+      setAllBooks(data.results);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
+
 
   useEffect(() => {
     getBookshelves();
@@ -112,8 +116,10 @@ export default function MyBooks() {
             <div className='content-left'>
               <div className='my-bookshelves'>
                 <h2>My Bookshelves</h2>
+                  <p value={'All'} onClick={handleClick}>All</p>
                   {bookshelves.map(shelf => (
                     <p
+                      key={Math.random()}
                       value={shelf}
                       onClick={handleClick}
                     >
@@ -126,7 +132,7 @@ export default function MyBooks() {
 
                 <h2>My Book Clubs</h2>
                   {bookclubs.map(club => (
-                    <div>
+                    <div key={club}>
                       <Link to='/bookclubdetail'>
                         {club}
                       </Link>
@@ -141,8 +147,10 @@ export default function MyBooks() {
 
             {/* NOTE: Bookshelves get rendered here */}
             <div className='content-right'>
-              <Carousel currentView={currentView}/>
-              HEREEE
+              <Carousel
+                selectedBookshelf={currentView}
+                allBooks={allBooks}
+              />
             </div>
 
           </div>
