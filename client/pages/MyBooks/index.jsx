@@ -6,8 +6,6 @@ import ReadingGoals from './readingGoals';
 import useStore from '../../userStore';
 
 
-
-
 export default function MyBooks() {
 
   const [books, setBooks] = useState([]);

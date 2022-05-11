@@ -18,11 +18,11 @@ export default function NavBar() {
 
           localStorage.setItem('user_data', JSON.stringify(newUser));
 
-          setUser(newUser);
-          setToken(token);
-        })
-        .catch(console.error);
-    }
+        setUser(newUser);
+        setToken(token);
+      })
+      .catch(console.error);
+
   };
 
   return (
