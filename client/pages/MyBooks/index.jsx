@@ -1,72 +1,79 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SideBar from './sidebar';
 import Carousel from './carousel';
 import ReadingGoals from './readingGoals';
 import useStore from '../../userStore';
-
+import '../styles/MyBooks.css';
+import '../styles/BookClubDetails.css';
 
 export default function MyBooks() {
 
-  const [books, setBooks] = useState([]);
-  const [currentView, setCurrentView] = useState('');
   const { user, setUser, setToken } = useStore();
+  const [books, setBooks] = useState([]);
+  const [bookclubs, setBookclubs] = useState([]);
+  const [bookshelves, setBookshelves] = useState([]);
+  const [currentView, setCurrentView] = useState('');
 
   const handleClick = (event) => {
     setCurrentView(event.target.innerText);
-
-
   }
 
-
-  // const uniqueBookshelves = [];
-  // function removeDuplicates(arr) {
-  //   arr.forEach(element => {
-  //       if (!uniqueBookshelves.includes(element)) {
-  //           uniqueBookshelves.push(element);
-  //       }
-  //   });
-  //   return uniqueBookshelves;
-  // }
-  // removeDuplicates(bookshelves);
-
-  // const getBooks = function() {
-  //   axios.get('/books')
-  //   .then(data => {
-  //     console.log(data)
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   })
-  // }
-
-  // const getBookshelves = (uid) => {
-  //   axios.get('/bookshelves', { params: {userId: 1}})
-  //     .then(({data}) => {
-  //       console.log('THIS', data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-
-  const getBookshelves = (userId) => {
-    axios({
-      method: 'get',
-      url: 'https://localhost:3030/bookshelves',
-      params: { userId: '1' }
-    })
-    .then(({ data }) => {
-      console.log('HERE!!!', data)
-    })
-    .catch((err) => {
-      console.log('error on client side')
-    });
+  //NOTE: get bookshelves by userId is working
+  const getBookshelves = (uid) => {
+    axios.get('http://localhost:3030/bookshelves', { params: {userId: 1}})
+      .then(({data}) => {
+        const temp = [];
+        for(let i = 0; i < data.results.length; i += 1) {
+          temp.push(data.results[i].title);
+        }
+        setBookshelves(temp);
+      })
+      .catch(err => {
+        console.error(err);
+      })
   }
+
+   //NOTE: get books by userId is working
+   //Default data for the book gallery
+  const getBooks = (uid) => {
+  axios.get('http://localhost:3030/books', { params: {userId: 1}})
+    .then(({data}) => {
+      console.log('books', data);
+      const temp = [];
+      for(let i = 0; i < data.results.length; i += 1) {
+        temp.push(data.results[i].imageLinks.smallThumbnail);
+      }
+      setBooks(temp);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
+   //NOTE: get bookclubs by userId is working
+  const getBookclubs = (uid) => {
+    axios.get('http://localhost:3030/myBookclubs', { params: {userId: "qwew"}})
+      .then(({data}) => {
+        console.log('bookclubs', data);
+        // state change here
+        const temp = [];
+        for(let i = 0; i < data.results.length; i += 1) {
+          temp.push(data.results[i].bookclubInfo.bookclubName);
+        }
+        setBookclubs(temp);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
 
   useEffect(() => {
     getBookshelves();
-  })
+    getBooks();
+    getBookclubs();
+  },[])
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -103,9 +110,9 @@ export default function MyBooks() {
 
           <div className='content-container'>
             <div className='content-left'>
-              {/* <div className='my-bookshelves'>
+              <div className='my-bookshelves'>
                 <h2>My Bookshelves</h2>
-                  {uniqueBookshelves.map(shelf => (
+                  {bookshelves.map(shelf => (
                     <p
                       value={shelf}
                       onClick={handleClick}
@@ -113,16 +120,18 @@ export default function MyBooks() {
                       {shelf}
                     </p>
                   ))}
-              </div> */}
+              </div>
 
               <div className='my-book-clubs'>
-                {/* To Do: dynamically render book clubs */}
+
                 <h2>My Book Clubs</h2>
-                  <p>All</p>
-                  <p>Read</p>
-                  <p>Currently Reading</p>
-                  <p>Want To Read</p>
-                  {/* <SideBar /> */}
+                  {bookclubs.map(club => (
+                    <div>
+                      <Link to='/bookclubdetail'>
+                        {club}
+                      </Link>
+                    </div>
+                  ))}
               </div>
               <div className='reading-goal'>
                 <h2>Reading Goals</h2>
@@ -132,7 +141,7 @@ export default function MyBooks() {
 
             {/* NOTE: Bookshelves get rendered here */}
             <div className='content-right'>
-              <Carousel books={books}/>
+              <Carousel currentView={currentView}/>
               HEREEE
             </div>
 
@@ -141,6 +150,5 @@ export default function MyBooks() {
       </div>
     </div>
   )
-
 }
 
