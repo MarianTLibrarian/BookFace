@@ -8,8 +8,9 @@ import Popover from '@mui/material/Popover';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import useStore from '../../client/userStore';
 
-const filterOptions = {
+const defaultFilterOptions = {
   all: 'All',
   books: 'Books',
   myBooks: 'My Books',
@@ -17,9 +18,11 @@ const filterOptions = {
   myClubs: 'My Clubs',
 };
 
-export default function SearchBar() {
-  const [searchFilter, setSearchFilter] = useState('all');
+export default function SearchBar({ filterOptions = defaultFilterOptions }) {
+  const [searchFilter, setSearchFilter] = useState(() => Object.keys(filterOptions)[0]);
   const [anchorElem, setAnchorElem] = useState(null);
+
+  const { setSearchQuery } = useStore();
 
   const handleExpand = (event) => {
     setAnchorElem(event.currentTarget);
@@ -32,21 +35,19 @@ export default function SearchBar() {
 
   const handleSearch = (event) => {
     event.preventDefault();
-
-    const { value } = event.target;
-    // console.log(value);
+    setSearchQuery(event.target.value);
   };
 
   const open = !!anchorElem;
 
   return (
     <Paper
-      component="form"
+      component="div"
       sx={{
         p: '2px 4px',
         display: 'flex',
         alignItems: 'center',
-        width: 720,
+        width: '100%',
       }}
     >
       <Button
@@ -80,10 +81,11 @@ export default function SearchBar() {
         inputProps={{ 'aria-label': 'search bookface' }}
         placeholder="Search for something"
         endAdornment={
-          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" onSubmit={handleSearch}>
+          <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onSubmit={handleSearch}>
             <SearchIcon />
           </IconButton>
         }
+        onChange={handleSearch}
         onSubmit={handleSearch}
       />
     </Paper>
