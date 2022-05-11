@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -26,39 +27,90 @@ const style = {
   'background': 'url(../assets/header-bg.jpg) no-repeat center center fixed'
 }
 
-export default function BookDetail({fakebookdetail}) {
-  const { user, setUser, setToken, bookDetails, expressUrl } = useStore();
+export default function BookDetail() {
+  const { user, setUser, setToken, bookDetails, setBookDetails, expressUrl } = useStore();
 
-  const [fakebookshelves, setFakebookshelves] = useState([
-    { title: 'readingwithHaley' },
-    { title:'readingwithHailee' },
-    { title:'readingwithJP' },
-    { title:'HappyReading' },]);
+  const [bookshelves, setBookshelves] = useState([]);
   // materialui--modal
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSubmit = ()=>{
-    // complete this submit function
-    alert('complete submit function')
+    const updatedbook = {
+      userId: JSON.parse(user).uid,
+      isbn: bookDetails.isbn,
+      rating: star,
+      bookshelf: value.title,
+      startReadDate:moment(startReadDate).format().slice(0, 10),
+      endReadDate:moment(endReadDate).format().slice(0, 10),
+      readingStatus: status
+    };
+    axios
+      .put(`${expressUrl}/books/update`,  updatedbook )
+      .then(({ data }) => {
+        console.log(data);
+        setBookDetails({
+          isbn: bookDetails.isbn,
+          rating: star,
+          bookshelf: value.title,
+          startReadDate:moment(startReadDate).format().slice(0, 10),
+          endReadDate:moment(endReadDate).format().slice(0, 10),
+          readingStatus: status,
+          title: bookDetails.title,
+          authors: bookDetails.authors,
+          publisher: bookDetails.publisher,
+          publishedDate: bookDetails.publishedDate,
+          description: bookDetails.description,
+          categories: bookDetails.categories,
+          imageLinks: bookDetails.imageLinks,
+          language: bookDetails.language
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+
     handleClose();
   }
   // materialui-bookshelffilter
   const filter = createFilterOptions();
-  const [value, setBookshelf] = React.useState(null);
+  const [value, setBookshelf] = React.useState({"title":bookDetails.bookshelf}|| null);
   // materialui-statusdropdown
-  const [status, setStatus] = React.useState('toread');
+  // bookDetails.readingStatus|| 'toread'
+  const [status, setStatus] = React.useState(null );
   const handleChange = (event) => {
     setStatus(event.target.value);
   };
   // datepicker
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startReadDate, setStartReadDate] = useState(new Date());
+  const [endReadDate, setEndReadDate] = useState(new Date());
   // rating
-  const [star, setStar] = useState(0);
+  const [star, setStar] = useState(bookDetails.rating || 0);
   // addtoshelf
   const handleAddtoShelf = () => {
     alert('added to shelf!')
+    const updatedbookdetail = {
+      userId: JSON.parse(user).uid,
+      isbn: bookDetails.isbn,
+      title: bookDetails.title,
+      authors: bookDetails.authors,
+      publisher: bookDetails.publisher,
+      publishedDate: bookDetails.publishedDate,
+      description: bookDetails.description,
+      categories: bookDetails.categories,
+      imageLinks: bookDetails.imageLinks,
+      language: bookDetails.language,
+    };
+    axios
+      .post(`${expressUrl}/books`,  updatedbookdetail )
+      .then(({ data }) => {
+        // console.log(data);
+      })
+      .then(()=>{setStatus('toread')})
+      .catch((err) => {
+        console.error(err);
+      });
   }
   // addtoshelf w/o login
   const handleuserLogin = () => signInWithGoogle()
@@ -78,34 +130,37 @@ export default function BookDetail({fakebookdetail}) {
     if (!user) {
       return (<AddBoxIcon onClick={handleuserLogin}/>);
     }
-    if (!bookDetails.readingStatus) {
+    if (user && !status) {
       return (<AddBoxIcon onClick={handleAddtoShelf} />)
     }
+    if (user && status) {
       return (<ModeEditOutlineIcon onClick={handleOpen} />)
+    }
   }
 
-  useEffect(()=>{
-    axios.get('http://localhost:3030/books', {params: {
-      userId: 1
-    }})
-    .then((data)=>{console.log(data)})
-    .catch(err=>{console.log(err)})
-  },[])
-
   const getBookshelves = (uid) => {
-  axios
-    .get(`${expressUrl}/bookshelves`, { params: { userId: uid } })
-    .then(({ data }) => {
-      const temp = [];
-      for (let i = 0; i < data.results.length; i += 1) {
-        temp.push(data.results[i].title);
-      }
-      setBookshelves(temp);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-  };
+    axios
+      .get(`${expressUrl}/bookshelves`, { params: { userId: JSON.parse(user).uid } })
+      .then(({ data }) => {
+        // console.log(data);
+        setBookshelves(data.results);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    };
+
+  useEffect(()=>{
+    getBookshelves();
+    if (bookDetails.startReadDate) {
+      setStartReadDate(moment(bookDetails.startReadDate)._d);
+    }
+    if (bookDetails.endReadDate) {
+      setEndReadDate(moment(bookDetails.endReadDate)._d);
+    }
+  },[status])
+
+
 
   return (
     <div className='header-container'>
@@ -125,8 +180,8 @@ export default function BookDetail({fakebookdetail}) {
               {bookDetails.readingStatus}</div> :null}
               {bookDetails.bookshelf?<div className='bookdetailbookshelf'>
               <BookIcon/>{bookDetails.bookshelf}</div> : null}
-              {bookDetails['start-read-date']?<div className='bookdetailstartdate'><AccessTimeFilledIcon/>Start Reading Date: {bookDetails['start-read-date']}</div> :null}
-              {bookDetails['finish-read-date']?<div className='bookdetailenddate'><EmojiEmotionsIcon/>End Reading Date: {bookDetails['finish-read-date']}</div> :null}
+              {bookDetails['startReadDate']?<div className='bookdetailstartReaddate'><AccessTimeFilledIcon/>Start Reading Date: {bookDetails['startReadDate']}</div> :null}
+              {bookDetails['endReadDate']?<div className='bookdetailendReaddate'><EmojiEmotionsIcon/>End Reading Date: {bookDetails['endReadDate']}</div> :null}
               {bookDetails.rating? <div className='bookdetailrating'><ReviewsIcon/>Rating:
               <Rating name="read-only" value={bookDetails.rating} readOnly />
               </div>:null}
@@ -194,7 +249,7 @@ export default function BookDetail({fakebookdetail}) {
               clearOnBlur
               handleHomeEndKeys
               id="free-solo-with-text-demo"
-              options={fakebookshelves}
+              options={bookshelves}
               getOptionLabel={(option) => {
                 // Value selected with enter, right from the input
                 if (typeof option === 'string') {
@@ -234,11 +289,11 @@ export default function BookDetail({fakebookdetail}) {
 
           <div className='modaldatestarted'>
             DATE STARTED
-            <DatePicker value={startDate} onChange={(date) => setStartDate(date)} />
+            <DatePicker value={startReadDate} onChange={(date) => setStartReadDate(date)} />
           </div>
           <div className='modaldateend'>
             DATE FINISHED
-            <DatePicker value={endDate} onChange={(date) => setEndDate(date)} />
+            <DatePicker value={endReadDate} onChange={(date) => setEndReadDate(date)} />
           </div>
           <div className='modalrating'>
             RATE THIS BOOK
