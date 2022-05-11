@@ -14,12 +14,19 @@ export default function MyBooks() {
   // calculate the % of books read
   const percentageRead = 72;
 
+  const setBookclubDetails = useStore(state => state.setBookclubDetails);
+  const bookclubDetails = useStore(state => state.bookclubDetails);
   const { user, setUser, setToken, expressUrl, searchQuery } = useStore();
+
+const setBookclubName = useStore(state => state.setBookclubName);
+const bookclubName = useStore(state => state.bookclubName);
+
 
   // sources of truth
   const [allBooks, setAllBooks] = useState([]);
   const [bookclubs, setBookclubs] = useState([]);
   const [bookshelves, setBookshelves] = useState([]);
+
 
   // filtered by search
   const [renderedBooks, setRenderedBooks] = useState([]);
@@ -34,6 +41,10 @@ export default function MyBooks() {
     event.preventDefault();
     setCurrentView(event.target.innerText);
   };
+
+  const handleClubClick = (currentClub) => {
+    setBookclubName(currentClub);
+  }
 
   // NOTE: get bookshelves by userId is working
   const getBookshelves = (uid) => {
@@ -57,11 +68,14 @@ export default function MyBooks() {
       .get(`${expressUrl}/myBookclubs`, { params: { userId: uid } })
       .then(({ data }) => {
         // console.log('bookclubs', data);
+        setBookclubDetails(data.results)
+
         const temp = [];
         for (let i = 0; i < data.results.length; i += 1) {
           temp.push(data.results[i].bookclubInfo.bookclubName);
         }
         setBookclubs(temp);
+
       })
       .catch((err) => {
         console.log(err);
@@ -75,13 +89,13 @@ export default function MyBooks() {
       .get(`${expressUrl}/books`, { params: { userId: uid } })
       .then(({ data }) => {
         // console.log('books', data);
-        // const container = [];
-        // for(let i = 0; i < data.results.length; i += 1) {
-        //   const temp = {};
-        //   temp.bookshelf = data.results[i].bookshelf;
-        //   temp.img = data.results[i].imageLinks.smallThumbnail;
-        //   container.push(temp);
-        // }
+        const container = [];
+        for(let i = 0; i < data.results.length; i += 1) {
+          const temp = {};
+          temp.bookshelf = data.results[i].bookshelf;
+          temp.img = data.results[i].imageLinks.smallThumbnail;
+          container.push(temp);
+        }
         setAllBooks(data.results);
       })
       .catch((err) => {
@@ -103,7 +117,10 @@ export default function MyBooks() {
       const queryRE = new RegExp(searchQuery, 'i');
       const hasQuery = ({ title, description }) => queryRE.test(title) || queryRE.test(description);
 
-      return allBooks.filter((book) => hasQuery(book));
+      const booksToRender = allBooks.filter((book) => hasQuery(book));
+
+      console.log({searchQuery, booksToRender})
+      return booksToRender;
     });
   }, [allBooks]);
 
@@ -182,7 +199,7 @@ export default function MyBooks() {
                 </Link>
                 {bookclubs.map((club) => (
                   <div key={club}>
-                    <Link to="/bookclubdetail" style={{ textDecoration: 'none', color: 'black' }}>
+                    <Link onClick={() => handleClubClick(club)} to="/bookclubdetail" style={{ textDecoration: 'none', color: 'black' }}>
                       {club}
                     </Link>
                   </div>
