@@ -54,7 +54,6 @@ module.exports = {
 
   addBook(req, callback) {
     let {isbn, userId, title, authors, publisher, publishedDate, description, pageCount, categories, imageLinks, language} = req.body;
-    console.log(isbn, userId, title, authors, publisher, publishedDate, description, pageCount, categories, imageLinks, language);
     isbn = parseInt(isbn, 10);
     pageCount = parseInt(pageCount, 10);
     addDoc(collection(db, 'PersonalBookLibrary'), {
@@ -71,11 +70,27 @@ module.exports = {
       language,
       readingStatus: "toread",
       rating: 0,
-      bookshelf: "none",
+      bookshelf: "Dream Bookshelf",
       review: "",
       review_date: "",
       startReadDate: "",
       endReadDate: ""
+    })
+    .then(()=>{
+      const getbookshelfq = query(collection(db, 'bookshelves'), where("userId", "==", `${userId}`), where("bookshelf", "==", 'Dream Bookshelf'));
+      getDocs(getbookshelfq)
+      .then(snapshot => {
+        const arr = [];
+        snapshot.forEach((document) => {
+          arr.push({...document.data()});
+        })
+        if (arr.length === 0) {
+          addDoc(collection(db, 'bookshelves'), {
+            userId,
+            bookshelf: 'Dream Bookshelf'
+          })
+        }
+      })
     })
     .then(()=>{
       callback(null, 'created')
@@ -88,7 +103,22 @@ module.exports = {
     isbn = parseInt(isbn, 10);
     rating = parseInt(rating, 10);
     const q = query(collection(db, 'PersonalBookLibrary'), where("userId", "==", `${userId}`), where("isbn", "==", isbn));
-    getDocs(q)
+    const getbookshelfq = query(collection(db, 'bookshelves'), where("userId", "==", `${userId}`), where("bookshelf", "==", `${bookshelf}`));
+    getDocs(getbookshelfq)
+    .then(snapshot => {
+      const arr = [];
+      snapshot.forEach((document) => {
+        arr.push({...document.data()});
+      })
+      if (arr.length === 0) {
+        addDoc(collection(db, 'bookshelves'), {
+          userId,
+          bookshelf
+        })
+      }
+    })
+    .then(()=>{
+      getDocs(q)
       .then(snapshot => {
         const id = [];
         snapshot.forEach((document) => {
@@ -103,6 +133,7 @@ module.exports = {
             callback(null, 'created');
           })
       })
-      .catch(err => console.log('Error in update rating: ', err))
+    })
+    .catch(err => console.log('Error in update rating: ', err))
   },
 };

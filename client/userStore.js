@@ -9,7 +9,13 @@ const useStore = create((set) => ({
 
   updateState: (state) => set(() => ({ ...state })),
 
-  expressUrl: 'http://localhost:3030'
+  expressUrl: 'http://localhost:3030',
+
+  searchQuery: '',
+  setSearchQuery: (query) => set(() => ({ searchQuery: query })),
+
+  bookDetails: '',
+  setBookDetails: (details) => set(() => ({ bookDetails: details})),
 }));
 
 export default useStore;

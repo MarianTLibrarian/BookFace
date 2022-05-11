@@ -31,8 +31,13 @@ h1 {
 }
 
 :root {
+  --light-gray: #eeeeee;
   --beige: #ddc9b4;
-  --wood:#B9946A
+  --wood:#B9946A;
+  --dark-beige: #e8c1a0;
+  --sunset: #f47560;
+  --cyan: #61cdbb;
+  --light-cyan: #97e3d5;
 }
 
 
@@ -238,6 +243,10 @@ button:hover {
 
 .col-right p:nth-child(2){
   opacity: 0.5;
+}
+
+.menu button{
+  margin:0;
 }
 
 /***********************     Footer     ***********************/

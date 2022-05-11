@@ -3,19 +3,18 @@ import '../styles/Home.css';
 import SearchBar from '../../../components/SearchBar';
 import Trends from './Trends';
 import BookClubs from './BookClubs';
-import PopularBooks from '../../../fakeData/books/popularBooks'
-import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs'
+import PopularBooks from '../../../fakeData/books/popularBooks';
+import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
 
 export default function Home() {
-
-  const [trends, setTrends] = useState([])
-  const [bookClubs, setBookClubs] = useState([])
+  const [trends, setTrends] = useState([]);
+  const [bookClubs, setBookClubs] = useState([]);
 
   useEffect(() => {
     setTrends(PopularBooks.lists[0].books);
-    const featuredClubs = PopularBookclubs.results.slice(0, 8)
-    setBookClubs(featuredClubs)
-  }, [])
+    const featuredClubs = PopularBookclubs.results.slice(0, 8);
+    setBookClubs(featuredClubs);
+  }, []);
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -27,7 +26,11 @@ export default function Home() {
         <div className="header" style={style}>
           <div className="filter" />
           <div className="main-content">
-            <SearchBar />
+            <div className="home-search-bar">
+              <div />
+              <SearchBar />
+              <div />
+            </div>
           </div>
         </div>
       </div>
@@ -46,7 +49,7 @@ export default function Home() {
         <p>Simple is Better.</p>
         <div className="trends-list">
           {trends.map((book) => (
-            <Trends book={book} key={book} />
+            <Trends book={book} key={Math.random()} />
           ))}
         </div>
       </div>
@@ -60,7 +63,9 @@ export default function Home() {
         </div>
         <div className="right">
           <div className="clubs-list">
-            {bookClubs.map((club) => <BookClubs club={club} key={club} />)}
+            {bookClubs.map((club) => (
+              <BookClubs club={club} key={Math.random()} />
+            ))}
             <div className="clear" />
           </div>
         </div>
@@ -68,14 +73,13 @@ export default function Home() {
 
       <div className="surprise">
         <h1>SURPRISE ME!</h1>
-        <div className='card'>
-          <div className='imgBox'>
-            <div className='bark' />
-            <img src='../assets/logo.png' alt="BookFace Logo"/>
+        <div className="card">
+          <div className="imgBox">
+            <div className="bark" />
+            <img src="../assets/logo.png" alt="BookFace Logo" />
           </div>
-          <div className='details'>
-            <h4 className='color1'>READ KATY&apos;S NOTION OR GO BACK TO SCHOOL!!!</h4>
-
+          <div className="details">
+            <h4 className="color1">READ KATY&apos;S NOTION OR GO BACK TO SCHOOL!!!</h4>
           </div>
         </div>
       </div>
