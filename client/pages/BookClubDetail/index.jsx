@@ -24,11 +24,9 @@ export default function BookClubDetail() {
   const [posts, setPosts] = useState([])
 
 
-  // const [clubNameList, setClubNames] = useState(null);
-
   const currentClub = bookclubDetails.filter(club => club.bookclubInfo.bookclubName === clubName);
 
-  // console.log("currentClub", currentClub)
+
 
   const getEvents = () => {
     axios.get('http://localhost:3030/events', { params: { bookclubName: currentClub[0].bookclubInfo.bookclubName } })
@@ -94,7 +92,7 @@ export default function BookClubDetail() {
     if (!chat) {
       return <div>
         <div className='write-post'>
-          <textarea placeHolder='Leave A Comment...' onChange={(e) => setPostBody(e.target.value)} />
+          <textarea placeHolder='Leave A Comment...' onChange={(e) => setPostBody(e.target.value)} value={postBody} />
           <div className='submit'>
             <div className='submit-btn'>
               <SendIcon onClick={addPost} />

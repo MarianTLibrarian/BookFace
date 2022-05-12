@@ -10,7 +10,7 @@ export default function Posts({ post }) {
           Message by <span>{post.userId}</span>
         </div>
         <div className='post-date'>
-        {moment(post.postDate).format('MMMM Do YYYY') }
+        {moment(post.postDate).format('LLLL') }
         </div>
       </div>
       <div className='post-body'>

@@ -11,13 +11,9 @@ export default function BookClubs({ club }) {
   const setBookclubName = useStore(state => state.setBookclubName);
 
 
-
-  // const setBookclubName = useStore(state => state.setBookclubName);
-  // const clubName = useStore(state => state.clubName);
-
   return (
-    <div className="club-container" onClick={(e)=>{setBookclubName(bookclubName)}
-      }>
+    <div className="club-container" onClick={(e) => { setBookclubName(bookclubName) }
+    }>
       <div className="club">
         <div className="col-left">
           <img src={imageUrl} alt="clubCover" />

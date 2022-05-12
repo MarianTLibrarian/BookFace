@@ -26,14 +26,10 @@ export default function BookClubs() {
   const [imgWidth, setImgWidth] = useState(0);
   const ref = useRef(null);
 
-  // const setUsersBookclubs = useStore(state => state.setUsersBookclubs);
-  // const usersBookclubs = useStore(state => state.usersBookclubs);
-
 
   const getUsersBookclub = (Id) => {
     axios.get('http://localhost:3030/myBookclubs', { params: { userId: Id } })
       .then(({ data }) => {
-        console.log("getUsersBookclubFrom bc page", data.results);
         setMyBookClubs(data.results);
         setBookclubDetails(data.results)
       })
@@ -64,12 +60,13 @@ export default function BookClubs() {
   useEffect(() => {
 
     setBookClub(bookclubDetails[0].bookclubInfo);
-    console.log("bookclubDetails[0].bookclubInfo", bookclubDetails[0].bookclubInfo)
     setAllClubs(popularBookclubs);
 
     if(user) {
       getUsersBookclub(user.uid);
-      // console.log(myBookClubs)
+
+
+      
     }
   }, [user]);
 

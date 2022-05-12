@@ -35,7 +35,7 @@ export default function Home() {
 
         setBookclubDetails(data);
         setPopularBookclubs(data);
-        console.log("setBookclubDetails", data)
+
         const featuredClubs = data.slice(0, 8);
         setBookClubs(featuredClubs);
       })
@@ -52,7 +52,7 @@ export default function Home() {
           for (let i = 0; i < data.results.length; i += 1) {
             temp.push(data.results[i].bookclubInfo.bookclubName);
           }
-          console.log('setUsersBookclubs!!!!!!', temp);
+      
           setUsersBookclubs(temp)
 
         })
