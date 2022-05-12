@@ -17,13 +17,13 @@ import useStore from '../../userStore';
 
 export default function BookClubDetail() {
   const [myClub, setMyClub] = useState(null);
-  const { user, setUser, setToken, bookclubDetails, usersBookclubs } = useStore();
+  const {user, setUser, setToken, bookclubDetails, usersBookclubs } = useStore();
   const [events, setEvents] = useState(null)
   const [chat, setChat] = useState(false)
   const [clubName, setClubNames] = useState(null);
 
 
-  const getMessages = () => {
+  const getEvents = () => {
     axios.get('http://localhost:3030/events', { params: { bookclubName: bookclubDetails.bookclubName } })
       .then(({ data }) => {
         setEvents(data)
@@ -31,16 +31,28 @@ export default function BookClubDetail() {
       .catch(err => {
         console.error(err);
       })
-    setMyClub(bookclubDetails)
-
+      setEvents(events)
   }
 
-  const getBookclubs = (uid) => {
+
+  // const getEvents = () => {
+  //   axios.get('http://localhost:3030/events', { params: { bookclubName: bookclubDetails.bookclubName } })
+  //     .then(({ data }) => {
+  //       setEvents(data)
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     })
+  //     setEvents(events)
+  // }
+
+
+  const getBookclubs = (id) => {
     axios
-      .get('http://localhost:3030//myBookclubs', { params: { userId: 'qwew' } })
+      .get('http://localhost:3030//myBookclubs', { params: { userId: id }})
       .then(({ data }) => {
         // console.log('bookclubs', data);
-        setClubNames(data.results)
+        setClubNames(data.results);
 
         const temp = [];
         for (let i = 0; i < data.results.length; i += 1) {
@@ -56,9 +68,8 @@ export default function BookClubDetail() {
 
 
   useEffect(() => {
-    getMessages()
-    getBookclubs()
-
+    getEvents();
+    getBookclubs('qwew')
   }, [])
 
 
@@ -71,6 +82,7 @@ export default function BookClubDetail() {
       setToken(token);
     })
     .catch(console.error)
+
 
   const liveChat = () => {
     setChat(!chat)
