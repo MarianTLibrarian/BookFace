@@ -4,6 +4,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import ForumIcon from '@mui/icons-material/Forum';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
+import LiveChat from './LiveChat'
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
@@ -51,7 +52,7 @@ export default function BookClubDetail() {
       </div>
     }
     return <div className='chat-box'>
-      @@
+      <LiveChat />
     </div>
   }
 
