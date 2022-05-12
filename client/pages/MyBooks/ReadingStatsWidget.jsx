@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Stats.css';
+import useStore from '../../userStore';
 
 const INITIAL_OFFSET = 25;
 const circleConfig = {
@@ -11,6 +12,7 @@ const circleConfig = {
 };
 
 export default function ReadingStatsWidget () {
+  const { user } = useStore();
   const [progressBar, setProgressBar] = useState(0);
   const [allBooksCount, setAllBooksCount] = useState(0);
   const [totalRead, setTotalRead] = useState([]);
@@ -45,7 +47,7 @@ export default function ReadingStatsWidget () {
   };
 
   useEffect(() => {
-    getTotal(1);
+    getTotal(JSON.parse(user).uid);
   }, []);
 
   useEffect(() => {
