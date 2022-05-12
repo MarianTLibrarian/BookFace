@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SearchBar from '../../../components/SearchBar';
+import useStore from '../../userStore';
+
+import '../styles/Search.css';
 
 export default function Search() {
+  const searchQuery = useStore((state) => state.searchQuery);
+  const searchHistory = useStore((state) => state.searchHistory);
+  const setSearchHistory = useStore((state) => state.setSearchHistory);
+  const expressUrl = useStore((state) => state.expressUrl);
+
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
+  };
+
+  const searchBooks = async () => {
+    const res = await fetch(`${expressUrl}/search?q=${searchQuery}`);
+    const { volumeInfo } = await res.json();
+
+    return volumeInfo
   };
 
   return (
@@ -13,7 +28,11 @@ export default function Search() {
         <div className="header" style={style}>
           <div className="filter" />
           <div className="main-content">
-            <SearchBar />
+            <div className="search-search-bar">
+              <div />
+              <SearchBar />
+              <div />
+            </div>
           </div>
         </div>
       </div>
@@ -48,7 +67,6 @@ export default function Search() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
