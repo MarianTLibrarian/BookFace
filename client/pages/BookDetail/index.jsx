@@ -140,7 +140,7 @@ export default function BookDetail() {
 
   const getBookshelves = (uid) => {
     axios
-      .get(`${expressUrl}/bookshelves`, { params: { userId: JSON.parse(user).uid } })
+      .get(`${expressUrl}/bookshelves`, { params: { userId: "1" } })
       .then(({ data }) => {
         // console.log(data);
         setBookshelves(data.results);

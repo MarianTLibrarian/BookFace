@@ -6,7 +6,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import ForumIcon from '@mui/icons-material/Forum';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
-import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
+// import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
 import LiveChat from './LiveChat'
 import Calendar from './Calendar';
 import '../styles/BookClubDetails.css';
@@ -16,22 +16,50 @@ import useStore from '../../userStore';
 
 
 export default function BookClubDetail() {
-  const [myClub, setMyClub] = useState(PopularBookclubs.results);
-  const { user, setUser, setToken } = useStore();
+  const [myClub, setMyClub] = useState(null);
+  const { user, setUser, setToken, bookclubDetails, usersBookclubs } = useStore();
   const [events, setEvents] = useState(null)
+  const [chat, setChat] = useState(false)
+  const [clubName, setClubNames] = useState(null);
 
-  useEffect(() => {
-    axios.get('http://localhost:3030/events', { params: { bookclubName: "Read With Haley (Official)" } })
+
+  const getMessages = () => {
+    axios.get('http://localhost:3030/events', { params: { bookclubName: bookclubDetails.bookclubName } })
       .then(({ data }) => {
         setEvents(data)
       })
       .catch(err => {
         console.error(err);
       })
+    setMyClub(bookclubDetails)
+
+  }
+
+  const getBookclubs = (uid) => {
+    axios
+      .get('http://localhost:3030//myBookclubs', { params: { userId: 'qwew' } })
+      .then(({ data }) => {
+        // console.log('bookclubs', data);
+        setClubNames(data.results)
+
+        const temp = [];
+        for (let i = 0; i < data.results.length; i += 1) {
+          temp.push(data.results[i].bookclubInfo.bookclubName);
+        }
+        setClubNames(temp);
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+  useEffect(() => {
+    getMessages()
+    getBookclubs()
 
   }, [])
-  const [chat, setChat] = useState(false)
-
 
 
   const handleUserLogin = () => signInWithGoogle()
@@ -48,7 +76,7 @@ export default function BookClubDetail() {
     setChat(!chat)
   }
   const style = {
-    background: `url('${myClub[0].bookclubInfo.imageUrl}') no-repeat center center fixed`
+    background: `url('${bookclubDetails.bookclubInfo.imageUrl}') no-repeat center center fixed`
   }
 
   const renderChat = () => {
@@ -63,7 +91,7 @@ export default function BookClubDetail() {
           </div>
         </div>
         <div className='club-posts'>
-          {myClub[0].posts.map(post =>
+          {bookclubDetails.posts.map(post =>
             <Posts post={post} key={post} />
           )}
         </div>
@@ -86,9 +114,9 @@ export default function BookClubDetail() {
           <div className='content-left'>
             <div className='my-clubs'>
               <h2>My Book Clubs</h2>
-              {myClub.map(club =>
+              {/* {clubName.map(club =>
                 <MyBookClubs club={club} key={club} />
-              )}
+              )} */}
             </div>
 
             <div className='upcoming-events'>
@@ -96,8 +124,8 @@ export default function BookClubDetail() {
 
               {
                 events ?
-                  events.map((event, index) =>
-                      // <Event event={event} index={index}/>
+                  events.map((event) =>
+
                       <div key={Math.random()}>
                         <p>
                           <span style={{fontWeight:'bold'}}>Topic: </span>
@@ -156,7 +184,7 @@ export default function BookClubDetail() {
           <div className='filter' />
           <div className='main-content'>
             <div>
-              <h1>{myClub[0].bookclubInfo.bookclubName}</h1>
+              <h1>{bookclubDetails.bookclubInfo.bookclubName}</h1>
               {user ? null : <div className='main-content-btn'>
                 <button type='button' onClick={handleUserLogin}>LOG IN</button>
               </div>}
@@ -168,7 +196,7 @@ export default function BookClubDetail() {
       <div className="description">
         <div className="text">
           <p>
-            {myClub[0].bookclubInfo.description}
+            {bookclubDetails.bookclubInfo.description}
           </p>
         </div>
       </div>
@@ -181,7 +209,3 @@ export default function BookClubDetail() {
   );
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main

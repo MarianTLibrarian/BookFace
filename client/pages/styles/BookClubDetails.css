@@ -373,7 +373,7 @@ align-items: center;
 
 .chat-window .chat-footer button {
   border: 0;
-  display: grid;
+  display: flex;
   place-items: center;
   cursor: pointer;
   flex: 15%;
@@ -383,6 +383,8 @@ align-items: center;
   font-size: 25px;
   color: lightgray;
 }
+
+
 
 .chat-window .chat-footer button:hover {
   color: #43a047;

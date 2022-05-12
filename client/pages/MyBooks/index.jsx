@@ -18,8 +18,10 @@ export default function MyBooks() {
   const bookclubDetails = useStore(state => state.bookclubDetails);
   const { user, setUser, setToken, expressUrl, searchQuery } = useStore();
 
-const setBookclubName = useStore(state => state.setBookclubName);
-const bookclubName = useStore(state => state.bookclubName);
+  const setBookclubName = useStore(state => state.setBookclubName);
+  const clubName = useStore(state => state.clubName);
+  const setUsersBookclubs = useStore(state => state.setUsersBookclubs);
+  const usersBookclubs = useStore(state => state.usersBookclubs);
 
 
   // sources of truth
@@ -75,6 +77,7 @@ const bookclubName = useStore(state => state.bookclubName);
           temp.push(data.results[i].bookclubInfo.bookclubName);
         }
         setBookclubs(temp);
+        setUsersBookclubs(temp)
 
       })
       .catch((err) => {

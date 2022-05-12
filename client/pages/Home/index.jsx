@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Home.css';
 import SearchBar from '../../../components/SearchBar';
@@ -8,14 +9,7 @@ import useStore from '../../userStore';
 
 export default function Home() {
 
-
-  const setBookclubDetails = useStore(state => state.setBookclubDetails);
-  const bookclubDetails = useStore(state => state.bookclubDetails);
-
-
-  const setBookclubName = useStore(state => state.setBookclubName);
-  const bookclubName = useStore(state => state.bookclubName);
-
+  const { bookclubDetails, bookDetails} = useStore();
 
   const [fiction, setFictionTrends] = useState([]);
   const [nonFiction, setNonfictionTrends] = useState([]);
@@ -84,13 +78,13 @@ export default function Home() {
         <h2 style={{ textAlign: 'left' }}>Fiction: </h2>
         <div className="trends-list">
           {fiction.map((book) => (
-            <Trends book={book} key={book} />
+                 <Trends book={book} key={book} />
           ))}
         </div>
         <h2 style={{ textAlign: 'left' }}>Non-Fiction: </h2>
         <div className="trends-list">
           {nonFiction.map((book) => (
-            <Trends book={book} key={book} />
+             <Trends book={book} key={book} />
           ))}
         </div>
       </div>
@@ -105,8 +99,8 @@ export default function Home() {
         <div className="right">
           <div className="clubs-list">
             {bookClubs.map((club) => (
-              <Link to='/bookclubdetail'>
-                <BookClubs club={club} key={Math.random()} />
+              <Link to='/bookclubdetail' >
+                <BookClubs club={club} key={Math.random()}/>
               </Link>
             ))}
             <div className="clear" />

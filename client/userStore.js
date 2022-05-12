@@ -17,8 +17,11 @@ const useStore = create((set) => ({
   bookDetails: null,
   setBookDetails: (details) => set(() => ({ bookDetails: details})),
 
-  bookclubName: null,
-  setBookclubName: (name) => set(() => ({ bookclubName: name})),
+  clubName: null,
+  setBookclubName: (name) => set(() => ({ clubName: name})),
+
+  usersBookclubs: null,
+  setUsersBookclubs: (details) => set(() => ({ clubs: details})),
 
   bookclubDetails: null,
   setBookclubDetails: (details) => set(() => ({ bookclubDetails : details}))
