@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import SearchBar from '../../../components/SearchBar';
 import useStore from '../../userStore';
@@ -10,6 +11,7 @@ export default function Search() {
   const searchHistory = useStore((state) => state.searchHistory);
   const setSearchHistory = useStore((state) => state.setSearchHistory);
   const expressUrl = useStore((state) => state.expressUrl);
+  const user = useStore((state) => state.user);
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -19,7 +21,47 @@ export default function Search() {
     const res = await fetch(`${expressUrl}/search?q=${searchQuery}`);
     const { volumeInfo } = await res.json();
 
-    return volumeInfo
+    // TODO: setSearchHistory
+
+    return volumeInfo;
+  };
+
+  const searchMyBooks = async () => {
+    const { uid } = user;
+    const res = await fetch(`${expressUrl}/books?userId=${uid}`);
+    const { results } = await res.json();
+
+    // TODO: setSearchHistory
+
+    return results;
+  };
+
+  const searchPopularBooks = async () => {
+    const res = await fetch(`${expressUrl}/popularBooks`);
+    const { books } = await res.json();
+
+    // TODO: setSearchHistory
+
+    return books;
+  }
+
+  const searchClubs = async () => {
+    const res = await fetch(`${expressUrl}/bookclubs`);
+    const clubs = await res.json();
+
+    // TODO: setSearchHistory
+
+    return clubs;
+  }
+
+  const searchMyClubs = async () => {
+    const { uid } = user;
+    const res = await fetch(`${expressUrl}/myBookclubs?userId=${uid}`);
+    const clubs = await res.json();
+
+    // TODO: setSearchHistory
+
+    return clubs;
   };
 
   return (
