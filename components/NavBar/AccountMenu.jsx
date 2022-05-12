@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -28,7 +29,6 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-
   const handleSignOut = () => {
     if (user) {
       return userSignOut().then(() => {
@@ -37,7 +37,6 @@ export default function AccountMenu() {
       });
     }
   };
-
 
   return (
     <a>
@@ -95,6 +94,13 @@ export default function AccountMenu() {
         <MenuItem>
           <Avatar /> My account
         </MenuItem>
+        <MenuItem>
+          <Avatar />
+          <Link to="/stats" style={{ 'text-decoration': 'none', color: 'black' }}>
+            {' '}
+            My Reading Stats{' '}
+          </Link>
+        </MenuItem>
         <Divider />
         <MenuItem>
           <ListItemIcon>
@@ -109,7 +115,7 @@ export default function AccountMenu() {
           Settings
         </MenuItem>
         <MenuItem onClick={handleSignOut}>
-          <ListItemIcon >
+          <ListItemIcon>
             <Logout fontSize="small" onClick={handleSignOut} />
           </ListItemIcon>
           Logout
