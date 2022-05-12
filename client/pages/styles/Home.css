@@ -41,18 +41,30 @@
 
 /***********************     Home     ***********************/
 
-.search {
-  padding: 40px 0;
+.home-search-bar {
+  display: grid;
+  width: 100%;
+
+  grid-template-columns: 1fr 2fr 1fr;
+
+  margin-bottom: 1rem;
 }
 
-.search input {
-  width: 700px;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
+.home-search-bar input {
+  /* width: 240px; */
+  padding: 10px;
+  text-align: left;
+  border-radius: 0;
+  font-size: inherit;
+  font-weight: inherit;
 }
+
+.home-search-bar .search {
+  text-align: right;
+  padding: 0;
+  padding-bottom: 20px;
+}
+
 
 .trends {
   padding: 80px 40px;

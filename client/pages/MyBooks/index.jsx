@@ -1,99 +1,164 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import SideBar from './sidebar';
 import Carousel from './carousel';
 import ReadingStatsWidget from './ReadingStatsWidget';
+import SearchBar from '../../../components/SearchBar';
 import useStore from '../../userStore';
 import '../styles/MyBooks.css';
 import '../styles/BookClubDetails.css';
 
-export default function MyBooks() {
+const filterOptions = { books: 'Books', myBooks: 'My Books' };
 
-  const { user, setUser, setToken } = useStore();
+export default function MyBooks() {
+  // calculate the % of books read
+  const percentageRead = 72;
+
+  const setBookclubDetails = useStore(state => state.setBookclubDetails);
+  const bookclubDetails = useStore(state => state.bookclubDetails);
+  const { user, setUser, setToken, expressUrl, searchQuery } = useStore();
+
+const setBookclubName = useStore(state => state.setBookclubName);
+const bookclubName = useStore(state => state.bookclubName);
+
+
+  // sources of truth
   const [allBooks, setAllBooks] = useState([]);
   const [bookclubs, setBookclubs] = useState([]);
   const [bookshelves, setBookshelves] = useState([]);
+
+
+  // filtered by search
+  const [renderedBooks, setRenderedBooks] = useState([]);
+  // TODO: these get rendered out to the page
+  const [renderedClubs, setRenderedClubs] = useState([]);
+  const [renderedShelves, setRenderedShelves] = useState([]);
   const [currentView, setCurrentView] = useState('All');
 
+
+
   const handleClick = (event) => {
+    event.preventDefault();
     setCurrentView(event.target.innerText);
+  };
+
+  const handleClubClick = (currentClub) => {
+    setBookclubName(currentClub);
   }
 
-  //NOTE: get bookshelves by userId is working
+  // NOTE: get bookshelves by userId is working
   const getBookshelves = (uid) => {
-    axios.get('http://localhost:3030/bookshelves', { params: {userId: 1}})
-      .then(({data}) => {
+    axios
+      .get(`${expressUrl}/bookshelves`, { params: { userId: uid } })
+      .then(({ data }) => {
         const temp = [];
-        for(let i = 0; i < data.results.length; i += 1) {
+        for (let i = 0; i < data.results.length; i += 1) {
           temp.push(data.results[i].title);
         }
         setBookshelves(temp);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
-      })
-  }
+      });
+  };
 
-  //NOTE: get bookclubs by userId is working
+  // NOTE: get bookclubs by userId is working
   const getBookclubs = (uid) => {
-    axios.get('http://localhost:3030/myBookclubs', { params: {userId: "qwew"}})
-    .then(({data}) => {
-      // console.log('bookclubs', data);
-      const temp = [];
-      for(let i = 0; i < data.results.length; i += 1) {
-        temp.push(data.results[i].bookclubInfo.bookclubName);
-      }
-      setBookclubs(temp);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }
+    axios
+      .get(`${expressUrl}/myBookclubs`, { params: { userId: uid } })
+      .then(({ data }) => {
+        // console.log('bookclubs', data);
+        setBookclubDetails(data.results)
 
-  //NOTE: get books by userId is working
-  //Default data for the book gallery
+        const temp = [];
+        for (let i = 0; i < data.results.length; i += 1) {
+          temp.push(data.results[i].bookclubInfo.bookclubName);
+        }
+        setBookclubs(temp);
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // NOTE: get books by userId is working
+  // Default data for the book gallery
   const getBooks = (uid) => {
-  axios.get('http://localhost:3030/books', { params: {userId: 1}})
-    .then(({data}) => {
-      // console.log('books', data);
-      // const container = [];
-      // for(let i = 0; i < data.results.length; i += 1) {
-      //   const temp = {};
-      //   temp.bookshelf = data.results[i].bookshelf;
-      //   temp.img = data.results[i].imageLinks.smallThumbnail;
-      //   container.push(temp);
-      // }
-      setAllBooks(data.results);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }
-
-
+    axios
+      .get(`${expressUrl}/books`, { params: { userId: uid } })
+      .then(({ data }) => {
+        // console.log('books', data);
+        const container = [];
+        for(let i = 0; i < data.results.length; i += 1) {
+          const temp = {};
+          temp.bookshelf = data.results[i].bookshelf;
+          temp.img = data.results[i].imageLinks.smallThumbnail;
+          container.push(temp);
+        }
+        setAllBooks(data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
-    getBookshelves();
-    getBooks();
-    getBookclubs();
-  },[])
+    // FIXME: these are placeholder arguments
+    getBookshelves(1);
+    getBooks(1);
+    getBookclubs('qwew');
+  }, []);
+
+  useEffect(() => {
+    setRenderedBooks(() => {
+      if (!searchQuery) return allBooks;
+
+      const queryRE = new RegExp(searchQuery, 'i');
+      const hasQuery = ({ title, description }) => queryRE.test(title) || queryRE.test(description);
+
+      const booksToRender = allBooks.filter((book) => hasQuery(book));
+
+      console.log({searchQuery, booksToRender})
+      return booksToRender;
+    });
+  }, [allBooks]);
+
+  useEffect(() => {
+    setRenderedClubs(() => {
+      if (!searchQuery) return bookclubs;
+
+      const queryRE = new RegExp(searchQuery, 'i');
+      const hasQuery = (clubName) => queryRE.test(clubName);
+
+      return bookclubs.filter((club) => hasQuery(club));
+    });
+  }, [bookclubs]);
+
+  useEffect(() => {
+    setRenderedShelves(() => {
+      if (!searchQuery) return bookshelves;
+
+      const queryRE = new RegExp(searchQuery, 'i');
+      const hasQuery = (shelfName) => queryRE.test(shelfName);
+
+      return bookshelves.filter((shelf) => hasQuery(shelf));
+    });
+  }, [bookshelves]);
 
   const style = {
-    background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
+    background: 'url(../assets/header-bg.jpg) no-repeat center fixed',
   };
 
   return (
     <div>
       <div className="header-container">
         <div className="header" style={style}>
-          <div className="filter"></div>
+          <div className="filter" />
           <div className="main-content">
             <div>
               <div className="mybooks">
-                <h1>
-                  My Books
-                </h1>
+                <h1>My Books</h1>
               </div>
             </div>
           </div>
@@ -101,46 +166,44 @@ export default function MyBooks() {
       </div>
       <div className="description">
         <div className="banner">
-          <p>Description</p>
+          <p>View and Manage Bookshelves, Book Clubs, and Reading Goals</p>
         </div>
       </div>
-      <div className='page-content'>
-        <div style={{ 'width': '100%' }}>
-          <div className='search-bar'>
-            <div className='search'>
-              <input />
+      <div className="page-content">
+        <div style={{ width: '100%' }}>
+          <div className="books-search-bar">
+            <div className="the-first-two-thirds" />
+            <div className="books-search">
+              <SearchBar filterOptions={filterOptions} />
             </div>
           </div>
 
-          <div className='content-container'>
-            <div className='content-left'>
-              <div className='my-bookshelves'>
+          <div className="content-container">
+            <div className="content-left">
+              <div className="my-bookshelves">
                 <h2>My Bookshelves</h2>
-                  <p value={'All'} onClick={handleClick}>All</p>
-                  {bookshelves.map(shelf => (
-                    <p
-                      key={Math.random()}
-                      value={shelf}
-                      onClick={handleClick}
-                    >
-                      {shelf}
-                    </p>
-                  ))}
+                <p value={'All'} onClick={handleClick}>
+                  All
+                </p>
+                {bookshelves.map((shelf) => (
+                  <p key={Math.random()} value={shelf} onClick={handleClick}>
+                    {shelf}
+                  </p>
+                ))}
               </div>
 
-              <div className='my-book-clubs'>
-
+              <div className="my-book-clubs">
                 <h2>My Book Clubs</h2>
-                  <Link to ='/bookclubs'style={{'text-decoration': 'none', 'color': 'black'}}>
-                    <p>All Clubs</p>
-                  </Link>
-                  {bookclubs.map(club => (
-                    <div key={club}>
-                      <Link to='/bookclubdetail' style={{'text-decoration': 'none', 'color': 'black'}}>
-                        {club}
-                      </Link>
-                    </div>
-                  ))}
+                <Link to="/bookclubs" style={{ textDecoration: 'none', color: 'black' }}>
+                  <p>All Clubs</p>
+                </Link>
+                {bookclubs.map((club) => (
+                  <div key={club}>
+                    <Link onClick={() => handleClubClick(club)} to="/bookclubdetail" style={{ textDecoration: 'none', color: 'black' }}>
+                      {club}
+                    </Link>
+                  </div>
+                ))}
               </div>
 
               <div className='reading-goal'>
@@ -161,21 +224,17 @@ export default function MyBooks() {
                   <ReadingStatsWidget />
                 </div>
               </div>
-
             </div>
 
             {/* NOTE: Bookshelves get rendered here */}
-            <div className='content-right'>
-              <Carousel
-                selectedBookshelf={currentView}
-                allBooks={allBooks}
-              />
+            <div className="contentRight">
+              <Carousel selectedBookshelf={currentView} allBooks={renderedBooks} />
             </div>
+
 
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-
