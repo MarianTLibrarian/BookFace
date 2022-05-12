@@ -50,7 +50,11 @@ export default function Home() {
         <div className="header" style={style}>
           <div className="filter" />
           <div className="main-content">
-            <SearchBar />
+            <div className="home-search-bar">
+              <div />
+              <SearchBar />
+              <div />
+            </div>
           </div>
         </div>
       </div>
@@ -90,7 +94,9 @@ export default function Home() {
         </div>
         <div className="right">
           <div className="clubs-list">
-            {bookClubs.map((club) => <BookClubs club={club} key={Math.random()} />)}
+            {bookClubs.map((club) => (
+              <BookClubs club={club} key={Math.random()} />
+            ))}
             <div className="clear" />
           </div>
         </div>
@@ -98,14 +104,13 @@ export default function Home() {
 
       <div className="surprise">
         <h1>SURPRISE ME!</h1>
-        <div className='card'>
-          <div className='imgBox'>
-            <div className='bark' />
-            <img src='../assets/logo.png' alt="BookFace Logo"/>
+        <div className="card">
+          <div className="imgBox">
+            <div className="bark" />
+            <img src="../assets/logo.png" alt="BookFace Logo" />
           </div>
-          <div className='details'>
-            <h4 className='color1'>READ KATY&apos;S NOTION OR GO BACK TO SCHOOL!!!</h4>
-
+          <div className="details">
+            <h4 className="color1">READ KATY&apos;S NOTION OR GO BACK TO SCHOOL!!!</h4>
           </div>
         </div>
       </div>

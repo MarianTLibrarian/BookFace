@@ -22,7 +22,7 @@
   font-weight: bold;
 }
 
-.bookdetailreadingstatus, .bookdetailbookshelf, .bookdetailstartdate, .bookdetailenddate, .bookdetailrating {
+.bookdetailreadingstatus, .bookdetailbookshelf, .bookdetailstartReaddate, .bookdetailendReaddate, .bookdetailrating {
   display: flex;
   column-gap: 15px;
   align-items: center;
