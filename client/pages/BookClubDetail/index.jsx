@@ -39,7 +39,7 @@ export default function BookClubDetail() {
 
   const getBookclubs = (uid) => {
     axios
-      .get('http://localhost:3030//myBookclubs', { params: { userId: 'qwew' } })
+      .get('http://localhost:3030/myBookclubs', { params: { userId: 'qwew' } })
       .then(({ data }) => {
         // console.log('bookclubs', data);
         setClubNames(data.results);
@@ -154,7 +154,7 @@ export default function BookClubDetail() {
             <div className="content-right">{renderChat()}</div>
           </div>
         </div>
-      );
+      )
     }
 
     return (
