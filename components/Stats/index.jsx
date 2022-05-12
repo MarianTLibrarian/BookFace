@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import useStore from '../../client/userStore';
 import '../../client/pages/styles/Stats.css';
 
 import Dropdown from './Dropdown';
@@ -12,34 +14,60 @@ export default function Stats() {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
   };
 
-  // To do: dynamically render the numbers
-  const totalBooks = 20;
-  const totalDays = 267;
+  const { user } = useStore();
+  const [allBooksCount, setAllBooksCount] = useState(0);
+  const [totalRead, setTotalRead] = useState([]);
 
+  const getTotal = (uid) => {
+    axios
+      .get('http://localhost:3030/books', { params: { userId: uid } })
+      .then(({ data }) => {
+        setAllBooksCount(data.results.length);
+        const temp = [];
+        for (let i = 0; i < data.results.length; i += 1) {
+          if (data.results[i].readingStatus === 'read') {
+            temp.push(data.results[i])
+            setTotalRead(temp)
+          }
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
-  const [progressBar, setProgressBar] = useState(0)
-  const UpdateNumbers = () => {
+  useEffect(() => {
+    getTotal(JSON.parse(user).uid);
+  }, []);
+
+  /*
+  * Count animation
+  */
+  const [progressBar, setProgressBar] = useState(0);
+  const speed='.3';
+  const count = totalRead.length;
+  const pace = count / speed;
+
+  const updatePercentage = () => {
     setTimeout(() => {
-      setProgressBar(progressBar + 1)
-    }, 5)
-  }
+      setProgressBar(progressBar + 1);
+    }, pace);
+  };
 
   useEffect(() => {
-    if (totalBooks > 0) UpdateNumbers()
-  }, [totalBooks])
+    if (count > 0) updatePercentage();
+  }, [count]);
 
   useEffect(() => {
-    if (progressBar < totalBooks) UpdateNumbers()
-  }, [progressBar])
+    if (progressBar < count) updatePercentage();
+  }, [progressBar]);
 
-
-  ///
-
+  /*
+  * Conditional rendering of stats
+  */
   const [menusView, setMenusView] = useState('BOOKS');
-  const menus = ['BOOKS', 'PAGES', 'GENRES'];
-
-  // To render selected stats
   const [currentView, setCurrentView] = useState('');
+  const menus = ['BOOKS', 'PAGES', 'GENRES'];
 
   const statsViews = () => {
     switch (currentView) {
@@ -63,7 +91,7 @@ export default function Stats() {
             <div>
               <div className="main-stats">
                 <h1>
-                  You have read <span>{totalBooks}</span> books in the past <span>{totalDays}</span> days
+                  You have read <span>{progressBar}</span> out of <span>{allBooksCount}</span> books
                 </h1>
               </div>
             </div>
