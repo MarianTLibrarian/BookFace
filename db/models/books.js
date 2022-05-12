@@ -101,7 +101,7 @@ module.exports = {
 
   updateBook(req, callback) {
     let {rating, isbn, userId, bookshelf, startReadDate, endReadDate, readingStatus} = req.body;
-    console.log(rating, isbn, userId, bookshelf, startReadDate, endReadDate, readingStatus);
+    // console.log(rating, isbn, userId, bookshelf, startReadDate, endReadDate, readingStatus);
     isbn = parseInt(isbn, 10);
     rating = parseInt(rating, 10);
     const q = query(collection(db, 'PersonalBookLibrary'), where("userId", "==", `${userId}`), where("isbn", "==", isbn));

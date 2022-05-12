@@ -9,7 +9,7 @@ import "react-calendar/dist/Calendar.css";
 import './bookdetail.css';
 
 
-export default function BookDetailModal({bookshelves,value,setBookshelf,status,setStatus, startReadDate, setStartReadDate, endReadDate, setEndReadDate, star, setStar, open, setOpen, UpdateBook}) {
+export default function BookDetailModal({bookshelves,value,setBookshelf,status,setStatus, startReadDate, setStartReadDate, endReadDate, setEndReadDate, star, setStar, open, setOpen, UpdateBook, handleSnackBarClick}) {
 
   const filter = createFilterOptions();
 
@@ -21,8 +21,12 @@ export default function BookDetailModal({bookshelves,value,setBookshelf,status,s
   const handleClose = () => setOpen(false);
 
   const handleSubmit = ()=>{
-    UpdateBook();
-    handleClose();
+    if (!value || !startReadDate || !endReadDate) {
+      console.log('NONONONO');
+    } else {
+      UpdateBook();
+      handleClose();
+    }
   }
 
 
@@ -121,11 +125,13 @@ export default function BookDetailModal({bookshelves,value,setBookshelf,status,s
         <div className='modalcancelbtn'>
           <Button variant="contained" onClick={handleClose}>Cancel</Button>
         </div>
-        <div className='modalsubmitbtn'>
-          <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+        <div className='modalsubmitbtn' onClick={handleSnackBarClick('Book Stats Updated')}>
+          <Button variant="contained" onClick={handleSubmit} >Submit</Button>
         </div>
       </Box>
     </Modal>
   )
 
 }
+
+// onMouseDown={handleSubmit}

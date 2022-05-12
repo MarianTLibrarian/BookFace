@@ -9,7 +9,7 @@ import BookIcon from '@mui/icons-material/Book';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import ReviewsIcon from '@mui/icons-material/Reviews';
-import CustomizedSnackbars from './SnackBar.jsx';
+import ConsecutiveSnackbars from './SnackBar.jsx';
 
 import { Rating } from '@mui/material';
 
@@ -51,9 +51,11 @@ export default function BookDetail() {
 
   const [inBookShelf, setInBookshelf] = useState(false);
   const [edited, setEdited] = useState(false);
-  const [SnackBarOpen, setSnackBarOpen] = React.useState(false);
 
-
+  const [snackPack, setSnackPack] = React.useState([]);
+  const handleSnackBarClick = (message) => () => {
+    setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
+  };
 
   /*------------------ HANDLER FUNCTION ---------------------- */
 
@@ -73,7 +75,6 @@ export default function BookDetail() {
 
   // addtoshelf
   const handleAddtoShelf = () => {
-    // alert('added to shelf!');
     const staticbookdetail = {
       userId: user.uid,
       isbn: isbn,
@@ -88,9 +89,6 @@ export default function BookDetail() {
     };
     axios
       .post(`${expressUrl}/books`,  staticbookdetail )
-      .then(({ data }) => {
-        console.log(data);
-      })
       .then(()=>{
         setBookshelf({'title':'Dream Bookshelf'});
         setInBookshelf(true);
@@ -98,6 +96,7 @@ export default function BookDetail() {
       .catch((err) => {
         console.error(err);
       });
+
   }
 
   const UpdateBook = ()=>{
@@ -110,10 +109,10 @@ export default function BookDetail() {
       endReadDate:moment(endReadDate).format().slice(0, 10),
       readingStatus: status
     };
+
     axios
       .put(`${expressUrl}/books/update`,  dynamicbookdetail )
-      .then(({ data }) => {
-        console.log(data);
+      .then(() => {
         setEdited(true);
       })
       .catch((err) => {
@@ -121,9 +120,8 @@ export default function BookDetail() {
       });
   };
 
-  const handleSnackBarClick = () => {
-    setSnackBarOpen(true);
-  };
+
+
 
   /*------------------RENDER DYNAMIC---------------------- */
 
@@ -132,7 +130,7 @@ export default function BookDetail() {
       return (<AddBoxIcon onClick={handleuserLogin}/>);
     }
     if (user && !inBookShelf) {
-      return (<AddBoxIcon onClick={()=>{handleAddtoShelf(); handleSnackBarClick();}} />)
+      return (<AddBoxIcon onClick={handleSnackBarClick('Added to Bookshelf')} onMouseDown={handleAddtoShelf}/>);
     }
     if (user && inBookShelf) {
       return (<ModeEditOutlineIcon onClick={handleOpen} />)
@@ -143,7 +141,7 @@ export default function BookDetail() {
     if (user && status) {
       return <BookDetailModal bookshelves={bookshelves} value={value} setBookshelf={setBookshelf} status={status}
       setStatus={setStatus} startReadDate={startReadDate} setStartReadDate={setStartReadDate} endReadDate={endReadDate}
-      setEndReadDate={setEndReadDate} star={star} setStar={setStar} open={open} setOpen={setOpen} UpdateBook={UpdateBook}/>
+      setEndReadDate={setEndReadDate} star={star} setStar={setStar} open={open} setOpen={setOpen} UpdateBook={UpdateBook} handleSnackBarClick={handleSnackBarClick}/>
     }
     return null;
   }
@@ -178,7 +176,7 @@ export default function BookDetail() {
     axios
       .get(`${expressUrl}/bookshelves`, { params: { userId: user.uid } })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         setBookshelves(data.results);
       })
       .catch((err) => {
@@ -292,7 +290,10 @@ export default function BookDetail() {
         </div>
       </div>
         {renderModal()}
-        <CustomizedSnackbars SnackBarOpen={SnackBarOpen} setSnackBarOpen={setSnackBarOpen} handleSnackBarClick={handleSnackBarClick}/>
+        <div onClick={handleSnackBarClick('Added to Bookshelf')}>Added to Bookshelf</div>
+        <div onClick={handleSnackBarClick('Book Stats Updated')}>Book Stats Updated</div>
+        <div onClick={handleSnackBarClick('Please fill out the form')}>Please fill out the form</div>
+        <ConsecutiveSnackbars handleSnackBarClick={handleSnackBarClick} snackPack={snackPack} setSnackPack={setSnackPack}/>
       </div>
     </div>
 
