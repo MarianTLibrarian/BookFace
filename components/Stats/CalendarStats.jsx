@@ -33,10 +33,11 @@ export default function CalendarStats() {
       });
   };
 
+  console.log('HERE', calendarStats)
   const calStartEndDate = calendarStats.day;
 
   useEffect(() => {
-    setResponsiveCalendar(() => import('@nivo/pie'));
+    setResponsiveCalendar(() => import('@nivo/calendar'));
     getCalendarStats(user.uid);
   }, []);
 

@@ -1,42 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import VideoChat from '../Chat/videoChat';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import SendIcon from '@mui/icons-material/Send';
+import VideoChat from '../Chat/VideoChat';
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
   const [clicked, setClicked] = useState(false);
-  // const [userToken, setUserToken] = useState();
 
-  // To do: use this state to render video chat button accordingly
-  const [connected, setConnection] = useState(false);
-
-  const postToken = () => {
-    const data = {
-      room: 'currentRoom',
-      userName: 'currentUserName',
-    };
-    axios
-      .post('/token', data)
-      .then((res) => {
-        console.log('POST RES ON CLIENT SIDE', res);
-      })
-      .catch((err) => {
-        console.log('ERR in ChatRoom:', err.message);
-      });
-  };
-
-  useEffect(() => {
-    postToken();
-  });
-
-  // Video Chat button: click to connect
-  const handleClick = (e) => {
+  const handleClick = () => {
     setClicked(!clicked);
-    // connectToRoom();
-    // setConnection(true);
-    // getToken();
-    console.log('connected');
   };
 
   const sendMessage = () => {
@@ -65,12 +38,12 @@ function Chat({ socket, username, room }) {
       <div className="chat-header">
         <p>Live Chat</p>
         <button type="submit" className="videoRoom" onClick={handleClick}>
-          Video Chat
+          <VideocamIcon />
         </button>
       </div>
       {clicked && (
         <div className="message-container">
-          <VideoChat />
+          <VideoChat username={username} roomName={room} />
         </div>
       )}
       <div className="chat-body">
@@ -94,7 +67,7 @@ function Chat({ socket, username, room }) {
         <input
           type="text"
           value={currentMessage}
-          placeholder="Hey..."
+          placeholder="Say something here..."
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
@@ -102,7 +75,9 @@ function Chat({ socket, username, room }) {
             event.key === 'Enter' && sendMessage();
           }}
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button onClick={sendMessage}>
+          <SendIcon />
+        </button>
       </div>
     </div>
   );
