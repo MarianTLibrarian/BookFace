@@ -6,75 +6,29 @@ function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [userToken, setUserToken] = useState();
+  // const [userToken, setUserToken] = useState();
 
   // To do: use this state to render video chat button accordingly
   const [connected, setConnection] = useState(false);
 
   const postToken = () => {
     const data = {
-      'room': 'currentRoom',
-      'userName': 'currentUserName',
-    }
+      room: 'currentRoom',
+      userName: 'currentUserName',
+    };
     axios
       .post('/token', data)
       .then((res) => {
-        console.log('POST RES ON CLIENT SIDE', res)
+        console.log('POST RES ON CLIENT SIDE', res);
       })
       .catch((err) => {
-        console.log('ERR in ChatRoom:', err.message)
-      })
-  }
+        console.log('ERR in ChatRoom:', err.message);
+      });
+  };
 
   useEffect(() => {
     postToken();
-  })
-
-
-  //   const response = await fetch('/token', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(data)
-  //   });
-  //   const roomToken = await response.json();
-  //   return roomToken
-  // }
-
-  // const getToken = (uid) => {
-  //   axios
-  //     .get('/token')
-  //     .then(({ data }) => {
-  //       console.log('TOKEN', data.token)
-  //       const { identity, token } = data;
-  //       setUserToken({identity, token})
-  //     })
-  //     .catch((err) => {
-  //       console.error('Err on the client side:', err);
-  //     });
-  // };
-
-  const connectToRoom = async () => {
-    const token = await getToken();
-    const conectedRoom = await connect(token, {
-      name: currentRoom,
-      audio: false,
-      video: { width: 1000 }
-    })
-    if (!activeRoom) {
-      setActiveRoom(conectedRoom);
-    }
-
-    const arr = []
-    conectedRoom.participants.forEach(
-      participant => { participantConnected(participant); arr.push(participant) }
-    );
-    setPeopleInDaRoom(arr)
-    console.log('arr', arr)
-    console.log('people in da room', peopleInDaRoom)
-    listenForRoomUpdates(conectedRoom)
-  }
+  });
 
   // Video Chat button: click to connect
   const handleClick = (e) => {

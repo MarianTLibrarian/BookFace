@@ -17,24 +17,24 @@ const compression = require('compression');
 const app = express();
 const server = http.createServer(app);
 
-function generateToken(username, roomName) {
-  const identity = username;
-  const videoGrant = new VideoGrant({
-    room: roomName,
-  });
-  const token = new AccessToken(
-    accountSid,
-    apiKey,
-    apiSecret,
-    {identity: identity}
-  );
-  token.addGrant(videoGrant);
-  return token.toJwt()
-}
+// function generateToken(username, roomName) {
+//   const identity = username;
+//   const videoGrant = new VideoGrant({
+//     room: roomName,
+//   });
+//   const token = new AccessToken(
+//     accountSid,
+//     apiKey,
+//     apiSecret,
+//     {identity: identity}
+//   );
+//   token.addGrant(videoGrant);
+//   return token.toJwt()
+// }
 
-app.post('/token', (req, res) => {
-  console.log('In the server side: ', req)
-})
+// app.post('/token', (req, res) => {
+//   console.log('In the server side: ', req)
+// })
 
 // app.post("/token", (req, res) => {
 //   console.log('IN THE SERVER: ', req)
@@ -50,6 +50,37 @@ app.post('/token', (req, res) => {
 //   }
 //   asynch()
 // })
+
+
+function tokenGenerator(userName, room) {
+  const twilioAccountSid = "ACdae279537bb04063d528bc06648dbb30";
+  const twilioApiKey = "SKbb5b2c7f61ae912b2858a3d616794847";
+  const twilioApiSecret = "4Us5B8UGqzgAw5GQrODU8urFtKtrtN5M";
+
+  const identity = userName;
+
+  const videoGrant = new VideoGrant({
+    room: room,
+  });
+  const token = new AccessToken(
+    twilioAccountSid,
+    twilioApiKey,
+    twilioApiSecret,
+    { identity: identity }
+  );
+  token.addGrant(videoGrant);
+  return token.toJwt()
+}
+
+app.post("/token", (req, res) => {
+  const asynch = async () => {
+    const userName = req.body.userName;
+    const room = req.body.room;
+    const token = await tokenGenerator(userName, room);
+    res.json(token);
+  }
+  asynch()
+})
 
 /*
 * Live chat

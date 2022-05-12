@@ -37,7 +37,7 @@ export default function Stats() {
   };
 
   useEffect(() => {
-    getTotal(JSON.parse(user).uid);
+    getTotal(user.uid);
   }, []);
 
   /*
