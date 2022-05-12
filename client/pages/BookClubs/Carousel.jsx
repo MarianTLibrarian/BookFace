@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function Carousel({ club, width }) {
 
-  const { imageUrl, bookclubName, membersCount, description } = club.bookclubInfo;
+const { imageUrl, bookclubName, membersCount, description } = club.bookclubInfo;
 
   const onImgLoad = ({ target: img }) => {
     width(img.offsetWidth)

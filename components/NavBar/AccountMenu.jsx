@@ -31,7 +31,7 @@ export default function AccountMenu() {
 
   const handleSignOut = () => {
     if (user) {
-      return userSignOut().then(() => {
+      userSignOut().then(() => {
         localStorage.removeItem('user_data');
         setUser(null);
       });
@@ -39,7 +39,7 @@ export default function AccountMenu() {
   };
 
   return (
-    <a>
+    <a> {/* <-- Should this be an <a> tag? */}
       <Tooltip title="Account settings">
         <IconButton
           onClick={handleClick}
@@ -49,7 +49,7 @@ export default function AccountMenu() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar sx={{ width: 32, height: 32 }} />
+          <Avatar sx={{ width: 32, height: 32 }} src={user.photoURL}/>
         </IconButton>
       </Tooltip>
 
