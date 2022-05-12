@@ -66,13 +66,18 @@
 }
 
 
-.trends {
+.search-trends {
   padding: 80px 40px;
 }
 
-.trends-list {
+.search-trends h1 {
+  text-transform: uppercase;
+}
+
+.search-trends-list {
   padding-top: 20px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .trends-book {
