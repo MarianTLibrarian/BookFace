@@ -25,7 +25,6 @@ export default function Carousel({ selectedBookshelf, allBooks }) {
   // setBookDetail function click event to bookcover div<<
   return (
     <div className="carousel">
-      <h3>Books</h3>
       <div className="container">
         {currentBookshelf.map(book => (
           <div className="book" key={Math.random()}>
@@ -42,7 +41,6 @@ export default function Carousel({ selectedBookshelf, allBooks }) {
                 <div className="light" ></div>
               </div>
             </Link>
-
             <div className="book-inside">
             </div>
             <a className="btn" href="#">£19.95</a>
@@ -52,3 +50,4 @@ export default function Carousel({ selectedBookshelf, allBooks }) {
     </div>
   )
 }
+

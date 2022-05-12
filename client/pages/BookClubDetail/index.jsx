@@ -9,6 +9,7 @@ import Posts from './Posts';
 // import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
 import LiveChat from './LiveChat'
 import Calendar from './Calendar';
+import SearchBar from '../../../components/SearchBar';
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
@@ -83,7 +84,7 @@ export default function BookClubDetail() {
     if (!chat) {
       return <div>
         <div className='write-post'>
-          <textarea placeHolder='Leave A Comment...' />
+          <textarea placeholder='Leave A Comment...' />
           <div className='submit'>
             <div className='submit-btn'>
               <SendIcon />
@@ -105,9 +106,10 @@ export default function BookClubDetail() {
   const renderView = () => {
     if (user) {
       return <div style={{ 'width': '100%' }}>
-        <div className='search-bar'>
-          <div className='search'>
-            <input />
+        <div className='club-search-bar'>
+          <div className='the-first-two-thirds' />
+          <div className='club-search'>
+            <SearchBar />
           </div>
         </div>
         <div className='content-container'>

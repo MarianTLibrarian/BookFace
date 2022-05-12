@@ -253,3 +253,8 @@ padding-top:30px;
   border-color:black;
   color:black;
   }
+
+
+.club-listing:hover {
+  cursor: pointer;
+}

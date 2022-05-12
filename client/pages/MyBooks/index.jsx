@@ -8,6 +8,7 @@ import useStore from '../../userStore';
 import '../styles/MyBooks.css';
 import '../styles/BookClubDetails.css';
 
+
 const filterOptions = { books: 'Books', myBooks: 'My Books' };
 
 export default function MyBooks() {
@@ -18,10 +19,8 @@ export default function MyBooks() {
   const bookclubDetails = useStore(state => state.bookclubDetails);
   const { user, setUser, setToken, expressUrl, searchQuery } = useStore();
 
-  const setBookclubName = useStore(state => state.setBookclubName);
-  const clubName = useStore(state => state.clubName);
-  const setUsersBookclubs = useStore(state => state.setUsersBookclubs);
-  const usersBookclubs = useStore(state => state.usersBookclubs);
+const setBookclubName = useStore(state => state.setBookclubName);
+const bookclubName = useStore(state => state.bookclubName);
 
 
   // sources of truth
@@ -77,8 +76,6 @@ export default function MyBooks() {
           temp.push(data.results[i].bookclubInfo.bookclubName);
         }
         setBookclubs(temp);
-        setUsersBookclubs(temp)
-
       })
       .catch((err) => {
         console.log(err);
@@ -189,7 +186,8 @@ export default function MyBooks() {
                   All
                 </p>
                 {bookshelves.map((shelf) => (
-                  <p key={Math.random()} value={shelf} onClick={handleClick}>
+                  <p className="shelf-listing" key={Math.random()} value={shelf}
+                  onClick={handleClick}>
                     {shelf}
                   </p>
                 ))}
@@ -201,7 +199,7 @@ export default function MyBooks() {
                   <p>All Clubs</p>
                 </Link>
                 {bookclubs.map((club) => (
-                  <div key={club}>
+                  <div className="club-listing" key={club}>
                     <Link onClick={() => handleClubClick(club)} to="/bookclubdetail" style={{ textDecoration: 'none', color: 'black' }}>
                       {club}
                     </Link>
@@ -233,8 +231,6 @@ export default function MyBooks() {
             <div className="contentRight">
               <Carousel selectedBookshelf={currentView} allBooks={renderedBooks} />
             </div>
-
-
           </div>
         </div>
       </div>
