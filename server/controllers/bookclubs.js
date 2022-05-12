@@ -15,6 +15,7 @@ module.exports = {
   },
 
   myClubs(req, res) {
+
     models.bookclubs.myClubs(req, (err, data) => {
       if(err) {
         console.log('controller error from myClubs: ', err);
@@ -26,7 +27,7 @@ module.exports = {
   },
 
   createClub(req, res) {
- 
+
     models.bookclubs.createClub(req.body, (err) => {
       if(err) {
         console.log('controller error from createClub: ', err);

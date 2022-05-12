@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../client/pages/styles/Stats.css';
-import { ResponsivePie } from '@nivo/pie';
 import useStore from '../../client/userStore';
 
 export default function GenresStats() {
   const { user } = useStore();
   const [genresStats, setGenresStats] = useState([]);
+  const [ResponsivePie, setResponsivePie] = useState(<div className="loading">loading</div>);
 
   const getGenresStats = (uid) => {
     axios
@@ -37,7 +37,8 @@ export default function GenresStats() {
   console.log('this', genresStats)
 
   useEffect(() => {
-    getGenresStats(JSON.parse(user).uid);
+    setResponsivePie(() => import('@nivo/pie'));
+    getGenresStats(user.uid);
   }, []);
 
   return (
