@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import axios from 'axios';
 import { Modal, Box, Button, Checkbox, Divider, TextField } from "@mui/material";
 import '../BookDetail/bookdetail.css'
@@ -24,11 +25,10 @@ export default function Calendar( {events, setEvents} ) {
 
    const data = {
       bookclubName: 'Read With Haley (Official)',
-      eventTime: eventTime.toString(),
+      eventTime: moment(eventTime),
       eventTopic
     };
     const allEvents = events.concat(data);
-    console.log(allEvents)
     setEvents(allEvents);
 
     axios.post('http://localhost:3030/events/create', data)

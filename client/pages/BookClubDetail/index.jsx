@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import axios from 'axios';
 import SendIcon from '@mui/icons-material/Send';
 import LockIcon from '@mui/icons-material/Lock';
@@ -11,11 +12,7 @@ import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
 
-// function Event ({event}) {
-//   return (
 
-//   )
-// }
 
 export default function BookClubDetail() {
 
@@ -69,16 +66,24 @@ export default function BookClubDetail() {
 
             <div className='upcoming-events'>
               <h2>Upcoming Events</h2>
+
               {
                 events ?
                   events.map((event, index) =>
                       // <Event event={event} index={index}/>
                       <div key={Math.random()}>
-
-                       <p> {event.eventTopic}
-                       <br/>
-                        <span>{event.eventTime}</span></p>
-
+                        <p>
+                          <span style={{fontWeight:'bold'}}>Topic: </span>
+                          {event.eventTopic}
+                        </p>
+                        <p>
+                          <span style={{fontWeight:'bold'}}>Date: </span>
+                          {moment( event.eventTime).format('MMMM Do YYYY') }
+                        </p>
+                        <p>
+                          <span style={{fontWeight:'bold'}}>Time: </span>
+                          {moment(event.eventTime).format( 'h:mm a')}
+                        </p>
 
                      </div>
                   )
