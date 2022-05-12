@@ -9,6 +9,7 @@ import BookIcon from '@mui/icons-material/Book';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import ReviewsIcon from '@mui/icons-material/Reviews';
+import CustomizedSnackbars from './SnackBar.jsx';
 
 import { Rating } from '@mui/material';
 
@@ -22,13 +23,13 @@ const style = {
 }
 
 export default function BookDetail() {
-  const { user, setUser, setToken, bookDetails, expressUrl } = useStore();
+  const { user, setUser, setToken, bookDetails, setBookDetails, expressUrl } = useStore();
 
-  const [value, setBookshelf] = React.useState(null);
-  const [status, setStatus] = React.useState(null);
-  const [startReadDate, setStartReadDate] = useState(null);
-  const [endReadDate, setEndReadDate] = useState(null);
-  const [star, setStar] = useState(null);
+  const [value, setBookshelf] = React.useState(bookDetails.bookshelf || null);
+  const [status, setStatus] = React.useState(bookDetails.readingStatus|| null);
+  const [startReadDate, setStartReadDate] = useState(moment(bookDetails.startReadDate)._d || null);
+  const [endReadDate, setEndReadDate] = useState(moment(bookDetails.endReadDate)._d || null);
+  const [star, setStar] = useState(bookDetails.rating || null);
   const [bookshelves, setBookshelves] = useState([]);
 
   const [isbn, setIsbn] = useState( bookDetails.isbn || 0 );
@@ -69,7 +70,7 @@ export default function BookDetail() {
 
   // addtoshelf
   const handleAddtoShelf = () => {
-    alert('added to shelf!')
+    alert('added to shelf!');
     const staticbookdetail = {
       userId: user.uid,
       isbn: isbn,
@@ -88,7 +89,6 @@ export default function BookDetail() {
         console.log(data);
       })
       .then(()=>{
-        setStatus('toread');
         setBookshelf({'title':'Dream Bookshelf'});
         setInBookshelf(true);
       })
@@ -107,7 +107,6 @@ export default function BookDetail() {
       endReadDate:moment(endReadDate).format().slice(0, 10),
       readingStatus: status
     };
-    console.log(dynamicbookdetail);
     axios
       .put(`${expressUrl}/books/update`,  dynamicbookdetail )
       .then(({ data }) => {
@@ -187,22 +186,32 @@ export default function BookDetail() {
     if (bookDetails.readingStatus) {
       setStatus(bookDetails.readingStatus)
     } else {
-      setStatus(null);
+      setStatus('toread');
     }
     if (bookDetails.startReadDate) {
       setStartReadDate(moment(bookDetails.startReadDate)._d);
+    } else {
+      setStartReadDate(null);
     }
     if (bookDetails.endReadDate) {
       setEndReadDate(moment(bookDetails.endReadDate)._d);
+    } else {
+      setEndReadDate(null);
     }
     if (bookDetails.rating) {
       setStar(bookDetails.rating)
+    } else {
+      setStar(null)
     }
     if (bookDetails.bookshelf) {
       setBookshelf(bookDetails.bookshelf);
+    } else {
+      setBookshelf(null);
     }
     if (bookDetails.isbn) {
       setIsbn(bookDetails.isbn)
+    } else {
+      setIsbn(null)
     }
     if (bookDetails.title) {
       setTitle(bookDetails.title)
@@ -228,18 +237,19 @@ export default function BookDetail() {
     if (bookDetails.language) {
       setLanguage(bookDetails.language)
     }
-    if (bookDetails.status) {
+    if (bookDetails.readingStatus) {
       setInBookshelf(true);
+    } else {
+      setInBookshelf(false);
     }
-    if (bookDetails.startReadDate || bookDetails.endReadDate || bookDetails.rating) {
+    if (bookDetails.startReadDate || bookDetails.endReadDate || bookDetails.rating >= 0) {
       setEdited(true);
+    } else {
+      setEdited(false);
     }
-    // if (edited) {
-    //   setInBookshelf(true);
-    // }
-    console.log('inbookshelf', inBookShelf);
-    console.log('edited', edited);
-  },[user, bookDetails, edited])
+    // console.log('inbookshelf', inBookShelf);
+    // console.log('edited', edited);
+  },[user, bookDetails])
 
   return (
     <div className='header-container'>
@@ -275,6 +285,7 @@ export default function BookDetail() {
         </div>
       </div>
         {renderModal()}
+        <CustomizedSnackbars/>
       </div>
     </div>
 

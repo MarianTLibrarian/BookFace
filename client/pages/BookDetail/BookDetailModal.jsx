@@ -15,6 +15,7 @@ export default function BookDetailModal({bookshelves,value,setBookshelf,status,s
 
   const handleChange = (event) => {
     setStatus(event.target.value);
+    console.log(status);
   };
 
   const handleClose = () => setOpen(false);
