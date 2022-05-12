@@ -7,7 +7,7 @@ import ForumIcon from '@mui/icons-material/Forum';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
 // import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
-import LiveChat from './LiveChat';
+import LiveChat from '../Chat/LiveChat.jsx';
 import Calendar from './Calendar';
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
@@ -98,14 +98,12 @@ export default function BookClubDetail() {
       );
     }
 
-
-      return (
-        <div className="chat-box" >
-          {roomName ? <LiveChat user={user.displayName} roomName={roomName} />: null}
-        </div>
-      )
-
-    }
+    return (
+      <div className="chat-box">
+        {roomName ? <LiveChat user={user.displayName} roomName={roomName} /> : null}
+      </div>
+    );
+  };
 
   const renderView = () => {
     if (user) {

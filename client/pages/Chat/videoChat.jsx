@@ -1,38 +1,27 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import '../styles/VideoChat.css';
+import '../styles/Chat.css';
 
-import Lobby from "./Lobby";
-import Room from "./Room";
+import Lobby from './Lobby';
+import Room from './Room';
 
 const { Video } = Twilio;
 
-export default function VideoChat() {
-
-  const [username, setUsername] = useState("");
-  const [roomName, setRoomName] = useState("");
+export default function VideoChat({ username, roomName }) {
   const [room, setRoom] = useState(null);
   const [connecting, setConnecting] = useState(false);
-
-  const handleUsernameChange = useCallback((event) => {
-    setUsername(event.target.value);
-  }, []);
-
-  const handleRoomNameChange = useCallback((event) => {
-    setRoomName(event.target.value);
-  }, []);
 
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
       setConnecting(true);
-      const data = await fetch("http://localhost:3030/video/token", {
-        method: "POST",
+      const data = await fetch('http://localhost:3030/video/token', {
+        method: 'POST',
         body: JSON.stringify({
           identity: username,
           room: roomName,
         }),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }).then((res) => res.json());
       Video.connect(data.token, {
@@ -47,7 +36,7 @@ export default function VideoChat() {
           setConnecting(false);
         });
     },
-    [roomName, username]
+    [roomName, username],
   );
 
   const handleLogout = useCallback(() => {
@@ -72,27 +61,23 @@ export default function VideoChat() {
           handleLogout();
         }
       };
-      window.addEventListener("pagehide", tidyUp);
-      window.addEventListener("beforeunload", tidyUp);
+      window.addEventListener('pagehide', tidyUp);
+      window.addEventListener('beforeunload', tidyUp);
       return () => {
-        window.removeEventListener("pagehide", tidyUp);
-        window.removeEventListener("beforeunload", tidyUp);
+        window.removeEventListener('pagehide', tidyUp);
+        window.removeEventListener('beforeunload', tidyUp);
       };
     }
   }, [room, handleLogout]);
 
   let render;
   if (room) {
-    render = (
-      <Room roomName={roomName} room={room} handleLogout={handleLogout} />
-    );
+    render = <Room roomName={roomName} room={room} handleLogout={handleLogout} />;
   } else {
     render = (
       <Lobby
         username={username}
         roomName={roomName}
-        handleUsernameChange={handleUsernameChange}
-        handleRoomNameChange={handleRoomNameChange}
         handleSubmit={handleSubmit}
         connecting={connecting}
       />

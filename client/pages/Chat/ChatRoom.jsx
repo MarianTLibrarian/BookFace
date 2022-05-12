@@ -6,16 +6,8 @@ function Chat({ socket, username, room }) {
   const [messageList, setMessageList] = useState([]);
   const [clicked, setClicked] = useState(false);
 
-  // To do: use this state to render video chat button accordingly
-  const [connected, setConnection] = useState(false);
-
-  // Video Chat button: click to connect
-  const handleClick = (e) => {
+  const handleClick = () => {
     setClicked(!clicked);
-    // connectToRoom();
-    // setConnection(true);
-    // getToken();
-    console.log('connected');
   };
 
   const sendMessage = () => {
@@ -49,7 +41,7 @@ function Chat({ socket, username, room }) {
       </div>
       {clicked && (
         <div className="message-container">
-          <VideoChat />
+          <VideoChat username={username} roomName={room} />
         </div>
       )}
       <div className="chat-body">
