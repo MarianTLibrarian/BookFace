@@ -10,7 +10,7 @@ export default function NavBar() {
 
   const handleSignIn = () => {
     if (!user) {
-      return signInWithGoogle()
+      signInWithGoogle()
         .then((result) => {
           if (!result || !result.user || !result.token) throw result;
 
@@ -18,41 +18,37 @@ export default function NavBar() {
 
           localStorage.setItem('user_data', JSON.stringify(newUser));
 
-        setUser(newUser);
-        setToken(token);
-      })
-      .catch(console.error);
+          setUser(newUser);
+          setToken(token);
+        })
+        .catch(console.error);
+    }
   };
-}
 
   return (
     <div className="nav-container">
       <div className="nav">
         <div className="logo">
           {' '}
-          <a href="/">
+          <NavLink exact to="/">
             <img alt="logo" src="../assets/logo.png" />
             <h3>BOOKFACE.</h3>
-          </a>
+          </NavLink>
           <div className="clear" />
         </div>
         <div className="menu">
           <NavLink exact to="/">
             Home
           </NavLink>
-          {user ?
+          {user ? (
             <NavLink activeClassName="active" to="/mybooks">
               My Books
             </NavLink>
-            : null
-          }
+          ) : null}
           <NavLink activeClassName="active" to="/bookclubs">
             {user ? 'My clubs' : 'Clubs'}
           </NavLink>
-          {user ?
-            <AccountMenu />
-            : <a onClick={handleSignIn} >Sign In</a>
-          }
+          {user ? <AccountMenu /> : <a onClick={handleSignIn}>Sign In</a>}
         </div>
       </div>
     </div>
