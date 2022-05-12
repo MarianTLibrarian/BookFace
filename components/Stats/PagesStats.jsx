@@ -42,7 +42,7 @@ export default function PagesStats() {
   };
 
   useEffect(() => {
-    getPagesTotal(JSON.parse(user).uid);
+    getPagesTotal(user.uid);
   }, []);
 
   const state = {
