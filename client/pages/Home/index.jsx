@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Home.css';
 import SearchBar from '../../../components/SearchBar';
@@ -23,11 +22,9 @@ export default function Home() {
   const [bookClubs, setBookClubs] = useState([])
 
 
-
-
   const getTrendingBooks = () => {
     axios.get('http://localhost:3030/popularBooks')
-      .then(({ data }) => {
+      .then(({data}) => {
         setFictionTrends(data.lists[0].books);
         setNonfictionTrends(data.lists[1].books);
       })
