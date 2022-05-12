@@ -4,11 +4,22 @@ const http = require('http');
 const server = http.createServer(app);
 const cors = require('cors');
 const path = require('path');
-
-
-const { Server } = require('socket.io');
-
 require('dotenv').config();
+
+/*
+* Live video chat
+*/
+const {AccessToken} = require('twilio').jwt;
+const {VideoGrant} = AccessToken;
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+
+/*
+* Live chat
+*/
+const { Server } = require('socket.io');
 
 // const morgan = require('morgan');
 const PORT = process.env.PORT || 3030;
