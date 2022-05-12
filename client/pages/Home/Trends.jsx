@@ -6,47 +6,47 @@ const googleBooksAPIUrl = 'https://www.googleapis.com/books/v1/volumes';
 
 export default function Trends({ book }) {
   const { bookDetails, setBookDetails } = useStore();
+  const [bookImage, setBookImage] = React.useState('../../../assets/testBook.jpg');
 
+  React.useEffect(() => {
+    console.log({ imgs: book.imageLinks });
+
+    // Why does the database have a different structure? (T_T)
+    if (Object.hasOwnProperty.call(book, 'book_image')) {
+      setBookImage(book.book_image);
+    } else if (Object.hasOwnProperty.call(book, 'imageLinks')) {
+      setBookImage(book.imageLinks.thumbnail || book.imageLinks.smallThumbnail);
+    } else {
+      setBookImage('../../../assets/testBook.jpg');
+    }
+  }, [book]);
 
   const handleBookClick = () => {
     const isbn = book.isbn13;
     const url = `${googleBooksAPIUrl}?q=${isbn}`;
 
-    axios.get(url)
-    .then((res)=>{
-      const fullbookdetail = res.data.items[0].volumeInfo;
-      // console.log("res.data.items[0]",res.data.items[0]);
-      const bookdetail = {
-        isbn: book.isbn13,
-        title: fullbookdetail.title,
-        authors: fullbookdetail.authors,
-        publisher: fullbookdetail.publisher,
-        publishedDate: fullbookdetail.publishedDate,
-        description: fullbookdetail.description,
-        categories: fullbookdetail.categories,
-        imageLinks: fullbookdetail.imageLinks,
-        language: fullbookdetail.language
-      };
+    axios
+      .get(url)
+      .then((res) => {
+        const fullbookdetail = res.data.items[0].volumeInfo;
+        // console.log("res.data.items[0]",res.data.items[0]);
+        const bookdetail = {
+          ...fullbookdetail,
+          isbn: book.isbn13,
+        };
 
-      // console.log('bookkdetail', bookdetail);
+        // console.log('bookkdetail', bookdetail);
 
-      setBookDetails(bookdetail);
-
-    })
-    .catch(err=> console.log(err));
-
-
-
-  }
+        setBookDetails(bookdetail);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
-    <div className="trends-book" onClick={handleBookClick} >
-      <Link to='/bookdetail'>
-        <img src={book.book_image} alt="bookcover" />
+    <div className="trends-book" onClick={handleBookClick}>
+      <Link to="/bookdetail">
+        <img src={bookImage} alt="bookcover" />
       </Link>
     </div>
-
   );
 }
-
-
