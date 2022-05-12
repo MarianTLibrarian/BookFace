@@ -4,7 +4,7 @@ function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
-  const sendMessage = async () => {
+  const sendMessage = () => {
     if (currentMessage !== "") {
       const messageData = {
         room: room,
@@ -16,17 +16,17 @@ function Chat({ socket, username, room }) {
           new Date(Date.now()).getMinutes(),
       };
 
-      await socket.emit("send_message", messageData);
-      setMessageList((list) => [...list, messageData]);
+      socket.emit("send_message", messageData);
+      setMessageList(messageList.concat(messageData));
       setCurrentMessage("");
     }
   };
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      setMessageList((list) => [...list, data]);
+      setMessageList(messageList.concat(data));
     });
-  }, [socket]);
+  }, [socket, messageList]);
 
   return (
     <div className="chat-window">
