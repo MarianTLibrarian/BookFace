@@ -2,7 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Carousel from './carousel';
-import ReadingGoals from './readingGoals';
+import ReadingStatsWidget from './ReadingStatsWidget';
 import SearchBar from '../../../components/SearchBar';
 import useStore from '../../userStore';
 import '../styles/MyBooks.css';
@@ -18,8 +18,15 @@ export default function MyBooks() {
   const bookclubDetails = useStore(state => state.bookclubDetails);
   const { user, setUser, setToken, expressUrl, searchQuery } = useStore();
 
+<<<<<<< HEAD
 const setBookclubName = useStore(state => state.setBookclubName);
 const bookclubName = useStore(state => state.bookclubName);
+=======
+  const setBookclubName = useStore(state => state.setBookclubName);
+  const clubName = useStore(state => state.clubName);
+  const setUsersBookclubs = useStore(state => state.setUsersBookclubs);
+  const usersBookclubs = useStore(state => state.usersBookclubs);
+>>>>>>> main
 
 
   // sources of truth
@@ -75,6 +82,10 @@ const bookclubName = useStore(state => state.bookclubName);
           temp.push(data.results[i].bookclubInfo.bookclubName);
         }
         setBookclubs(temp);
+<<<<<<< HEAD
+=======
+        setUsersBookclubs(temp)
+>>>>>>> main
 
       })
       .catch((err) => {
@@ -206,31 +217,23 @@ const bookclubName = useStore(state => state.bookclubName);
                 ))}
               </div>
 
-              <div className="reading-goal">
-                <Link to="/stats" style={{ textDecoration: 'none', color: 'black' }}>
-                  <h2
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    Reading Goals
-                    <span style={{ fontSize: '12px', paddingRight: '1em' }}>&#9658;</span>
+              <div className='reading-goal'>
+                <Link to='/stats' style={{'text-decoration': 'none', 'color': 'black'}}>
+                  <h2 style={{
+                    'display': 'flex',
+                    'flex-direction': 'row',
+                    'align-items': 'center',
+                    'justify-content': 'space-between'
+                  }}>
+                    Reading Stats
+                    <span
+                      style={{'font-size': '12px', 'padding-right': '1em'}}
+                    >&#9658;</span>
                   </h2>
                 </Link>
-                <ReadingGoals
-                  className="reading-goal"
-                  strokeColor="var(--sunset)"
-                  strokeWidth="5"
-                  innerText="READ"
-                  percentage={percentageRead}
-                  trailStrokeWidth="5"
-                  trailStrokeColor="var(--dark-beige)"
-                  trailSpaced="true"
-                  speed="10"
-                />
+                <div style={{'border': '1px solid transparent'}}>
+                  <ReadingStatsWidget />
+                </div>
               </div>
             </div>
 

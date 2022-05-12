@@ -13,11 +13,14 @@ import Carousel from './Carousel';
 const filterOptions = { clubs: 'Clubs', myClubs: 'My Clubs' };
 
 export default function BookClubs() {
+
+  const { user, setUser, setToken, searchQuery, bookclubDetails } = useStore();
+
   const [bookClub, setBookClub] = useState([]);
   const [allClubs, setAllClubs] = useState([]);
   const [renderedClubs, setRenderedClubs] = useState(<div className="loading">Loading ...</div>);
   const [myBookClubs, setMyBookClubs] = useState([]);
-  const { user, setUser, setToken, searchQuery } = useStore();
+
   const [imgStyle, setImgStyle] = useState(0);
   const [imgWidth, setImgWidth] = useState(0);
   const ref = useRef(null);
@@ -56,6 +59,7 @@ export default function BookClubs() {
   };
 
   const renderView = () => {
+    // console.log(bookclubDetails)
     if (!user) {
       return (
         <div className="club-of-the-day">
@@ -75,7 +79,7 @@ export default function BookClubs() {
       );
     }
     return (
-      <div>
+      <div style={{position:'relative'}}>
         <div className="club-btns">
           <div className="prev">
             <button onClick={handlePrev} type="button">
@@ -123,6 +127,11 @@ export default function BookClubs() {
   }, [searchQuery, allClubs]);
 
   useEffect(() => {
+    // setBookClub(PopularBookclubs.results[0].bookclubInfo);
+    // setAllClubs(PopularBookclubs.results);
+    // setMyBookClubs(PersonalBookClubs);
+
+
     setBookClub(PopularBookclubs.results[0].bookclubInfo);
     setAllClubs(PopularBookclubs.results);
     setMyBookClubs(PersonalBookClubs);

@@ -41,7 +41,7 @@
 
 /***********************     Home     ***********************/
 
-.home-search-bar {
+.search-search-bar {
   display: grid;
   width: 100%;
 
@@ -50,7 +50,7 @@
   margin-bottom: 1rem;
 }
 
-.home-search-bar input {
+.search-search-bar input {
   /* width: 240px; */
   padding: 10px;
   text-align: left;
@@ -59,7 +59,7 @@
   font-weight: inherit;
 }
 
-.home-search-bar .search {
+.search-search-bar .search {
   text-align: right;
   padding: 0;
   padding-bottom: 20px;
@@ -72,7 +72,6 @@
 
 .trends-list {
   padding-top: 20px;
-  padding-bottom: 20px;
   display: flex;
 }
 
