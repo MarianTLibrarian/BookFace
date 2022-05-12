@@ -14,7 +14,10 @@ const filterOptions = { clubs: 'Clubs', myClubs: 'My Clubs' };
 
 export default function BookClubs() {
 
-  const { user, setUser, setToken, searchQuery, bookclubDetails } = useStore();
+  const { user, setUser, setToken, searchQuery, bookclubDetails, popularBookclubs } = useStore();
+
+
+
 
   const [bookClub, setBookClub] = useState([]);
   const [allClubs, setAllClubs] = useState([]);

@@ -38,7 +38,7 @@ export default function BookStats() {
   };
 
   useEffect(() => {
-    getBooksTotal(JSON.parse(user).uid);
+    getBooksTotal(user.uid);
   }, []);
 
   const state = {
