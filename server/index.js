@@ -32,19 +32,24 @@ function generateToken(username, roomName) {
   return token.toJwt()
 }
 
-app.post("/token", (req, res) => {
-  const asynch = async () => {
-  const username = req.body.username;
-  const roomName = req.body.roomName;
-  const token = await generateToken(username, roomName);
-
-  console.log('token', token)
-  console.log('typeof token', typeof token)
-
-  res.json(token);
-  }
-  asynch()
+app.post('/token', (req, res) => {
+  console.log('In the server side: ', req)
 })
+
+// app.post("/token", (req, res) => {
+//   console.log('IN THE SERVER: ', req)
+//   const asynch = async () => {
+//   const username = req.body.username;
+//   const roomName = req.body.roomName;
+//   const token = await generateToken(username, roomName);
+
+//   console.log('token', token)
+//   console.log('typeof token', typeof token)
+
+//   res.json(token);
+//   }
+//   asynch()
+// })
 
 /*
 * Live chat
