@@ -105,8 +105,8 @@ const bookclubName = useStore(state => state.bookclubName);
 
   useEffect(() => {
     // FIXME: these are placeholder arguments
-    getBookshelves(1);
-    getBooks(1);
+    getBookshelves(user.uid);
+    getBooks(user.uid);
     getBookclubs('qwew');
   }, []);
 
