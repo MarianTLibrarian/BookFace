@@ -16,17 +16,19 @@ import useStore from '../../userStore';
 
 export default function BookClubDetail() {
 
-  const [myClub, setMyClub] = useState(null);
-  const {user, setUser, setToken, bookclubDetails, usersBookclubs, clubName, popularBookclubs} = useStore();
+  // const [myClub, setMyClub] = useState(null);
+  const { user, setUser, setToken, bookclubDetails, usersBookclubs, clubName, popularBookclubs } = useStore();
   const [events, setEvents] = useState(null)
   const [chat, setChat] = useState(false)
-  const [clubNameList, setClubNames] = useState(null);
+  const [postBody, setPostBody] = useState('')
+  const [posts, setPosts] = useState([])
+
+
+  // const [clubNameList, setClubNames] = useState(null);
 
   const currentClub = bookclubDetails.filter(club => club.bookclubInfo.bookclubName === clubName);
-  console.log("currentClub", currentClub)
 
-
-
+  // console.log("currentClub", currentClub)
 
   const getEvents = () => {
     axios.get('http://localhost:3030/events', { params: { bookclubName: currentClub[0].bookclubInfo.bookclubName } })
@@ -36,15 +38,38 @@ export default function BookClubDetail() {
       .catch(err => {
         console.error(err);
       })
-      setEvents(events)
+    setEvents(events)
   }
 
 
   useEffect(() => {
     getEvents();
-
+    setPosts(currentClub[0].posts)
   }, [])
 
+
+  const addPost = (e) => {
+    e.preventDefault();
+    setPostBody('');
+    const data = {
+      userId: user.providerData[0].displayName,
+      bookclubName: currentClub[0].bookclubInfo.bookclubName,
+      postBody,
+      posterUserImg: user.photoURL
+    }
+
+    axios.post('http://localhost:3030/bookclubs/messages', data)
+      .then(res => {
+        console.log('Your event is posted: ', res.data)
+      })
+      .catch(err => {
+        console.error(err);
+      })
+
+    const result = posts.concat(data);
+    setPosts(result);
+
+  }
 
 
   const handleUserLogin = () => signInWithGoogle()
@@ -69,22 +94,22 @@ export default function BookClubDetail() {
     if (!chat) {
       return <div>
         <div className='write-post'>
-          <textarea placeHolder='Leave A Comment...' />
+          <textarea placeHolder='Leave A Comment...' onChange={(e) => setPostBody(e.target.value)} />
           <div className='submit'>
             <div className='submit-btn'>
-              <SendIcon />
+              <SendIcon onClick={addPost} />
             </div>
           </div>
         </div>
         <div className='club-posts'>
-          {currentClub[0].posts.map(post =>
+          {posts.map(post =>
             <Posts post={post} key={post} />
           )}
         </div>
       </div>
     }
     return <div className='chat-box'>
-     <LiveChat />
+      <LiveChat />
     </div>
   }
 
@@ -113,21 +138,21 @@ export default function BookClubDetail() {
                 events ?
                   events.map((event) =>
 
-                      <div key={Math.random()}>
-                        <p>
-                          <span style={{fontWeight:'bold'}}>Topic: </span>
-                          {event.eventTopic}
-                        </p>
-                        <p>
-                          <span style={{fontWeight:'bold'}}>Date: </span>
-                          {moment( event.eventTime).format('MMMM Do YYYY') }
-                        </p>
-                        <p>
-                          <span style={{fontWeight:'bold'}}>Time: </span>
-                          {moment(event.eventTime).format( 'h:mm a')}
-                        </p>
+                    <div key={Math.random()}>
+                      <p>
+                        <span style={{ fontWeight: 'bold' }}>Topic: </span>
+                        {event.eventTopic}
+                      </p>
+                      <p>
+                        <span style={{ fontWeight: 'bold' }}>Date: </span>
+                        {moment(event.eventTime).format('MMMM Do YYYY')}
+                      </p>
+                      <p>
+                        <span style={{ fontWeight: 'bold' }}>Time: </span>
+                        {moment(event.eventTime).format('h:mm a')}
+                      </p>
 
-                     </div>
+                    </div>
                   )
                   : null
               }
