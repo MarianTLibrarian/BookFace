@@ -9,40 +9,40 @@ require('dotenv').config();
 /*
 * Live video chat
 */
-// const {AccessToken} = require('twilio').jwt;
-// const {VideoGrant} = AccessToken;
-// const accountSid = process.env.TWILIO_ACCOUNT_SID;
-// const apiKey = process.env.TWILIO_API_KEY;
-// const apiSecret = process.env.TWILIO_API_SECRET;
+const {AccessToken} = require('twilio').jwt;
+const {VideoGrant} = AccessToken;
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const apiKey = process.env.TWILIO_API_KEY;
+const apiSecret = process.env.TWILIO_API_SECRET;
 
-// function generateToken(username, roomName) {
-//   const identity = username;
-//   const videoGrant = new VideoGrant({
-//     room: roomName,
-//   });
-//   const token = new AccessToken(
-//     accountSid,
-//     apiKey,
-//     apiSecret,
-//     {identity: identity}
-//   );
-//   token.addGrant(videoGrant);
-//   return token.toJwt()
-// }
+function generateToken(username, roomName) {
+  const identity = username;
+  const videoGrant = new VideoGrant({
+    room: roomName,
+  });
+  const token = new AccessToken(
+    accountSid,
+    apiKey,
+    apiSecret,
+    {identity: identity}
+  );
+  token.addGrant(videoGrant);
+  return token.toJwt()
+}
 
-// app.post("/token", (req, res) => {
-//   const asynch = async () => {
-//   const username = req.body.username;
-//   const roomName = req.body.roomName;
-//   const token = await generateToken(username, roomName);
+app.post("/token", (req, res) => {
+  const asynch = async () => {
+  const username = req.body.username;
+  const roomName = req.body.roomName;
+  const token = await generateToken(username, roomName);
 
-//   console.log('token', token)
-//   console.log('typeof token', typeof token)
+  console.log('token', token)
+  console.log('typeof token', typeof token)
 
-//   res.json(token);
-//   }
-//   asynch()
-// })
+  res.json(token);
+  }
+  asynch()
+})
 
 /*
 * Live chat

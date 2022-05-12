@@ -3,7 +3,6 @@ import io from "socket.io-client";
 import Chat from "./ChatRoom";
 
 
-
 const socket = io.connect("http://localhost:3030");
 
 export default function LiveChat() {

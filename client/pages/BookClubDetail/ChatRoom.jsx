@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import VideoChat from '../Chat/videoChat';
+import VideoChat from '../Chat/videoChat';
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -33,7 +33,7 @@ function Chat({ socket, username, room }) {
     <div className="chat-window">
       <div className="chat-header">
         <p>Live Chat</p>
-        {/* <p>TEST</p> */}
+        <VideoChat />
       </div>
       <div className="chat-body">
         <div className="message-container">
