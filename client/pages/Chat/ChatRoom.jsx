@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import SendIcon from '@mui/icons-material/Send';
 import VideoChat from '../Chat/VideoChat';
 
 function Chat({ socket, username, room }) {
@@ -36,7 +38,7 @@ function Chat({ socket, username, room }) {
       <div className="chat-header">
         <p>Live Chat</p>
         <button type="submit" className="videoRoom" onClick={handleClick}>
-          Video Chat
+          <VideocamIcon />
         </button>
       </div>
       {clicked && (
@@ -65,7 +67,7 @@ function Chat({ socket, username, room }) {
         <input
           type="text"
           value={currentMessage}
-          placeholder="Hey..."
+          placeholder="Say something here..."
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
@@ -73,7 +75,9 @@ function Chat({ socket, username, room }) {
             event.key === 'Enter' && sendMessage();
           }}
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button onClick={sendMessage}>
+          <SendIcon />
+        </button>
       </div>
     </div>
   );
