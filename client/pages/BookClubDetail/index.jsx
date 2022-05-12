@@ -1,22 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import SendIcon from '@mui/icons-material/Send';
 import LockIcon from '@mui/icons-material/Lock';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
 
+import Calendar from './Calendar';
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
+
+// function Event ({event}) {
+//   return (
+
+//   )
+// }
 
 export default function BookClubDetail() {
 
   const [myClub, setMyClub] = useState(PopularBookclubs.results);
   const { user, setUser, setToken } = useStore();
+  const [events, setEvents] = useState(null)
 
   useEffect(() => {
+    axios.get('http://localhost:3030/events', { params: { bookclubName: "Read With Haley (Official)" } })
+      .then(({ data }) => {
+        setEvents(data)
+      })
+      .catch(err => {
+        console.error(err);
+      })
 
   }, [])
+
 
   const handleUserLogin = () => signInWithGoogle()
     .then((result) => {
@@ -49,16 +66,32 @@ export default function BookClubDetail() {
                 <MyBookClubs club={club} key={club} />
               )}
             </div>
+
             <div className='upcoming-events'>
               <h2>Upcoming Events</h2>
+              {
+                events ?
+                  events.map((event, index) =>
+                      // <Event event={event} index={index}/>
+                      <div key={Math.random()}>
+
+                       <p> {event.eventTopic}
+                       <br/>
+                        {event.eventTime}</p>
+
+
+                     </div>
+                  )
+                  : null
+              }
+
             </div>
-            <div className='calendar'>
-              <h2>Calendar</h2>
-            </div>
+
             <div className='create-events'>
-              <button type='button'>CREATE AN EVENT</button>
+              <Calendar setEvents={setEvents} events={events} />
             </div>
           </div>
+
           <div className='content-right'>
             <div className='write-post'>
 
@@ -116,3 +149,5 @@ export default function BookClubDetail() {
     </div>
   );
 }
+
+

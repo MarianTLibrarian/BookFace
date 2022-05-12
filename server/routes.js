@@ -35,4 +35,10 @@ router.put('/bookclubs/leave', controller.bookclubs.deleteClub);
 router.get('/bookshelves', controller.bookshelves.allBookshelves);
 router.post('/bookshelves/create', controller.bookshelves.addBookshelf);
 
+// ---                          ---
+// --- Bookclub events API endpoints ---
+// ---                          ---
+router.get('/events', controller.events.allEvents)
+router.post('/events/create', controller.events.addEvent)
+
 module.exports = router;
