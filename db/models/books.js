@@ -99,7 +99,7 @@ module.exports = {
    },
 
   updateBook(req, callback) {
-    let {rating, isbn, userId, bookshelf, startReadDate, endReadDate, readingStatus, review, review_date} = req.body;
+    let {rating, isbn, userId, bookshelf, startReadDate, endReadDate, readingStatus} = req.body;
     isbn = parseInt(isbn, 10);
     rating = parseInt(rating, 10);
     const q = query(collection(db, 'PersonalBookLibrary'), where("userId", "==", `${userId}`), where("isbn", "==", isbn));
@@ -128,7 +128,7 @@ module.exports = {
       })
       .then(id => {
         const docRef = doc(db, 'PersonalBookLibrary', id);
-        updateDoc(docRef,  {rating, bookshelf, startReadDate, endReadDate, readingStatus, review, review_date })
+        updateDoc(docRef,  {rating, bookshelf, startReadDate, endReadDate, readingStatus})
           .then(() => {
             callback(null, 'created');
           })

@@ -75,7 +75,7 @@ export default function BookClubs() {
       );
     }
     return (
-      <div>
+      <div style={{position:'relative'}}>
         <div className="club-btns">
           <div className="prev">
             <button onClick={handlePrev} type="button">
