@@ -51,6 +51,9 @@ export default function BookDetail() {
 
   const [inBookShelf, setInBookshelf] = useState(false);
   const [edited, setEdited] = useState(false);
+  const [SnackBarOpen, setSnackBarOpen] = React.useState(false);
+
+
 
   /*------------------ HANDLER FUNCTION ---------------------- */
 
@@ -70,7 +73,7 @@ export default function BookDetail() {
 
   // addtoshelf
   const handleAddtoShelf = () => {
-    alert('added to shelf!');
+    // alert('added to shelf!');
     const staticbookdetail = {
       userId: user.uid,
       isbn: isbn,
@@ -118,6 +121,10 @@ export default function BookDetail() {
       });
   };
 
+  const handleSnackBarClick = () => {
+    setSnackBarOpen(true);
+  };
+
   /*------------------RENDER DYNAMIC---------------------- */
 
   const renderDynamicBtn = () => {
@@ -125,7 +132,7 @@ export default function BookDetail() {
       return (<AddBoxIcon onClick={handleuserLogin}/>);
     }
     if (user && !inBookShelf) {
-      return (<AddBoxIcon onClick={handleAddtoShelf} />)
+      return (<AddBoxIcon onClick={()=>{handleAddtoShelf(); handleSnackBarClick();}} />)
     }
     if (user && inBookShelf) {
       return (<ModeEditOutlineIcon onClick={handleOpen} />)
@@ -285,7 +292,7 @@ export default function BookDetail() {
         </div>
       </div>
         {renderModal()}
-        <CustomizedSnackbars/>
+        <CustomizedSnackbars SnackBarOpen={SnackBarOpen} setSnackBarOpen={setSnackBarOpen} handleSnackBarClick={handleSnackBarClick}/>
       </div>
     </div>
 

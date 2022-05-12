@@ -4,31 +4,23 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function SnackBar() {
-  const [open, setOpen] = React.useState(false);
+export default function SnackBar({SnackBarOpen, setSnackBarOpen, handleSnackBarClick}) {
 
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
+  const handleSnackBarClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false);
+    setSnackBarOpen(false);
   };
 
   const action = (
     <React.Fragment>
-      <Button color="secondary" size="small" onClick={handleClose}>
-        UNDO
-      </Button>
       <IconButton
         size="small"
         aria-label="close"
         color="inherit"
-        onClick={handleClose}
+        onClick={handleSnackBarClose}
       >
         <CloseIcon fontSize="small" />
       </IconButton>
@@ -37,13 +29,13 @@ export default function SnackBar() {
 
   return (
     <div>
-      <Button onClick={handleClick}>Open simple snackbar</Button>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message="Note archived"
+      <Snackbar style={{color: 'white'}}
+        open={SnackBarOpen}
+        autoHideDuration={1500}
+        onClose={handleSnackBarClose}
+        message="ADDED TO BOOKSHELF"
         action={action}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       />
     </div>
   );
