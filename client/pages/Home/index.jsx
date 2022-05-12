@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Home.css';
 import SearchBar from '../../../components/SearchBar';
 import Trends from './Trends';
 import BookClubs from './BookClubs';
+import useStore from '../../userStore';
 
 export default function Home() {
+
+  const { bookclubDetails, bookDetails} = useStore();
+
+  const setPopularBookclubs = useStore(state => state.setPopularBookclubs);
+  const popularBookclubs = useStore(state => state.popularBookclubs);
 
   const [fiction, setFictionTrends] = useState([]);
   const [nonFiction, setNonfictionTrends] = useState([]);
   const [bookClubs, setBookClubs] = useState([])
+
+
+
 
 
   const getTrendingBooks = () => {
@@ -25,9 +35,10 @@ export default function Home() {
 
   const getTrendingBookclubs = () => {
     axios.get('http://localhost:3030/bookclubs')
-      .then(({data}) => {
-        const featuredClubs = data.slice(0, 8)
-        setBookClubs(featuredClubs)
+      .then(({ data }) => {
+        setPopularBookclubs(data);
+        const featuredClubs = data.slice(0, 8);
+        setBookClubs(featuredClubs);
       })
       .catch(err => {
         console.error(err);
@@ -71,13 +82,13 @@ export default function Home() {
       <div className="trends">
         <h1>Explore Trends</h1>
         <p>What will you discover?</p>
-        <h2 style={{textAlign: 'left'}}>Fiction: </h2>
+        <h2 style={{ textAlign: 'left' }}>Fiction: </h2>
         <div className="trends-list">
           {fiction.map((book) => (
             <Trends book={book} key={book} />
           ))}
         </div>
-        <h2 style={{textAlign: 'left'}}>Non-Fiction: </h2>
+        <h2 style={{ textAlign: 'left' }}>Non-Fiction: </h2>
         <div className="trends-list">
           {nonFiction.map((book) => (
             <Trends book={book} key={book} />
@@ -95,7 +106,9 @@ export default function Home() {
         <div className="right">
           <div className="clubs-list">
             {bookClubs.map((club) => (
-              <BookClubs club={club} key={Math.random()} />
+              <Link to='/bookclubdetail' >
+                <BookClubs club={club} key={Math.random()}/>
+              </Link>
             ))}
             <div className="clear" />
           </div>
