@@ -260,14 +260,29 @@ align-items: center;
   margin: 0;
 }
 .chat-window .chat-header {
-  height: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 60px;
   border-radius: 6px;
   background: #263238;
   position: relative;
+}
+
+.videoRoom {
+  border: 1px solid red;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 30px;
   cursor: pointer;
 }
+
 .chat-window .chat-header p {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0 1em 0 2em;
   color: #fff;
   font-weight: 700;
@@ -383,8 +398,6 @@ align-items: center;
   font-size: 25px;
   color: lightgray;
 }
-
-
 
 .chat-window .chat-footer button:hover {
   color: #43a047;
