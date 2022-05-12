@@ -9,8 +9,9 @@ import useStore from '../../userStore';
 
 export default function Home() {
 
-  const { setBookclubDetails} = useStore();
-  const setPopularBookclubs = useStore(state => state.setPopularBookclubs);
+  const {user, setPopularBookclubs,setBookclubDetails, setUsersBookclubs} = useStore();
+  // const setUsersBookclubs = useStore(state => state.setUsersBookclubs);
+
 
 
   const [fiction, setFictionTrends] = useState([]);
@@ -33,6 +34,7 @@ export default function Home() {
       .then(({ data }) => {
 
         setBookclubDetails(data);
+        setPopularBookclubs(data);
         console.log("setBookclubDetails", data)
         const featuredClubs = data.slice(0, 8);
         setBookClubs(featuredClubs);
@@ -42,9 +44,31 @@ export default function Home() {
       })
   }
 
+    const getMybookclubs = (uid) => {
+      axios
+        .get('http://localhost:3030/myBookclubs', { params: { userId: uid } })
+        .then(({ data }) => {
+          const temp = [];
+          for (let i = 0; i < data.results.length; i += 1) {
+            temp.push(data.results[i].bookclubInfo.bookclubName);
+          }
+          console.log('setUsersBookclubs!!!!!!', temp);
+          setUsersBookclubs(temp)
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+
   useEffect(() => {
     getTrendingBooks();
-    getTrendingBookclubs()
+    getTrendingBookclubs();
+    if(user) {
+      getMybookclubs(user.uid)
+    }
+
   }, [])
 
   const style = {

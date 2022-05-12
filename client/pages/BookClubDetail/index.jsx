@@ -101,7 +101,7 @@ export default function BookClubDetail() {
           <div className='content-left'>
             <div className='my-clubs'>
               <h2>My Book Clubs</h2>
-              {bookclubDetails.map(club =>
+              {usersBookclubs.map(club =>
                 <MyBookClubs club={club} key={club} />
               )}
             </div>

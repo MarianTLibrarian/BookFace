@@ -4,7 +4,7 @@ export default function MyBookClubs({ club }) {
 
   return (
     <fragment>
-      <p>{club.bookclubInfo.bookclubName}</p>
+      <p>{club}</p>
     </fragment>
   );
 }

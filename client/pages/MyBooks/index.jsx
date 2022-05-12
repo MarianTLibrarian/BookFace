@@ -80,9 +80,9 @@ export default function MyBooks() {
 
         setBookclubs(temp);
 
-        console.log('setUsersBookclubs', temp);
+        console.log("setUsersBookclubs",temp )
         setUsersBookclubs(temp)
-
+        console.log(setUsersBookclubs.toString())
       })
       .catch((err) => {
         console.log(err);
@@ -114,7 +114,7 @@ export default function MyBooks() {
     // FIXME: these are placeholder arguments
     getBookshelves(1);
     getBooks(1);
-    getBookclubs('qwew');
+    getBookclubs(user.uid);
   }, []);
 
   useEffect(() => {

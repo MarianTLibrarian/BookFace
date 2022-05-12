@@ -57,7 +57,6 @@ export default function BookClubs() {
   }
 
   const carouselClick = (e) => {
- 
     setBookclubName(e.target.value)
   }
 
@@ -66,7 +65,7 @@ export default function BookClubs() {
 
     setBookClub(bookclubDetails[0].bookclubInfo);
     console.log("bookclubDetails[0].bookclubInfo", bookclubDetails[0].bookclubInfo)
-    setAllClubs(bookclubDetails);
+    setAllClubs(popularBookclubs);
 
     if(user) {
       getUsersBookclub(user.uid);
