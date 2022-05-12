@@ -36,7 +36,7 @@ export default function CalendarStats() {
   const calStartEndDate = calendarStats.day;
 
   useEffect(() => {
-    getCalendarStats(JSON.parse(user).uid);
+    getCalendarStats(user.uid);
   }, []);
 
   return (

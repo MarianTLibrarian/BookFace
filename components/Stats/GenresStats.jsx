@@ -37,7 +37,7 @@ export default function GenresStats() {
   console.log('this', genresStats)
 
   useEffect(() => {
-    getGenresStats(JSON.parse(user).uid);
+    getGenresStats(user.uid);
   }, []);
 
   return (
