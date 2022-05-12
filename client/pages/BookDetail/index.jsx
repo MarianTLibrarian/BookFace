@@ -290,9 +290,6 @@ export default function BookDetail() {
         </div>
       </div>
         {renderModal()}
-        <div onClick={handleSnackBarClick('Added to Bookshelf')}>Added to Bookshelf</div>
-        <div onClick={handleSnackBarClick('Book Stats Updated')}>Book Stats Updated</div>
-        <div onClick={handleSnackBarClick('Please fill out the form')}>Please fill out the form</div>
         <ConsecutiveSnackbars handleSnackBarClick={handleSnackBarClick} snackPack={snackPack} setSnackPack={setSnackPack}/>
       </div>
     </div>
