@@ -47,7 +47,7 @@ export default function ReadingStatsWidget () {
   };
 
   useEffect(() => {
-    getTotal(JSON.parse(user).uid);
+    getTotal(user.uid);
   }, []);
 
   useEffect(() => {

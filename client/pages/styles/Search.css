@@ -1,0 +1,228 @@
+.Home {
+  text-align: center;
+}
+
+.Home-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Home-logo {
+    animation: Home-logo-spin infinite 20s linear;
+  }
+}
+
+.Home-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Home-link {
+  color: #61dafb;
+}
+
+@keyframes Home-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/***********************     Home     ***********************/
+
+.search-search-bar {
+  display: grid;
+  width: 100%;
+
+  grid-template-columns: 1fr 2fr 1fr;
+
+  margin-bottom: 1rem;
+}
+
+.search-search-bar input {
+  /* width: 240px; */
+  padding: 10px;
+  text-align: left;
+  border-radius: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.search-search-bar .search {
+  text-align: right;
+  padding: 0;
+  padding-bottom: 20px;
+}
+
+
+.trends {
+  padding: 80px 40px;
+}
+
+.trends-list {
+  padding-top: 20px;
+  display: flex;
+}
+
+.trends-book {
+  width: 25%;
+  padding: 20px;
+}
+
+.trends-book img {
+  width: 100%;
+}
+
+.featured-clubs {
+  display: flex;
+}
+
+.left {
+  width: 40%;
+  background: url('../assets/bookclubs.png') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 700px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left h3 {
+  padding-bottom: 20px;
+}
+
+.right {
+  width: 60%;
+  background: #eeeeee;
+}
+
+.clubs-list {
+padding:80px;
+}
+
+
+.surprise{
+  padding:80px 0;
+  height:700px;
+  position: relative;
+}
+
+
+
+.card {
+  color: #013243; /*SHERPA BLUE*/
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  width: 300px;
+  height: 400px;
+  background: #e0e1dc;
+  transform-style: preserve-3d;
+  transform: translate(-50%,-50%) perspective(2000px);
+  box-shadow: inset 300px 0 50px rgba(0,0,0,.5), 20px 0 60px rgba(0,0,0,.5);
+  transition: 1s;
+}
+
+.card:hover {
+  transform: translate(-50%,-50%) perspective(2000px) rotate(15deg) scale(1.5);
+  box-shadow: inset 20px 0 50px rgba(0,0,0,.5), 0 10px 100px rgba(0,0,0,.5);
+}
+
+.card:before {
+  content:'';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: #BAC1BA;
+  transform-origin: bottom;
+  transform: skewX(-45deg);
+}
+
+.card:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 5px;
+  height: 100%;
+  background: #92A29C;
+  transform-origin: left;
+  transform: skewY(-45deg);
+}
+
+.card .imgBox {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-origin: left;
+  transition: .7s;
+}
+
+.card .bark {
+  position: absolute;
+  background: #e0e1dc;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: .7s;
+}
+
+.card .imgBox img {
+  background: black;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card:hover .imgBox {
+  transform: rotateY(-135deg);
+}
+
+.card:hover .bark {
+  opacity: 1;
+  transition: .6s;
+  box-shadow: 300px 200px 100px rgba(0, 0, 0, .4) inset;
+}
+
+.card .details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 0 0 0 10px;
+  z-index: -1;
+  margin-top: 70px;
+}
+
+.card .details p {
+  font-size: 15px;
+  line-height: 5px;
+  transform: rotate(-10deg);
+  padding: 0 0 0 20px;
+}
+
+.card .details h4 {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+

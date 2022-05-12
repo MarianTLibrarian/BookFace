@@ -1,10 +1,11 @@
 const express = require('express');
-const app = express();
 const http = require('http');
-const server = http.createServer(app);
 const cors = require('cors');
 const path = require('path');
+const compression = require('compression');
 
+const app = express();
+const server = http.createServer(app);
 
 const { Server } = require('socket.io');
 
@@ -16,35 +17,31 @@ const router = require('./routes');
 
 app.use(cors());
 app.use(express.json());
-
-// app.use(express.urlencoded({ extended: true }));
-// app.use(morgan('dev'));
-// app.use(express.static(path.join(__dirname, '../assets')));
+app.use(compression());
 app.use(express.static(path.join(__dirname, '../client/pages')));
 app.use('/', router);
 
 const io = new Server(server, {
   cors: {
     origin: '*',
-    methods: ['GET', 'POST']
-  }
+    methods: ['GET', 'POST'],
+  },
 });
 
-
-io.on("connection", (socket) => {
+io.on('connection', (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
+  socket.on('join_room', (data) => {
     socket.join(data);
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
+  socket.on('send_message', (data) => {
+    socket.to(data.room).emit('receive_message', data);
   });
 
-  socket.on("disconnect", () => {
-    console.log("User Disconnected", socket.id);
+  socket.on('disconnect', () => {
+    console.log('User Disconnected', socket.id);
   });
 });
 

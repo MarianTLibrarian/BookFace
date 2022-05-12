@@ -15,7 +15,7 @@ const useStore = create((set) => ({
   setSearchQuery: (query) => set(() => ({ searchQuery: query })),
 
   bookDetails: null,
-  setBookDetails: (details) => set(() => ({ bookDetails: details})),
+  setBookDetails: (details) => set(() => ({ bookDetails: details })),
 
   clubName: null,
   setBookclubName: (name) => set(() => ({ clubName: name})),
@@ -24,7 +24,13 @@ const useStore = create((set) => ({
   setUsersBookclubs: (details) => set(() => ({ clubs: details})),
 
   bookclubDetails: null,
-  setBookclubDetails: (details) => set(() => ({ bookclubDetails : details}))
+  setBookclubDetails: (details) => set(() => ({ bookclubDetails: details })),
+
+  searchHistory: [],
+  setSearchHistory: (search) => set((history) => ({ searchHistory: [...history, search] })),
+
+  searchFilter: 'all',
+  setSearchFilter: (filter) => set(() => ({ searchFilter: filter })),
 }));
 
 export default useStore;
