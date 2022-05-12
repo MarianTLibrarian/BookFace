@@ -77,7 +77,7 @@ export default function BookClubDetail() {
 
                        <p> {event.eventTopic}
                        <br/>
-                        {event.eventTime}</p>
+                        <span>{event.eventTime}</span></p>
 
 
                      </div>
