@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import VideoChat from '../Chat/videoChat';
+import VideoChat from '../Chat/VideoChat';
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState('');
@@ -11,24 +11,24 @@ function Chat({ socket, username, room }) {
   // To do: use this state to render video chat button accordingly
   const [connected, setConnection] = useState(false);
 
-  const postToken = () => {
-    const data = {
-      room: 'currentRoom',
-      userName: 'currentUserName',
-    };
-    axios
-      .post('/token', data)
-      .then((res) => {
-        console.log('POST RES ON CLIENT SIDE', res);
-      })
-      .catch((err) => {
-        console.log('ERR in ChatRoom:', err.message);
-      });
-  };
+  // const postToken = () => {
+  //   const data = {
+  //     room: 'currentRoom',
+  //     userName: 'currentUserName',
+  //   };
+  //   axios
+  //     .post('/token', data)
+  //     .then((res) => {
+  //       console.log('POST RES ON CLIENT SIDE', res);
+  //     })
+  //     .catch((err) => {
+  //       console.log('ERR in ChatRoom:', err.message);
+  //     });
+  // };
 
-  useEffect(() => {
-    postToken();
-  });
+  // useEffect(() => {
+  //   postToken();
+  // });
 
   // Video Chat button: click to connect
   const handleClick = (e) => {

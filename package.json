@@ -10,6 +10,12 @@
     "test": "jest --config=jest.config.js",
     "socket": "nodemon socket.js"
   },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
