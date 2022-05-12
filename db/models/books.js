@@ -54,6 +54,7 @@ module.exports = {
 
   addBook(req, callback) {
     let {isbn, userId, title, authors, publisher, publishedDate, description, pageCount, categories, imageLinks, language} = req.body;
+    console.log(isbn, userId, title, authors, publisher, publishedDate, description, pageCount, categories, imageLinks, language);
     isbn = parseInt(isbn, 10);
     pageCount = parseInt(pageCount, 10);
     addDoc(collection(db, 'PersonalBookLibrary'), {
@@ -100,6 +101,7 @@ module.exports = {
 
   updateBook(req, callback) {
     let {rating, isbn, userId, bookshelf, startReadDate, endReadDate, readingStatus} = req.body;
+    console.log(rating, isbn, userId, bookshelf, startReadDate, endReadDate, readingStatus);
     isbn = parseInt(isbn, 10);
     rating = parseInt(rating, 10);
     const q = query(collection(db, 'PersonalBookLibrary'), where("userId", "==", `${userId}`), where("isbn", "==", isbn));
