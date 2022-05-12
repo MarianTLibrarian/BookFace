@@ -238,8 +238,6 @@ const bookclubName = useStore(state => state.bookclubName);
             <div className="contentRight">
               <Carousel selectedBookshelf={currentView} allBooks={renderedBooks} />
             </div>
-
-
           </div>
         </div>
       </div>
