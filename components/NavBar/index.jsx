@@ -32,16 +32,20 @@ export default function NavBar() {
       <div className="nav">
         <div className="logo">
           {' '}
-          <a href="/">
+          <NavLink exact to="/">
             <img alt="logo" src="../assets/logo.png" />
             <h3>BOOKFACE.</h3>
-          </a>
+          </NavLink>
           <div className="clear" />
         </div>
         <div className="menu">
           <div
             className="nav-search"
-            style={pathname === '/' ? { visibility: 'hidden' } : { visibility: 'visible' }}
+            style={
+              pathname === '/' || pathname === '/search'
+                ? { visibility: 'hidden' }
+                : { visibility: 'visible' }
+            }
           >
             <SearchBar />
           </div>
