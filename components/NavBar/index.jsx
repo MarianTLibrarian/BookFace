@@ -41,7 +41,11 @@ export default function NavBar() {
         <div className="menu">
           <div
             className="nav-search"
-            style={pathname === '/' ? { visibility: 'hidden' } : { visibility: 'visible' }}
+            style={
+              pathname === '/' || pathname === '/search'
+                ? { visibility: 'hidden' }
+                : { visibility: 'visible' }
+            }
           >
             <SearchBar />
           </div>
