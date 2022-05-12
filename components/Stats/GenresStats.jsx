@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../client/pages/styles/Stats.css';
 import { ResponsivePie } from '@nivo/pie';
+import useStore from '../../client/userStore';
 
 export default function GenresStats() {
+  const { user } = useStore();
   const [genresStats, setGenresStats] = useState([]);
 
   const getGenresStats = (uid) => {
@@ -33,7 +35,7 @@ export default function GenresStats() {
   };
 
   useEffect(() => {
-    getGenresStats(1);
+    getGenresStats(JSON.parse(user).uid);
   }, []);
 
   return (

@@ -11,10 +11,12 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import useStore from '../../client/userStore';
 
 export default function BookStats() {
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+  const { user } = useStore();
   const [totalReadPerYear, setTotalReadPerYear] = useState({});
 
   const getBooksTotal = (uid) => {
@@ -36,7 +38,7 @@ export default function BookStats() {
   };
 
   useEffect(() => {
-    getBooksTotal(1);
+    getBooksTotal(JSON.parse(user).uid);
   }, []);
 
   const state = {

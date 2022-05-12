@@ -11,10 +11,12 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import useStore from '../../client/userStore';
 
 export default function PagesStats() {
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+  const { user } = useStore();
   const [totalPagesPerYear, setTotalPagesPerYear] = useState({});
 
   const getPagesTotal = (uid) => {
@@ -40,7 +42,7 @@ export default function PagesStats() {
   };
 
   useEffect(() => {
-    getPagesTotal(1);
+    getPagesTotal(JSON.parse(user).uid);
   }, []);
 
   const state = {

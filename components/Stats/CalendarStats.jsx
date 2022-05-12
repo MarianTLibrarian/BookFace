@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../client/pages/styles/Stats.css';
 import { ResponsiveCalendar } from '@nivo/calendar';
+import useStore from '../../client/userStore';
 
 export default function CalendarStats() {
+  const { user } = useStore();
   const [calendarStats, setCalendarStats] = useState([]);
 
   const getCalendarStats = (uid) => {

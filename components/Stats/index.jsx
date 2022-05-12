@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import useStore from '../../client/userStore';
 import '../../client/pages/styles/Stats.css';
 
 import Dropdown from './Dropdown';
@@ -13,6 +14,7 @@ export default function Stats() {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
   };
 
+  const { user } = useStore();
   const [allBooksCount, setAllBooksCount] = useState(0);
   const [totalRead, setTotalRead] = useState([]);
 
@@ -35,7 +37,7 @@ export default function Stats() {
   };
 
   useEffect(() => {
-    getTotal(1);
+    getTotal(JSON.parse(user).uid);
   }, []);
 
   /*
