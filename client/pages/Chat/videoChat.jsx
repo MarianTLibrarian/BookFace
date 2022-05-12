@@ -38,9 +38,9 @@ export default function VideoChat() {
       Video.connect(data.token, {
         name: roomName,
       })
-        .then((room) => {
+        .then((newRoom) => {
           setConnecting(false);
-          setRoom(room);
+          setRoom(newRoom);
         })
         .catch((err) => {
           console.error(err);
