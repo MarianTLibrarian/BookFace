@@ -277,6 +277,7 @@ align-items: center;
   justify-content: center;
   align-items: center;
   padding-right: 30px;
+  cursor: pointer;
 }
 
 .chat-window .chat-header p {
