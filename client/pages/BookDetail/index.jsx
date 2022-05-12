@@ -215,9 +215,7 @@ export default function BookDetail() {
     }
     if (bookDetails.isbn) {
       setIsbn(bookDetails.isbn)
-    } else {
-      setIsbn(null)
-    }
+    } 
     if (bookDetails.title) {
       setTitle(bookDetails.title)
     }
