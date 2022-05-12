@@ -22,8 +22,9 @@ export default function BookDetailModal({bookshelves,value,setBookshelf,status,s
 
   const handleSubmit = ()=>{
     if (!value || !startReadDate || !endReadDate) {
-      console.log('NONONONO');
+      $(".hiddenbox2").click();
     } else {
+      $(".hiddenbox1").click();
       UpdateBook();
       handleClose();
     }
@@ -122,10 +123,12 @@ export default function BookDetailModal({bookshelves,value,setBookshelf,status,s
             }}
           />
         </div>
+        <div style={{color:'white'}} onClick={handleSnackBarClick('Book Stats Updated')} className='hiddenbox1'>test1</div>
+        <div style={{color:'white'}} onClick={handleSnackBarClick('Please fill out the form')} className='hiddenbox2'>test2</div>
         <div className='modalcancelbtn'>
           <Button variant="contained" onClick={handleClose}>Cancel</Button>
         </div>
-        <div className='modalsubmitbtn' onClick={handleSnackBarClick('Book Stats Updated')}>
+        <div className='modalsubmitbtn'>
           <Button variant="contained" onClick={handleSubmit} >Submit</Button>
         </div>
       </Box>
