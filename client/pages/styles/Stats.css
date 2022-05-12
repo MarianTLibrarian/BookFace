@@ -55,9 +55,7 @@
 }
 
 .genres-stats-container {
-  /* border: 1px solid red; */
   display: flex;
-  flex-direction: row;
   height: 50vh;
   width: 100%;
 }
@@ -67,75 +65,45 @@
   width: 100%;
 }
 
-
-/* ACCORDION */
-.accordion {
-  max-width: 100%;
-  margin: 2rem auto;
-}
-
-.accordion-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  cursor: pointer;
-  background-color: #21aeca;
-}
-
-.accordion-title:hover {
-  background-color: #3ab4cc;
-}
-
-.accordion-title,
-.accordion-content {
-  padding: 1rem;
-}
-
-.accordion-content {
-  background-color: #eeee;
-  height: 100%;
-}
-
-@media screen and (max-width: 700px) {
-  body {
-    font-size: 18px;
-  }
-
-  .accordion {
-    width: 90%;
-  }
-}
-
 /***********************     ReadingGoals Widget     ***********************/
 
-  .chart-text {
-    transform: translateY(0.25em);
-  }
+.chart-text {
+  transform: translateY(0.25em);
+}
 
-  .chart-number {
-    font-size: 0.6em;
-    line-height: 1;
-    text-anchor: middle;
-    transform: translateY(-0.25em);
-  }
+.chart-number {
+  font-size: 0.6em;
+  line-height: 1;
+  text-anchor: middle;
+  transform: translateY(-0.25em);
+}
 
-  .chart-label {
-    font-size: 0.18em;
-    text-transform: uppercase;
-    text-anchor: middle;
-    transform: translateY(0.7em);
-  }
+.chart-label {
+  font-size: 0.18em;
+  text-transform: uppercase;
+  text-anchor: middle;
+  transform: translateY(0.7em);
+}
 
-  .figure-key-list {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-  }
+.figure-key-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
 
-  .shape-circle {
-    display: inline-block;
-    vertical-align: middle;
-    width: 21px;
-    height: 21px;
-    border-radius: 50%;
-  }
+.shape-circle {
+  display: inline-block;
+  vertical-align: middle;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+}
+
+/***********************     No Data     ***********************/
+.genres-no-data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

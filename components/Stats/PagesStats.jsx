@@ -61,52 +61,68 @@ export default function PagesStats() {
 
   return (
     <div className="stats-container">
-      <h3>Total number of pages you have read over the years</h3>
-      <div className="stats-graph-container">
-        <Bar
-          data={state}
-          options={{
-            scales: {
-              x: {
-                ticks: {
-                  font: {
-                    size: 16,
+      {state.labels.length === 0 ? (
+        <div className="genres-no-data">
+          <h2>You have not read any books yet!</h2>
+          <iframe
+            src="https://giphy.com/embed/xUA7b2OfgTuVzqpVXq"
+            width="480"
+            height="480"
+            frameBorder="0"
+            class="giphy-embed"
+            allowFullScreen
+          ></iframe>
+        </div>
+      ) : (
+        <>
+          <h3>Total number of pages you have read over the years</h3>
+          <div className="stats-graph-container">
+            <Bar
+              data={state}
+              options={{
+                scales: {
+                  x: {
+                    ticks: {
+                      font: {
+                        size: 16,
+                      },
+                      precision: 0,
+                    },
                   },
-                  precision: 0
-                },
-              },
-              y: {
-                ticks: {
-                  font: {
-                    size: 30,
-                    weight: 'bold',
+                  y: {
+                    ticks: {
+                      font: {
+                        size: 30,
+                        weight: 'bold',
+                      },
+                    },
+                    grid: {
+                      display: false,
+                    },
                   },
                 },
-                grid: {
-                  display: false,
+                label: {
+                  fontSize: 20,
                 },
-              },
-            },
-            label: {
-              fontSize: 20,
-            },
-            indexAxis: 'y',
-            plugins: {
-              legend: {
-                display: false,
-              },
-              tooltip: {
-                titleFont: {
-                  size: 20,
+                indexAxis: 'y',
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                  tooltip: {
+                    titleFont: {
+                      size: 20,
+                    },
+                    bodyFont: {
+                      size: 16,
+                    },
+                  },
                 },
-                bodyFont: {
-                  size: 16,
-                },
-              },
-            },
-          }}
-        />
-      </div>
+              }}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

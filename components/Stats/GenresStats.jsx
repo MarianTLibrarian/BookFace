@@ -34,32 +34,43 @@ export default function GenresStats() {
       });
   };
 
+  console.log('this', genresStats)
+
   useEffect(() => {
     getGenresStats(JSON.parse(user).uid);
   }, []);
 
   return (
     <div className="genres-stats-container">
-      <ResponsivePie
-        data={genresStats}
-        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-        innerRadius={0.5}
-        padAngle={0.7}
-        cornerRadius={3}
-        activeOuterRadiusOffset={8}
-        borderWidth={1}
-        borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
-        arcLinkLabelsSkipAngle={10}
-        arcLinkLabelsTextColor="#333333"
-        arcLinkLabelsThickness={2}
-        arcLinkLabelsColor={{ from: 'color' }}
-        arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
-        theme={{
-          fontSize: 16,
-        }}
-      />
-      <div style={{ width: '20%' }} />
+    {genresStats.length === 0 ?
+      <div className="genres-no-data">
+        <h2>You have not read any books yet!</h2>
+        <iframe src="https://giphy.com/embed/xUA7b2OfgTuVzqpVXq" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+      </div>
+      :
+      <>
+        <ResponsivePie
+          data={genresStats}
+          margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+          innerRadius={0.5}
+          padAngle={0.7}
+          cornerRadius={3}
+          activeOuterRadiusOffset={8}
+          borderWidth={1}
+          borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
+          arcLinkLabelsSkipAngle={10}
+          arcLinkLabelsTextColor="#333333"
+          arcLinkLabelsThickness={2}
+          arcLinkLabelsColor={{ from: 'color' }}
+          arcLabelsSkipAngle={10}
+          arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
+          theme={{
+            fontSize: 16,
+          }}
+        />
+        <div style={{ width: '20%' }} />
+      </>
+    }
     </div>
   );
 }
