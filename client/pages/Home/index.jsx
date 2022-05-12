@@ -9,10 +9,9 @@ import useStore from '../../userStore';
 
 export default function Home() {
 
-  const { bookclubDetails, bookDetails} = useStore();
-
+  const { setBookclubDetails} = useStore();
   const setPopularBookclubs = useStore(state => state.setPopularBookclubs);
-  const popularBookclubs = useStore(state => state.popularBookclubs);
+
 
   const [fiction, setFictionTrends] = useState([]);
   const [nonFiction, setNonfictionTrends] = useState([]);
@@ -32,7 +31,9 @@ export default function Home() {
   const getTrendingBookclubs = () => {
     axios.get('http://localhost:3030/bookclubs')
       .then(({ data }) => {
-        setPopularBookclubs(data);
+
+        setBookclubDetails(data);
+        console.log("setBookclubDetails", data)
         const featuredClubs = data.slice(0, 8);
         setBookClubs(featuredClubs);
       })

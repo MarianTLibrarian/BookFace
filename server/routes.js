@@ -17,8 +17,8 @@ router.put('/books/update', controller.books.updateBook);
 // ---                          ---
 // --- Book Clubs API endpoints ---
 // ---                          ---
-router.get('/bookclubs', routeCache.cacheSeconds(3600), controller.bookclubs.allClubs);
-router.get('/myBookclubs', routeCache.cacheSeconds(3600), controller.bookclubs.myClubs);
+router.get('/bookclubs', controller.bookclubs.allClubs);
+router.get('/myBookclubs', controller.bookclubs.myClubs);
 
 router.post('/bookclub/create', controller.bookclubs.createClub);
 router.post('/bookclubs/messages', controller.bookclubs.postMessage);
@@ -37,7 +37,7 @@ router.post('/bookshelves/create', controller.bookshelves.addBookshelf);
 // ---                               ---
 // --- Bookclub events API endpoints ---
 // ---                               ---
-router.get('/events', routeCache.cacheSeconds(3600), controller.events.allEvents);
+router.get('/events', controller.events.allEvents);
 router.post('/events/create', controller.events.addEvent);
 
 module.exports = router;

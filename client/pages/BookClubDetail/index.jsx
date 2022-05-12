@@ -6,7 +6,6 @@ import LockIcon from '@mui/icons-material/Lock';
 import ForumIcon from '@mui/icons-material/Forum';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
-// import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
 import LiveChat from './LiveChat'
 import Calendar from './Calendar';
 import '../styles/BookClubDetails.css';
@@ -16,89 +15,36 @@ import useStore from '../../userStore';
 
 
 export default function BookClubDetail() {
+
   const [myClub, setMyClub] = useState(null);
-<<<<<<< HEAD
-  const {user, setUser, setToken, bookclubDetails, usersBookclubs } = useStore();
-=======
-  const { user, setUser, setToken, bookclubDetails, usersBookclubs } = useStore();
->>>>>>> main
+  const {user, setUser, setToken, bookclubDetails, usersBookclubs, clubName, popularBookclubs} = useStore();
   const [events, setEvents] = useState(null)
   const [chat, setChat] = useState(false)
-  const [clubName, setClubNames] = useState(null);
+  const [clubNameList, setClubNames] = useState(null);
+
+  const currentClub = bookclubDetails.filter(club => club.bookclubInfo.bookclubName === clubName);
+  console.log("currentClub", currentClub)
 
 
-<<<<<<< HEAD
+
+
   const getEvents = () => {
-=======
-  const getMessages = () => {
->>>>>>> main
-    axios.get('http://localhost:3030/events', { params: { bookclubName: bookclubDetails.bookclubName } })
+    axios.get('http://localhost:3030/events', { params: { bookclubName: currentClub[0].bookclubInfo.bookclubName } })
       .then(({ data }) => {
         setEvents(data)
       })
       .catch(err => {
         console.error(err);
       })
-<<<<<<< HEAD
       setEvents(events)
   }
 
 
-  // const getEvents = () => {
-  //   axios.get('http://localhost:3030/events', { params: { bookclubName: bookclubDetails.bookclubName } })
-  //     .then(({ data }) => {
-  //       setEvents(data)
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     })
-  //     setEvents(events)
-  // }
-
-
-  const getBookclubs = (id) => {
-    axios
-      .get('http://localhost:3030//myBookclubs', { params: { userId: id }})
-      .then(({ data }) => {
-        // console.log('bookclubs', data);
-        setClubNames(data.results);
-
-=======
-    setMyClub(bookclubDetails)
-
-  }
-
-  const getBookclubs = (uid) => {
-    axios
-      .get('http://localhost:3030//myBookclubs', { params: { userId: 'qwew' } })
-      .then(({ data }) => {
-        // console.log('bookclubs', data);
-        setClubNames(data.results)
-
->>>>>>> main
-        const temp = [];
-        for (let i = 0; i < data.results.length; i += 1) {
-          temp.push(data.results[i].bookclubInfo.bookclubName);
-        }
-        setClubNames(temp);
-
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-
   useEffect(() => {
-<<<<<<< HEAD
     getEvents();
-    getBookclubs('qwew')
-=======
-    getMessages()
-    getBookclubs()
 
->>>>>>> main
   }, [])
+
 
 
   const handleUserLogin = () => signInWithGoogle()
@@ -116,7 +62,7 @@ export default function BookClubDetail() {
     setChat(!chat)
   }
   const style = {
-    background: `url('${bookclubDetails.bookclubInfo.imageUrl}') no-repeat center center fixed`
+    background: `url('${currentClub[0].bookclubInfo.imageUrl}') no-repeat center center fixed`
   }
 
   const renderChat = () => {
@@ -131,7 +77,7 @@ export default function BookClubDetail() {
           </div>
         </div>
         <div className='club-posts'>
-          {bookclubDetails.posts.map(post =>
+          {currentClub[0].posts.map(post =>
             <Posts post={post} key={post} />
           )}
         </div>
@@ -143,6 +89,7 @@ export default function BookClubDetail() {
   }
 
   const renderView = () => {
+
     if (user) {
       return <div style={{ 'width': '100%' }}>
         <div className='search-bar'>
@@ -154,9 +101,9 @@ export default function BookClubDetail() {
           <div className='content-left'>
             <div className='my-clubs'>
               <h2>My Book Clubs</h2>
-              {/* {clubName.map(club =>
+              {bookclubDetails.map(club =>
                 <MyBookClubs club={club} key={club} />
-              )} */}
+              )}
             </div>
 
             <div className='upcoming-events'>
@@ -224,7 +171,7 @@ export default function BookClubDetail() {
           <div className='filter' />
           <div className='main-content'>
             <div>
-              <h1>{bookclubDetails.bookclubInfo.bookclubName}</h1>
+              <h1>{currentClub[0].bookclubInfo.bookclubName}</h1>
               {user ? null : <div className='main-content-btn'>
                 <button type='button' onClick={handleUserLogin}>LOG IN</button>
               </div>}
@@ -236,7 +183,7 @@ export default function BookClubDetail() {
       <div className="description">
         <div className="text">
           <p>
-            {bookclubDetails.bookclubInfo.description}
+            {currentClub[0].bookclubInfo.description}
           </p>
         </div>
       </div>

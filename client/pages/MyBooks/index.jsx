@@ -69,14 +69,18 @@ export default function MyBooks() {
     axios
       .get(`${expressUrl}/myBookclubs`, { params: { userId: uid } })
       .then(({ data }) => {
-        // console.log('bookclubs', data);
+        console.log('setBookclubDetails', data.results);
+
         setBookclubDetails(data.results)
 
         const temp = [];
         for (let i = 0; i < data.results.length; i += 1) {
           temp.push(data.results[i].bookclubInfo.bookclubName);
         }
+
         setBookclubs(temp);
+
+        console.log('setUsersBookclubs', temp);
         setUsersBookclubs(temp)
 
       })

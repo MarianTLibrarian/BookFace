@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-
-export default function Carousel({ club, width }) {
+export default function Carousel({ club, width, carouselClick }) {
 
   const { imageUrl, bookclubName, membersCount, description } = club.bookclubInfo;
 
@@ -14,14 +14,18 @@ export default function Carousel({ club, width }) {
 
   return (
     <div className='my-club-info'>
-      <img onLoad={onImgLoad} src={imageUrl} alt='clubImage' />
+      <Link to='/bookclubdetail'>
+        <img onLoad={onImgLoad} src={imageUrl} alt='clubImage' onClick={carouselClick} value={bookclubName} />
+      </Link>
       <div className='club-detail'>
         <h2>{bookclubName}</h2>
         <h3>{membersCount} Members</h3>
         <p>{text}</p>
+        <Link to='/bookclubdetail'>
         <div className='btn'>
-          <button type='button'>MORE</button>
+          <button type='button'onClick={carouselClick} value={bookclubName}>MORE</button>
         </div>
+        </Link>
       </div>
     </div>
   );

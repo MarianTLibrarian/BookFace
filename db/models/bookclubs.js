@@ -33,7 +33,7 @@ module.exports = {
   },
 
   myClubs(req, callback) {
-    
+
     const { userId } = req.query;
     const q = query(collection(db, "bookclubs"), where("users", "array-contains", `${userId}`));
     getDocs(q)
