@@ -4,7 +4,8 @@ const http = require('http');
 const server = http.createServer(app);
 const cors = require('cors');
 const path = require('path');
-
+const AccessToken = require('twilio').jwt.AccessToken;
+const VideoGrant = AccessToken.VideoGrant;
 
 const { Server } = require('socket.io');
 
@@ -47,5 +48,36 @@ io.on("connection", (socket) => {
     console.log("User Disconnected", socket.id);
   });
 });
+
+
+function tokenGenerator(userName, room) {
+  const twilioAccountSid = "ACdae279537bb04063d528bc06648dbb30";
+  const twilioApiKey = "SKbb5b2c7f61ae912b2858a3d616794847";
+  const twilioApiSecret = "4Us5B8UGqzgAw5GQrODU8urFtKtrtN5M";
+
+  const identity = userName;
+
+  const videoGrant = new VideoGrant({
+    room: room,
+  });
+  const token = new AccessToken(
+    twilioAccountSid,
+    twilioApiKey,
+    twilioApiSecret,
+    { identity: identity }
+  );
+  token.addGrant(videoGrant);
+  return token.toJwt()
+}
+
+app.post("/token", (req, res) => {
+  const asynch = async () => {
+    const userName = req.body.userName;
+    const room = req.body.room;
+    const token = await tokenGenerator(userName, room);
+    res.json(token);
+  }
+  asynch()
+})
 
 server.listen(PORT, () => console.info(`Server listening on port ${PORT}\n`));

@@ -70,6 +70,7 @@ function Chat({ socket, username, room }) {
         <button onClick={sendMessage}>&#9658;</button>
       </div>
     </div>
+
   );
 }
 
