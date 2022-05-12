@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import SearchBar from '../../../components/SearchBar';
 import useStore from '../../userStore';
 
 import '../styles/Search.css';
 
+const defaultRenderedItems = 'Loading ...';
+
 export default function Search() {
   const searchQuery = useStore((state) => state.searchQuery);
-  const searchHistory = useStore((state) => state.searchHistory);
-  const setSearchHistory = useStore((state) => state.setSearchHistory);
+  const searchFilter = useStore((state) => state.searchFilter) || 'books';
   const expressUrl = useStore((state) => state.expressUrl);
   const user = useStore((state) => state.user);
+
+  const [renderedItems, setRenderedItems] = useState(defaultRenderedItems);
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -19,11 +21,11 @@ export default function Search() {
 
   const searchBooks = async () => {
     const res = await fetch(`${expressUrl}/search?q=${searchQuery}`);
-    const { volumeInfo } = await res.json();
+    const books = await res.json();
 
     // TODO: setSearchHistory
 
-    return volumeInfo;
+    return books.map((book) => book.volumeInfo);
   };
 
   const searchMyBooks = async () => {
@@ -43,7 +45,7 @@ export default function Search() {
     // TODO: setSearchHistory
 
     return books;
-  }
+  };
 
   const searchClubs = async () => {
     const res = await fetch(`${expressUrl}/bookclubs`);
@@ -52,7 +54,7 @@ export default function Search() {
     // TODO: setSearchHistory
 
     return clubs;
-  }
+  };
 
   const searchMyClubs = async () => {
     const { uid } = user;
@@ -63,6 +65,41 @@ export default function Search() {
 
     return clubs;
   };
+
+  useEffect(() => {
+    if (!user || !searchQuery.trim()) {
+      setRenderedItems(defaultRenderedItems);
+    } else {
+      (async () => {
+        let result = defaultRenderedItems;
+
+        switch (searchFilter) {
+          case 'all':
+          case 'books':
+            result = await searchBooks();
+            break;
+
+          case 'myBooks':
+            result = await searchMyBooks();
+            break;
+
+          case 'clubs':
+            result = await searchClubs();
+            break;
+
+          case 'myClubs':
+            result = await searchMyClubs();
+            break;
+
+          default:
+            break;
+        }
+
+        // FIXME: Each response needs to be mapped separately, since they have different structures
+        setRenderedItems(result.map((item) => <li key={Math.random()}>{JSON.stringify(item)}</li>));
+      })();
+    }
+  }, [searchQuery, searchFilter, user]);
 
   return (
     <div className="Home">
@@ -78,7 +115,6 @@ export default function Search() {
           </div>
         </div>
       </div>
-
       <div className="description">
         <div className="text">
           <p>
@@ -92,22 +128,7 @@ export default function Search() {
       <div className="trends">
         <h1>TRENDS</h1>
         <p>Simple is Better.</p>
-        <div className="trends-list">trends</div>
-      </div>
-
-      <div className="featured-clubs">
-        <div className="left">
-          <div>
-            <h3>FEATURED</h3>
-            <h1>BOOK CLUBS</h1>
-          </div>
-        </div>
-        <div className="right">
-          <div className="clubs-list">
-            clubs
-            <div className="clear" />
-          </div>
-        </div>
+        <div className="trends-list">{renderedItems}</div>
       </div>
     </div>
   );
