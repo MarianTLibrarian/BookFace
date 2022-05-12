@@ -1,18 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
+import axios from 'axios';
 import SendIcon from '@mui/icons-material/Send';
 import LockIcon from '@mui/icons-material/Lock';
 import ForumIcon from '@mui/icons-material/Forum';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
+
+import Calendar from './Calendar';
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
 
+
+
 export default function BookClubDetail() {
   const [myClub, setMyClub] = useState(PopularBookclubs.results);
   const { user, setUser, setToken } = useStore();
+  const [events, setEvents] = useState(null)
+
+  useEffect(() => {
+    axios.get('http://localhost:3030/events', { params: { bookclubName: "Read With Haley (Official)" } })
+      .then(({ data }) => {
+        setEvents(data)
+      })
+      .catch(err => {
+        console.error(err);
+      })
+
+  }, [])
   const [chat, setChat] = useState(false)
+
 
 
   const handleUserLogin = () => signInWithGoogle()
@@ -71,16 +90,40 @@ export default function BookClubDetail() {
                 <MyBookClubs club={club} key={club} />
               )}
             </div>
+
             <div className='upcoming-events'>
               <h2>Upcoming Events</h2>
+
+              {
+                events ?
+                  events.map((event, index) =>
+                      // <Event event={event} index={index}/>
+                      <div key={Math.random()}>
+                        <p>
+                          <span style={{fontWeight:'bold'}}>Topic: </span>
+                          {event.eventTopic}
+                        </p>
+                        <p>
+                          <span style={{fontWeight:'bold'}}>Date: </span>
+                          {moment( event.eventTime).format('MMMM Do YYYY') }
+                        </p>
+                        <p>
+                          <span style={{fontWeight:'bold'}}>Time: </span>
+                          {moment(event.eventTime).format( 'h:mm a')}
+                        </p>
+
+                     </div>
+                  )
+                  : null
+              }
+
             </div>
-            <div className='calendar'>
-              <h2>Calendar</h2>
-            </div>
+
             <div className='create-events'>
-              <button type='button'>CREATE AN EVENT</button>
+              <Calendar setEvents={setEvents} events={events} />
             </div>
           </div>
+
           <div className='content-right'>
             {renderChat()}
           </div>
@@ -137,3 +180,5 @@ export default function BookClubDetail() {
     </div>
   );
 }
+
+

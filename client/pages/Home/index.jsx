@@ -1,20 +1,44 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../styles/Home.css';
 import SearchBar from '../../../components/SearchBar';
 import Trends from './Trends';
 import BookClubs from './BookClubs';
-import PopularBooks from '../../../fakeData/books/popularBooks';
-import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
 
 export default function Home() {
-  const [trends, setTrends] = useState([]);
-  const [bookClubs, setBookClubs] = useState([]);
+
+  const [fiction, setFictionTrends] = useState([]);
+  const [nonFiction, setNonfictionTrends] = useState([]);
+  const [bookClubs, setBookClubs] = useState([])
+
+
+  const getTrendingBooks = () => {
+    axios.get('http://localhost:3030/popularBooks')
+      .then(({data}) => {
+        setFictionTrends(data.lists[0].books);
+        setNonfictionTrends(data.lists[1].books);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
+  const getTrendingBookclubs = () => {
+    axios.get('http://localhost:3030/bookclubs')
+      .then(({data}) => {
+        const featuredClubs = data.slice(0, 8)
+        setBookClubs(featuredClubs)
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
 
   useEffect(() => {
-    setTrends(PopularBooks.lists[0].books);
-    const featuredClubs = PopularBookclubs.results.slice(0, 8);
-    setBookClubs(featuredClubs);
-  }, []);
+    getTrendingBooks();
+    getTrendingBookclubs()
+  }, [])
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -45,11 +69,18 @@ export default function Home() {
       </div>
 
       <div className="trends">
-        <h1>TRENDS</h1>
-        <p>Simple is Better.</p>
+        <h1>Explore Trends</h1>
+        <p>What will you discover?</p>
+        <h2 style={{textAlign: 'left'}}>Fiction: </h2>
         <div className="trends-list">
-          {trends.map((book) => (
-            <Trends book={book} key={Math.random()} />
+          {fiction.map((book) => (
+            <Trends book={book} key={book} />
+          ))}
+        </div>
+        <h2 style={{textAlign: 'left'}}>Non-Fiction: </h2>
+        <div className="trends-list">
+          {nonFiction.map((book) => (
+            <Trends book={book} key={book} />
           ))}
         </div>
       </div>
