@@ -12,6 +12,7 @@ const BookClubs = lazy(() => import('./BookClubs'));
 const BookDetail = lazy(() => import('./BookDetail'));
 const Home = lazy(() => import('./Home'));
 const MyBooks = lazy(() => import('./MyBooks'));
+const Search = lazy(() => import('./Search'));
 
 
 function NotFound() {
@@ -24,7 +25,7 @@ export default function App() {
   useEffect(() => {
     const userData = localStorage.getItem('user_data');
     if (userData) {
-      setUser(userData);
+      setUser(JSON.parse(userData));
     }
 
   }, []);
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/bookclubs" element={<BookClubs />} />
           <Route path="/bookclubdetail" element={<BookClubDetail />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/search" element={<Search />} />
           <Route path="*" element={NotFound} />
         </Routes>
         {/* Stretch: <LiveChat /> */}
