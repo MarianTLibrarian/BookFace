@@ -21,7 +21,10 @@ const useStore = create((set) => ({
   setBookclubName: (name) => set(() => ({ bookclubName: name})),
 
   bookclubDetails: null,
-  setBookclubDetails: (details) => set(() => ({ bookclubDetails : details}))
+  setBookclubDetails: (details) => set(() => ({ bookclubDetails : details})),
+
+  searchHistory: [],
+  setSearchHistory: (search) => set((history) => ({ searchHistory: [...history, search] })),
 }));
 
 export default useStore;
