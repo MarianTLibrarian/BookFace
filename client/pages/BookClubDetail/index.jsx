@@ -7,7 +7,7 @@ import ForumIcon from '@mui/icons-material/Forum';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
 import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
-
+import LiveChat from './LiveChat'
 import Calendar from './Calendar';
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
@@ -70,7 +70,7 @@ export default function BookClubDetail() {
       </div>
     }
     return <div className='chat-box'>
-      @@
+     <LiveChat />
     </div>
   }
 
@@ -180,5 +180,4 @@ export default function BookClubDetail() {
     </div>
   );
 }
-
 

@@ -54,7 +54,7 @@ export default function NavBar() {
             </NavLink>
           ) : null}
           <NavLink activeClassName="active" to="/bookclubs">
-            {user ? 'My clubs' : 'Clubs'}
+            {user ? 'My Clubs' : 'Clubs'}
           </NavLink>
           {user ? <AccountMenu /> : <a onClick={handleSignIn}>Sign In</a>}
         </div>
