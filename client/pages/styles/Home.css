@@ -67,23 +67,67 @@
 
 
 .trends {
-  padding: 80px 40px;
+  padding: 100px 40px 120px 40px;
+  width: 80vw;
+  margin: auto;
 }
 
+.trends h1{
+  padding-bottom:50px;
+}
 .trends-list {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 0 20px;
   display: flex;
 }
 
 .trends-book {
-  width: 25%;
-  padding: 20px;
+  width: 20%;
+  padding: 20px 20px 0 20px;
 }
 
 .trends-book img {
   width: 100%;
 }
+
+.trends h2 {
+  text-align: center !important;
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  padding-top:40px;
+
+}
+
+.trends h2::before{
+  content: '「';
+  position: absolute;
+  margin-left: -40px;
+  margin-top: -8px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.trends h2::after{
+  content: '」';
+  bottom: -3px;
+  position: absolute;
+  margin-left: 8px;
+  margin-bottom: 0;
+  font-size: 30px;
+}
+
+
+.retroshadow {
+  color: #2c2c2c;
+  letter-spacing: .05em;
+  text-shadow:
+    2px 2px 0px #d5d5d5,
+    3px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
 
 .featured-clubs {
   display: flex;
@@ -113,20 +157,21 @@
 }
 
 .clubs-list {
-padding:80px;
+  padding: 80px;
 }
 
 
-.surprise{
-  padding:80px 0;
-  height:700px;
+.surprise {
+  padding: 80px 0;
+  height: 700px;
   position: relative;
 }
 
 
 
 .card {
-  color: #013243; /*SHERPA BLUE*/
+  color: #013243;
+  /*SHERPA BLUE*/
   position: absolute;
   top: 55%;
   left: 50%;
@@ -134,18 +179,18 @@ padding:80px;
   height: 400px;
   background: #e0e1dc;
   transform-style: preserve-3d;
-  transform: translate(-50%,-50%) perspective(2000px);
-  box-shadow: inset 300px 0 50px rgba(0,0,0,.5), 20px 0 60px rgba(0,0,0,.5);
+  transform: translate(-50%, -50%) perspective(2000px);
+  box-shadow: inset 300px 0 50px rgba(0, 0, 0, .5), 20px 0 60px rgba(0, 0, 0, .5);
   transition: 1s;
 }
 
 .card:hover {
-  transform: translate(-50%,-50%) perspective(2000px) rotate(15deg) scale(1.5);
-  box-shadow: inset 20px 0 50px rgba(0,0,0,.5), 0 10px 100px rgba(0,0,0,.5);
+  transform: translate(-50%, -50%) perspective(2000px) rotate(15deg) scale(1.5);
+  box-shadow: inset 20px 0 50px rgba(0, 0, 0, .5), 0 10px 100px rgba(0, 0, 0, .5);
 }
 
 .card:before {
-  content:'';
+  content: '';
   position: absolute;
   top: -5px;
   left: 0;
@@ -227,3 +272,138 @@ padding:80px;
   text-align: right;
 }
 
+
+.book {
+  width: 100%;
+  height: 100%;
+  position:relative;
+  text-align: center;
+  margin:2.5%;
+}
+
+.book-cover {
+  position: absolute;
+  z-index:1;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 50%;
+  -webkit-transform-origin: 0 50%;
+  background: #111;
+  background-size:cover;
+  border-radius: 3px;
+  box-shadow:
+    inset 4px 1px 3px #ffffff60,
+    inset 0 -1px 2px #00000080;
+  transition: all .5s ease-in-out;
+  -webkit-transition: all .5s ease-in-out;
+}
+
+
+.book .book-cover {
+  background-size: 100% 100%;
+}
+
+
+.effect {
+  width: 20px;
+  height: 100%;
+  margin-left: 10px;
+  border-left: 2px solid #00000010;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+  transition: all .5s ease;
+}
+
+.light {
+  width: 90%;
+  height: 100%;
+  position: absolute;
+  border-radius: 3px;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%);
+  top: 0;
+  right:0;
+  opacity: .1;
+  transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+}
+
+.book:hover { cursor:pointer; }
+
+.book:hover .book-cover {
+  transform: perspective(2000px) rotateY(-30deg);
+  -webkit-transform: perspective(2000px) rotateY(-30deg);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  box-shadow:
+    inset 4px 1px 3px #ffffff60,
+    inset 0 -1px 2px #00000080,
+    10px 0px 10px -5px #00000030
+}
+
+.book:hover .effect {
+  width: 40px;
+}
+
+.book:hover .light {
+  opacity: 1;
+  width: 70%;
+}
+
+.book-inside{
+  width: calc(100% - 2px);
+  height:96%;
+  position:relative;
+  top: 2%;
+  border: 1px solid grey;
+  border-radius:3px;
+  background: white;
+  box-shadow:
+  10px 40px 40px -10px #00000030,
+  inset -2px 0 0 grey,
+  inset -3px 0 0 #dbdbdb,
+  inset -4px 0 0 white,
+  inset -5px 0 0 #dbdbdb,
+  inset -6px 0 0 white,
+  inset -7px 0 0 #dbdbdb,
+  inset -8px 0 0 white,
+  inset -9px 0 0 #dbdbdb;
+}
+
+.book-inside img{
+  opacity: 0;
+}
+
+.trends-book .book .book-cover{
+  background-size:100% 100% !important;
+}
+
+.bookshelf{
+  margin-top: -12px;
+}
+
+.bookshelf img{
+  width:100%
+}
+
+.col-right p{
+  color:black;
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+  .trends {
+    width: 100vw;
+  }
+
+}
+
+@media only screen and (max-width: 800px) {
+  .trends {
+    padding:40px 10px;
+  }
+
+  .trends h1{
+    padding-bottom:20px;
+  }
+
+}
