@@ -258,3 +258,14 @@ padding-top:30px;
 .club-listing:hover {
   cursor: pointer;
 }
+
+.no-club {
+  width: 40%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover !important;
+  height: 500px;
+  border-radius: 20px 0 0 20px;
+  background-image: url("https://img.freepik.com/free-photo/top-view-books-with-copy-space_23-2148827187.jpg?w=1800&t=st=1652479532~exp=1652480132~hmac=f7cff3eb2e6fd0ef14154d0f0fa6a14d0f0072f3fcd842d6245007fb6436dd04");
+}

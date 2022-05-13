@@ -23,6 +23,7 @@ export default function PagesStats() {
     axios
       .get('http://localhost:3030/books', { params: { userId: uid } })
       .then(({ data }) => {
+        console.log(data.results)
         const yearData = {};
         for (let i = 0; i < data.results.length; i += 1) {
           if (data.results[i].readingStatus === 'read') {
