@@ -187,9 +187,7 @@ export default function BookDetail() {
     };
 
   useEffect(()=>{
-    if (user) {
-      getBookshelves();
-    }
+    if (!bookDetails) return;
     if (bookDetails.readingStatus) {
       setStatus(bookDetails.readingStatus)
     } else {
@@ -254,7 +252,13 @@ export default function BookDetail() {
     }
     // console.log('inbookshelf', inBookShelf);
     // console.log('edited', edited);
-  },[user, bookDetails])
+  }, [bookDetails])
+
+  useEffect(() => {
+    if (user) {
+      getBookshelves();
+    }
+  }, [user]);
 
   return (
     <div className='header-container'>
