@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import SendIcon from '@mui/icons-material/Send';
-import VideoChat from '../Chat/VideoChat';
+// import VideoChat from '../Chat/VideoChat';
+import VideoChat from './videoChat'
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState('');
@@ -15,10 +16,10 @@ function Chat({ socket, username, room }) {
   const sendMessage = () => {
     if (currentMessage !== '') {
       const messageData = {
-        room: room,
+        room,
         author: username,
         message: currentMessage,
-        time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
+        time: `${new Date(Date.now()).getHours()  }:${  new Date(Date.now()).getMinutes()}`,
       };
 
       socket.emit('send_message', messageData);
@@ -71,11 +72,9 @@ function Chat({ socket, username, room }) {
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
-          onKeyPress={(event) => {
-            event.key === 'Enter' && sendMessage();
-          }}
+          onKeyPress={(event) => event.key === 'Enter' && sendMessage()}
         />
-        <button onClick={sendMessage}>
+        <button onClick={sendMessage} type="button">
           <SendIcon />
         </button>
       </div>
