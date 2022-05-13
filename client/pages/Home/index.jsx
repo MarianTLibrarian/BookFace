@@ -9,10 +9,10 @@ import useStore from '../../userStore';
 
 export default function Home() {
 
-  const { bookclubDetails, bookDetails} = useStore();
+  const {user, setPopularBookclubs,setBookclubDetails, setUsersBookclubs} = useStore();
+  // const setUsersBookclubs = useStore(state => state.setUsersBookclubs);
 
-  const setPopularBookclubs = useStore(state => state.setPopularBookclubs);
-  const popularBookclubs = useStore(state => state.popularBookclubs);
+
 
   const [fiction, setFictionTrends] = useState([]);
   const [nonFiction, setNonfictionTrends] = useState([]);
@@ -32,7 +32,10 @@ export default function Home() {
   const getTrendingBookclubs = () => {
     axios.get('http://localhost:3030/bookclubs')
       .then(({ data }) => {
+
+        setBookclubDetails(data);
         setPopularBookclubs(data);
+
         const featuredClubs = data.slice(0, 8);
         setBookClubs(featuredClubs);
       })
@@ -41,9 +44,31 @@ export default function Home() {
       })
   }
 
+    const getMybookclubs = (uid) => {
+      axios
+        .get('http://localhost:3030/myBookclubs', { params: { userId: uid } })
+        .then(({ data }) => {
+          const temp = [];
+          for (let i = 0; i < data.results.length; i += 1) {
+            temp.push(data.results[i].bookclubInfo.bookclubName);
+          }
+      
+          setUsersBookclubs(temp)
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+
   useEffect(() => {
     getTrendingBooks();
-    getTrendingBookclubs()
+    getTrendingBookclubs();
+    if(user) {
+      getMybookclubs(user.uid)
+    }
+
   }, [])
 
   const style = {
@@ -75,24 +100,19 @@ export default function Home() {
       </div>
 
       <div className="trends">
-        <h1>EXPLORE TRENDS</h1>
-
+        <h1>Explore Trends</h1>
+        <p>What will you discover?</p>
+        <h2 style={{ textAlign: 'left' }}>Fiction: </h2>
         <div className="trends-list">
           {fiction.map((book) => (
             <Trends book={book} key={book} />
           ))}
         </div>
-        <div className='bookshelf'>
-          <img src='../../../assets/shelf_wood.png' alt='shelf'/>
-        </div>
-
+        <h2 style={{ textAlign: 'left' }}>Non-Fiction: </h2>
         <div className="trends-list">
           {nonFiction.map((book) => (
             <Trends book={book} key={book} />
           ))}
-        </div>
-        <div className='bookshelf'>
-        <img src='../../../assets/shelf_wood.png' alt='shelf'/>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../styles/BookClubs.css';
 
 export default function BookClubs({ club, user, joinBookclub }) {
   const { imageUrl, bookclubName, membersCount, description } = club.bookclubInfo;
