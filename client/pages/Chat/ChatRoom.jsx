@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import SendIcon from '@mui/icons-material/Send';
-import VideoChat from './videoChat'
+import VideoChat from './videoChat';
+import ScrollToBottom from "react-scroll-to-bottom";
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState('');
@@ -14,11 +15,12 @@ function Chat({ socket, username, room }) {
 
   const sendMessage = () => {
     if (currentMessage !== '') {
+      const timeStamp = (('0'+ (new Date(Date.now()).getHours())).slice(-2)+ ':' + ('0'+ (new Date(Date.now()).getMinutes())).slice(-2));
       const messageData = {
         room: room,
         author: username,
         message: currentMessage,
-        time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
+        time: timeStamp,
       };
 
       socket.emit('send_message', messageData);
@@ -47,7 +49,7 @@ function Chat({ socket, username, room }) {
         </div>
       )}
       <div className="chat-body">
-        <div className="message-container">
+        <ScrollToBottom className="message-container">
           {messageList.map((messageContent) => (
             <div className="message" id={username === messageContent.author ? 'you' : 'other'}>
               <div>
@@ -61,7 +63,7 @@ function Chat({ socket, username, room }) {
               </div>
             </div>
           ))}
-        </div>
+        </ScrollToBottom>
       </div>
       <div className="chat-footer">
         <input

@@ -105,15 +105,15 @@ export default function BookDetailModal({bookshelves,value,setBookshelf,status,s
         </div>
 
         <div className='modaldatestarted'>
-          DATE STARTED
+          <div className='modaltitle'>DATE STARTED</div>
           <DatePicker value={startReadDate} onChange={(date) => setStartReadDate(date)} />
         </div>
         <div className='modaldateend'>
-          DATE FINISHED
+        <div className='modaltitle'>DATE FINISHED</div>
           <DatePicker value={endReadDate} onChange={(date) => setEndReadDate(date)} />
         </div>
         <div className='modalrating'>
-          RATE THIS BOOK
+        <div className='modaltitle'> RATE THIS BOOK</div>
           <Rating
             name="simple-controlled"
             value={star}

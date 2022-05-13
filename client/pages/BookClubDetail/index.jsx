@@ -39,7 +39,9 @@ export default function BookClubDetail() {
 
   useEffect(() => {
     getEvents();
-    setPosts(currentClub[0].posts);
+    setPosts(() =>
+      currentClub[0].posts.sort((a, b) => b.postDate.seconds - a.postDate.seconds)
+    );
   }, []);
 
   const addPost = (e) => {
@@ -61,7 +63,8 @@ export default function BookClubDetail() {
         console.error(err);
       });
 
-    const result = posts.concat(data);
+    // const result = posts.concat(data);
+    const result = [data, ...posts];
     setPosts(result);
   };
 
