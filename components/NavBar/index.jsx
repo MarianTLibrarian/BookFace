@@ -30,7 +30,10 @@ export default function NavBar() {
   useEffect(() => {
     if (user)
       fetch(`${expressUrl}/myBookclubs`, { params: { userId: user.uid } })
-        .then(({ data }) => setUsersBookclubs(data.map((club) => club.bookclubInfo.bookclubName)))
+        .then((res) => res.json())
+        .then(({ results }) => {
+          setUsersBookclubs(results.map((club) => club.bookclubInfo.bookclubName));
+        })
         .catch(console.error);
     else setUsersBookclubs([]);
   }, [user]);
@@ -60,14 +63,8 @@ export default function NavBar() {
           <NavLink exact to="/">
             Home
           </NavLink>
-          {user ? (
-            <NavLink to="/mybooks">
-              My Books
-            </NavLink>
-          ) : null}
-          <NavLink to="/bookclubs">
-            {user ? 'My Clubs' : 'Clubs'}
-          </NavLink>
+          {user ? <NavLink to="/mybooks">My Books</NavLink> : null}
+          <NavLink to="/bookclubs">{user ? 'My Clubs' : 'Clubs'}</NavLink>
           {user ? <AccountMenu /> : <a onClick={handleSignIn}>Sign In</a>}
         </div>
       </div>
