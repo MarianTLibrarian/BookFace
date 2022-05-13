@@ -52,7 +52,7 @@ export default function Home() {
           for (let i = 0; i < data.results.length; i += 1) {
             temp.push(data.results[i].bookclubInfo.bookclubName);
           }
-      
+
           setUsersBookclubs(temp)
 
         })
@@ -105,13 +105,13 @@ export default function Home() {
         <h2 style={{ textAlign: 'left' }}>Fiction: </h2>
         <div className="trends-list">
           {fiction.map((book) => (
-            <Trends book={book} key={book} />
+            <Trends book={book} key={Math.random()} />
           ))}
         </div>
         <h2 style={{ textAlign: 'left' }}>Non-Fiction: </h2>
         <div className="trends-list">
           {nonFiction.map((book) => (
-            <Trends book={book} key={book} />
+            <Trends book={book} key={Math.random()} />
           ))}
         </div>
       </div>
