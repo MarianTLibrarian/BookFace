@@ -17,17 +17,17 @@ import useStore from '../../userStore';
 export default function BookClubDetail() {
 
   // const [myClub, setMyClub] = useState(null);
-  const { user, setUser, setToken, bookclubDetails, usersBookclubs, popularBookclubs } = useStore();
+  const { user, setUser, setToken, bookclubDetails, usersBookclubs, clubName, popularBookclubs } = useStore();
   const [events, setEvents] = useState(null)
   const [chat, setChat] = useState(false)
   const [postBody, setPostBody] = useState('')
   const [posts, setPosts] = useState([])
-  const [clubName, setClubNames] = useState(null);
+  // const [clubName, setClubNames] = useState(null);
   const [roomName, setRoomName] = useState('');
 
 
   const currentClub = bookclubDetails.filter(club => club.bookclubInfo.bookclubName === clubName);
-  // console.log(clubName)
+
 
 
   const getEvents = () => {
@@ -38,14 +38,15 @@ export default function BookClubDetail() {
       .catch((err) => {
         console.error(err);
       })
-    setEvents(events)
-    setRoomName(bookclubDetails.bookclubInfo.bookclubName);
+    // setEvents(events)
+    // setRoomName(bookclubDetails.bookclubInfo.bookclubName);
   }
 
 
   useEffect(() => {
     getEvents();
     setPosts(currentClub[0].posts)
+    // setRoomName(bookclubDetails.bookclubInfo.bookclubName);
   }, [])
 
 
@@ -102,7 +103,7 @@ export default function BookClubDetail() {
             </div>
           </div>
           <div className="club-posts">
-            {bookclubDetails.posts.map((post) => (
+            {posts.map((post) => (
               <Posts post={post} key={post} />
             ))}
           </div>
