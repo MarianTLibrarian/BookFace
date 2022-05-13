@@ -18,13 +18,13 @@ const useStore = create((set) => ({
   setBookDetails: (details) => set(() => ({ bookDetails: details })),
 
   clubName: null,
-  setBookclubName: (name) => set(() => ({ clubName: name})),
+  setBookclubName: (name) => set(() => ({ clubName: name })),
 
   popularBookclubs: null,
-  setPopularBookclubs: (details) => set(() => ({ popularBookclubs: details})),
+  setPopularBookclubs: (details) => set(() => ({ popularBookclubs: details })),
 
   usersBookclubs: null,
-  setUsersBookclubs: (details) => set(() => ({ usersBookclubs: details})),
+  setUsersBookclubs: (details) => set(() => ({ usersBookclubs: details })),
 
   bookclubDetails: null,
   setBookclubDetails: (details) => set(() => ({ bookclubDetails: details })),
