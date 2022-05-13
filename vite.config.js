@@ -8,7 +8,7 @@ export default defineConfig({
     'process.env': {},
     'global': {}
   },
-  optimizeDeps: {
-    exclude: ['@nivo/colors']
-  },
+  // optimizeDeps: {
+  //   exclude: ['@nivo/colors']
+  // },
 })
