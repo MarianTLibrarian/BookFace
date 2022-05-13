@@ -23,7 +23,7 @@ const style = {
 }
 
 export default function BookDetail() {
-  
+
   const { user, setUser, setToken, bookDetails, setBookDetails, expressUrl } = useStore();
 
   const [value, setBookshelf] = React.useState(bookDetails.bookshelf || null);
@@ -106,7 +106,7 @@ export default function BookDetail() {
       userId: user.uid,
       isbn: isbn,
       rating: star,
-      bookshelf: value.title,
+      bookshelf: value.title || value,
       startReadDate:moment(startReadDate).format().slice(0, 10),
       endReadDate:moment(endReadDate).format().slice(0, 10),
       readingStatus: status
