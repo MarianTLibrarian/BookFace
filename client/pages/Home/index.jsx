@@ -83,7 +83,7 @@ export default function Home() {
           <div className="main-content">
             <div className="home-search-bar">
               <div className="home-headline">
-                <h1>Home for Your Tome</h1>
+                <h1>Home for Your Tomes</h1>
               </div>
               <div />
               <SearchBar />
@@ -104,7 +104,7 @@ export default function Home() {
 
         <div className="trends-list">
           {fiction.map((book) => (
-            <Trends book={book} key={book} />
+            <Trends book={book} key={Math.random()} />
           ))}
         </div>
         <div className='bookshelf'>
@@ -113,7 +113,7 @@ export default function Home() {
 
         <div className="trends-list">
           {nonFiction.map((book) => (
-            <Trends book={book} key={book} />
+            <Trends book={book} key={Math.random()} />
           ))}
         </div>
         <div className='bookshelf'>
