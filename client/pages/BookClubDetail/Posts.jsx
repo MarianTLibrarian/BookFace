@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 export default function Posts({ post }) {
 
@@ -6,10 +7,10 @@ export default function Posts({ post }) {
     <div className='club-post'>
       <div className='post-header'>
         <div className='username'>
-          Message {post.post_id} by <span>{post.poster_name}</span>
+          Message by <span>{post.userId}</span>
         </div>
         <div className='post-date'>
-          {post.post_date}
+        {moment(post.postDate).format('LLLL') }
         </div>
       </div>
       <div className='post-body'>
@@ -17,7 +18,7 @@ export default function Posts({ post }) {
           <img src={post.posterUserImg} alt='userImage' />
         </div>
         <div className='user-post'>
-          <p> {post.post_body}</p>
+          <p> {post.postBody}</p>
         </div>
       </div>
     </div>

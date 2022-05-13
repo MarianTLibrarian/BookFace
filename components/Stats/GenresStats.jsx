@@ -34,11 +34,10 @@ export default function GenresStats() {
       });
   };
 
-  console.log('this', genresStats)
-
   useEffect(() => {
     setResponsivePie(() => import('@nivo/pie'));
     getGenresStats(user.uid);
+
   }, []);
 
   return (
