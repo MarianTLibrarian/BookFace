@@ -82,6 +82,9 @@ export default function Home() {
           <div className="filter" />
           <div className="main-content">
             <div className="home-search-bar">
+              <div className="home-headline">
+                <h1>Home for Your Tome</h1>
+              </div>
               <div />
               <SearchBar />
               <div />
@@ -91,28 +94,30 @@ export default function Home() {
       </div>
       <div className="description">
         <div className="text">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor diam vitae
-            interdum molestie. In placerat suscipit velit, gravida pretium velit maximus id. Duis ut
-            felis maximus, suscipit orci vitae, porta metus.{' '}
-          </p>
+          <p>Find and read more books you'll love, and keep track of the books you want to read.</p>
+          <p>Be part of the world's largest community of book lovers on BookFace.</p>
         </div>
       </div>
 
       <div className="trends">
-        <h1>Explore Trends</h1>
-        <p>What will you discover?</p>
-        <h2 style={{ textAlign: 'left' }}>Fiction: </h2>
+        <h1>EXPLORE TRENDS</h1>
+
         <div className="trends-list">
           {fiction.map((book) => (
-            <Trends book={book} key={Math.random()} />
+            <Trends book={book} key={book} />
           ))}
         </div>
-        <h2 style={{ textAlign: 'left' }}>Non-Fiction: </h2>
+        <div className='bookshelf'>
+          <img src='../../../assets/shelf_wood.png' alt='shelf'/>
+        </div>
+
         <div className="trends-list">
           {nonFiction.map((book) => (
-            <Trends book={book} key={Math.random()} />
+            <Trends book={book} key={book} />
           ))}
+        </div>
+        <div className='bookshelf'>
+        <img src='../../../assets/shelf_wood.png' alt='shelf'/>
         </div>
       </div>
 
