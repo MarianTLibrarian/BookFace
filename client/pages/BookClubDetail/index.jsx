@@ -22,6 +22,8 @@ export default function BookClubDetail() {
   const [postBody, setPostBody] = useState('');
   const [posts, setPosts] = useState([]);
 
+  const [renderedView, setRenderedView] = useState(<div className="loading">Loading ...</div>);
+
   const currentClub = bookclubDetails.filter((club) => club.bookclubInfo.bookclubName === clubName);
 
   const getEvents = () => {
@@ -36,11 +38,6 @@ export default function BookClubDetail() {
         console.error(err);
       });
   };
-
-  useEffect(() => {
-    getEvents();
-    setPosts(currentClub[0].posts);
-  }, []);
 
   const addPost = (e) => {
     e.preventDefault();
@@ -89,7 +86,7 @@ export default function BookClubDetail() {
         <div>
           <div className="write-post">
             <textarea
-              placeHolder="Leave A Comment..."
+              placeholder="Leave A Comment..."
               onChange={(e) => setPostBody(e.target.value)}
               value={postBody}
             />
@@ -114,6 +111,8 @@ export default function BookClubDetail() {
     );
   };
 
+  // TODO: Depends on
+  // - usersBookclubs
   const renderView = () => {
     if (user) {
       return (
@@ -128,9 +127,9 @@ export default function BookClubDetail() {
             <div className="content-left">
               <div className="my-clubs">
                 <h2>My Book Clubs</h2>
-                {usersBookclubs.map((club) => (
-                  <MyBookClubs club={club} key={club} />
-                ))}
+                {usersBookclubs
+                  ? usersBookclubs.map((club) => <MyBookClubs club={club} key={club} />)
+                  : null}
               </div>
 
               <div className="upcoming-events">
@@ -165,21 +164,21 @@ export default function BookClubDetail() {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div className="required">
-          <div
-            className="lock"
-            role="button"
-            onClick={handleUserLogin}
-            onKeyUp={handleUserLogin}
-            tabIndex="0"
-          >
-            <LockIcon />
-          </div>
-        </div>
-      );
     }
+
+    return (
+      <div className="required">
+        <div
+          className="lock"
+          role="button"
+          onClick={handleUserLogin}
+          onKeyUp={handleUserLogin}
+          tabIndex="0"
+        >
+          <LockIcon />
+        </div>
+      </div>
+    );
   };
 
   const renderIcon = () => {
@@ -194,6 +193,13 @@ export default function BookClubDetail() {
     }
     return null;
   };
+
+  useEffect(() => {
+    getEvents();
+    setPosts(currentClub[0].posts);
+  }, []);
+
+  useEffect(() => setRenderedView(renderView()), [usersBookclubs]);
 
   return (
     <div className="book-club-detail">
@@ -221,7 +227,7 @@ export default function BookClubDetail() {
         </div>
       </div>
 
-      <div className="page-content">{renderView()}</div>
+      <div className="page-content">{renderedView}</div>
       {renderIcon()}
     </div>
   );
