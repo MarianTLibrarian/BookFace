@@ -1,50 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import BookDetailModal from './BookDetailModal.jsx';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import BookIcon from '@mui/icons-material/Book';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import { Rating } from '@mui/material';
 import axios from 'axios';
 import moment from 'moment';
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import BookIcon from '@mui/icons-material/Book';
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-import ReviewsIcon from '@mui/icons-material/Reviews';
-import ConsecutiveSnackbars from './SnackBar.jsx';
-
-import { Rating } from '@mui/material';
-
+import React, { useEffect, useState } from 'react';
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
-
 import './bookdetail.css';
+import BookDetailModal from './BookDetailModal';
+import ConsecutiveSnackbars from './SnackBar';
 
 const style = {
   'background': 'url(../assets/header-bg.jpg) no-repeat center center fixed'
 }
 
 export default function BookDetail() {
-  
+
   const { user, setUser, setToken, bookDetails, setBookDetails, expressUrl } = useStore();
 
-  const [value, setBookshelf] = React.useState(bookDetails.bookshelf || null);
-  const [status, setStatus] = React.useState(bookDetails.readingStatus|| null);
-  const [startReadDate, setStartReadDate] = useState(moment(bookDetails.startReadDate)._d || null);
-  const [endReadDate, setEndReadDate] = useState(moment(bookDetails.endReadDate)._d || null);
-  const [star, setStar] = useState(bookDetails.rating || null);
+  const [value, setBookshelf] = React.useState(bookDetails?.bookshelf || null);
+  const [status, setStatus] = React.useState(bookDetails?.readingStatus|| null);
+  const [startReadDate, setStartReadDate] = useState(moment(bookDetails?.startReadDate)._d || null);
+  const [endReadDate, setEndReadDate] = useState(moment(bookDetails?.endReadDate)._d || null);
+  const [star, setStar] = useState(bookDetails?.rating || null);
   const [bookshelves, setBookshelves] = useState([]);
 
-  const [isbn, setIsbn] = useState( bookDetails.isbn || 0 );
-  const [title, setTitle] = useState (bookDetails.title || 'Great Book');
-  const [authors, setAuthors] = useState (bookDetails.authors || ['Great Author']);
-  const [publisher, setPublisher] = useState(bookDetails.publisher || "Great Publisher");
-  const [publishedDate, setPublishedDate] = useState (bookDetails.publishedDate || "2000-01-01");
-  const [description, setDescription] = useState(bookDetails.description || 'Great Description');
-  const [categories, setCategories] = useState(bookDetails.categories || ['Uncategorized']);
-  const [imageLinks, setImageLinks] = useState(bookDetails.imageLinks || {
+  const [isbn, setIsbn] = useState( bookDetails?.isbn || 0 );
+  const [title, setTitle] = useState (bookDetails?.title || 'Great Book');
+  const [authors, setAuthors] = useState (bookDetails?.authors || ['Great Author']);
+  const [publisher, setPublisher] = useState(bookDetails?.publisher || "Great Publisher");
+  const [publishedDate, setPublishedDate] = useState (bookDetails?.publishedDate || "2000-01-01");
+  const [description, setDescription] = useState(bookDetails?.description || 'Great Description');
+  const [categories, setCategories] = useState(bookDetails?.categories || ['Uncategorized']);
+  const [imageLinks, setImageLinks] = useState(bookDetails?.imageLinks || {
     "smallThumbnail": "http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
     "thumbnail": "http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
   });
-  const [language, setLanguage] = useState(bookDetails.language || 'en');
+  const [language, setLanguage] = useState(bookDetails?.language || 'en');
 
 
   // materialui--modal
