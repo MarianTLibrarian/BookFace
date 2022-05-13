@@ -5,6 +5,17 @@ import '../../client/pages/styles/Stats.css';
 import { ResponsivePie } from '@nivo/pie';
 import useStore from '../../client/userStore';
 
+const tempStats = [
+  {
+    id: 'Fiction',
+    value: 2
+  },
+  {
+    id: 'Biography & Autobiography',
+    value: 1,
+  }
+];
+
 export default function GenresStats() {
   const { user } = useStore();
   const [genresStats, setGenresStats] = useState([]);
@@ -14,22 +25,18 @@ export default function GenresStats() {
     axios
       .get('http://localhost:3030/books', { params: { userId: uid } })
       .then(({ data }) => {
-        const genresData = {
-          id: '',
-          value: 0,
-        };
-        for (let i = 0; i < data.results.length; i += 1) {
-          if (data.results[i].readingStatus === 'read') {
-            const genres = data.results[i].categories[0];
-            genresData.id = genres;
-            if (genresData.id) {
-              genresData.value += 1;
-            } else {
-              genresData.value = 1;
-            }
-            setGenresStats([genresData]);
-          }
-        }
+
+        const readBooks = data.results.filter((element) => element.readingStatus === 'read');
+
+        const genreObj = readBooks
+          .map((book) => book.categories[0])
+          .reduce((genreCounts, genre) => {
+            genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+            return genreCounts;
+          }, {});
+
+        setGenresStats(Object.entries(genreObj).map(([id, value]) => ({ id, value })));
+
       })
       .catch((err) => {
         console.error(err);
@@ -37,8 +44,8 @@ export default function GenresStats() {
   };
 
   useEffect(() => {
-    // setResponsivePie(() => import('@nivo/pie'));
     getGenresStats(user.uid);
+    // setResponsivePie(() => import('@nivo/pie'));
     // getGenresStats(1);
   }, []);
 
