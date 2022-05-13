@@ -20,19 +20,6 @@ export default function Home() {
   const [surpriseData, setSurpriseData] = useState([]);
   const [surpriseBook, setSurpriseBook] = useState([]);
 
-<<<<<<< HEAD
-
-  // const surpriseSelector = (array) => {
-  //   const isbnArray = [];
-  //   array.forEach(item => {
-  //     isbnArray.push(item.volumeInfo.industryIdentifiers[0].identifier)
-  //   })
-  //   console.log(isbnArray);
-  // }
-
-
-=======
->>>>>>> main
   const getTrendingBooks = () => {
     axios.get('http://localhost:3030/popularBooks')
       .then(({data}) => {
@@ -59,7 +46,6 @@ export default function Home() {
       })
   }
 
-<<<<<<< HEAD
   const getSurprise = (q) => {
     axios.get(`https://www.googleapis.com/books/v1/volumes?q=${q}`)//what id used to reference book?  "9781483458427"
     .then(({ data }) => {
@@ -71,11 +57,6 @@ export default function Home() {
     })
   }
 
-    useEffect(() => {
-      getTrendingBooks();
-      getTrendingBookclubs();
-      getSurprise();
-=======
     const getMybookclubs = (uid) => {
       axios
         .get('http://localhost:3030/myBookclubs', { params: { userId: uid } })
@@ -97,11 +78,11 @@ export default function Home() {
   useEffect(() => {
     getTrendingBooks();
     getTrendingBookclubs();
+    getSurprise();
     if(user) {
       getMybookclubs(user.uid)
     }
 
->>>>>>> main
   }, [])
 
     useEffect(() => {

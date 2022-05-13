@@ -9,11 +9,6 @@ export default function Trends({ book }) {
   const [bookImage, setBookImage] = React.useState('../../../assets/testBook.jpg');
 
   React.useEffect(() => {
-<<<<<<< HEAD
-    // console.log({ imgs: book.imageLinks });
-
-=======
->>>>>>> main
     // Why does the database have a different structure? (T_T)
     if (Object.hasOwnProperty.call(book, 'book_image')) {
       setBookImage(book.book_image);
