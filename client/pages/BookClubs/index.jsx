@@ -62,17 +62,16 @@ export default function BookClubs() {
 
   const carouselClick = (e) => {
     setBookclubName(e.target.value);
-    console.log('!!', e.target.value);
   };
 
   useEffect(() => {
-    setBookClub(bookclubDetails[0].bookclubInfo);
-    setAllClubs(popularBookclubs);
+    if (bookclubDetails && bookclubDetails[0]?.bookclubInfo) setBookClub(bookclubDetails[0].bookclubInfo);
+    if (popularBookclubs) setAllClubs(popularBookclubs);
 
     if (user) {
       getUsersBookclub(user.uid);
     }
-  }, [user]);
+  }, [user, bookclubDetails, popularBookclubs]);
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
