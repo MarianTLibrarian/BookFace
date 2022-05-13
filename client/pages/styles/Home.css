@@ -1,3 +1,16 @@
+h4 {
+  margin-bottom: 3px;
+}
+
+.surprise-title .surprise-author {
+  margin-top: -10px;
+  margin-bottom: 3px;
+}
+
+.surprise-button {
+  margin-top: 20px;
+}
+
 .Home {
   text-align: center;
 }
