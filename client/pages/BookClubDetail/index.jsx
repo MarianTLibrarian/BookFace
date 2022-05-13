@@ -105,11 +105,6 @@ export default function BookClubDetail() {
             ))}
           </div>
         </div>
-        <div className='club-posts'>
-          {posts.map(post =>
-            <Posts post={post} key={post} />
-          )}
-        </div>
       </div>
     }
     return (
@@ -136,6 +131,7 @@ export default function BookClubDetail() {
               {usersBookclubs.map(club =>
                 <MyBookClubs club={club} key={club} />
               )}
+<<<<<<< HEAD
             </div>
 
             <div className="upcoming-events">
@@ -161,6 +157,33 @@ export default function BookClubDetail() {
                 : null}
             </div>
 
+=======
+            </div>
+
+            <div className="upcoming-events">
+              <h2>Upcoming Events</h2>
+
+              {events
+                ? events.map((event) => (
+                  <div key={Math.random()}>
+                    <p>
+                      <span style={{ fontWeight: 'bold' }}>Topic: </span>
+                      {event.eventTopic}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: 'bold' }}>Date: </span>
+                      {moment(event.eventTime).format('MMMM Do YYYY')}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: 'bold' }}>Time: </span>
+                      {moment(event.eventTime).format('h:mm a')}
+                    </p>
+                  </div>
+                ))
+                : null}
+            </div>
+
+>>>>>>> main
             <div className="create-events">
               <Calendar setEvents={setEvents} events={events} />
             </div>
