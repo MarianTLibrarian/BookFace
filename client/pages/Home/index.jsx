@@ -9,18 +9,14 @@ import useStore from '../../userStore';
 
 export default function Home() {
 
-  const { bookclubDetails, bookDetails} = useStore();
+  const {user, setPopularBookclubs,setBookclubDetails, setUsersBookclubs} = useStore();
+  // const setUsersBookclubs = useStore(state => state.setUsersBookclubs);
 
-  const setPopularBookclubs = useStore(state => state.setPopularBookclubs);
-  const popularBookclubs = useStore(state => state.popularBookclubs);
+
 
   const [fiction, setFictionTrends] = useState([]);
   const [nonFiction, setNonfictionTrends] = useState([]);
   const [bookClubs, setBookClubs] = useState([])
-
-
-
-
 
   const getTrendingBooks = () => {
     axios.get('http://localhost:3030/popularBooks')
@@ -36,7 +32,10 @@ export default function Home() {
   const getTrendingBookclubs = () => {
     axios.get('http://localhost:3030/bookclubs')
       .then(({ data }) => {
+
+        setBookclubDetails(data);
         setPopularBookclubs(data);
+
         const featuredClubs = data.slice(0, 8);
         setBookClubs(featuredClubs);
       })
@@ -47,7 +46,11 @@ export default function Home() {
 
   useEffect(() => {
     getTrendingBooks();
-    getTrendingBookclubs()
+    getTrendingBookclubs();
+    if(user) {
+      getMybookclubs(user.uid)
+    }
+
   }, [])
 
   const style = {

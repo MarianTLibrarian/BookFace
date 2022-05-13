@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function BookClubs({ club, user }) {
+export default function BookClubs({ club, user, joinBookclub }) {
   const { imageUrl, bookclubName, membersCount, description } = club.bookclubInfo;
 
   const text = `${description.substring(0, 200)}...`;
@@ -11,7 +11,7 @@ export default function BookClubs({ club, user }) {
       <div className='club'>
         <div className='col-left'>
           {user ? <div className='join-modal'>
-            <button type='button'>JOIN</button>
+            <button onClick = {joinBookclub} value={bookclubName} type='button'>JOIN</button>
           </div> : null}
           <img src={imageUrl} alt="clubCover" />
         </div>

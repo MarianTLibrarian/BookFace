@@ -23,6 +23,7 @@ const style = {
 }
 
 export default function BookDetail() {
+  
   const { user, setUser, setToken, bookDetails, setBookDetails, expressUrl } = useStore();
 
   const [value, setBookshelf] = React.useState(bookDetails.bookshelf || null);
@@ -44,6 +45,7 @@ export default function BookDetail() {
     "thumbnail": "http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
   });
   const [language, setLanguage] = useState(bookDetails.language || 'en');
+
 
   // materialui--modal
   const [open, setOpen] = useState(false);
@@ -215,7 +217,7 @@ export default function BookDetail() {
     }
     if (bookDetails.isbn) {
       setIsbn(bookDetails.isbn)
-    } 
+    }
     if (bookDetails.title) {
       setTitle(bookDetails.title)
     }

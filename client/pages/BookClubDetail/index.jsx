@@ -7,7 +7,7 @@ import ForumIcon from '@mui/icons-material/Forum';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
 // import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
-import LiveChat from './LiveChat'
+import LiveChat from '../Chat/LiveChat';
 import Calendar from './Calendar';
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';

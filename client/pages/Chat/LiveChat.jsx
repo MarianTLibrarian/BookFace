@@ -5,7 +5,7 @@ import Chat from "./ChatRoom";
 const socket = io.connect('http://localhost:3030');
 
 export default function LiveChat({ user, roomName }) {
-
+  console.log(roomName)
   const joinRoom = () => {
     if (user !== "" && roomName !== "") {
       socket.emit("join_room", roomName);

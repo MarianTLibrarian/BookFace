@@ -68,14 +68,20 @@ const bookclubName = useStore(state => state.bookclubName);
     axios
       .get(`${expressUrl}/myBookclubs`, { params: { userId: uid } })
       .then(({ data }) => {
-        // console.log('bookclubs', data);
+        console.log('setBookclubDetails', data.results);
+
         setBookclubDetails(data.results)
 
         const temp = [];
         for (let i = 0; i < data.results.length; i += 1) {
           temp.push(data.results[i].bookclubInfo.bookclubName);
         }
+
         setBookclubs(temp);
+
+        // console.log("setUsersBookclubs",temp )
+        // setUsersBookclubs(temp)
+        // console.log(setUsersBookclubs.toString())
       })
       .catch((err) => {
         console.log(err);
@@ -107,7 +113,7 @@ const bookclubName = useStore(state => state.bookclubName);
     // FIXME: these are placeholder arguments
     getBookshelves(user.uid);
     getBooks(user.uid);
-    getBookclubs('qwew');
+    getBookclubs(user.uid);
   }, []);
 
   useEffect(() => {
