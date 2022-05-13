@@ -16,33 +16,37 @@ import BookDetailModal from './BookDetailModal';
 import ConsecutiveSnackbars from './SnackBar';
 
 const style = {
-  'background': 'url(../assets/header-bg.jpg) no-repeat center center fixed'
-}
+  background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
+};
 
 export default function BookDetail() {
-
   const { user, setUser, setToken, bookDetails, setBookDetails, expressUrl } = useStore();
 
   const [value, setBookshelf] = React.useState(bookDetails.bookshelf || null);
-  const [status, setStatus] = React.useState(bookDetails.readingStatus|| null);
+  const [status, setStatus] = React.useState(bookDetails.readingStatus || null);
   const [startReadDate, setStartReadDate] = useState(moment(bookDetails.startReadDate)._d || null);
   const [endReadDate, setEndReadDate] = useState(moment(bookDetails.endReadDate)._d || null);
   const [star, setStar] = useState(bookDetails.rating || null);
   const [bookshelves, setBookshelves] = useState([]);
 
-  const [isbn, setIsbn] = useState( bookDetails.isbn || 0 );
-  const [title, setTitle] = useState (bookDetails.title || 'Great Book');
-  const [authors, setAuthors] = useState (bookDetails.authors || ['Great Author']);
-  const [publisher, setPublisher] = useState(bookDetails.publisher || "Great Publisher");
-  const [publishedDate, setPublishedDate] = useState (bookDetails.publishedDate || "2000-01-01");
+//  FIXME: These are redundant.
+  //  TODO: Find each and transition to rendered state in single variable
+  const [isbn, setIsbn] = useState(bookDetails.isbn || 0);
+  const [title, setTitle] = useState(bookDetails.title || 'Great Book');
+  const [authors, setAuthors] = useState(bookDetails.authors || ['Great Author']);
+  const [publisher, setPublisher] = useState(bookDetails.publisher || 'Great Publisher');
+  const [publishedDate, setPublishedDate] = useState(bookDetails.publishedDate || '2000-01-01');
   const [description, setDescription] = useState(bookDetails.description || 'Great Description');
   const [categories, setCategories] = useState(bookDetails.categories || ['Uncategorized']);
-  const [imageLinks, setImageLinks] = useState(bookDetails.imageLinks || {
-    "smallThumbnail": "http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-    "thumbnail": "http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-  });
+  const [imageLinks, setImageLinks] = useState(
+    bookDetails.imageLinks || {
+      smallThumbnail:
+        'http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api',
+      thumbnail:
+        'http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+    },
+  );
   const [language, setLanguage] = useState(bookDetails.language || 'en');
-
 
   // materialui--modal
   const [open, setOpen] = useState(false);
@@ -59,18 +63,19 @@ export default function BookDetail() {
   /*------------------ HANDLER FUNCTION ---------------------- */
 
   // addtoshelf w/o login
-  const handleuserLogin = () => signInWithGoogle()
-  .then((result) => {
-    if (!result || !result.user || !result.token) throw result;
+  const handleuserLogin = () =>
+    signInWithGoogle()
+      .then((result) => {
+        if (!result || !result.user || !result.token) throw result;
 
-    const { user: newUser, token } = result;
+        const { user: newUser, token } = result;
 
-    localStorage.setItem('user_data', JSON.stringify(newUser));
+        localStorage.setItem('user_data', JSON.stringify(newUser));
 
-    setUser(newUser);
-    setToken(token);
-  })
-  .catch(console.error);
+        setUser(newUser);
+        setToken(token);
+      })
+      .catch(console.error);
 
   // addtoshelf
   const handleAddtoShelf = () => {
@@ -87,30 +92,29 @@ export default function BookDetail() {
       language: language,
     };
     axios
-      .post(`${expressUrl}/books`,  staticbookdetail )
-      .then(()=>{
-        setBookshelf({'title':'Dream Bookshelf'});
+      .post(`${expressUrl}/books`, staticbookdetail)
+      .then(() => {
+        setBookshelf({ title: 'Dream Bookshelf' });
         setInBookshelf(true);
       })
       .catch((err) => {
         console.error(err);
       });
+  };
 
-  }
-
-  const UpdateBook = ()=>{
+  const UpdateBook = () => {
     const dynamicbookdetail = {
       userId: user.uid,
       isbn: isbn,
       rating: star,
       bookshelf: value.title,
-      startReadDate:moment(startReadDate).format().slice(0, 10),
-      endReadDate:moment(endReadDate).format().slice(0, 10),
-      readingStatus: status
+      startReadDate: moment(startReadDate).format().slice(0, 10),
+      endReadDate: moment(endReadDate).format().slice(0, 10),
+      readingStatus: status,
     };
 
     axios
-      .put(`${expressUrl}/books/update`,  dynamicbookdetail )
+      .put(`${expressUrl}/books/update`, dynamicbookdetail)
       .then(() => {
         setEdited(true);
       })
@@ -119,57 +123,89 @@ export default function BookDetail() {
       });
   };
 
-
-
-
   /*------------------RENDER DYNAMIC---------------------- */
 
   const renderDynamicBtn = () => {
     if (!user) {
-      return (<AddBoxIcon onClick={handleuserLogin}/>);
+      return <AddBoxIcon onClick={handleuserLogin} />;
     }
     if (user && !inBookShelf) {
-      return (<AddBoxIcon onClick={handleSnackBarClick('Added to Bookshelf')} onMouseDown={handleAddtoShelf}/>);
+      return (
+        <AddBoxIcon
+          onClick={handleSnackBarClick('Added to Bookshelf')}
+          onMouseDown={handleAddtoShelf}
+        />
+      );
     }
     if (user && inBookShelf) {
-      return (<ModeEditOutlineIcon onClick={handleOpen} />)
+      return <ModeEditOutlineIcon onClick={handleOpen} />;
     }
-  }
+  };
 
   const renderModal = () => {
     if (user && status) {
-      return <BookDetailModal bookshelves={bookshelves} value={value} setBookshelf={setBookshelf} status={status}
-      setStatus={setStatus} startReadDate={startReadDate} setStartReadDate={setStartReadDate} endReadDate={endReadDate}
-      setEndReadDate={setEndReadDate} star={star} setStar={setStar} open={open} setOpen={setOpen} UpdateBook={UpdateBook} handleSnackBarClick={handleSnackBarClick}/>
+      return (
+        <BookDetailModal
+          bookshelves={bookshelves}
+          value={value}
+          setBookshelf={setBookshelf}
+          status={status}
+          setStatus={setStatus}
+          startReadDate={startReadDate}
+          setStartReadDate={setStartReadDate}
+          endReadDate={endReadDate}
+          setEndReadDate={setEndReadDate}
+          star={star}
+          setStar={setStar}
+          open={open}
+          setOpen={setOpen}
+          UpdateBook={UpdateBook}
+          handleSnackBarClick={handleSnackBarClick}
+        />
+      );
     }
     return null;
-  }
+  };
 
   const renderDynamicStats = () => {
     if (user && edited) {
       return (
-        <div className='bookdetailusrinputs'>
-          {status?
-            <div className='bookdetailreadingstatus'><CheckCircleIcon/>{status}</div>
-          :null}
-          {value?
-            <div className='bookdetailbookshelf'><BookIcon/>{value.title || value}</div>
-          : null}
-          {startReadDate?
-            <div className='bookdetailstartReaddate'><AccessTimeFilledIcon/>Start Reading Date: {moment(startReadDate).format().slice(0, 10)}</div>
-          :null}
-          {endReadDate?
-            <div className='bookdetailendReaddate'><EmojiEmotionsIcon/>End Reading Date: {moment(endReadDate).format().slice(0, 10)}</div>
-          :null}
-          {star?
-            <div className='bookdetailrating'><ReviewsIcon/>Rating: <Rating name="read-only" value={star} readOnly />
+        <div className="bookdetailusrinputs">
+          {status ? (
+            <div className="bookdetailreadingstatus">
+              <CheckCircleIcon />
+              {status}
             </div>
-          :null}
+          ) : null}
+          {value ? (
+            <div className="bookdetailbookshelf">
+              <BookIcon />
+              {value.title || value}
+            </div>
+          ) : null}
+          {startReadDate ? (
+            <div className="bookdetailstartReaddate">
+              <AccessTimeFilledIcon />
+              Start Reading Date: {moment(startReadDate).format().slice(0, 10)}
+            </div>
+          ) : null}
+          {endReadDate ? (
+            <div className="bookdetailendReaddate">
+              <EmojiEmotionsIcon />
+              End Reading Date: {moment(endReadDate).format().slice(0, 10)}
+            </div>
+          ) : null}
+          {star ? (
+            <div className="bookdetailrating">
+              <ReviewsIcon />
+              Rating: <Rating name="read-only" value={star} readOnly />
+            </div>
+          ) : null}
         </div>
-      )}
+      );
+    }
     return null;
-  }
-
+  };
 
   const getBookshelves = () => {
     axios
@@ -181,14 +217,14 @@ export default function BookDetail() {
       .catch((err) => {
         console.error(err);
       });
-    };
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (user) {
       getBookshelves();
     }
     if (bookDetails.readingStatus) {
-      setStatus(bookDetails.readingStatus)
+      setStatus(bookDetails.readingStatus);
     } else {
       setStatus('toread');
     }
@@ -203,9 +239,9 @@ export default function BookDetail() {
       setEndReadDate(null);
     }
     if (bookDetails.rating) {
-      setStar(bookDetails.rating)
+      setStar(bookDetails.rating);
     } else {
-      setStar(null)
+      setStar(null);
     }
     if (bookDetails.bookshelf) {
       setBookshelf(bookDetails.bookshelf);
@@ -213,13 +249,13 @@ export default function BookDetail() {
       setBookshelf(null);
     }
     if (bookDetails.isbn) {
-      setIsbn(bookDetails.isbn)
+      setIsbn(bookDetails.isbn);
     }
     if (bookDetails.title) {
-      setTitle(bookDetails.title)
+      setTitle(bookDetails.title);
     }
     if (bookDetails.authors) {
-      setAuthors(bookDetails.authors)
+      setAuthors(bookDetails.authors);
     }
     if (bookDetails.publisher) {
       setPublisher(bookDetails.publisher);
@@ -231,13 +267,13 @@ export default function BookDetail() {
       setDescription(bookDetails.description);
     }
     if (bookDetails.categories) {
-      setCategories(bookDetails.categories)
+      setCategories(bookDetails.categories);
     }
     if (bookDetails.imageLinks) {
-      setImageLinks(bookDetails.imageLinks)
+      setImageLinks(bookDetails.imageLinks);
     }
     if (bookDetails.language) {
-      setLanguage(bookDetails.language)
+      setLanguage(bookDetails.language);
     }
     if (bookDetails.readingStatus) {
       setInBookshelf(true);
@@ -251,46 +287,46 @@ export default function BookDetail() {
     }
     // console.log('inbookshelf', inBookShelf);
     // console.log('edited', edited);
-  },[user, bookDetails])
+  }, [user, bookDetails]);
 
   return (
-    <div className='header-container'>
-      <div className='header' style={style}>
-        <div className='filter' />
-        <div className='main-content'>
+    <div className="header-container">
+      <div className="header" style={style}>
+        <div className="filter" />
+        <div className="main-content">
           <h1>{title}</h1>
         </div>
       </div>
-      <div className='bookdetailmain' >
-      <div className='bookdetailleftcol'>
-          <img className='bookdetailimg' alt='bookdetailimg' src={imageLinks.thumbnail}/>
+      <div className="bookdetailmain">
+        <div className="bookdetailleftcol">
+          <img className="bookdetailimg" alt="bookdetailimg" src={imageLinks.thumbnail} />
           {renderDynamicStats()}
-      </div>
-      <div className='bookdetailrightcol'>
-        <div className="bookdetailtitle">{title}</div>
-        <div className='bookdetaildynamicbtn'>
-          {renderDynamicBtn()}
         </div>
-        <div className='bookdetailauthor'> by {authors[0]}</div>
-        <div className='bookdetaildesc'>{description}</div>
-        <div className='bookdetailgenre'>
-          <p className='bookdetailmisctitle'>GENRES</p>
-          <p>{categories}</p>
+        <div className="bookdetailrightcol">
+          <div className="bookdetailtitle">{title}</div>
+          <div className="bookdetaildynamicbtn">{renderDynamicBtn()}</div>
+          <div className="bookdetailauthor"> by {authors[0]}</div>
+          <div className="bookdetaildesc">{description}</div>
+          <div className="bookdetailgenre">
+            <p className="bookdetailmisctitle">GENRES</p>
+            <p>{categories}</p>
+          </div>
+          <div className="bookdetailpublishdetails">
+            <p className="bookdetailmisctitle">PUBLISH INFO</p>
+            Published {publishedDate} by {publisher}
+          </div>
+          <div className="bookdetailisbn">
+            <p className="bookdetailmisctitle">ISBN</p>
+            {isbn}
+          </div>
         </div>
-        <div className='bookdetailpublishdetails'>
-          <p className='bookdetailmisctitle'>PUBLISH INFO</p>
-          Published {publishedDate} by {publisher}
-        </div>
-        <div className='bookdetailisbn'>
-          <p className='bookdetailmisctitle'>ISBN</p>
-          {isbn}
-        </div>
-      </div>
         {renderModal()}
-        <ConsecutiveSnackbars handleSnackBarClick={handleSnackBarClick} snackPack={snackPack} setSnackPack={setSnackPack}/>
+        <ConsecutiveSnackbars
+          handleSnackBarClick={handleSnackBarClick}
+          snackPack={snackPack}
+          setSnackPack={setSnackPack}
+        />
       </div>
     </div>
-
   );
 }
-
