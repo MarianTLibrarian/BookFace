@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import SendIcon from '@mui/icons-material/Send';
-import VideoChat from '../Chat/VideoChat';
+import VideoChat from './videoChat'
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState('');
