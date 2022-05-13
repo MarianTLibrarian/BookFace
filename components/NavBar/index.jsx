@@ -61,11 +61,11 @@ export default function NavBar() {
             Home
           </NavLink>
           {user ? (
-            <NavLink activeClassName="active" to="/mybooks">
+            <NavLink to="/mybooks">
               My Books
             </NavLink>
           ) : null}
-          <NavLink activeClassName="active" to="/bookclubs">
+          <NavLink to="/bookclubs">
             {user ? 'My Clubs' : 'Clubs'}
           </NavLink>
           {user ? <AccountMenu /> : <a onClick={handleSignIn}>Sign In</a>}
