@@ -45,7 +45,6 @@ export default function Home() {
       })
   }
 
-
   useEffect(() => {
     getTrendingBooks();
     getTrendingBookclubs()
@@ -80,19 +79,24 @@ export default function Home() {
       </div>
 
       <div className="trends">
-        <h1>Explore Trends</h1>
-        <p>What will you discover?</p>
-        <h2 style={{ textAlign: 'left' }}>Fiction: </h2>
+        <h1>EXPLORE TRENDS</h1>
+
         <div className="trends-list">
           {fiction.map((book) => (
             <Trends book={book} key={book} />
           ))}
         </div>
-        <h2 style={{ textAlign: 'left' }}>Non-Fiction: </h2>
+        <div className='bookshelf'>
+          <img src='../../../assets/shelf_wood.png' alt='shelf'/>
+        </div>
+
         <div className="trends-list">
           {nonFiction.map((book) => (
             <Trends book={book} key={book} />
           ))}
+        </div>
+        <div className='bookshelf'>
+        <img src='../../../assets/shelf_wood.png' alt='shelf'/>
         </div>
       </div>
 
