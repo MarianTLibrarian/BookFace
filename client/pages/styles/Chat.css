@@ -44,7 +44,20 @@
   font-size: 16px;
 }
 
-.joinChatContainer button {
+/* .joinChatContainer button {
+  width: 225px;
+  height: 50px;
+  margin: 7px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  background: #43a047;
+  color: #fff;
+  cursor: pointer;
+} */
+
+#videocamicon {
   width: 225px;
   height: 50px;
   margin: 7px;
@@ -57,7 +70,11 @@
   cursor: pointer;
 }
 
-.joinChatContainer button:hover {
+/* .joinChatContainer button:hover {
+  background: #2e7d32;
+} */
+
+#videocamicon:hover {
   background: #2e7d32;
 }
 
@@ -221,5 +238,9 @@
 }
 
 .react-scroll-to-bottom--css-koyec-1tj0vk3 {
-  display: none;
+  display: none !important;
+  z-index: -2000 !important;
+  bottom: 0px !important;
+  width: 5px !important;
+  background-color: rgba(0, 0, 0, 0) !important;
 }

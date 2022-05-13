@@ -39,7 +39,7 @@ function Chat({ socket, username, room }) {
     <div className="chat-window">
       <div className="chat-header">
         <p>Live Chat</p>
-        <button type="submit" className="videoRoom" onClick={handleClick}>
+        <button type="submit" className="videoRoom" id="videocamicon" onClick={handleClick}>
           <VideocamIcon />
         </button>
       </div>
