@@ -41,7 +41,7 @@ export default function CalendarStats() {
   useEffect(() => {
     // setResponsiveCalendar(() => import('@nivo/calendar'));
     getCalendarStats(user.uid);
-    // getCalendarStats(1);
+    getCalendarStats(1);
   }, []);
 
   return (
