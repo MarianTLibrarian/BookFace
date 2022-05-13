@@ -105,11 +105,6 @@ export default function BookClubDetail() {
             ))}
           </div>
         </div>
-        <div className='club-posts'>
-          {posts.map(post =>
-            <Posts post={post} key={post} />
-          )}
-        </div>
       </div>
     }
     return (

@@ -80,8 +80,8 @@ const bookclubName = useStore(state => state.bookclubName);
         setBookclubs(temp);
 
         // console.log("setUsersBookclubs",temp )
-        setUsersBookclubs(temp)
-        console.log(setUsersBookclubs.toString())
+        // setUsersBookclubs(temp)
+        // console.log(setUsersBookclubs.toString())
       })
       .catch((err) => {
         console.log(err);
