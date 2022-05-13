@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import SearchBar from '../../../components/SearchBar';
 import Trends from '../Home/Trends';
+import Carousel from '../MyBooks/carousel';
 import AllClubs from '../BookClubs/AllClubs';
 import useStore from '../../userStore';
 
@@ -63,13 +64,19 @@ export default function Search() {
           case 'all':
           case 'books':
             result = (await searchBooks()).map((book) => (
-              <Trends book={book} key={JSON.stringify(book.industryIdentifiers)} />
+              <Trends
+                book={{ ...book, isbn13: book.industryIdentifiers[0].identifier }}
+                key={JSON.stringify(book.industryIdentifiers)}
+              />
             ));
             break;
 
           case 'myBooks':
             result = (await searchMyBooks()).map((book) => (
-              <Trends book={book} key={JSON.stringify(book.industryIdentifiers)} />
+              <Trends
+                book={{ ...book, isbn13: book.industryIdentifiers[0].identifier }}
+                key={JSON.stringify(book.industryIdentifiers)}
+              />
             ));
             break;
 
