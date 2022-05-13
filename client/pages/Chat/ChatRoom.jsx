@@ -14,11 +14,12 @@ function Chat({ socket, username, room }) {
 
   const sendMessage = () => {
     if (currentMessage !== '') {
+      const timeStamp = (('0'+ (new Date(Date.now()).getHours())).slice(-2)+ ':' + ('0'+ (new Date(Date.now()).getMinutes())).slice(-2));
       const messageData = {
         room: room,
         author: username,
         message: currentMessage,
-        time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
+        time: timeStamp,
       };
 
       socket.emit('send_message', messageData);
