@@ -56,7 +56,7 @@ export default function BookDetail() {
     setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
   };
 
-  /*------------------ HANDLER FUNCTION ---------------------- */
+  /* ------------------ HANDLER FUNCTION ---------------------- */
 
   // addtoshelf w/o login
   const handleuserLogin = () => signInWithGoogle()
@@ -76,15 +76,15 @@ export default function BookDetail() {
   const handleAddtoShelf = () => {
     const staticbookdetail = {
       userId: user.uid,
-      isbn: isbn,
-      title: title,
-      authors: authors,
-      publisher: publisher,
-      publishedDate: publishedDate,
-      description: description,
-      categories: categories,
-      imageLinks: imageLinks,
-      language: language,
+      isbn,
+      title,
+      authors,
+      publisher,
+      publishedDate,
+      description,
+      categories,
+      imageLinks,
+      language,
     };
     axios
       .post(`${expressUrl}/books`,  staticbookdetail )
@@ -101,7 +101,7 @@ export default function BookDetail() {
   const UpdateBook = ()=>{
     const dynamicbookdetail = {
       userId: user.uid,
-      isbn: isbn,
+      isbn,
       rating: star,
       bookshelf: value.title,
       startReadDate:moment(startReadDate).format().slice(0, 10),
@@ -122,7 +122,7 @@ export default function BookDetail() {
 
 
 
-  /*------------------RENDER DYNAMIC---------------------- */
+  /* ------------------RENDER DYNAMIC---------------------- */
 
   const renderDynamicBtn = () => {
     if (!user) {
@@ -134,6 +134,7 @@ export default function BookDetail() {
     if (user && inBookShelf) {
       return (<ModeEditOutlineIcon onClick={handleOpen} />)
     }
+    return null;
   }
 
   const renderModal = () => {
