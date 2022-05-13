@@ -83,7 +83,7 @@ export default function Home() {
           <div className="main-content">
             <div className="home-search-bar">
               <div className="home-headline">
-                <h1>Home for Your Tome</h1>
+                <h1>Home for Your Tomes</h1>
               </div>
               <div />
               <SearchBar />
