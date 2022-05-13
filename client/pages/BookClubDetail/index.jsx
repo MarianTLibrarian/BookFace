@@ -6,37 +6,40 @@ import LockIcon from '@mui/icons-material/Lock';
 import ForumIcon from '@mui/icons-material/Forum';
 import MyBookClubs from './MyBookClubs';
 import Posts from './Posts';
-import LiveChat from './LiveChat'
+// import PopularBookclubs from '../../../fakeData/bookClubs/popularBookclubs';
+import LiveChat from '../Chat/LiveChat';
 import Calendar from './Calendar';
+import SearchBar from '../../../components/SearchBar';
 import '../styles/BookClubDetails.css';
 import { signInWithGoogle } from '../../../components/Firebase';
 import useStore from '../../userStore';
 
-
-
 export default function BookClubDetail() {
 
   // const [myClub, setMyClub] = useState(null);
-  const { user, setUser, setToken, bookclubDetails, usersBookclubs, clubName, popularBookclubs } = useStore();
+  const { user, setUser, setToken, bookclubDetails, usersBookclubs, popularBookclubs } = useStore();
   const [events, setEvents] = useState(null)
   const [chat, setChat] = useState(false)
   const [postBody, setPostBody] = useState('')
   const [posts, setPosts] = useState([])
+  const [clubName, setClubNames] = useState(null);
+  const [roomName, setRoomName] = useState('');
 
 
   const currentClub = bookclubDetails.filter(club => club.bookclubInfo.bookclubName === clubName);
-
+  // console.log(clubName)
 
 
   const getEvents = () => {
     axios.get('http://localhost:3030/events', { params: { bookclubName: currentClub[0].bookclubInfo.bookclubName } })
       .then(({ data }) => {
-        setEvents(data)
+        setEvents(data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       })
     setEvents(events)
+    setRoomName(bookclubDetails.bookclubInfo.bookclubName);
   }
 
 
@@ -82,8 +85,8 @@ export default function BookClubDetail() {
 
 
   const liveChat = () => {
-    setChat(!chat)
-  }
+    setChat(!chat);
+  };
   const style = {
     background: `url('${currentClub[0].bookclubInfo.imageUrl}') no-repeat center center fixed`
   }
@@ -98,6 +101,11 @@ export default function BookClubDetail() {
               <SendIcon onClick={addPost} />
             </div>
           </div>
+          <div className="club-posts">
+            {bookclubDetails.posts.map((post) => (
+              <Posts post={post} key={post} />
+            ))}
+          </div>
         </div>
         <div className='club-posts'>
           {posts.map(post =>
@@ -106,18 +114,21 @@ export default function BookClubDetail() {
         </div>
       </div>
     }
-    return <div className='chat-box'>
-      <LiveChat />
-    </div>
+    return (
+      <div className="chat-box">
+        {roomName ? <LiveChat user={user.displayName} roomName={roomName} /> : null}
+      </div>
+    );
   }
 
   const renderView = () => {
 
     if (user) {
-      return <div style={{ 'width': '100%' }}>
-        <div className='search-bar'>
-          <div className='search'>
-            <input />
+      return (<div style={{ 'width': '100%' }}>
+        <div className='club-search-bar'>
+          <div className='the-first-two-thirds' />
+          <div className='club-search'>
+            <SearchBar />
           </div>
         </div>
         <div className='content-container'>
@@ -129,70 +140,76 @@ export default function BookClubDetail() {
               )}
             </div>
 
-            <div className='upcoming-events'>
+            <div className="upcoming-events">
               <h2>Upcoming Events</h2>
 
-              {
-                events ?
-                  events.map((event) =>
-
-                    <div key={Math.random()}>
-                      <p>
-                        <span style={{ fontWeight: 'bold' }}>Topic: </span>
-                        {event.eventTopic}
-                      </p>
-                      <p>
-                        <span style={{ fontWeight: 'bold' }}>Date: </span>
-                        {moment(event.eventTime).format('MMMM Do YYYY')}
-                      </p>
-                      <p>
-                        <span style={{ fontWeight: 'bold' }}>Time: </span>
-                        {moment(event.eventTime).format('h:mm a')}
-                      </p>
-
-                    </div>
-                  )
-                  : null
-              }
-
+              {events
+                ? events.map((event) => (
+                  <div key={Math.random()}>
+                    <p>
+                      <span style={{ fontWeight: 'bold' }}>Topic: </span>
+                      {event.eventTopic}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: 'bold' }}>Date: </span>
+                      {moment(event.eventTime).format('MMMM Do YYYY')}
+                    </p>
+                    <p>
+                      <span style={{ fontWeight: 'bold' }}>Time: </span>
+                      {moment(event.eventTime).format('h:mm a')}
+                    </p>
+                  </div>
+                ))
+                : null}
             </div>
 
-            <div className='create-events'>
+            <div className="create-events">
               <Calendar setEvents={setEvents} events={events} />
             </div>
           </div>
 
-          <div className='content-right'>
-            {renderChat()}
-          </div>
+          <div className="content-right">{renderChat()}</div>
         </div>
       </div>
+      )
+    } else {
+      return (
+        <div className="required">
+          <div
+            className="lock"
+            role="button"
+            onClick={handleUserLogin}
+            onKeyUp={handleUserLogin}
+            tabIndex="0"
+          >
+            <LockIcon />
+          </div>
+        </div>
+      );
     }
 
-    return <div className='required'>
-      <div className='lock' role='button' onClick={handleUserLogin} onKeyUp={handleUserLogin} tabIndex='0'>
-        <LockIcon />
-      </div>
-    </div>
-  }
+
+  };
 
   const renderIcon = () => {
     if (user) {
-      return <div className='live-chat' role='button' onClick={liveChat} onKeyUp={liveChat} tabIndex='0'>
-        <div className='icon'>
-          <ForumIcon />
+      return (
+        <div className="live-chat" role="button" onClick={liveChat} onKeyUp={liveChat} tabIndex="0">
+          <div className="icon">
+            <ForumIcon />
+          </div>
         </div>
-      </div>
+      );
     }
     return null;
-  }
+  };
 
   return (
-    <div className='book-club-detail'>
-      <div className='header-container'>
-        <div className='header' style={style}>
-          <div className='filter' />
-          <div className='main-content'>
+    <div className="book-club-detail">
+      <div className="header-container">
+        <div className="header" style={style}>
+          <div className="filter" />
+          <div className="main-content">
             <div>
               <h1>{currentClub[0].bookclubInfo.bookclubName}</h1>
               {user ? null : <div className='main-content-btn'>
@@ -211,11 +228,8 @@ export default function BookClubDetail() {
         </div>
       </div>
 
-      <div className='page-content'>
-        {renderView()}
-      </div>
+      <div className="page-content">{renderView()}</div>
       {renderIcon()}
     </div>
   );
 }
-

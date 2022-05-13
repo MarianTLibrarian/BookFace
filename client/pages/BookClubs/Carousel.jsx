@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 
 export default function Carousel({ club, width, carouselClick }) {
 
-  const { imageUrl, bookclubName, membersCount, description } = club.bookclubInfo;
+const { imageUrl, bookclubName, membersCount, description } = club.bookclubInfo;
 
   const onImgLoad = ({ target: img }) => {
     width(img.offsetWidth)
   }
 
   const text = `${description.substring(0, 150)}...`;
+
 
 
   return (

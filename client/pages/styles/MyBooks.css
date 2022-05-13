@@ -1,9 +1,10 @@
 .container {
   width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  margin-right: 10em;
 }
 
 .book {
@@ -12,6 +13,8 @@
   position: relative;
   text-align: center;
   margin: 2.5%;
+  margin-bottom: 50px;
+  margin-top: 75px;
 }
 
 .book-cover {
@@ -163,4 +166,8 @@
   text-align: right;
   padding: 0;
   padding-bottom: 20px;
+}
+
+.shelf-listing:hover{
+  cursor: pointer;
 }

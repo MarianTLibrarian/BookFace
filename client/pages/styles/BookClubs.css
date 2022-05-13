@@ -194,14 +194,14 @@ text-align: center;
 }
 
 .club-btns button{
- width:50px;
- height:50px;
- padding:0;
- border:none;
- background:black;
- border-radius:50px;
- opacity: 0.7;
- transition: 0.5s;
+  width:50px;
+  height:50px;
+  padding:0;
+  border:none;
+  background:black;
+  border-radius:50px;
+  opacity: 0.7;
+  transition: 0.5s;
 }
 
 .prev svg{
@@ -215,7 +215,7 @@ margin-top:5px
 
 .club-btns button:hover{
   opacity: 1;
- }
+}
 
 .club-detail{
   position: absolute;
@@ -253,3 +253,8 @@ padding-top:30px;
   border-color:black;
   color:black;
   }
+
+
+.club-listing:hover {
+  cursor: pointer;
+}

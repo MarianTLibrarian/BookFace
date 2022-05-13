@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import SearchBar from '../../../components/SearchBar';
+import Trends from '../Home/Trends';
+import AllClubs from '../BookClubs/AllClubs';
 import useStore from '../../userStore';
 
 import '../styles/Search.css';
@@ -17,13 +19,12 @@ export default function Search() {
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
+    height: '50vh',
   };
 
   const searchBooks = async () => {
     const res = await fetch(`${expressUrl}/search?q=${searchQuery}`);
     const books = await res.json();
-
-    // TODO: setSearchHistory
 
     return books.map((book) => book.volumeInfo);
   };
@@ -33,25 +34,12 @@ export default function Search() {
     const res = await fetch(`${expressUrl}/books?userId=${uid}`);
     const { results } = await res.json();
 
-    // TODO: setSearchHistory
-
     return results;
-  };
-
-  const searchPopularBooks = async () => {
-    const res = await fetch(`${expressUrl}/popularBooks`);
-    const { books } = await res.json();
-
-    // TODO: setSearchHistory
-
-    return books;
   };
 
   const searchClubs = async () => {
     const res = await fetch(`${expressUrl}/bookclubs`);
     const clubs = await res.json();
-
-    // TODO: setSearchHistory
 
     return clubs;
   };
@@ -60,8 +48,6 @@ export default function Search() {
     const { uid } = user;
     const res = await fetch(`${expressUrl}/myBookclubs?userId=${uid}`);
     const clubs = await res.json();
-
-    // TODO: setSearchHistory
 
     return clubs;
   };
@@ -76,27 +62,34 @@ export default function Search() {
         switch (searchFilter) {
           case 'all':
           case 'books':
-            result = await searchBooks();
+            result = (await searchBooks()).map((book) => (
+              <Trends book={book} key={JSON.stringify(book.industryIdentifiers)} />
+            ));
             break;
 
           case 'myBooks':
-            result = await searchMyBooks();
+            result = (await searchMyBooks()).map((book) => (
+              <Trends book={book} key={JSON.stringify(book.industryIdentifiers)} />
+            ));
             break;
 
           case 'clubs':
-            result = await searchClubs();
+            result = (await searchClubs()).map((club) => (
+              <AllClubs club={club} user={user} key={Math.random()} />
+            ));
             break;
 
           case 'myClubs':
-            result = await searchMyClubs();
+            result = (await searchMyClubs()).map((club) => (
+              <AllClubs club={club} user={user} key={Math.random()} />
+            ));
             break;
 
           default:
             break;
         }
 
-        // FIXME: Each response needs to be mapped separately, since they have different structures
-        setRenderedItems(result.map((item) => <li key={Math.random()}>{JSON.stringify(item)}</li>));
+        setRenderedItems(result);
       })();
     }
   }, [searchQuery, searchFilter, user]);
@@ -125,10 +118,10 @@ export default function Search() {
         </div>
       </div>
 
-      <div className="trends">
-        <h1>TRENDS</h1>
-        <p>Simple is Better.</p>
-        <div className="trends-list">{renderedItems}</div>
+      <div className="search-trends">
+        <h1>{`${searchFilter} RESULTS`}</h1>
+        <p>{`Here are some results related to '${searchQuery}'`}</p>
+        <div className="search-trends-list">{renderedItems}</div>
       </div>
     </div>
   );

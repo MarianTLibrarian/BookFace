@@ -30,7 +30,9 @@ export default function BookClubs() {
   const getUsersBookclub = (Id) => {
     axios.get('http://localhost:3030/myBookclubs', { params: { userId: Id } })
       .then(({ data }) => {
+        
         setMyBookClubs(data.results);
+
         setBookclubDetails(data.results)
       })
       .catch(err => {
@@ -54,6 +56,7 @@ export default function BookClubs() {
 
   const carouselClick = (e) => {
     setBookclubName(e.target.value)
+    console.log("!!", e.target.value)
   }
 
 
@@ -64,9 +67,6 @@ export default function BookClubs() {
 
     if(user) {
       getUsersBookclub(user.uid);
-
-
-      
     }
   }, [user]);
 
