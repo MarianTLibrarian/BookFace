@@ -64,6 +64,7 @@ export default function NavBar() {
             Home
           </NavLink>
           {user ? <NavLink to="/mybooks">My Books</NavLink> : null}
+          {user ? <NavLink to="/stats">My Stats</NavLink> : null}
           <NavLink to="/bookclubs">{user ? 'My Clubs' : 'Clubs'}</NavLink>
           {user ? <AccountMenu /> : <a onClick={handleSignIn}>Sign In</a>}
         </div>

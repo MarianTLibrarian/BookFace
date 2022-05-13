@@ -94,13 +94,6 @@ export default function AccountMenu() {
         <MenuItem>
           <Avatar /> My account
         </MenuItem>
-        <MenuItem>
-          <Avatar />
-          <Link to="/stats" style={{ 'text-decoration': 'none', color: 'black' }}>
-            {' '}
-            My Reading Stats{' '}
-          </Link>
-        </MenuItem>
         <Divider />
         <MenuItem>
           <ListItemIcon>
