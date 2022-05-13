@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import AccountMenu from './AccountMenu';
 
@@ -7,7 +7,7 @@ import useStore from '../../client/userStore';
 import SearchBar from '../SearchBar';
 
 export default function NavBar() {
-  const { user, setUser, setToken } = useStore();
+  const { user, setUser, setToken, setUsersBookclubs, expressUrl } = useStore();
   const { pathname } = useLocation();
 
   const handleSignIn = () => {
@@ -26,6 +26,14 @@ export default function NavBar() {
         .catch(console.error);
     }
   };
+
+  useEffect(() => {
+    if (user)
+      fetch(`${expressUrl}/myBookclubs`, { params: { userId: user.uid } })
+        .then(({ data }) => setUsersBookclubs(data.map((club) => club.bookclubInfo.bookclubName)))
+        .catch(console.error);
+    else setUsersBookclubs([]);
+  }, [user]);
 
   return (
     <div className="nav-container">
