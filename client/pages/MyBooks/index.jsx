@@ -8,26 +8,20 @@ import useStore from '../../userStore';
 import '../styles/MyBooks.css';
 import '../styles/BookClubDetails.css';
 
-
 const filterOptions = { books: 'Books', myBooks: 'My Books' };
 
 export default function MyBooks() {
-  // calculate the % of books read
-  const percentageRead = 72;
-
-  const setBookclubDetails = useStore(state => state.setBookclubDetails);
-  const bookclubDetails = useStore(state => state.bookclubDetails);
+  const setBookclubDetails = useStore((state) => state.setBookclubDetails);
+  const bookclubDetails = useStore((state) => state.bookclubDetails);
   const { user, setUser, setToken, expressUrl, searchQuery } = useStore();
 
-const setBookclubName = useStore(state => state.setBookclubName);
-const bookclubName = useStore(state => state.bookclubName);
-
+  const setBookclubName = useStore((state) => state.setBookclubName);
+  const bookclubName = useStore((state) => state.bookclubName);
 
   // sources of truth
   const [allBooks, setAllBooks] = useState([]);
   const [bookclubs, setBookclubs] = useState([]);
   const [bookshelves, setBookshelves] = useState([]);
-
 
   // filtered by search
   const [renderedBooks, setRenderedBooks] = useState([]);
@@ -36,8 +30,6 @@ const bookclubName = useStore(state => state.bookclubName);
   const [renderedShelves, setRenderedShelves] = useState([]);
   const [currentView, setCurrentView] = useState('All');
 
-
-
   const handleClick = (event) => {
     event.preventDefault();
     setCurrentView(event.target.innerText);
@@ -45,7 +37,7 @@ const bookclubName = useStore(state => state.bookclubName);
 
   const handleClubClick = (currentClub) => {
     setBookclubName(currentClub);
-  }
+  };
 
   // NOTE: get bookshelves by userId is working
   const getBookshelves = (uid) => {
@@ -70,7 +62,7 @@ const bookclubName = useStore(state => state.bookclubName);
       .then(({ data }) => {
         // console.log('setBookclubDetails', data.results);
 
-        setBookclubDetails(data.results)
+        setBookclubDetails(data.results);
 
         const temp = [];
         for (let i = 0; i < data.results.length; i += 1) {
@@ -96,7 +88,7 @@ const bookclubName = useStore(state => state.bookclubName);
       .then(({ data }) => {
         // console.log('books', data);
         const container = [];
-        for(let i = 0; i < data.results.length; i += 1) {
+        for (let i = 0; i < data.results.length; i += 1) {
           const temp = {};
           temp.bookshelf = data.results[i].bookshelf;
           temp.img = data.results[i].imageLinks.smallThumbnail;
@@ -192,8 +184,12 @@ const bookclubName = useStore(state => state.bookclubName);
                   All
                 </p>
                 {bookshelves.map((shelf) => (
-                  <p className="shelf-listing" key={Math.random()} value={shelf}
-                  onClick={handleClick}>
+                  <p
+                    className="shelf-listing"
+                    key={Math.random()}
+                    value={shelf}
+                    onClick={handleClick}
+                  >
                     {shelf}
                   </p>
                 ))}
@@ -206,28 +202,32 @@ const bookclubName = useStore(state => state.bookclubName);
                 </Link>
                 {bookclubs.map((club) => (
                   <div className="club-listing" key={Math.random()}>
-                    <Link onClick={() => handleClubClick(club)} to="/bookclubdetail" style={{ textDecoration: 'none', color: 'black' }}>
+                    <Link
+                      onClick={() => handleClubClick(club)}
+                      to="/bookclubdetail"
+                      style={{ textDecoration: 'none', color: 'black' }}
+                    >
                       {club}
                     </Link>
                   </div>
                 ))}
               </div>
 
-              <div className='reading-goal'>
-                <Link to='/stats' style={{textDecoration: 'none', 'color': 'black'}}>
-                  <h2 style={{
-                    'display': 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                  }}>
+              <div className="reading-goal">
+                <Link to="/stats" style={{ textDecoration: 'none', color: 'black' }}>
+                  <h2
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
                     Reading Stats
-                    <span
-                      style={{fontSize: '12px', paddingRight: '1em'}}
-                    >&#9658;</span>
+                    <span style={{ fontSize: '12px', paddingRight: '1em' }}>&#9658;</span>
                   </h2>
                 </Link>
-                <div style={{'border': '1px solid transparent'}}>
+                <div style={{ border: '1px solid transparent' }}>
                   <ReadingStatsWidget />
                 </div>
               </div>
