@@ -9,13 +9,19 @@ import '../styles/BookClubs.css';
 import AllClubs from './AllClubs';
 import Carousel from './Carousel';
 
-
 const filterOptions = { clubs: 'Clubs', myClubs: 'My Clubs' };
 
 export default function BookClubs() {
-
-  const { user, setUser, setToken, searchQuery, setBookclubName, popularBookclubs, setBookclubDetails, bookclubDetails} = useStore();
-
+  const {
+    user,
+    setUser,
+    setToken,
+    searchQuery,
+    setBookclubName,
+    popularBookclubs,
+    setBookclubDetails,
+    bookclubDetails,
+  } = useStore();
 
   const [bookClub, setBookClub] = useState([]);
   const [allClubs, setAllClubs] = useState([]);
@@ -26,50 +32,47 @@ export default function BookClubs() {
   const [imgWidth, setImgWidth] = useState(0);
   const ref = useRef(null);
 
-
   const getUsersBookclub = (Id) => {
-    axios.get('http://localhost:3030/myBookclubs', { params: { userId: Id } })
+    axios
+      .get('http://localhost:3030/myBookclubs', { params: { userId: Id } })
       .then(({ data }) => {
-        
         setMyBookClubs(data.results);
 
-        setBookclubDetails(data.results)
+        setBookclubDetails(data.results);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
-      })
-  }
+      });
+  };
 
   const joinBookclub = (e) => {
-    const data = {userId: user.uid, bookclubName: e.target.value};
-    axios.put('http://localhost:3030/bookclubs/join', data)
-    .then(res => {
-      console.log("joined")
-    })
-    .catch(err => {
-      console.error(err);
-    })
-    if(user) {
+    const data = { userId: user.uid, bookclubName: e.target.value };
+    axios
+      .put('http://localhost:3030/bookclubs/join', data)
+      .then((res) => {
+        console.log('joined');
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    if (user) {
       getUsersBookclub(user.uid);
     }
-  }
+  };
 
   const carouselClick = (e) => {
-    setBookclubName(e.target.value)
-    console.log("!!", e.target.value)
-  }
-
+    setBookclubName(e.target.value);
+    console.log('!!', e.target.value);
+  };
 
   useEffect(() => {
-
     setBookClub(bookclubDetails[0].bookclubInfo);
     setAllClubs(popularBookclubs);
 
-    if(user) {
+    if (user) {
       getUsersBookclub(user.uid);
     }
   }, [user]);
-
 
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
@@ -105,7 +108,6 @@ export default function BookClubs() {
   };
 
   const renderView = () => {
-
     if (!user) {
       return (
         <div className="club-of-the-day">
@@ -125,7 +127,7 @@ export default function BookClubs() {
       );
     }
     return (
-      <div style={{position:'relative'}}>
+      <div style={{ position: 'relative' }}>
         <div className="club-btns">
           <div className="prev">
             <button onClick={handlePrev} type="button">
@@ -141,7 +143,12 @@ export default function BookClubs() {
         <div className="my-book-clubs-container" ref={ref}>
           <div className="my-book-clubs" style={{ transform: `translate(${imgStyle}px)` }}>
             {myBookClubs.map((club) => (
-              <Carousel width={measureWidth} club={club} key={club.bookclubInfo.bookclubName} carouselClick={carouselClick} />
+              <Carousel
+                width={measureWidth}
+                club={club}
+                key={club.bookclubInfo.bookclubName}
+                carouselClick={carouselClick}
+              />
             ))}
           </div>
         </div>
@@ -157,11 +164,12 @@ export default function BookClubs() {
     return queryRE.test(bookclubName) || queryRE.test(description);
   };
 
-
   useEffect(() => {
     setRenderedClubs(() => {
       if (!searchQuery)
-        return allClubs.map((club) => <AllClubs club={club} user={user} key={Math.random()} joinBookclub={joinBookclub}/>);
+        return allClubs.map((club) => (
+          <AllClubs club={club} user={user} key={Math.random()} joinBookclub={joinBookclub} />
+        ));
 
       return allClubs.reduce(
         (renderList, club) =>
@@ -172,7 +180,6 @@ export default function BookClubs() {
       );
     });
   }, [searchQuery, allClubs]);
-
 
   return (
     <div className="book-clubs">
