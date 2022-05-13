@@ -130,28 +130,50 @@ export default function BookClubs() {
     return (
       <div style={{ position: 'relative' }}>
         <div className="club-btns">
-          <div className="prev">
-            <button onClick={handlePrev} type="button">
-              <ArrowBackIosIcon />
-            </button>
-          </div>
-          <div className="next">
-            <button onClick={handleNext} type="button">
-              <ArrowForwardIosIcon />
-            </button>
-          </div>
+          {myBookClubs.length === 0 ? (
+            <div/>
+            ) : (
+            <div className="prev">
+              <button onClick={handlePrev} type="button">
+                <ArrowBackIosIcon />
+              </button>
+            </div>
+            )
+          }
+          {myBookClubs.length === 0 ? (
+            <div/>
+            ) : (
+            <div className="next">
+              <button onClick={handleNext} type="button">
+                <ArrowForwardIosIcon />
+              </button>
+            </div>
+            )
+          }
         </div>
         <div className="my-book-clubs-container" ref={ref}>
-          <div className="my-book-clubs" style={{ transform: `translate(${imgStyle}px)` }}>
-            {myBookClubs.map((club) => (
-              <Carousel
-                width={measureWidth}
-                club={club}
-                key={club.bookclubInfo.bookclubName}
-                carouselClick={carouselClick}
-              />
-            ))}
-          </div>
+          {myBookClubs.length === 0 ? (
+              <div className="club-of-the-day">
+                <div className="no-club" />
+                <div className="club-right">
+                  <h1>Join a club today!</h1>
+                  <h3>find people with similar interests as you</h3>
+                </div>
+              </div>
+
+            ) : (
+              <div className="my-book-clubs" style={{ transform: `translate(${imgStyle}px)` }}>
+                {myBookClubs.map((club) => (
+                  <Carousel
+                    width={measureWidth}
+                    club={club}
+                    key={club.bookclubInfo.bookclubName}
+                    carouselClick={carouselClick}
+                  />
+                ))}
+              </div>
+            )
+          }
         </div>
       </div>
     );

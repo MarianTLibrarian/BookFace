@@ -16,6 +16,7 @@
   justify-content: center;
   align-items: center;
   transition: 0.5s;
+  cursor: pointer;
 }
 .live-chat svg{
   color:white !important;

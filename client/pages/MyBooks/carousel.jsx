@@ -43,7 +43,6 @@ export default function Carousel({ selectedBookshelf, allBooks }) {
             </Link>
             <div className="book-inside">
             </div>
-            <a className="btn" href="#">£19.95</a>
           </div>
         ))}
       </div>
