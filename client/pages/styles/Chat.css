@@ -127,7 +127,7 @@
   height: auto;
   min-height: 40px;
   max-width: 120px;
-  background-color: #43a047;
+  background-color: cornflowerblue;
   border-radius: 5px;
   color: white;
   display: flex;
@@ -140,29 +140,29 @@
   word-break: break-word;
 }
 
-#you {
+#other {
   justify-content: flex-start;
 }
 
-#you .message-content {
+#other .message-content {
   justify-content: flex-start;
 }
 
-#you .message-meta {
+#other .message-meta {
   justify-content: flex-start;
   margin-left: 5px;
 }
 
-#other {
+#you {
   justify-content: flex-end;
 }
 
-#other .message-content {
+#you .message-content {
   justify-content: flex-end;
-  background-color: cornflowerblue;
+  background-color: #43a047;
 }
 
-#other .message-meta {
+#you .message-meta {
   justify-content: flex-end;
   margin-right: 5px;
 }
