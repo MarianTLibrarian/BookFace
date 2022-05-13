@@ -17,6 +17,8 @@ export default function Home() {
   const [fiction, setFictionTrends] = useState([]);
   const [nonFiction, setNonfictionTrends] = useState([]);
   const [bookClubs, setBookClubs] = useState([])
+  const [surpriseData, setSurpriseData] = useState([]);
+  const [surpriseBook, setSurpriseBook] = useState([]);
 
   const getTrendingBooks = () => {
     axios.get('http://localhost:3030/popularBooks')
@@ -44,6 +46,17 @@ export default function Home() {
       })
   }
 
+  const getSurprise = (q) => {
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${q}`)//what id used to reference book?  "9781483458427"
+    .then(({ data }) => {
+      const temp = data.items
+      setSurpriseData(temp)
+  })
+    .catch(err => {
+      console.error(err);
+    })
+  }
+
     const getMybookclubs = (uid) => {
       axios
         .get('http://localhost:3030/myBookclubs', { params: { userId: uid } })
@@ -65,15 +78,44 @@ export default function Home() {
   useEffect(() => {
     getTrendingBooks();
     getTrendingBookclubs();
+    getSurprise();
     if(user) {
       getMybookclubs(user.uid)
     }
 
   }, [])
 
+    useEffect(() => {
+      setSurpriseBook(surpriseData[Math.floor(Math.random() * surpriseData.length)])
+    }, [surpriseData])
+
   const style = {
     background: 'url(../assets/header-bg.jpg) no-repeat center center fixed',
   };
+
+  const renderView = () => {
+    if (surpriseBook) {
+      return(
+        <div>
+            <div className="surprise">
+            <h1>SURPRISE ME!</h1>
+            <div className="card">
+              <div className="imgBox">
+                <div className="bark" />
+                <img src={surpriseBook.volumeInfo?.imageLinks.smallThumbnail || "http://books.google.com/books/content?id=u1-hDQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"} alt="Book Cover" />
+              </div>
+              <div className="details">
+                <h4 className="surprise-title">Title: {surpriseBook.volumeInfo?.title || 'Title'}</h4>
+                <h4 className="surprise-author">Author: {surpriseBook.volumeInfo?.authors || 'Author'}</h4>
+                <button className="surprise-button" type="button">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+          )
+        }
+      return null;
+    }
 
   return (
     <div className="Home">
@@ -139,19 +181,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      <div className="surprise">
-        <h1>SURPRISE ME!</h1>
-        <div className="card">
-          <div className="imgBox">
-            <div className="bark" />
-            <img src="../assets/logo.png" alt="BookFace Logo" />
-          </div>
-          <div className="details">
-            <h4 className="color1">READ KATY&apos;S NOTION OR GO BACK TO SCHOOL!!!</h4>
-          </div>
-        </div>
-      </div>
+      {renderView()}
     </div>
   );
 }
