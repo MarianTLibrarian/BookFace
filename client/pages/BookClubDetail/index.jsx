@@ -16,37 +16,34 @@ import useStore from '../../userStore';
 
 export default function BookClubDetail() {
 
-  // const [myClub, setMyClub] = useState(null);
+
   const { user, setUser, setToken, bookclubDetails, usersBookclubs, clubName, popularBookclubs } = useStore();
   const [events, setEvents] = useState(null)
   const [chat, setChat] = useState(false)
   const [postBody, setPostBody] = useState('')
   const [posts, setPosts] = useState([])
-  // const [clubName, setClubNames] = useState(null);
-  const [roomName, setRoomName] = useState('');
 
 
   const currentClub = bookclubDetails.filter(club => club.bookclubInfo.bookclubName === clubName);
-
 
 
   const getEvents = () => {
     axios.get('http://localhost:3030/events', { params: { bookclubName: currentClub[0].bookclubInfo.bookclubName } })
       .then(({ data }) => {
         setEvents(data);
+
       })
       .catch((err) => {
         console.error(err);
       })
-    // setEvents(events)
-    // setRoomName(bookclubDetails.bookclubInfo.bookclubName);
+
   }
 
 
   useEffect(() => {
     getEvents();
     setPosts(currentClub[0].posts)
-    // setRoomName(bookclubDetails.bookclubInfo.bookclubName);
+
   }, [])
 
 
@@ -117,7 +114,7 @@ export default function BookClubDetail() {
     }
     return (
       <div className="chat-box">
-        {roomName ? <LiveChat user={user.displayName} roomName={roomName} /> : null}
+        {clubName ? <LiveChat user={user.displayName} roomName={clubName} /> : null}
       </div>
     );
   }
