@@ -40,11 +40,24 @@ export default function Trends({ book }) {
       .catch((err) => console.log(err));
   };
 
+  const cover = {
+    background: `url('${bookImage}') no-repeat center center`,
+  }
+
   return (
     <div className="trends-book" onClick={handleBookClick}>
       <Link to="/bookdetail">
-        <img src={bookImage} alt="bookcover" />
+        <div className="book">
+          <div className="book-cover cover" style={cover}>
+            <div className="effect"></div>
+            <div className="light"></div>
+          </div>
+          <div className="book-inside">
+            <img src={bookImage} alt='bookcover' />
+          </div>
+        </div>
       </Link>
     </div>
+
   );
 }

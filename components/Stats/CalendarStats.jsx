@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../client/pages/styles/Stats.css';
+
+import { ResponsiveCalendar } from '@nivo/calendar';
 import useStore from '../../client/userStore';
 
 export default function CalendarStats() {
   const { user } = useStore();
   const [calendarStats, setCalendarStats] = useState([]);
-  const [ResponsiveCalendar, setResponsiveCalendar] = useState(<div className="loading">loading</div>);
+  // const [ResponsiveCalendar, setResponsiveCalendar] = useState(<div className="loading">loading</div>);
 
   const getCalendarStats = (uid) => {
     axios
@@ -37,8 +39,9 @@ export default function CalendarStats() {
   const calStartEndDate = calendarStats.day;
 
   useEffect(() => {
-    setResponsiveCalendar(() => import('@nivo/calendar'));
+    // setResponsiveCalendar(() => import('@nivo/calendar'));
     getCalendarStats(user.uid);
+    // getCalendarStats(1);
   }, []);
 
   return (
