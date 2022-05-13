@@ -45,6 +45,7 @@ export default function BookDetail() {
     "thumbnail": "http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
   });
   const [language, setLanguage] = useState(bookDetails.language || 'en');
+  const [pageCount, setPageCount] = useState(bookDetails.pageCount || 125);
 
 
   // materialui--modal
@@ -88,6 +89,7 @@ export default function BookDetail() {
       categories: categories,
       imageLinks: imageLinks,
       language: language,
+      pageCount: pageCount
     };
     axios
       .post(`${expressUrl}/books`,  staticbookdetail )
