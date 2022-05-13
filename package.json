@@ -10,12 +10,17 @@
     "test": "jest --config=jest.config.js",
     "socket": "nodemon socket.js"
   },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.7.0",
-    "@nivo/bar": "^0.79.1",
     "@nivo/calendar": "^0.79.1",
     "@nivo/core": "^0.79.0",
     "@nivo/pie": "^0.79.1",
@@ -32,6 +37,7 @@
     "react-datetime-picker": "^3.5.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
+    "react-scroll-to-bottom": "^4.2.0",
     "route-cache": "^0.4.7",
     "socket.io": "^4.5.0",
     "socket.io-client": "^4.5.0",

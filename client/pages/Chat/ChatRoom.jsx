@@ -1,51 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import VideoChat from '../Chat/videoChat';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import SendIcon from '@mui/icons-material/Send';
+import VideoChat from './videoChat';
+import ScrollToBottom from "react-scroll-to-bottom";
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
   const [clicked, setClicked] = useState(false);
-  // const [userToken, setUserToken] = useState();
 
-  // To do: use this state to render video chat button accordingly
-  const [connected, setConnection] = useState(false);
-
-  const postToken = () => {
-    const data = {
-      room: 'currentRoom',
-      userName: 'currentUserName',
-    };
-    axios
-      .post('/token', data)
-      .then((res) => {
-        console.log('POST RES ON CLIENT SIDE', res);
-      })
-      .catch((err) => {
-        console.log('ERR in ChatRoom:', err.message);
-      });
-  };
-
-  useEffect(() => {
-    postToken();
-  });
-
-  // Video Chat button: click to connect
-  const handleClick = (e) => {
+  const handleClick = () => {
     setClicked(!clicked);
-    // connectToRoom();
-    // setConnection(true);
-    // getToken();
-    console.log('connected');
   };
 
   const sendMessage = () => {
     if (currentMessage !== '') {
+      const timeStamp = (('0'+ (new Date(Date.now()).getHours())).slice(-2)+ ':' + ('0'+ (new Date(Date.now()).getMinutes())).slice(-2));
       const messageData = {
         room: room,
         author: username,
         message: currentMessage,
-        time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
+        time: timeStamp,
       };
 
       socket.emit('send_message', messageData);
@@ -65,16 +40,16 @@ function Chat({ socket, username, room }) {
       <div className="chat-header">
         <p>Live Chat</p>
         <button type="submit" className="videoRoom" onClick={handleClick}>
-          Video Chat
+          <VideocamIcon />
         </button>
       </div>
       {clicked && (
         <div className="message-container">
-          <VideoChat />
+          <VideoChat username={username} roomName={room} />
         </div>
       )}
       <div className="chat-body">
-        <div className="message-container">
+        <ScrollToBottom className="message-container">
           {messageList.map((messageContent) => (
             <div className="message" id={username === messageContent.author ? 'you' : 'other'}>
               <div>
@@ -88,13 +63,13 @@ function Chat({ socket, username, room }) {
               </div>
             </div>
           ))}
-        </div>
+        </ScrollToBottom>
       </div>
       <div className="chat-footer">
         <input
           type="text"
           value={currentMessage}
-          placeholder="Hey..."
+          placeholder="Say something here..."
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
@@ -102,7 +77,9 @@ function Chat({ socket, username, room }) {
             event.key === 'Enter' && sendMessage();
           }}
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button onClick={sendMessage}>
+          <SendIcon />
+        </button>
       </div>
     </div>
   );

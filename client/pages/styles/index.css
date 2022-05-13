@@ -8,6 +8,8 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: scroll !important;
+  padding: 0 !important;
 }
 
 code {
@@ -40,6 +42,9 @@ h1 {
   --light-cyan: #97e3d5;
 }
 
+button, a{
+  cursor: pointer;
+}
 /***********************     Nav     ***********************/
 .nav-container {
   position: absolute;
@@ -158,6 +163,7 @@ button {
   border: 2px solid white;
   transition: 0.5s;
 }
+
 .green-btn button {
   background: #67b27c;
   border: none;
@@ -259,4 +265,35 @@ button:hover {
   padding: 40px;
   color: white;
   font-weight: bold;
+}
+
+
+
+@media only screen and (max-width: 1400px) {
+  .col-right p {
+    font-size: 14px !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .club-container {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .featured-clubs {
+    flex-direction: column;
+  }
+
+  .featured-clubs .left {
+    width: 100%;
+    min-height: 400px;
+  }
+
+  .featured-clubs .right {
+    width: 100%
+  }
+
+
 }

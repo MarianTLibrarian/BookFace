@@ -9,10 +9,10 @@ import useStore from '../../userStore';
 
 export default function Home() {
 
-  const { bookclubDetails, bookDetails} = useStore();
+  const {user, setPopularBookclubs,setBookclubDetails, setUsersBookclubs} = useStore();
+  // const setUsersBookclubs = useStore(state => state.setUsersBookclubs);
 
-  const setPopularBookclubs = useStore(state => state.setPopularBookclubs);
-  const popularBookclubs = useStore(state => state.popularBookclubs);
+
 
   const [fiction, setFictionTrends] = useState([]);
   const [nonFiction, setNonfictionTrends] = useState([]);
@@ -20,6 +20,7 @@ export default function Home() {
   const [surpriseData, setSurpriseData] = useState([]);
   const [surpriseBook, setSurpriseBook] = useState([]);
 
+<<<<<<< HEAD
 
   // const surpriseSelector = (array) => {
   //   const isbnArray = [];
@@ -30,6 +31,8 @@ export default function Home() {
   // }
 
 
+=======
+>>>>>>> main
   const getTrendingBooks = () => {
     axios.get('http://localhost:3030/popularBooks')
       .then(({data}) => {
@@ -44,7 +47,10 @@ export default function Home() {
   const getTrendingBookclubs = () => {
     axios.get('http://localhost:3030/bookclubs')
       .then(({ data }) => {
+
+        setBookclubDetails(data);
         setPopularBookclubs(data);
+
         const featuredClubs = data.slice(0, 8);
         setBookClubs(featuredClubs);
       })
@@ -53,6 +59,7 @@ export default function Home() {
       })
   }
 
+<<<<<<< HEAD
   const getSurprise = (q) => {
     axios.get(`https://www.googleapis.com/books/v1/volumes?q=${q}`)//what id used to reference book?  "9781483458427"
     .then(({ data }) => {
@@ -68,6 +75,33 @@ export default function Home() {
       getTrendingBooks();
       getTrendingBookclubs();
       getSurprise();
+=======
+    const getMybookclubs = (uid) => {
+      axios
+        .get('http://localhost:3030/myBookclubs', { params: { userId: uid } })
+        .then(({ data }) => {
+          const temp = [];
+          for (let i = 0; i < data.results.length; i += 1) {
+            temp.push(data.results[i].bookclubInfo.bookclubName);
+          }
+
+          setUsersBookclubs(temp)
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+
+  useEffect(() => {
+    getTrendingBooks();
+    getTrendingBookclubs();
+    if(user) {
+      getMybookclubs(user.uid)
+    }
+
+>>>>>>> main
   }, [])
 
     useEffect(() => {
@@ -109,6 +143,9 @@ export default function Home() {
           <div className="filter" />
           <div className="main-content">
             <div className="home-search-bar">
+              <div className="home-headline">
+                <h1>Home for Your Tomes</h1>
+              </div>
               <div />
               <SearchBar />
               <div />
@@ -118,28 +155,30 @@ export default function Home() {
       </div>
       <div className="description">
         <div className="text">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor diam vitae
-            interdum molestie. In placerat suscipit velit, gravida pretium velit maximus id. Duis ut
-            felis maximus, suscipit orci vitae, porta metus.{' '}
-          </p>
+          <p>Find and read more books you'll love, and keep track of the books you want to read.</p>
+          <p>Be part of the world's largest community of book lovers on BookFace.</p>
         </div>
       </div>
 
       <div className="trends">
-        <h1>Explore Trends</h1>
-        <p>What will you discover?</p>
-        <h2 style={{ textAlign: 'left' }}>Fiction: </h2>
+        <h1>EXPLORE TRENDS</h1>
+
         <div className="trends-list">
           {fiction.map((book) => (
-            <Trends book={book} key={book} />
+            <Trends book={book} key={Math.random()} />
           ))}
         </div>
-        <h2 style={{ textAlign: 'left' }}>Non-Fiction: </h2>
+        <div className='bookshelf'>
+          <img src='../../../assets/shelf_wood.png' alt='shelf'/>
+        </div>
+
         <div className="trends-list">
           {nonFiction.map((book) => (
-            <Trends book={book} key={book} />
+            <Trends book={book} key={Math.random()} />
           ))}
+        </div>
+        <div className='bookshelf'>
+        <img src='../../../assets/shelf_wood.png' alt='shelf'/>
         </div>
       </div>
 

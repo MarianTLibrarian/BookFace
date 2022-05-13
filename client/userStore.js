@@ -24,7 +24,7 @@ const useStore = create((set) => ({
   setPopularBookclubs: (details) => set(() => ({ popularBookclubs: details})),
 
   usersBookclubs: null,
-  setUsersBookclubs: (details) => set(() => ({ clubs: details})),
+  setUsersBookclubs: (details) => set(() => ({ usersBookclubs: details})),
 
   bookclubDetails: null,
   setBookclubDetails: (details) => set(() => ({ bookclubDetails: details })),

@@ -68,14 +68,20 @@ const bookclubName = useStore(state => state.bookclubName);
     axios
       .get(`${expressUrl}/myBookclubs`, { params: { userId: uid } })
       .then(({ data }) => {
-        // console.log('bookclubs', data);
+        // console.log('setBookclubDetails', data.results);
+
         setBookclubDetails(data.results)
 
         const temp = [];
         for (let i = 0; i < data.results.length; i += 1) {
           temp.push(data.results[i].bookclubInfo.bookclubName);
         }
+
         setBookclubs(temp);
+
+        // console.log("setUsersBookclubs",temp )
+        // setUsersBookclubs(temp)
+        // console.log(setUsersBookclubs.toString())
       })
       .catch((err) => {
         console.log(err);
@@ -105,9 +111,9 @@ const bookclubName = useStore(state => state.bookclubName);
 
   useEffect(() => {
     // FIXME: these are placeholder arguments
-    getBookshelves(1);
-    getBooks(1);
-    getBookclubs('qwew');
+    getBookshelves(user.uid);
+    getBooks(user.uid);
+    getBookclubs(user.uid);
   }, []);
 
   useEffect(() => {
@@ -119,7 +125,7 @@ const bookclubName = useStore(state => state.bookclubName);
 
       const booksToRender = allBooks.filter((book) => hasQuery(book));
 
-      console.log({searchQuery, booksToRender})
+      // console.log({searchQuery, booksToRender})
       return booksToRender;
     });
   }, [allBooks]);
@@ -195,11 +201,11 @@ const bookclubName = useStore(state => state.bookclubName);
 
               <div className="my-book-clubs">
                 <h2>My Book Clubs</h2>
-                <Link to="/bookclubs" style={{ textDecoration: 'none', color: 'black' }}>
-                  <p>All Clubs</p>
-                </Link>
+                <p>All Clubs</p>
+                {/* <Link to="/bookclubs" style={{ textDecoration: 'none', color: 'black' }}>
+                </Link> */}
                 {bookclubs.map((club) => (
-                  <div className="club-listing" key={club}>
+                  <div className="club-listing" key={Math.random()}>
                     <Link onClick={() => handleClubClick(club)} to="/bookclubdetail" style={{ textDecoration: 'none', color: 'black' }}>
                       {club}
                     </Link>
@@ -208,16 +214,16 @@ const bookclubName = useStore(state => state.bookclubName);
               </div>
 
               <div className='reading-goal'>
-                <Link to='/stats' style={{'text-decoration': 'none', 'color': 'black'}}>
+                <Link to='/stats' style={{textDecoration: 'none', 'color': 'black'}}>
                   <h2 style={{
                     'display': 'flex',
-                    'flex-direction': 'row',
-                    'align-items': 'center',
-                    'justify-content': 'space-between'
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
                   }}>
                     Reading Stats
                     <span
-                      style={{'font-size': '12px', 'padding-right': '1em'}}
+                      style={{fontSize: '12px', paddingRight: '1em'}}
                     >&#9658;</span>
                   </h2>
                 </Link>
