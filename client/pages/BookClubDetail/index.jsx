@@ -89,7 +89,7 @@ export default function BookClubDetail() {
         <div>
           <div className="write-post">
             <textarea
-              placeHolder="Leave A Comment..."
+              placeholder="Leave A Comment..."
               onChange={(e) => setPostBody(e.target.value)}
               value={postBody}
             />
@@ -100,7 +100,7 @@ export default function BookClubDetail() {
             </div>
             <div className="club-posts">
               {posts.map((post) => (
-                <Posts post={post} key={post} />
+                <Posts post={post} key={Math.random()} />
               ))}
             </div>
           </div>
@@ -129,7 +129,7 @@ export default function BookClubDetail() {
               <div className="my-clubs">
                 <h2>My Book Clubs</h2>
                 {usersBookclubs.map((club) => (
-                  <MyBookClubs club={club} key={club} />
+                  <MyBookClubs club={club} key={Math.random()} />
                 ))}
               </div>
 
