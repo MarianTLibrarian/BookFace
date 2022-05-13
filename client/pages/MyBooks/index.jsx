@@ -201,9 +201,9 @@ const bookclubName = useStore(state => state.bookclubName);
 
               <div className="my-book-clubs">
                 <h2>My Book Clubs</h2>
-                <Link to="/bookclubs" style={{ textDecoration: 'none', color: 'black' }}>
-                  <p>All Clubs</p>
-                </Link>
+                <p>All Clubs</p>
+                {/* <Link to="/bookclubs" style={{ textDecoration: 'none', color: 'black' }}>
+                </Link> */}
                 {bookclubs.map((club) => (
                   <div className="club-listing" key={Math.random()}>
                     <Link onClick={() => handleClubClick(club)} to="/bookclubdetail" style={{ textDecoration: 'none', color: 'black' }}>
