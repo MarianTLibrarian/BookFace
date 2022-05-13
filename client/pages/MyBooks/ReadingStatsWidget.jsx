@@ -18,7 +18,7 @@ export default function ReadingStatsWidget () {
   const [totalRead, setTotalRead] = useState([]);
 
   const trailSpaced='true';
-  const speed='.3';
+  const speed='2';
   const percentage = Math.round((totalRead / allBooksCount) * 100);
   const pace = percentage / speed;
 
