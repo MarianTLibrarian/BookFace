@@ -42,6 +42,9 @@ h1 {
   --light-cyan: #97e3d5;
 }
 
+button, a{
+  cursor: pointer;
+}
 /***********************     Nav     ***********************/
 .nav-container {
   position: absolute;

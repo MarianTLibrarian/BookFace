@@ -5,6 +5,13 @@ import '../../client/pages/styles/Stats.css';
 import { ResponsiveCalendar } from '@nivo/calendar';
 import useStore from '../../client/userStore';
 
+const tempStats = [
+  {
+    "value": 0,
+    "day": "2022-02-04"
+  }
+];
+
 export default function CalendarStats() {
   const { user } = useStore();
   const [calendarStats, setCalendarStats] = useState([]);
@@ -14,29 +21,22 @@ export default function CalendarStats() {
     axios
       .get('http://localhost:3030/books', { params: { userId: uid } })
       .then(({ data }) => {
-        const eachDay = {
-          value: 0,
-          day: '',
-        };
-        for (let i = 0; i < data.results.length; i += 1) {
-          if (data.results[i].readingStatus === 'read') {
-            eachDay.day = data.results[i].endReadDate;
-            if (eachDay.day) {
-              eachDay.value += 1;
-            } else {
-              eachDay.value = 1;
-            }
-            setCalendarStats(eachDay);
-          }
-        }
+
+        const readBooks = data.results.filter((element) => element.readingStatus === 'read');
+
+        const calObj = readBooks
+          .map((book) => book.endReadDate)
+          .reduce((dateCounts, date) => {
+            dateCounts[date] = (dateCounts[date] || 0) + 1;
+            return dateCounts;
+          }, {});
+
+        setCalendarStats(Object.entries(calObj).map(([day, value]) => ({ value, day })));
       })
       .catch((err) => {
         console.error(err);
       });
   };
-
-  console.log('HERE', calendarStats)
-  const calStartEndDate = calendarStats.day;
 
   useEffect(() => {
     // setResponsiveCalendar(() => import('@nivo/calendar'));
@@ -47,13 +47,13 @@ export default function CalendarStats() {
   return (
     <div className="stats-calendar">
       <div>
-        <h3 style={{'color': '#808080'}}>Your readings this year</h3>
+        <h3 style={{ color: '#808080' }}>Your readings this year</h3>
       </div>
-      {calendarStats.length === 0 ?
+      {calendarStats.length === 0 ? (
         <ResponsiveCalendar
-          data={[calendarStats]}
-          from='2022-01-09'
-          to='2022-08-09'
+          data={tempStats}
+          from="2022-01-09"
+          to="2022-08-09"
           emptyColor="#eeeeee"
           colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
           margin={{
@@ -79,11 +79,11 @@ export default function CalendarStats() {
             },
           ]}
         />
-        :
+      ) : (
         <ResponsiveCalendar
-          data={[calendarStats]}
-          from={calStartEndDate}
-          to={calStartEndDate}
+          data={calendarStats}
+          from="2022-01-09"
+          to="2022-08-09"
           emptyColor="#eeeeee"
           colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
           margin={{
@@ -109,7 +109,7 @@ export default function CalendarStats() {
             },
           ]}
         />
-      }
+      )}
     </div>
   );
 }
