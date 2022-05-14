@@ -1,27 +1,23 @@
 # BookFace
-BookFace is a social cataloging website that allows book lovers to connect, share books they love, and manage their collection of books with personalized bookshelves.
-
-This is the culmination of six engineers working closely over the course of one week to complete an MVP based on client's request (Marian T. Librarian).
+BookFace is a social cataloging website that allows book lovers to connect, share books they love, and manage their collection of books with personalized bookshelves. This is the culmination of six engineers working closely over the course of one week to complete an MVP based on client's request.
 
 
 ## Table of Contents
 ---
-- [BookFace](#bookface)
-  - [## Table of Contents](#-table-of-contents)
-  - [## Tech Stack](#-tech-stack)
-  - [## Wireframes](#-wireframes)
-  - [## Product Features](#-product-features)
-    - [Home](#home)
-    - [Login authentication with Firebase OAuth](#login-authentication-with-firebase-oauth)
-    - [Live search with smart filter](#live-search-with-smart-filter)
-    - [MyBooks](#mybooks)
-    - [Book detail page](#book-detail-page)
-    - [Reading Stats](#reading-stats)
-    - [MyClubs](#myclubs)
-    - [Club detail page](#club-detail-page)
-    - [Live Chat](#live-chat)
-    - [Video Chat](#video-chat)
-  - [## Contributors](#-contributors)
+- [Tech Stack](#tech-stack)
+- [Wireframes](#wireframes)
+- [Product Features](#product-features)
+  - [Home](#home)
+  - [Login authentication with Firebase OAuth](#login-authentication-with-firebase-oauth)
+  - [Live search with smart filter](#live-search-with-smart-filter)
+  - [MyBooks](#mybooks)
+  - [Book detail page](#book-detail-page)
+  - [Reading Stats](#reading-stats)
+  - [MyClubs](#myclubs)
+  - [Club detail page](#club-detail-page)
+  - [Live Chat](#live-chat)
+  - [Video Chat](#video-chat)
+- [Contributors](#contributors)
 
 
 ## Tech Stack
@@ -113,7 +109,6 @@ This is the culmination of six engineers working closely over the course of one 
 | ------------- | ------------- |
 | Product Managers  | [Haley Jung](https://github.com/haleyjung) &  [Addison Hernandez](https://github.com/addisonhernandez)  |
 | App Architects  | [Hailee Lu](https://github.com/HuijunLu) & [Katy Feng](https://github.com/katyfsy) |
-| UI Leads  |[Junpeng Chang](https://github.com/jp-chang) & [Joseph Sanfelippo](https://github.com/JosephSanfelippo)
- |
+| UI Leads  |[Junpeng Chang](https://github.com/jp-chang) & [Joseph Sanfelippo](https://github.com/JosephSanfelippo) |
 
 
