@@ -62,7 +62,7 @@ export default function PagesStats() {
 
   return (
     <div className="stats-container">
-      {state.labels.length === 0 ? (
+      {/* {state.labels.length === 0 ? (
         <div className="genres-no-data">
           <h2>You have not read any books yet!</h2>
           <iframe
@@ -75,7 +75,7 @@ export default function PagesStats() {
           ></iframe>
         </div>
       ) : (
-        <>
+        <> */}
           <h3>Total number of pages you have read over the years</h3>
           <div className="stats-graph-container">
             <Bar
@@ -122,8 +122,8 @@ export default function PagesStats() {
               }}
             />
           </div>
-        </>
-      )}
+        {/* </>
+      )} */}
     </div>
   );
 }
