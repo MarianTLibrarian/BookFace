@@ -123,9 +123,11 @@ export default function Search() {
       </div>
 
       <div className="search-trends">
+        <div className="page-content">
         <h1>{`${searchFilter} RESULTS`}</h1>
         <p>{`Here are some results related to '${searchQuery}'`}</p>
         <div className="search-trends-list">{renderedItems}</div>
+        </div>
       </div>
     </div>
   );

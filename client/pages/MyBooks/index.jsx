@@ -102,7 +102,6 @@ export default function MyBooks() {
   };
 
   useEffect(() => {
-    // FIXME: these are placeholder arguments
     getBookshelves(user.uid);
     getBooks(user.uid);
     getBookclubs(user.uid);
@@ -116,8 +115,6 @@ export default function MyBooks() {
       const hasQuery = ({ title, description }) => queryRE.test(title) || queryRE.test(description);
 
       const booksToRender = allBooks.filter((book) => hasQuery(book));
-
-      // console.log({searchQuery, booksToRender})
       return booksToRender;
     });
   }, [allBooks]);
@@ -180,15 +177,13 @@ export default function MyBooks() {
             <div className="content-left">
               <div className="my-bookshelves">
                 <h2>My Bookshelves</h2>
-                <p value={'All'} onClick={handleClick}>
-                  All
-                </p>
                 {bookshelves.map((shelf) => (
                   <p
                     className="shelf-listing"
                     key={Math.random()}
                     value={shelf}
                     onClick={handleClick}
+                    style={{ 'padding-bottom': '10px'}}
                   >
                     {shelf}
                   </p>
@@ -197,9 +192,6 @@ export default function MyBooks() {
 
               <div className="sidebar-book-clubs">
                 <h2>My Book Clubs</h2>
-                <p>All Clubs</p>
-                {/* <Link to="/bookclubs" style={{ textDecoration: 'none', color: 'black' }}>
-                </Link> */}
                 {bookclubs.map((club) => (
                   <div className="club-listing" key={Math.random()}>
                     <Link

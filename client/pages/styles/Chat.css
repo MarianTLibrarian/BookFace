@@ -1,5 +1,5 @@
 .video-chat-container {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   background-color: bisque;
   height: 800px;
 }
@@ -98,7 +98,7 @@
 }
 
 .videoRoom {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   color: white;
   display: flex;
   justify-content: center;
@@ -240,4 +240,29 @@
 
 .chat-body button{
   display: none;
+}
+
+.remote-participants{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+  padding-top: 15px;
+}
+
+.participant{
+  width:100%;
+}
+
+.participant video {
+  width:100%
+}
+
+.participant h3 {
+  font-size: 16px;
+  margin: 2px;
+  text-align: right;
+}
+
+.room {
+  padding: 20px;
 }
