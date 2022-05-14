@@ -12,7 +12,7 @@
   flex-direction: column;
 }
 
-.book {
+.mybooks-book {
   width: 225px;
   height: 350px;
   position: relative;
@@ -37,7 +37,7 @@
   -webkit-transition: all 0.5s ease-in-out;
 }
 
-.book .book-cover {
+.mybooks-book .book-cover {
   background-size: 100% 100% !important;
 }
 
@@ -71,11 +71,11 @@
   -webkit-transition: all 0.5s ease;
 }
 
-.book:hover {
+.mybooks-book:hover {
   cursor: pointer;
 }
 
-.book:hover .book-cover {
+.mybooks-book:hover .book-cover {
   transform: perspective(2000px) rotateY(-30deg);
   -webkit-transform: perspective(2000px) rotateY(-30deg);
   transform-style: preserve-3d;
@@ -83,13 +83,13 @@
   box-shadow: inset 4px 1px 3px #ffffff60, inset 0 -1px 2px #00000080, 10px 0px 10px -5px #00000030;
 }
 
-.book:hover .effect {
+.mybooks-book:hover .effect {
   width: 40px;
   /** margin-left:13px;
   opacity: 0.5; **/
 }
 
-.book:hover .light {
+.mybooks-book:hover .light {
   opacity: 1;
   width: 70%;
 }
@@ -144,8 +144,8 @@
   -webkit-transition: all 1s ease-in-out;
 }
 
-.book:hover .btn,
-.book:hover .title {
+.mybooks-book:hover .btn,
+.mybooks-book:hover .title {
   opacity: 1;
 }
 
