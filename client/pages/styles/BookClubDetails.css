@@ -182,10 +182,12 @@ align-items: center;
 .calendarModalBox {
   background-color: white;
   position: absolute;
-  top: 210px;
-  left: 700px;
+  top: 50%;
+  left: 50%;
   width: 500px;
   height: 400px;
+  margin-left:-250px;
+  margin-top:-200px;
   padding: 40px;
   display: grid;
   flex-direction: column;
