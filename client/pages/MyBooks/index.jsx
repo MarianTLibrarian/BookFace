@@ -195,7 +195,7 @@ export default function MyBooks() {
                 ))}
               </div>
 
-              <div className="my-book-clubs">
+              <div className="sidebar-book-clubs">
                 <h2>My Book Clubs</h2>
                 <p>All Clubs</p>
                 {/* <Link to="/bookclubs" style={{ textDecoration: 'none', color: 'black' }}>
