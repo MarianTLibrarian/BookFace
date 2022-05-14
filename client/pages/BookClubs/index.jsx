@@ -19,8 +19,10 @@ export default function BookClubs() {
     searchQuery,
     setBookclubName,
     popularBookclubs,
+    setPopularBookclubs,
     setBookclubDetails,
     bookclubDetails,
+    expressUrl,
   } = useStore();
 
   const [bookClub, setBookClub] = useState([]);
@@ -64,6 +66,13 @@ export default function BookClubs() {
     setBookclubName(e.target.value);
     console.log('!!', e.target.value);
   };
+
+  useEffect(() => {
+    fetch(`${expressUrl}/bookclubs`)
+      .then((res) => res.json())
+      .then((clubs) => setPopularBookclubs(clubs))
+      .catch(console.error);
+  }, []);
 
   useEffect(() => {
     if (bookclubDetails && bookclubDetails[0]?.bookclubInfo)
