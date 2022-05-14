@@ -3,7 +3,6 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 
 
 ## Table of Contents
----
 - [Tech Stack](#tech-stack)
 - [Wireframes](#wireframes)
 - [Product Features](#product-features)
@@ -21,7 +20,6 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 
 
 ## Tech Stack
----
 ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=for-the-badge)
 ![Vite](https://img.shields.io/badge/-Vite-BA55D3?logo=vite&logoColor=white&style=for-the-badge)
 ![Firebase](https://img.shields.io/badge/-Firebase-FFD700?logo=firebase&logoColor=white&style=for-the-badge)
@@ -37,12 +35,10 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 
 
 ## Wireframes
----
 ![](assets/demo/BookFace_wireframes.png)
 
 
 ## Product Features
----
 
 ### Home
 ![](assets/demo/BookFace_Home.gif)
@@ -96,7 +92,7 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 
 
 ## Contributors
----
+
 &nbsp;
 
 <a href="https://github.com/MarianTLibrarian/BookFace/graphs/contributors">
