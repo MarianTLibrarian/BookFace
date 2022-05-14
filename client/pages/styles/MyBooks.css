@@ -189,10 +189,10 @@
 
 .contentRight .container{
   margin-right:0;
-  justify-content:end;
+
 }
 
-.contentLeft {
+/* .contentLeft {
   width: 450px !important;
-}
+} */
 

@@ -226,7 +226,7 @@ export default function MyBooks() {
             </div>
 
             {/* NOTE: Bookshelves get rendered here */}
-            <div className="contentRight">
+            <div className="contentRight content-right">
               <Carousel selectedBookshelf={currentView} allBooks={renderedBooks} />
             </div>
           </div>
