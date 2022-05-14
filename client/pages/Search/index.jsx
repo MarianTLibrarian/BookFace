@@ -117,11 +117,8 @@ export default function Search() {
       </div>
       <div className="description">
         <div className="text">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor diam vitae
-            interdum molestie. In placerat suscipit velit, gravida pretium velit maximus id. Duis ut
-            felis maximus, suscipit orci vitae, porta metus.
-          </p>
+          <p>Find and read more books you'll love, and keep track of the books you want to read.</p>
+          <p>Be part of the world's largest community of book lovers on BookFace.</p>
         </div>
       </div>
 
