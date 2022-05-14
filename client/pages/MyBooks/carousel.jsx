@@ -27,7 +27,7 @@ export default function Carousel({ selectedBookshelf, allBooks }) {
     <div className="carousel">
       <div className="container">
         {currentBookshelf.map(book => (
-          <div className="book" key={Math.random()}>
+          <div className="mybooks-book" key={Math.random()}>
             <div className="title">
               <p>{book.title}</p>
             </div>
