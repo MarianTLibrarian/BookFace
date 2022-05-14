@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   margin-right: 10em;
@@ -23,13 +23,13 @@
 }
 
 .mybooks-book {
-  width: 225px;
-  height: 350px;
+  width: 23%;
+  height: 300px;
   position: relative;
   text-align: center;
-  margin: 2.5%;
   margin-bottom: 50px;
   margin-top: 75px;
+  margin-left:16px;
 }
 
 .book-cover {
@@ -118,7 +118,7 @@
 }
 
 .title {
-  font-size: 22px;
+  font-size: 16px;
   width: 100%;
   color: #333;
   text-align: center;

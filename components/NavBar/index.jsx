@@ -63,7 +63,7 @@ export default function NavBar() {
           <NavLink exact to="/">
             Home
           </NavLink>
-          <NavLink exact to="/">
+          <NavLink exact to="/about">
             About
           </NavLink>
           {user ? <NavLink to="/mybooks">My Books</NavLink> : null}
