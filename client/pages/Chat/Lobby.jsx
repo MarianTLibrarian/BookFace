@@ -5,7 +5,7 @@ function Lobby ({
   connecting,
 }) {
   return (
-    <form style={{'border': '1px solid red'}} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <button type="submit" disabled={connecting}>
         {connecting ? "Connecting" : "Join"}
       </button>

@@ -102,12 +102,14 @@ export default function Home() {
             <div className="card">
               <div className="imgBox">
                 <div className="bark" />
-                <img src={surpriseBook.volumeInfo?.imageLinks.smallThumbnail || "http://books.google.com/books/content?id=u1-hDQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"} alt="Book Cover" />
+                <img src="../../../assets/surpriseme.jpg" alt='tome'/>
               </div>
               <div className="details">
-                <h4 className="surprise-title">Title: {surpriseBook.volumeInfo?.title || 'Title'}</h4>
-                <h4 className="surprise-author">Author: {surpriseBook.volumeInfo?.authors || 'Author'}</h4>
-                <button className="surprise-button" type="button">Details</button>
+                <h4 className="surprise-title">{surpriseBook.volumeInfo?.title || 'Title'}</h4>
+                <h5 className="surprise-author">by {surpriseBook.volumeInfo?.authors || 'Author'}</h5>
+                {/* <button className="surprise-button" type="button">Details</button> */}
+
+                <img src={surpriseBook.volumeInfo?.imageLinks.thumbnail || "http://books.google.com/books/content?id=u1-hDQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"} alt="Book Cover" />
               </div>
             </div>
           </div>

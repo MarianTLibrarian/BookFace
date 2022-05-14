@@ -2,14 +2,6 @@ h4 {
   margin-bottom: 3px;
 }
 
-.surprise-title .surprise-author {
-  margin-top: -10px;
-  margin-bottom: 3px;
-}
-
-.surprise-button {
-  margin-top: 20px;
-}
 
 .Home {
   text-align: center;
@@ -265,9 +257,17 @@ h4 {
   top: 0;
   left: 0;
   box-sizing: border-box;
-  padding: 0 0 0 10px;
+  padding: 25px 0 20px 50px;
+  flex-direction: column;
+  display:flex;
+  justify-content: center;
+  align-items: center;
   z-index: -1;
-  margin-top: 70px;
+}
+
+.card .details img{
+  width:200px;
+  height:300px;
 }
 
 .card .details p {
@@ -279,7 +279,15 @@ h4 {
 
 .card .details h4 {
   text-align: center;
+  font-size:16px;
 }
+
+.card .details h5 {
+  text-align: center;
+  font-size:12px;
+  padding-bottom:10px;
+}
+
 
 .text-right {
   text-align: right;
@@ -418,5 +426,79 @@ h4 {
   .trends h1{
     padding-bottom:20px;
   }
+}
 
+/***********************     About     ***********************/
+
+.profile-container {
+  padding-bottom: 0;
+}
+
+.last-profile-container {
+  padding-bottom: 200px !important;
+}
+
+.profiles-second-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.team-profiles-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.team-profile img {
+  border-radius: 50%;
+  width: 250px;
+  margin-bottom: 20px;
+}
+
+.profile-titles h1 {
+  color: var(--wood);
+}
+
+.profile-info {
+  margin-top: 70px;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: transparent;
+  color: transparent;
+}
+
+.flip-card-back {
+  background-color: transparent;
+  color: transparent;
+  transform: rotateY(180deg);
 }

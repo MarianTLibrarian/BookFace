@@ -6,7 +6,7 @@ function Room ({ roomName, room, handleLogout }) {
 
   useEffect(() => {
     const participantConnected = (participant) => {
-      setParticipants((prevParticipants) => [...prevParticipants, participant]);
+      setParticipants((prevParticipants) => Array.from(new Set([...prevParticipants, participant])));
     };
 
     const participantDisconnected = (participant) => {
@@ -42,7 +42,6 @@ function Room ({ roomName, room, handleLogout }) {
           ""
         )}
       </div>
-      <h3>Remote Participants</h3>
       <div className="remote-participants">{remoteParticipants}</div>
     </div>
   );

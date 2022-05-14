@@ -172,13 +172,13 @@ padding:10px 20px
 
 .my-club-info{
   width:400px;
-position: relative;
-text-align: center;
+  position: relative;
+  text-align: center;
 }
 
 .my-club-info img{
   width:100%;
-  height:100%;
+  height:600px;
   object-fit: cover;
   border:5px solid white;
 }

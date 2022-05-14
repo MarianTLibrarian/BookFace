@@ -20,7 +20,7 @@ export default function Posts({ post }) {
           <img src={post.posterUserImg} alt='userImage' />
         </div>
         <div className='user-post'>
-          <p> {post.postBody}</p>
+          <p className='post-detail'> {post.postBody}</p>
         </div>
       </div>
     </div>

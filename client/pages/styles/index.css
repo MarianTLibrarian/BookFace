@@ -182,7 +182,7 @@ button:hover {
 
 .description {
   background: black;
-  padding: 60px;
+  padding: 60px 80px;
   color: white;
   font-weight: 500;
   display: flex;
@@ -190,7 +190,7 @@ button:hover {
 }
 
 .text {
-  width: 900px;
+  width: 800px;
   line-height: 26px;
   font-weight: bold;
   text-align: center;

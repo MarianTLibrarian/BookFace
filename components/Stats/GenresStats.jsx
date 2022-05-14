@@ -51,13 +51,13 @@ export default function GenresStats() {
 
   return (
     <div className="genres-stats-container">
-    {genresStats.length === 0 ?
+    {/* {genresStats.length === 0 ?
       <div className="genres-no-data">
         <h2>You have not read any books yet!</h2>
         <iframe src="https://giphy.com/embed/xUA7b2OfgTuVzqpVXq" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
       </div>
       :
-      <>
+      <> */}
         <ResponsivePie
           data={genresStats}
           margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -78,8 +78,8 @@ export default function GenresStats() {
           }}
         />
         <div style={{ width: '20%' }} />
-      </>
-    }
+      {/* </>
+    } */}
     </div>
   );
 }

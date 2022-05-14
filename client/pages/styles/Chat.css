@@ -1,16 +1,16 @@
 .video-chat-container {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   background-color: bisque;
   height: 800px;
 }
 
-.live-chat{
+.live-chat {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background:var(--beige);
-  width:60px;
-  height:60px;
+  background: var(--beige);
+  width: 60px;
+  height: 60px;
   border-radius: 100px;
   display: flex;
   justify-content: center;
@@ -18,11 +18,11 @@
   transition: 0.5s;
   cursor: pointer;
 }
-.live-chat svg{
-  color:white !important;
+.live-chat svg {
+  color: white !important;
 }
-.live-chat:hover{
-  background:var(--wood);
+.live-chat:hover {
+  background: var(--wood);
 }
 
 .joinChatContainer {
@@ -59,14 +59,14 @@
 } */
 
 #videocamicon {
-  width: 225px;
+  width: 50px;
   height: 50px;
   margin: 7px;
   border: none;
   border-radius: 5px;
   padding: 5px;
   font-size: 16px;
-  background: #43a047;
+  background: yellowgreen;
   color: #fff;
   cursor: pointer;
 }
@@ -91,14 +91,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 60px;
-  border-radius: 6px;
+  height: 63px;
+  border-radius: 6px 6px 0 0;
   background: #263238;
   position: relative;
 }
 
 .videoRoom {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   color: white;
   display: flex;
   justify-content: center;
@@ -145,7 +145,7 @@
   height: auto;
   min-height: 40px;
   max-width: 320px;
-  background-color: cornflowerblue;
+  background-color: var(--cyan);
   border-radius: 5px;
   color: white;
   display: flex;
@@ -179,7 +179,7 @@
 
 #you .message-content {
   justify-content: flex-start;
-  background-color: #43a047;
+  background-color: var(--sunset);
 }
 
 #you .message-meta {
@@ -213,7 +213,7 @@
   border-right: 1px dotted #607d8b;
 
   outline: none;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .chat-window .chat-footer button {
@@ -224,7 +224,7 @@
   place-items: center;
   cursor: pointer;
   flex: 15%;
-  height: 80%;
+
   background: transparent;
   outline: none;
   font-size: 25px;
@@ -238,6 +238,67 @@
   opacity: 0 !important;
 }
 
-.chat-body button{
+.chat-body button {
   display: none;
+}
+
+.remote-participants {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+  padding-top: 15px;
+}
+
+.participant {
+  width: 100%;
+}
+
+.participant video {
+  width: 100%;
+}
+
+.participant h3 {
+  font-size: 16px;
+  padding: 15px;
+  margin: 10px 0 0 0;
+  border-radius: 6px 6px 0 0;
+  text-align: center;
+  background: var(--beige);
+}
+
+.room {
+  padding: 20px;
+}
+
+.chat-body button {
+  display: none;
+}
+
+.message-container form {
+  border-left: 1px solid black !important;
+  border-right: 1px solid black !important;
+  padding: 10px;
+}
+
+#videocamicon:hover {
+  background: #6e9421;
+}
+
+.message-container button {
+  background: yellowgreen;
+  border-radius: 8px;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.message-container button:hover {
+  background: #6e9421;
+}
+
+.message-container .room h2 {
+  padding-bottom: 15px;
+}
+
+.message-container .room{
+  background:#f8f4f0;
 }
