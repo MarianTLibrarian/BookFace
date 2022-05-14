@@ -174,7 +174,7 @@ export default function MyBooks() {
           </div>
 
           <div className="content-container">
-            <div className="content-left">
+            <div className="content-left contentLeft">
               <div className="my-bookshelves">
                 <h2>My Bookshelves</h2>
                 {bookshelves.map((shelf) => (
