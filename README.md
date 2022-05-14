@@ -1,70 +1,119 @@
-<!-- TODO:
-  This is a template layout pulled from Learn
-  https://learn-2.galvanize.com/cohorts/3229/blocks/722/content_files/01-Blue-Ocean/04-Readme-Template.md
+# BookFace
+BookFace is a social cataloging website that allows book lovers to connect, share books they love, and manage their collection of books with personalized bookshelves.
 
-  We'll tweak it and fill in info as we make progress
--->
+This is the culmination of six engineers working closely over the course of one week to complete an MVP based on client's request (Marian T. Librarian).
 
-# Catchy headline / cool graphic
 
-# Contributors
+## Table of Contents
+---
+- [BookFace](#bookface)
+  - [## Table of Contents](#-table-of-contents)
+  - [## Tech Stack](#-tech-stack)
+  - [## Wireframes](#-wireframes)
+  - [## Product Features](#-product-features)
+    - [Home](#home)
+    - [Login authentication with Firebase OAuth](#login-authentication-with-firebase-oauth)
+    - [Live search with smart filter](#live-search-with-smart-filter)
+    - [MyBooks](#mybooks)
+    - [Book detail page](#book-detail-page)
+    - [Reading Stats](#reading-stats)
+    - [MyClubs](#myclubs)
+    - [Club detail page](#club-detail-page)
+    - [Live Chat](#live-chat)
+    - [Video Chat](#video-chat)
+  - [## Contributors](#-contributors)
 
-# Introduction
 
-This project was a brief 1-week sprint where our team tried to complete an MVP for an external user (Marian T. Librarian)
+## Tech Stack
+---
+![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=for-the-badge)
+![Vite](https://img.shields.io/badge/-Vite-BA55D3?logo=vite&logoColor=white&style=for-the-badge)
+![Firebase](https://img.shields.io/badge/-Firebase-FFD700?logo=firebase&logoColor=white&style=for-the-badge)
+![Express](https://img.shields.io/badge/-Express-DCDCDC?logo=express&logoColor=black&style=for-the-badge)
+![Node](https://img.shields.io/badge/-Node-9ACD32?logo=node.js&logoColor=white&style=for-the-badge)
+![Axios](https://img.shields.io/badge/-Axios-671ddf?logo=axios&logoColor=black&style=for-the-badge)
+![Twilio](https://img.shields.io/badge/-Twilio-FF0000?logo=twilio&logoColor=white&style=for-the-badge)
+![Socket](https://img.shields.io/badge/-Socket-000000?logo=socket.io&logoColor=white&style=for-the-badge)
+![Chart.js](https://img.shields.io/badge/-Chartjs-FF6384?logo=chart.js&logoColor=white&style=for-the-badge)
+![Nivo](https://img.shields.io/badge/-Nivo-66CDAA?logo=nivo&logoColor=white&style=for-the-badge)
+![Figma](https://img.shields.io/badge/-Figma-B2E7E8?logo=figma&logoColor=black&style=for-the-badge)
+![Zustand](https://img.shields.io/badge/-Zustand-FFb049?logo=zustand&logoColor=black&style=for-the-badge)
 
-Add any additional content here pertaining to the timeline, any personal goals, etc.
 
-# What does the app do?
+## Wireframes
+---
+![](assets/demo/BookFace_wireframes.png)
 
-- What problem does it solve? Who uses it?
-- Why was it built?
-- User Inputs and Outputs
 
-# Tech stack ( you can include logos)
+## Product Features
+---
 
-# Technical Challenges and research that you anticipated
+### Home
+![](assets/demo/BookFace_Home.gif)
 
-- Why, what was the plan to overcome those challenges?
-- What did you learn?
+### Login authentication with Firebase OAuth
+![](assets/demo/BookFace_OAuth.gif)
 
-## Challenges that were unexpected
+### Live search with smart filter
 
-- Why was it a challenge
-- What did you learn?
+> Users can perform sitewide search on books/bookclubs
 
-# Video Demo / Screen shot walkthrough of the app
+![](assets/demo/BookFace_Search.gif)
+### MyBooks
 
-- What were the user stories / what was MVP (mention Minimal Viable Product)
+> Users can view their personalized bookshelves and joined bookclubs
 
-## How does the app work?
+![](assets/demo/BookFace_MyBooks.gif)
 
-- What happens behind the scenes when the user interacts with it?
-- OR What are all the places the data travels? What happens to that data?
-- Optionally include a diagram
-- How does the tech stack come together?
+### Book detail page
+> Users can add book to their bookshelves and update reading status
 
-## What research was required?
+![](assets/demo/BookFace_BookDetails.gif)
 
-Workflow and Key lessons from your team - specifically those related to: Agile, CI/CD, testing, working with external stakeholders, ticketing, and user stories.
+### Reading Stats
+> Users can generate a personalized reading statistics report
 
-- Your git workflow, style guides, commit guides, etc
-- What did you learn from the process
-- What were key takeaways from stand ups, code reviews, etc
-- Writing tests
-- Link to your trello board, discuss completed tickets
+![](assets/demo/BookFace_Stats.gif)
 
-# Any non-MVP tickets (optional)
 
-- Code refactorings
-- Performance Optimizations
-- Additional features
-- etc
+### MyClubs
 
-# Notes from your Sprint Retro
+> Users can explore and join bookclubs
 
-# What additional features do you plan to add, how do you plan to implement those features?
+![](assets/demo/BookFace_Clubs.gif)
 
-- Future refactoring?
-- Additional dev ops considerations?
-- UI/UX additions?
+### Club detail page
+
+> Users can create an event and post messages
+
+![](assets/demo/BookFace_MyBookClub.gif)
+
+### Live Chat
+> Users can chat with other club members
+
+![](assets/demo/BookFace_LiveChat.gif)
+
+### Video Chat
+> users can initiate a video call for club members to join
+
+![](assets/demo/BookFace_VideoChat.gif)
+
+
+## Contributors
+---
+&nbsp;
+
+<a href="https://github.com/MarianTLibrarian/BookFace/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=MarianTLibrarian/BookFace" />
+</a>
+
+&nbsp;
+
+|   |  |
+| ------------- | ------------- |
+| Product Managers  | [Haley Jung](https://github.com/haleyjung) &  [Addison Hernandez](https://github.com/addisonhernandez)  |
+| App Architects  | [Hailee Lu](https://github.com/HuijunLu) & [Katy Feng](https://github.com/katyfsy) |
+| UI Leads  |[Junpeng Chang](https://github.com/jp-chang) & [Joseph Sanfelippo](https://github.com/JosephSanfelippo)
+ |
+
+
