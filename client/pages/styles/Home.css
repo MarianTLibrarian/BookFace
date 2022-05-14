@@ -456,8 +456,11 @@ h4 {
   margin-bottom: 20px;
 }
 
+.profile-titles h1 {
+  color: var(--wood);
+}
+
 .profile-info {
-  /* border: 1px solid red; */
   margin-top: 70px;
 }
 

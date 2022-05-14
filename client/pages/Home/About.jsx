@@ -19,7 +19,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="trends profile-container">
+      <div className="trends profile-container profile-titles">
         <h1>Product Managers</h1>
         <div className="team-profiles-container">
           <div className="team-profile">
@@ -29,7 +29,7 @@ export default function Home() {
                   <img src="https://avatars.githubusercontent.com/u/1973542?v=4" alt="profile" />
                 </div>
                 <div className="flip-card-back">
-                  <img src="https://avatars.githubusercontent.com/u/73789849?v=4" alt="profile" />
+                  <img src="https://media3.giphy.com/media/BzyTuYCmvSORqs1ABM/giphy.gif?cid=790b76117a862757fbc7f5aa0da1463fd72cd7261267cca4&rid=giphy.gif&ct=g" alt="profile" />
                 </div>
               </div>
             </div>
@@ -46,7 +46,7 @@ export default function Home() {
                   <img src="https://avatars.githubusercontent.com/u/73789849?v=4" alt="profile" />
                 </div>
                 <div className="flip-card-back">
-                  <img src="https://avatars.githubusercontent.com/u/73789849?v=4" alt="profile" />
+                  <img src="https://media4.giphy.com/media/2A75RyXVzzSI2bx4Gj/giphy.gif?cid=790b76119244af56d53bf1cbd6eda7316b444b6acde60c4d&rid=giphy.gif&ct=g" alt="profile" />
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@ export default function Home() {
       </div>
 
       <div className="profiles-second-row">
-        <div className="trends last-profile-container">
+        <div className="trends last-profile-container profile-titles">
           <h1>Architecture Leads</h1>
           <div className="team-profiles-container">
             <div className="team-profile">
@@ -69,7 +69,7 @@ export default function Home() {
                     <img src="https://avatars.githubusercontent.com/u/92131794?v=4" alt="profile" />
                   </div>
                   <div className="flip-card-back">
-                    <img src="https://avatars.githubusercontent.com/u/73789849?v=4" alt="profile" />
+                    <img src="https://media3.giphy.com/media/xAFcpblRNMyfvt1oAf/giphy.gif?cid=790b7611c23ff5fb171b2d6c516d9e117a2e8a9d014ec0ab&rid=giphy.gif&ct=g" alt="profile" />
                   </div>
                 </div>
               </div>
@@ -86,7 +86,7 @@ export default function Home() {
                     <img src="https://avatars.githubusercontent.com/u/97313452?v=4" alt="profile" />
                   </div>
                   <div className="flip-card-back">
-                    <img src="https://avatars.githubusercontent.com/u/73789849?v=4" alt="profile" />
+                    <img src="https://media2.giphy.com/media/9Vvoj75o3ZsK6TRUqH/giphy.gif?cid=790b7611f6698348ab7d423aa70d5b616c45ffa67dfc5d6b&rid=giphy.gif&ct=g" alt="profile" />
                   </div>
                 </div>
               </div>
@@ -98,7 +98,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="trends last-profile-container">
+        <div className="trends last-profile-container profile-titles">
           <h1>UI/UX Leads</h1>
           <div className="team-profiles-container">
             <div className="team-profile">
@@ -111,7 +111,7 @@ export default function Home() {
                     />
                   </div>
                   <div className="flip-card-back">
-                    <img src="https://avatars.githubusercontent.com/u/73789849?v=4" alt="profile" />
+                    <img src="https://media0.giphy.com/media/7FgDOBGyFLgns6aiKb/giphy.gif?cid=790b7611517e72f82740c25533b159ef7a105273fda000c5&rid=giphy.gif&ct=g" alt="profile" />
                   </div>
                 </div>
               </div>
@@ -128,7 +128,7 @@ export default function Home() {
                     <img src="https://avatars.githubusercontent.com/u/94151508?v=4" alt="profile" />
                   </div>
                   <div className="flip-card-back">
-                    <img src="https://avatars.githubusercontent.com/u/73789849?v=4" alt="profile" />
+                    <img src="https://media0.giphy.com/media/U7JM6ChJMrFnXfFHvE/giphy.gif?cid=790b7611be0c90e666c8a7540b871771cbe9f408fb9e14b4&rid=giphy.gif&ct=g" alt="profile" />
                   </div>
                 </div>
               </div>
