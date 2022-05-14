@@ -63,6 +63,9 @@ export default function NavBar() {
           <NavLink exact to="/">
             Home
           </NavLink>
+          <NavLink exact to="/">
+            About
+          </NavLink>
           {user ? <NavLink to="/mybooks">My Books</NavLink> : null}
           {user ? <NavLink to="/stats">My Stats</NavLink> : null}
           <NavLink to="/bookclubs">{user ? 'My Clubs' : 'Clubs'}</NavLink>

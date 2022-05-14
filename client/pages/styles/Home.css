@@ -2,14 +2,6 @@ h4 {
   margin-bottom: 3px;
 }
 
-.surprise-title .surprise-author {
-  margin-top: -10px;
-  margin-bottom: 3px;
-}
-
-.surprise-button {
-  margin-top: 20px;
-}
 
 .Home {
   text-align: center;
@@ -265,9 +257,17 @@ h4 {
   top: 0;
   left: 0;
   box-sizing: border-box;
-  padding: 0 0 0 10px;
+  padding: 25px 0 20px 50px;
+  flex-direction: column;
+  display:flex;
+  justify-content: center;
+  align-items: center;
   z-index: -1;
-  margin-top: 70px;
+}
+
+.card .details img{
+  width:200px;
+  height:300px;
 }
 
 .card .details p {
@@ -279,7 +279,15 @@ h4 {
 
 .card .details h4 {
   text-align: center;
+  font-size:16px;
 }
+
+.card .details h5 {
+  text-align: center;
+  font-size:12px;
+  padding-bottom:10px;
+}
+
 
 .text-right {
   text-align: right;
