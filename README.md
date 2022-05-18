@@ -101,7 +101,7 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 
 &nbsp;
 
-While all members worked as full stack engineers and took ownership of different features, we also took additional roles like the following:
+While all members worked as full stack engineers and had ownership of different features, we also took additional roles like the following:
 
 |   |  |
 | ------------- | ------------- |
