@@ -1,3 +1,5 @@
+<div id="top"/>
+
 # BookFace
 BookFace is a social cataloging website that allows book lovers to connect, share books they love, and manage their collection of books with personalized bookshelves. This is the culmination of six engineers working closely over the course of one week to complete an MVP based on client's request.
 
@@ -90,6 +92,44 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 
 ![](assets/demo/BookFace_VideoChat.gif)
 
+## Getting Started
+
+### Installation
+
+From the root directory, run the following commands in your terminal.
+
+1. To install all dependencies
+
+```
+npm install
+```
+
+2. To start dev server: open http://localhost:3000 to view it in your browser
+
+```
+npm run dev
+```
+
+3. To build for production
+
+```
+npm run build
+```
+
+4. To locally preview production build
+```
+npm run preview
+```
+
+5. To connect to the server: use http://localhost:3030 to verify the server connection
+```
+npm run serve
+```
+
+6. To connect to socket for live chat
+```
+npm run socket
+```
 
 ## Contributors
 
@@ -101,7 +141,7 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 
 &nbsp;
 
-While all members worked as full stack engineers and had ownership of different features, we also took additional roles like the following:
+While all members worked as full stack engineers and had ownership of different features, we also took the following additional roles:
 
 |   |  |
 | ------------- | ------------- |
@@ -110,3 +150,4 @@ While all members worked as full stack engineers and had ownership of different 
 | UI Leads  |[Junpeng Chang](https://github.com/jp-chang) & [Joseph Sanfelippo](https://github.com/JosephSanfelippo) |
 
 
+<p align="right">(<a href="#top">back to top</a>)</p>
