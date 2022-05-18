@@ -5,20 +5,25 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 
 
 ## Table of Contents
-- [Tech Stack](#tech-stack)
-- [Wireframes](#wireframes)
-- [Product Features](#product-features)
-  - [Home](#home)
-  - [Login authentication with Firebase OAuth](#login-authentication-with-firebase-oauth)
-  - [Live search with smart filter](#live-search-with-smart-filter)
-  - [MyBooks](#mybooks)
-  - [Book detail page](#book-detail-page)
-  - [Reading Stats](#reading-stats)
-  - [MyClubs](#myclubs)
-  - [Club detail page](#club-detail-page)
-  - [Live Chat](#live-chat)
-  - [Video Chat](#video-chat)
-- [Contributors](#contributors)
+- [BookFace](#bookface)
+  - [Table of Contents](#table-of-contents)
+  - [Tech Stack](#tech-stack)
+  - [User Persona & Story](#user-persona--story)
+  - [Wireframes](#wireframes)
+  - [Product Features](#product-features)
+    - [Home](#home)
+    - [Login authentication with Firebase OAuth](#login-authentication-with-firebase-oauth)
+    - [Live search with smart filter](#live-search-with-smart-filter)
+    - [MyBooks](#mybooks)
+    - [Book detail page](#book-detail-page)
+    - [Reading Stats](#reading-stats)
+    - [MyClubs](#myclubs)
+    - [Club detail page](#club-detail-page)
+    - [Live Chat](#live-chat)
+    - [Video Chat](#video-chat)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+  - [Contributors](#contributors)
 
 
 ## Tech Stack
@@ -36,6 +41,9 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 ![Figma](https://img.shields.io/badge/-Figma-B2E7E8?logo=figma&logoColor=black&style=for-the-badge)
 ![Zustand](https://img.shields.io/badge/-Zustand-FFb049?logo=zustand&logoColor=black&style=for-the-badge)
 
+## User Persona & Story
+![](assets/BookFace_Persona2.png)
+![](assets/BookFace_Persona1.png)
 
 ## Wireframes
 ![](assets/demo/BookFace_wireframes.png)
