@@ -30,6 +30,7 @@ BookFace is a social cataloging website that allows book lovers to connect, shar
 ![Axios](https://img.shields.io/badge/-Axios-671ddf?logo=axios&logoColor=black&style=for-the-badge)
 ![Twilio](https://img.shields.io/badge/-Twilio-FF0000?logo=twilio&logoColor=white&style=for-the-badge)
 ![Socket](https://img.shields.io/badge/-Socket-000000?logo=socket.io&logoColor=white&style=for-the-badge)
+![Material-UI](https://img.shields.io/badge/-MUI-007FFF?logo=mui&logoColor=white&style=for-the-badge)
 ![Chart.js](https://img.shields.io/badge/-Chartjs-FF6384?logo=chart.js&logoColor=white&style=for-the-badge)
 ![Nivo](https://img.shields.io/badge/-Nivo-66CDAA?logo=nivo&logoColor=white&style=for-the-badge)
 ![Figma](https://img.shields.io/badge/-Figma-B2E7E8?logo=figma&logoColor=black&style=for-the-badge)
