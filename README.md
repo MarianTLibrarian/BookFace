@@ -148,7 +148,7 @@ npm run socket
 
 &nbsp;
 
-While all members worked as full stack engineers and had ownership of different features, we also took the following additional roles:
+While all members worked as full stack engineers to develop features, we also had these additional roles:
 
 |   |  |
 | ------------- | ------------- |
